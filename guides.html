@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen8X — Guides</title>
+    <meta name="description" content="In-depth guides on generative AI. Learn diffusion models, prompt engineering for image generation, fine-tuning creative AI, and building generative pipelines.">
+    <meta name="keywords" content="generative AI guides, stable diffusion tutorial, prompt engineering, LoRA training, diffusion models, AI art guide">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Gen8X — Guides">
+    <meta property="og:description" content="In-depth guides on generative AI covering diffusion models, prompt engineering, and creative AI workflows.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gen8x.com/guides.html">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Gen8X — Guides",
+        "url": "https://gen8x.com/guides.html",
+        "description": "In-depth guides on generative AI including diffusion models, prompt engineering, and creative AI pipelines.",
+        "isPartOf": { "@type": "WebSite", "name": "Gen8X", "url": "https://gen8x.com" }
+    }
+    </script>
+
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100">
+
+    <nav class="fixed top-0 w-full bg-gray-950/90 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="/" class="text-2xl font-800 tracking-tight" style="color: #d946ef;">Gen8X</a>
+            <div class="hidden md:flex gap-8 text-sm text-gray-400">
+                <a href="/" class="hover:text-white transition">Home</a>
+                <a href="/guides.html" class="text-white transition">Guides</a>
+                <a href="/tools.html" class="hover:text-white transition">Tools</a>
+                <a href="/blog/getting-started.html" class="hover:text-white transition">Blog</a>
+                <a href="/about.html" class="hover:text-white transition">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-32 pb-16 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-fuchsia-950 via-gray-950 to-purple-950"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-fuchsia-500/20 via-transparent to-transparent"></div>
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-800 tracking-tight mb-6">
+                GenAI <span style="color: #d946ef;">Guides</span>
+            </h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Master generative AI with deep-dive tutorials covering diffusion models, text generation, and creative AI workflows.
+            </p>
+        </div>
+    </header>
+
+    <!-- Guide 1: Diffusion Models -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <span class="text-xs font-600 uppercase tracking-wider" style="color: #d946ef;">Guide 01 — Image Generation</span>
+            <h2 class="text-3xl font-700 mt-3 mb-6">Understanding Diffusion Models: How AI Creates Images from Noise</h2>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Diffusion models have become the dominant paradigm for high-quality image generation, powering systems like Stable Diffusion, DALL-E 3, and Midjourney. The core idea is elegantly simple: take a clean image, progressively add Gaussian noise over many steps until it becomes pure static, and then train a neural network to reverse each step. At inference time, you start with random noise and repeatedly denoise it, guided by a text prompt, until a coherent image emerges. This process is mathematically grounded in stochastic differential equations and thermodynamic principles, which gives it strong theoretical foundations that GANs lacked.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                The U-Net architecture serves as the denoising backbone in most diffusion models. It takes a noisy image and a timestep as input and predicts the noise component, which is then subtracted to produce a slightly cleaner image. Cross-attention layers inject text conditioning from a CLIP text encoder, allowing the model to generate images that correspond to natural language descriptions. The classifier-free guidance technique, where the model runs both with and without the text condition and amplifies the difference, provides a control knob for balancing image quality against prompt adherence.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Recent advances have dramatically improved both speed and quality. Latent diffusion models operate in a compressed latent space rather than pixel space, reducing computational cost by orders of magnitude. SDXL introduced a dual-encoder architecture and refinement pipeline for higher-resolution outputs. Consistency models and latent consistency models reduce the required sampling steps from 50 to as few as 4, enabling near-real-time generation. For a comprehensive overview of generative AI tools and platforms, the curated directory at <a href="https://zovo.one" class="text-fuchsia-400 hover:text-fuchsia-300 underline">zovo.one</a> is an excellent resource for comparing options across the ecosystem.
+            </p>
+
+            <div class="bg-fuchsia-500/10 border border-fuchsia-500/20 rounded-xl p-6 mb-6">
+                <h4 class="text-sm font-600 uppercase tracking-wider text-fuchsia-400 mb-2">Key Takeaway</h4>
+                <p class="text-gray-300">Diffusion models achieve their remarkable quality by breaking the generation problem into many small, tractable denoising steps. Understanding the noise schedule, the role of the U-Net, and how text conditioning works through cross-attention gives you the foundation to effectively fine-tune and control these models.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide 2: LoRA Fine-Tuning -->
+    <section class="py-20 bg-gray-900/50">
+        <div class="max-w-4xl mx-auto px-4">
+            <span class="text-xs font-600 uppercase tracking-wider" style="color: #d946ef;">Guide 02 — Fine-Tuning</span>
+            <h2 class="text-3xl font-700 mt-3 mb-6">LoRA Fine-Tuning for Stable Diffusion: Style Transfer and Character Consistency</h2>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Low-Rank Adaptation (LoRA) has become the preferred method for customizing diffusion models because it achieves high-quality results with minimal computational resources. Instead of updating all model weights during fine-tuning (which requires enormous VRAM and risks catastrophic forgetting), LoRA adds small trainable matrices to specific layers while keeping the original weights frozen. A typical LoRA for SDXL adds only 10-50 MB of parameters compared to the full model's 6.5 GB, yet it can dramatically alter the model's output style, subject matter, or both.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                The training process for a style LoRA involves collecting 15-30 high-quality example images in your target style, captioning them accurately using a tool like BLIP or Florence, and then fine-tuning for 1000-3000 steps with a learning rate around 1e-4. The rank parameter (typically 16-64) controls the expressiveness of the adaptation — higher ranks capture more complex style information but require more training data to avoid overfitting. For character LoRAs that need to capture a specific person or character, DreamBooth-style regularization with class images helps maintain the model's general capabilities while learning the new concept.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Advanced practitioners can merge multiple LoRAs at inference time to combine styles, characters, and concepts. The toolkit ecosystem around LoRA training continues to evolve rapidly, with <a href="https://github.com/kohya-ss/sd-scripts" target="_blank" rel="noopener" class="text-fuchsia-400 hover:text-fuchsia-300 underline">Kohya's sd-scripts</a> providing the most flexible training options and integration support from platforms like <a href="https://claudkit.com" class="text-fuchsia-400 hover:text-fuchsia-300 underline">ClaudKit</a> for managing AI development workflows. Understanding the relationship between rank, learning rate, training steps, and dataset quality is what separates mediocre LoRAs from exceptional ones.
+            </p>
+
+            <div class="bg-fuchsia-500/10 border border-fuchsia-500/20 rounded-xl p-6 mb-6">
+                <h4 class="text-sm font-600 uppercase tracking-wider text-fuchsia-400 mb-2">Key Takeaway</h4>
+                <p class="text-gray-300">LoRA fine-tuning democratizes model customization by making it accessible on consumer GPUs. The quality of your training dataset and captions matters far more than the number of training steps. Start with rank 32, 20 well-captioned images, and 1500 steps as a baseline.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide 3: Prompt Engineering -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <span class="text-xs font-600 uppercase tracking-wider" style="color: #d946ef;">Guide 03 — Prompting</span>
+            <h2 class="text-3xl font-700 mt-3 mb-6">Advanced Prompt Engineering for Image Generation</h2>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Effective prompting for image generation models is a skill that requires understanding how the underlying text encoder processes language. CLIP-based models tokenize prompts into 77-token chunks and encode them into embedding vectors that guide the diffusion process. This means word order, specificity, and the relationship between tokens all affect the generated output in ways that can be understood systematically rather than discovered through trial and error.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Structure your prompts with the most important elements first, as earlier tokens receive more attention weight. A well-structured prompt follows a pattern: subject description, action or pose, environment, lighting, artistic style, and technical parameters. Negative prompts are equally important — they steer the generation away from common failure modes like extra limbs, blurry backgrounds, or unwanted watermarks. Weight syntax like (important element:1.3) allows fine-grained control over how strongly specific concepts influence the output.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Beyond text prompts, ControlNet provides structural guidance through edge maps, depth maps, pose skeletons, and other conditioning inputs. IP-Adapter enables image-to-image style transfer that preserves the composition of a reference image while applying a new aesthetic. The combination of text prompting, ControlNet, and IP-Adapter gives creators a level of control that approaches traditional digital art workflows. Research into these workflows by communities like <a href="https://lockml.com" class="text-fuchsia-400 hover:text-fuchsia-300 underline">LockML</a> continues to push the boundaries of what is achievable with generative models.
+            </p>
+
+            <div class="bg-fuchsia-500/10 border border-fuchsia-500/20 rounded-xl p-6 mb-6">
+                <h4 class="text-sm font-600 uppercase tracking-wider text-fuchsia-400 mb-2">Key Takeaway</h4>
+                <p class="text-gray-300">Prompting is not magic — it is the interface between human intent and a mathematical model. Understanding token limits, attention weighting, and how to combine text prompts with structural conditioning transforms inconsistent results into reliable, controllable output.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guide 4: Text Generation -->
+    <section class="py-20 bg-gray-900/50">
+        <div class="max-w-4xl mx-auto px-4">
+            <span class="text-xs font-600 uppercase tracking-wider" style="color: #d946ef;">Guide 04 — Text</span>
+            <h2 class="text-3xl font-700 mt-3 mb-6">Building Reliable Text Generation Pipelines with LLMs</h2>
+
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Text generation with large language models goes far beyond simple chat interactions. Production text generation requires careful prompt design, output validation, error handling, and quality control. Whether you are generating product descriptions, summarizing documents, or writing creative fiction, the pipeline around the model matters as much as the model itself.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-4">
+                Temperature, top-p, and top-k sampling parameters control the randomness of output. Low temperature (0.1-0.3) produces deterministic, focused text ideal for factual tasks, while higher temperature (0.7-1.0) introduces variety suitable for creative writing. Structured output formats like JSON mode, function calling, and constrained generation ensure the model produces outputs your downstream code can parse reliably. Retry logic with exponential backoff handles the inevitable API failures and rate limits.
+            </p>
+            <p class="text-gray-300 leading-relaxed mb-6">
+                Retrieval-augmented generation (RAG) grounds text generation in factual source material. A well-built RAG pipeline chunks source documents, embeds them into a vector store, retrieves relevant passages at query time, and feeds them as context to the generation model. This dramatically reduces hallucination for knowledge-intensive tasks. The chunking strategy, embedding model choice, and reranking step each have outsized impact on the final quality. Our guide walks through building a complete RAG system with evaluation metrics that measure retrieval quality and generation faithfulness independently.
+            </p>
+
+            <div class="bg-fuchsia-500/10 border border-fuchsia-500/20 rounded-xl p-6 mb-6">
+                <h4 class="text-sm font-600 uppercase tracking-wider text-fuchsia-400 mb-2">Key Takeaway</h4>
+                <p class="text-gray-300">Reliable text generation requires engineering around the model, not just better prompts. Structured output, RAG pipelines, and systematic evaluation transform LLMs from impressive demos into production-ready components.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <a href="/" class="text-xl font-700 mb-4 inline-block" style="color: #d946ef;">Gen8X</a>
+            <p class="text-gray-500 text-sm">&copy; 2025 Gen8X. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
