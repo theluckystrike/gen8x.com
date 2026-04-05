@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Theory for Developers: Beyond the Basics | gen8x.com</title>
+  <meta name="description" content="A developer's guide to color theory — HSL, color harmonies, perceptual uniformity, and practical techniques for building consistent palettes.">
+  <link rel="canonical" href="https://gen8x.com/blog/post-2.html">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav>
+        <a href="/">Tool</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <article class="blog-post">
+    <h1>Color Theory for Developers: Beyond the Basics</h1>
+    <p class="meta">Published April 2025 &middot; 8 min read</p>
+
+    <p>Most developers learn color as hex codes and RGB values, which is like learning music as frequencies without understanding scales. Color theory gives you the vocabulary and mental models to make confident color decisions without relying on trial and error or a designer to save you.</p>
+
+    <h2>Think in HSL, Not RGB</h2>
+    <p>RGB describes how screens produce color (mixing red, green, and blue light). HSL describes how humans perceive color: Hue (the color itself, 0-360 degrees on the color wheel), Saturation (how vivid, 0-100%), and Lightness (how bright, 0-100%).</p>
+    <p>When you need a darker version of your brand blue, adjusting RGB values is guesswork. In HSL, you simply reduce lightness. Need a muted version? Reduce saturation. Need a complementary color? Add 180 to the hue. HSL makes color relationships intuitive.</p>
+    <pre>/* RGB: which value do you change for "darker blue"? */
+color: rgb(59, 130, 246);
+
+/* HSL: reduce lightness from 60% to 40% — obvious */
+color: hsl(217, 91%, 60%);
+color: hsl(217, 91%, 40%); /* darker */</pre>
+    <p>CSS supports HSL natively, so there is no conversion cost. Use it.</p>
+
+    <h2>The Four Classical Harmonies</h2>
+    <p>Color harmonies are relationships on the color wheel that produce aesthetically pleasing combinations. They work because of how our visual system processes color contrast:</p>
+    <ul>
+      <li><strong>Complementary</strong> — Two colors opposite on the wheel (180 degrees apart). Maximum contrast. Use one as dominant and the other as accent only. Example: blue (#2563EB) and orange (#EA580C).</li>
+      <li><strong>Analogous</strong> — Three to five colors adjacent on the wheel (within 30 degrees). Low contrast, harmonious. Common in nature. Good for backgrounds and gradients.</li>
+      <li><strong>Triadic</strong> — Three colors equally spaced (120 degrees apart). Vibrant and balanced. Works well when one color dominates and the other two are accents.</li>
+      <li><strong>Monochromatic</strong> — Single hue with varying saturation and lightness. The safest choice; almost impossible to make it look bad. Ideal for minimalist designs.</li>
+    </ul>
+    <p>You can experiment with all four types using the <a href="https://gen8x.com">gen8x.com palette generator</a>, which calculates harmonious colors from any starting hue.</p>
+
+    <h2>Perceptual Uniformity: Why Some Grays Look Blue</h2>
+    <p>HSL has a significant flaw: equal steps in lightness do not produce equal steps in perceived brightness. A 50% lightness yellow looks much brighter than a 50% lightness blue. This is because human vision is more sensitive to green and yellow wavelengths.</p>
+    <p>This matters when you are building gray scales for UI. A "neutral" gray with equal RGB values (like #808080) looks neutral on its own, but next to a saturated color, it can appear to have a slight tint. Design systems like Material Design account for this by using slightly warm grays (adding 1-2 points of saturation in warm hues) to make surfaces feel more natural.</p>
+    <p>For programmatic color work, consider OKLCH (Lightness-Chroma-Hue), which is perceptually uniform. CSS now supports it:</p>
+    <pre>/* Perceptually uniform color steps */
+color: oklch(50% 0.15 250);  /* medium blue */
+color: oklch(70% 0.15 250);  /* lighter — actually looks proportionally lighter */</pre>
+
+    <h2>Building a Systematic Palette</h2>
+    <p>A production-ready color palette needs more than five pretty colors. You need a system that scales. Here is how to build one:</p>
+    <h3>Step 1: Choose your primary hue</h3>
+    <p>This is your brand color. Pick one hue and generate a scale of 9-11 shades from nearly white to nearly black by varying lightness from 95% down to 10% while slightly adjusting saturation (reduce at extremes).</p>
+    <h3>Step 2: Add semantic colors</h3>
+    <p>Every interface needs success (green), warning (yellow/amber), error (red), and info (blue). Choose hues that feel related to your primary through shared undertones. If your primary is a warm blue, use a warm green and a warm red.</p>
+    <h3>Step 3: Define your neutral scale</h3>
+    <p>Generate 9-11 gray shades. Add a hint of your primary hue (2-5% saturation) to make them feel integrated with your brand. Pure grays often look lifeless next to saturated brand colors.</p>
+    <h3>Step 4: Test in context</h3>
+    <p>A palette that looks good as swatches can fail in a real interface. Test with actual UI components: buttons, cards, form inputs, alert banners. The <a href="https://gen8x.com">gen8x.com preview feature</a> gives you a quick mockup view.</p>
+
+    <h2>Common Developer Mistakes</h2>
+    <ul>
+      <li><strong>Using pure black (#000000) on pure white (#FFFFFF)</strong> — The contrast is harsh and causes eye fatigue. Use near-black (#111827 or #1a1a1a) instead. This is why nearly every well-designed site uses dark gray rather than true black for text.</li>
+      <li><strong>Too many colors</strong> — Limit your palette to 1-2 brand colors plus neutrals and semantic colors. Every additional color increases cognitive load.</li>
+      <li><strong>Ignoring color blindness</strong> — Always provide secondary cues (icons, text, patterns) alongside color coding. Never use red and green as the only distinction between success and error states.</li>
+      <li><strong>Hardcoding colors</strong> — Use CSS custom properties or design tokens. When you need to tweak a color, you change it in one place instead of finding every instance across your codebase.</li>
+    </ul>
+
+    <h2>Practical Resources</h2>
+    <p>The best way to develop color intuition is to study palettes that work. Analyze the color choices of products you admire. Extract their hex codes and map them to HSL to understand the relationships. Use tools like the <a href="https://ml0x.com">ml0x.com cheat sheet generator</a> for technical references and <a href="https://zovo.one">zovo.one</a> for our full suite of developer tools.</p>
+    <p>Color theory is a skill that compounds. Once you internalize the HSL model and the four harmonies, you will make better color decisions intuitively and spend less time second-guessing your choices.</p>
+  </article>
+
+  <footer>
+    <div class="container">
+      <span>Built by <a href="https://zovo.one">zovo.one</a> &middot; More tools: <a href="https://krzen.com">krzen.com</a>, <a href="https://abwex.com">abwex.com</a></span>
+      <span>&copy; 2025 gen8x.com</span>
+    </div>
+  </footer>
+</body>
+</html>
