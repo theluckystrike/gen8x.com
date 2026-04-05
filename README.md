@@ -20,9 +20,7 @@ Enter a hex color, type a keyword, or click random to generate a seed color. Sel
 
 - Vanilla JavaScript (no frameworks, no dependencies)
 - Client-side only — your data never leaves your browser
-- Part of the [Zovo Tools](https://zovo.one) open network
 
-## Related Tools
 
 - [Developer Toolkit](https://kappakit.com) — color converter plus Base64, JWT, Hash, and more
 - [Image Compressor](https://krzen.com) — optimize images that use your new palette
