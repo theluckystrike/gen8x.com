@@ -7,18 +7,26 @@
   <meta name="description" content="Generate harmonious color palettes with hex, RGB, and HSL values. Export as CSS variables, Tailwind, SCSS, or JSON. Free client-side tool.">
   <meta name="keywords" content="color palette generator, color scheme tool, CSS colors, complementary colors, web design colors">
   <link rel="canonical" href="https://gen8x.com/">
-<link rel="alternate" type="application/atom+xml" title="Color Palette Generator Blog Feed" href="/blog/feed.xml">
-  <meta property="og:title" content="Color Palette Generator | gen8x.com">
-  <meta property="og:description" content="Generate harmonious color palettes. Export as CSS variables, Tailwind config, SCSS, or JSON.">
-  <meta property="og:url" content="https://gen8x.com/">
+  <link rel="alternate" hreflang="en" href="https://gen8x.com/">
+  <link rel="alternate" hreflang="x-default" href="https://gen8x.com/">
+  <link rel="alternate" type="application/atom+xml" title="Color Palette Generator Blog Feed" href="/blog/feed.xml">
   <meta property="og:type" content="website">
+  <meta property="og:title" content="Color Palette Generator — Free CSS, Tailwind, SCSS Export">
+  <meta property="og:description" content="Generate harmonious color palettes. Export as CSS variables, Tailwind config, SCSS, or JSON. No sign-up required.">
+  <meta property="og:url" content="https://gen8x.com/">
+  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+  <meta property="og:site_name" content="Zovo Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Color Palette Generator — Free CSS, Tailwind, SCSS Export">
+  <meta name="twitter:description" content="Generate harmonious color palettes. Export as CSS variables, Tailwind config, SCSS, or JSON. No sign-up required.">
+  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
   <link rel="stylesheet" href="assets/style.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Color Palette Generator | gen8x.com",
-  "url": "http://gen8x.com/",
+  "name": "Color Palette Generator",
+  "url": "https://gen8x.com/",
   "description": "Generate harmonious color palettes with hex, RGB, and HSL values. Export as CSS variables, Tailwind, SCSS, or JSON. Free client-side tool.",
   "applicationCategory": "DesignApplication",
   "operatingSystem": "Any",
@@ -29,8 +37,85 @@
   },
   "author": {
     "@type": "Person",
-    "name": "Zovo"
-  }
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "datePublished": "2026-04-05",
+  "dateModified": "2026-04-06",
+  "featureList": [
+    "Generate 5-color harmonious palettes",
+    "Complementary, analogous, triadic, and monochromatic modes",
+    "Generate from hex code or keyword",
+    "Export as CSS variables, Tailwind config, SCSS, or JSON",
+    "Live UI preview mockup",
+    "Recent palettes history in localStorage",
+    "Click-to-copy hex codes",
+    "Client-side — no data sent to servers"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the color palette generator work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The gen8x.com color palette generator creates harmonious 5-color palettes using color theory algorithms. You can generate a random palette, start from a specific hex code, or enter a keyword like 'ocean' or 'sunset'. The tool calculates complementary, analogous, triadic, or monochromatic colors based on HSL color relationships."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What export formats does the color palette tool support?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gen8x supports four export formats: CSS custom properties (variables), Tailwind CSS config, SCSS variables, and raw JSON. Each format is ready to copy and paste directly into your project."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the color palette generator free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, gen8x.com is completely free with no sign-up required. The tool runs entirely in your browser — no data is sent to any server. There are no usage limits or watermarks on exported palettes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between complementary and analogous color schemes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Complementary colors are opposite on the color wheel (180 degrees apart), creating maximum contrast. Analogous colors are adjacent on the wheel (within 30 degrees), creating a harmonious, low-contrast look. Use complementary for high-impact CTAs and analogous for cohesive backgrounds and branding."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I generate a palette from a specific brand color?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, enter any hex code in the 'From Hex' input field and the color palette generator will create a harmonious 5-color palette based on that starting color. You can then switch between complementary, analogous, triadic, and monochromatic modes to find the best combination."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this tool support dark mode palette generation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The palette generator works with any color range including dark tones. To generate a dark-mode-friendly palette, start with a dark hex code or use the monochromatic mode from a dark base. The live preview shows how your palette looks in a UI context."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my palettes saved anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your last 10 palettes are saved in your browser's localStorage so you can revisit them. No data is sent to any server. If you clear your browser data, the history is reset."
+      }
+    }
+  ]
 }
 </script>
 </head>
@@ -43,7 +128,7 @@
         <a href="/blog/">Blog</a>
         <a href="/about.html">About</a>
           <div class="nav-right">
-      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro ✦</a>
+      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
       <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
     </div>
   </nav>
@@ -54,6 +139,7 @@
     <section class="hero">
       <h1>Color <span>Palette</span> Generator</h1>
       <p>Generate harmonious 5-color palettes. Click any swatch to copy its hex code.</p>
+      <p class="byline">Built by <a href="/about.html">Michael Lip</a></p>
     </section>
 
     <div class="controls">
@@ -112,6 +198,56 @@
       <h3>Recent Palettes</h3>
       <div id="history-list" class="history-list"></div>
     </div>
+
+    <div class="last-updated"><time datetime="2026-04-06">Last updated: April 6, 2026</time></div>
+
+    <section class="explainer" style="max-width:780px;margin:40px auto;line-height:1.7;">
+      <h2>How the Color Palette Generator Works</h2>
+      <p>The gen8x.com color palette generator creates harmonious 5-color palettes using established color theory principles. The tool works entirely in your browser — it converts your starting color to HSL (Hue, Saturation, Lightness) and then calculates related colors based on the harmony mode you select. Complementary colors are 180 degrees apart on the color wheel, analogous colors sit within 30 degrees, triadic colors are evenly spaced at 120-degree intervals, and monochromatic palettes vary saturation and lightness while keeping the same hue.</p>
+      <p>You can start from a random seed, paste a specific hex code (useful when building around an existing brand color), or type a keyword like "ocean," "forest," or "sunset" to get a thematically appropriate starting hue. Each palette shows hex, RGB, and HSL values for every swatch, and clicking any swatch copies the hex code to your clipboard instantly. The live preview feature renders a mock UI using your generated palette so you can see how the colors look in context before committing them to your project.</p>
+      <p>Once you have a palette you like, export it in the format your project needs. CSS custom properties are ready to paste into any stylesheet. The Tailwind config output gives you a colors object for your tailwind.config.js. SCSS variables are formatted for preprocessor workflows. JSON output is useful for design tokens or programmatic access. If you need to <a href="https://krzen.com">compress images</a> to match your new color scheme or check how your palette works with text using a <a href="https://enhio.com">readability analysis tool</a>, the Zovo Tools suite has you covered.</p>
+
+      <h2>Features</h2>
+      <p>The color palette generator includes four harmony modes (complementary, analogous, triadic, monochromatic), generation from hex code or natural-language keywords, one-click copy for any color value, a live UI mockup preview, export to CSS variables, Tailwind, SCSS, and JSON formats, and a recent palettes history stored in your browser's localStorage. The tool handles color math correctly, including edge cases like hue wrapping at 360 degrees and saturation clamping at the extremes of lightness. When testing color combinations for conversion optimization, pair this tool with an <a href="https://abwex.com">A/B test calculator</a> to measure which palette variant performs better.</p>
+
+      <h2>Who Uses This</h2>
+      <p>Web developers use the color palette generator to quickly create consistent color systems for new projects. UI designers use it to explore color harmonies before committing to a design system. Brand designers use the hex-to-palette feature to build supporting colors around an existing logo color. Front-end engineers use the Tailwind and CSS variable exports to skip manual color math. Students learning color theory use the visual preview to understand how complementary and analogous schemes differ in practice.</p>
+
+      <h2>Privacy</h2>
+      <p>Everything on gen8x.com runs locally in your browser. No data is sent to any server, no analytics tracking is used, and no account is required. Your recent palette history is stored in localStorage on your device. The source code is open on <a href="https://github.com/theluckystrike/gen8x.com">GitHub</a>.</p>
+    </section>
+
+    <section class="faq-section" style="max-width:780px;margin:40px auto;">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>How does the color palette generator work?</summary>
+        <p>The gen8x.com color palette generator creates harmonious 5-color palettes using color theory algorithms. You can generate a random palette, start from a specific hex code, or enter a keyword like "ocean" or "sunset." The tool calculates complementary, analogous, triadic, or monochromatic colors based on HSL color relationships.</p>
+      </details>
+      <details>
+        <summary>What export formats does the color palette tool support?</summary>
+        <p>Gen8x supports four export formats: CSS custom properties (variables), Tailwind CSS config, SCSS variables, and raw JSON. Each format is ready to copy and paste directly into your project.</p>
+      </details>
+      <details>
+        <summary>Is the color palette generator free?</summary>
+        <p>Yes, gen8x.com is completely free with no sign-up required. The tool runs entirely in your browser with no data sent to any server. There are no usage limits or watermarks on exported palettes.</p>
+      </details>
+      <details>
+        <summary>What is the difference between complementary and analogous color schemes?</summary>
+        <p>Complementary colors are opposite on the color wheel (180 degrees apart), creating maximum contrast. Analogous colors are adjacent on the wheel (within 30 degrees), creating a harmonious, low-contrast look. Use complementary for high-impact CTAs and analogous for cohesive backgrounds and branding.</p>
+      </details>
+      <details>
+        <summary>Can I generate a palette from a specific brand color?</summary>
+        <p>Yes, enter any hex code in the "From Hex" input field and the color palette generator will create a harmonious 5-color palette based on that starting color. You can then switch between complementary, analogous, triadic, and monochromatic modes to find the best combination.</p>
+      </details>
+      <details>
+        <summary>Does this tool support dark mode palette generation?</summary>
+        <p>The palette generator works with any color range including dark tones. To generate a dark-mode-friendly palette, start with a dark hex code or use the monochromatic mode from a dark base. The live preview shows how your palette looks in a UI context.</p>
+      </details>
+      <details>
+        <summary>Are my palettes saved anywhere?</summary>
+        <p>Your last 10 palettes are saved in your browser's localStorage so you can revisit them. No data is sent to any server. If you clear your browser data, the history is reset.</p>
+      </details>
+    </section>
   </main>
 
   <div id="toast" class="toast"></div>
