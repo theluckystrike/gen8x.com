@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Color Palette Generator Blog</title>
+  <link href="http://gen8x.com/blog/" rel="alternate"/>
+  <link href="http://gen8x.com/blog/feed.xml" rel="self"/>
+  <id>http://gen8x.com/blog/</id>
+  <updated>2026-04-06T00:00:00Z</updated>
+  <author><name>Color Palette Generator</name></author>
+  <entry>
+    <title>How to Pick Colors That Convert (Data-Backed Guide) | gen8x.com</title>
+    <link href="https://gen8x.com/blog/post-1.html" rel="alternate"/>
+    <id>https://gen8x.com/blog/post-1.html</id>
+    <updated>2026-04-06T00:00:00Z</updated>
+    <summary>Research-backed guide to choosing colors that improve conversion rates. Learn which hues build trust, create urgency, and drive action.</summary>
+  </entry>
+  <entry>
+    <title>Color Theory for Developers: Beyond the Basics | gen8x.com</title>
+    <link href="https://gen8x.com/blog/post-2.html" rel="alternate"/>
+    <id>https://gen8x.com/blog/post-2.html</id>
+    <updated>2026-04-06T00:00:00Z</updated>
+    <summary>A developer&apos;s guide to color theory — HSL, color harmonies, perceptual uniformity, and practical techniques for building consistent palettes.</summary>
+  </entry>
+</feed>
