@@ -1,34 +1,36 @@
-# Color Palette Generator — Create Accessible Color Schemes from Any Seed Color
+# Gen8X -- Color Palette Generator with CSS, Tailwind & SCSS Export
 
-**[Generate Palettes →](https://gen8x.com)** | [About](https://gen8x.com/about.html) | [Blog](https://gen8x.com/blog/)
+**[-> Use Gen8X (live tool)](https://gen8x.com/)**
 
-Color Palette Generator creates beautiful, accessible color palettes from a random seed, hex value, or keyword. Choose from 4 palette types — analogous, complementary, triadic, and monochromatic. Check WCAG accessibility contrast ratios for every color pair. Export palettes as CSS variables, Tailwind config, JSON, or shareable image. Essential for designers and front-end developers building accessible UIs.
+Gen8X is a free color palette generator that creates harmonious 5-color palettes using color theory algorithms. Generate from hex codes, keywords, or random seeds. Export as CSS variables, Tailwind config, SCSS variables, or JSON. Preview palettes in a live UI mockup before committing to your project.
 
 ## Features
 
-- **4 palette generation modes** — analogous, complementary, triadic, and monochromatic
-- **Multiple seed options** — start from random, hex code, or keyword (e.g., "ocean", "sunset")
-- **WCAG accessibility checker** — contrast ratios for every color combination in your palette
-- **Export formats** — CSS custom properties, Tailwind config, JSON, PNG image
-- **Live preview** — see your palette applied to a sample UI layout in real time
+- Four harmony modes: complementary, analogous, triadic, monochromatic
+- Generate palettes from hex code, keyword, or random seed
+- Export as CSS custom properties, Tailwind config, SCSS variables, or JSON
+- Live UI mockup preview with generated palette applied
+- Click-to-copy hex codes for any swatch
+- Recent palettes history stored in localStorage
+- 100% client-side -- your data never leaves your browser
+- Open source -- inspect the code yourself
 
-## How It Works
+## Tech Stack
 
-Enter a hex color, type a keyword, or click random to generate a seed color. Select your palette type and the generator creates a harmonious set of 5-8 colors using color theory algorithms. Each color shows its hex, RGB, and HSL values. The accessibility panel checks every pair against WCAG AA and AAA contrast requirements. Export your final palette in the format your project needs — CSS variables, Tailwind config, or a shareable PNG.
+- Vanilla JavaScript (no frameworks, no build step)
+- Static HTML hosted on GitHub Pages
+- Cloudflare DNS + SSL
+- Zero dependencies, zero tracking, zero cookies
 
-## Built With
+## Part of Zovo Tools
 
-- Vanilla JavaScript (no frameworks, no dependencies)
-- Client-side only — your data never leaves your browser
+Gen8X is part of [Zovo Tools](https://zovo.one/tools) -- a collection of free developer tools.
 
-
-- [Developer Toolkit](https://kappakit.com) — color converter plus Base64, JWT, Hash, and more
-- [Image Compressor](https://krzen.com) — optimize images that use your new palette
-- [Text Enhancement Tool](https://enhio.com) — ensure your text is readable against your palette colors
-
-## Contributing
-
-Found a bug or have a feature request? [Open an issue](https://github.com/theluckystrike/gen8x.com/issues).
+**Other tools in the network:**
+- [EpochPilot](https://epochpilot.com) -- 30+ timestamp and timezone tools
+- [HeyTensor](https://heytensor.com) -- PyTorch tensor shape calculator
+- [LochBot](https://lochbot.com) -- Prompt injection vulnerability checker
+- [KappaKit](https://kappakit.com) -- Developer toolkit (Base64, JWT, hash, UUID)
 
 ## License
 
