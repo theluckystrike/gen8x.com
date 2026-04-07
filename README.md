@@ -1,50 +1,60 @@
-# Gen8X -- Color Palette Generator with CSS, Tailwind & SCSS Export
+# Gen8X
 
-**[-> Use Gen8X (live tool)](https://gen8x.com/)**
+> Free color palette generator with CSS, Tailwind, and SCSS export, harmony modes, and WCAG accessibility checks.
 
-Gen8X is a free color palette generator that creates harmonious 5-color palettes using color theory algorithms. Generate from hex codes, keywords, or random seeds. Export as CSS variables, Tailwind config, SCSS variables, or JSON. Preview palettes in a live UI mockup before committing to your project.
+**[Use Gen8X live](https://gen8x.com/)**
+
+Gen8X is a free color palette generator that creates harmonious 5-color palettes using color theory algorithms. Generate from hex codes, keywords, or random seeds. Export as CSS custom properties, Tailwind config, SCSS variables, or JSON. Preview palettes in a live UI mockup and validate contrast ratios against WCAG AA and AAA standards before committing to your design.
 
 ## Features
 
 - Four harmony modes: complementary, analogous, triadic, monochromatic
-- Generate palettes from hex code, keyword, or random seed
+- Generate palettes from a hex code, keyword, or random seed
 - Export as CSS custom properties, Tailwind config, SCSS variables, or JSON
-- Live UI mockup preview with generated palette applied
+- Live UI mockup preview with the generated palette applied
+- WCAG AA and AAA contrast ratio checker for every color pair
 - Click-to-copy hex codes for any swatch
 - Recent palettes history stored in localStorage
-- 100% client-side -- your data never leaves your browser
-- Open source -- inspect the code yourself
+- Accessible color-blind simulation previews
+- 100% client-side — no data leaves your browser
+- MIT licensed
+- No signup, no tracking
 
 ## Tech Stack
 
-- Vanilla JavaScript (no frameworks, no build step)
-- Static HTML hosted on GitHub Pages
-- Cloudflare DNS + SSL
-- Zero dependencies, zero tracking, zero cookies
+- Pure HTML, CSS, and vanilla JavaScript
+- No build step
+- No external dependencies (except Google Fonts on some pages)
+- Hosted on GitHub Pages with Cloudflare CDN
 
 ## Part of Zovo Tools
 
-Gen8X is part of [Zovo Tools](https://zovo.one/tools) -- a collection of free developer tools.
+Gen8X is part of [Zovo Tools](https://zovo.one/tools) — free developer tools by a solo developer. No tracking, no signup, no nonsense.
 
 **Other tools in the network:**
-- [EpochPilot](https://epochpilot.com) -- Epoch & timestamp converter, timezone tools & cron parser
-- [HeyTensor](https://heytensor.com) -- PyTorch tensor shape calculator & error debugger
-- [LochBot](https://lochbot.com) -- Prompt injection vulnerability checker for chatbots
-- [KappaKit](https://kappakit.com) -- Developer toolkit (Base64, JWT, hash, UUID, regex & more)
-- [ABWex](https://abwex.com) -- A/B test statistical significance calculator
-- [KickLLM](https://kickllm.com) -- LLM API cost calculator & provider comparison
-- [LockML](https://lockml.com) -- Open source ML model comparison table
-- [ClaudKit](https://claudkit.com) -- Claude API playground & request builder
-- [ClaudFlow](https://claudflow.com) -- AI workflow builder & visual prompt chain editor
-- [ClaudHQ](https://claudhq.com) -- Claude prompt library with 30+ ready-to-use templates
-- [ML3X](https://ml3x.com) -- Matrix calculator with step-by-step solutions
-- [ML0X](https://ml0x.com) -- Machine learning cheat sheet generator
-- [Krzen](https://krzen.com) -- Image compressor, resizer & format converter
-- [Kappafy](https://kappafy.com) -- JSON explorer & mock API generator
-- [InvokeBot](https://invokebot.com) -- Webhook request builder & HTTP client
-- [GPT0X](https://gpt0x.com) -- AI model database & comparison tool
-- [Enhio](https://enhio.com) -- Text enhancement tool & readability analyzer
+
+- [HeyTensor](https://heytensor.com) — PyTorch tensor shape calculator
+- [EpochPilot](https://epochpilot.com) — Timestamp, timezone, and cron tools
+- [KappaKit](https://kappakit.com) — Developer toolkit (Base64, JWT, hash, regex)
+- [LochBot](https://lochbot.com) — Prompt injection vulnerability checker
+- [ABWex](https://abwex.com) — A/B test significance calculator
+- [KickLLM](https://kickllm.com) — LLM cost calculator
+- [GPT0X](https://gpt0x.com) — AI model database
+- [ML3X](https://ml3x.com) — Matrix calculator
+- [ML0X](https://ml0x.com) — Machine learning cheat sheet generator
+- [Enhio](https://enhio.com) — Text enhancement utilities
+- [Krzen](https://krzen.com) — Image compression
+- [Kappafy](https://kappafy.com) — JSON formatter and explorer
+- [LockML](https://lockml.com) — Open source ML model comparison
+- [InvokeBot](https://invokebot.com) — Webhook testing
+- [ClaudHQ](https://claudhq.com) — Claude prompt library
+- [ClaudKit](https://claudkit.com) — Claude API utilities
+- [ClaudFlow](https://claudflow.com) — AI workflow builder
 
 ## License
 
-MIT
+MIT licensed.
+
+## Contact
+
+Built and maintained by [Michael Lip](https://zovo.one). For questions or feedback: support@zovo.one
