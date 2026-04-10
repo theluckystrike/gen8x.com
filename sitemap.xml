@@ -30,4 +30,40 @@
 <changefreq>monthly</changefreq>
 <priority>0.6</priority>
 </url>
+  <url>
+<loc>https://gen8x.com/tools/</loc>
+<lastmod>2026-04-10</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+  <url>
+<loc>https://gen8x.com/tools/hex-to-rgb.html</loc>
+<lastmod>2026-04-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+  <url>
+<loc>https://gen8x.com/tools/rgb-to-hsl.html</loc>
+<lastmod>2026-04-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+  <url>
+<loc>https://gen8x.com/tools/color-contrast-checker.html</loc>
+<lastmod>2026-04-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+  <url>
+<loc>https://gen8x.com/tools/tailwind-colors.html</loc>
+<lastmod>2026-04-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+  <url>
+<loc>https://gen8x.com/tools/css-gradient-generator.html</loc>
+<lastmod>2026-04-10</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
 </urlset>

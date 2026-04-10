@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RGB to HSL Converter — Hue Saturation Lightness | Gen8X</title>
+  <meta name="description" content="Convert RGB color values to HSL format. Understand hue, saturation, and lightness. Live color preview with CSS output.">
+  <meta name="keywords" content="rgb to hsl, color converter, hue saturation lightness, css hsl, color conversion tool">
+  <link rel="canonical" href="https://gen8x.com/tools/rgb-to-hsl.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RGB to HSL Converter — Hue Saturation Lightness | Gen8X">
+  <meta property="og:description" content="Convert RGB color values to HSL format. Understand hue, saturation, and lightness. Live color preview with CSS output.">
+  <meta property="og:url" content="https://gen8x.com/tools/rgb-to-hsl.html">
+  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+  <meta property="og:site_name" content="Zovo Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RGB to HSL Converter — Hue Saturation Lightness | Gen8X">
+  <meta name="twitter:description" content="Convert RGB color values to HSL format. Understand hue, saturation, and lightness. Live color preview with CSS output.">
+  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
+  <link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "RGB to HSL Converter",
+  "url": "https://gen8x.com/tools/rgb-to-hsl.html",
+  "description": "Convert RGB color values to HSL format. Understand hue, saturation, and lightness. Live color preview with CSS output.",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "datePublished": "2026-04-10",
+  "dateModified": "2026-04-10"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does HSL stand for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HSL stands for Hue, Saturation, and Lightness. Hue is the color angle on the color wheel (0-360 degrees), saturation is the intensity of the color (0-100%), and lightness is how light or dark the color is (0-100%). HSL is designed to be more intuitive than RGB for humans to read and adjust."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert RGB to HSL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "First normalize R, G, B to 0-1 by dividing by 255. Find the max and min channel values. Lightness = (max + min) / 2. If max equals min, saturation is 0 and hue is undefined. Otherwise, saturation = (max - min) / (1 - |2L - 1|). Hue depends on which channel is max: if R, hue = 60 * ((G - B) / (max - min)); if G, hue = 60 * ((B - R) / (max - min) + 2); if B, hue = 60 * ((R - G) / (max - min) + 4). Adjust hue to be within 0-360."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is HSL better than RGB for palette generation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HSL separates color identity (hue) from color properties (saturation and lightness), making it natural to create color harmonies. To find a complementary color, add 180 to the hue. To create a lighter tint, increase lightness. To desaturate, lower saturation. These operations are straightforward in HSL but require complex math in RGB."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between HSL and HSV/HSB?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HSL and HSV (also called HSB) both use hue and saturation but differ in the third component. HSL uses lightness where 50% is a pure color, 0% is black, and 100% is white. HSV uses value/brightness where 100% is a pure color and 0% is black. HSL is used in CSS; HSV is common in design tools like Photoshop and Figma."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does CSS support the hsl() function?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. All modern browsers support hsl() and hsla(). The syntax is hsl(hue, saturation%, lightness%) or the modern space-separated form hsl(hue saturation% lightness% / alpha). For example, hsl(217, 91%, 60%) and hsl(217 91% 60%) both produce Tailwind Blue 500."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav>
+        <a href="/">Tool</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about.html">About</a>
+          <div class="nav-right">
+      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
+      <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
+    </div>
+  </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>RGB to HSL</span></nav>
+      <h1>RGB to HSL Color Converter</h1>
+      <p>Convert RGB color values to hue, saturation, and lightness format with live preview and ready-to-use CSS output.</p>
+    </div>
+
+    <section class="explainer" style="max-width:720px;margin:2rem auto;line-height:1.7;">
+      <h2>The HSL Color Model Explained</h2>
+      <p>HSL represents colors using three properties that match how humans naturally think about color. Hue is the color itself, measured as a degree on the color wheel: 0 degrees is red, 120 degrees is green, and 240 degrees is blue. Saturation controls the intensity, from 0% (gray) to 100% (fully vivid). Lightness controls brightness, from 0% (black) through 50% (pure color) to 100% (white).</p>
+      <p>This model was designed to be more intuitive than RGB, where adjusting a single channel changes both the perceived color and brightness simultaneously. In HSL, you can make a color lighter without changing its hue, or desaturate it without affecting brightness. This separation of concerns makes HSL the preferred model for color manipulation in CSS and design systems.</p>
+
+      <h2>The RGB to HSL Conversion Algorithm</h2>
+      <p>The conversion from RGB to HSL follows a well-defined mathematical process. First, normalize each RGB channel to the range 0-1 by dividing by 255. Then find the maximum and minimum of the three normalized values:</p>
+      <pre><code>// Normalize to 0-1
+const r = R / 255, g = G / 255, b = B / 255;
+const max = Math.max(r, g, b);
+const min = Math.min(r, g, b);
+const d = max - min;
+
+// Lightness
+const l = (max + min) / 2;
+
+// Saturation
+const s = d === 0 ? 0
+  : d / (1 - Math.abs(2 * l - 1));
+
+// Hue (in degrees)
+let h = 0;
+if (d !== 0) {
+  switch (max) {
+    case r: h = 60 * (((g - b) / d) % 6); break;
+    case g: h = 60 * ((b - r) / d + 2); break;
+    case b: h = 60 * ((r - g) / d + 4); break;
+  }
+}
+if (h < 0) h += 360;</code></pre>
+      <p>When the maximum and minimum values are equal, the color is a shade of gray. Saturation is zero and hue is undefined (conventionally set to 0). The hue formula produces different results depending on which RGB channel is dominant, correctly mapping the result to the appropriate sextant of the color wheel.</p>
+
+      <h2>Why HSL Is Better for Palette Generation</h2>
+      <p>Color palette generators like <a href="/">gen8x.com</a> work primarily in HSL because color harmonies are defined by angular relationships on the hue wheel. A complementary color is exactly 180 degrees away. Analogous colors are 30 degrees apart. Triadic colors are 120 degrees apart. These operations are trivial in HSL but require converting through multiple color spaces in RGB.</p>
+      <p>HSL also makes it easy to generate tints and shades of a color by adjusting lightness, and to create muted or vivid variants by adjusting saturation. A typical design system might use a single hue with lightness values of 95%, 90%, 80%, 70%, 60%, 50%, 40%, 30%, 20%, and 10% to create a complete shade scale, similar to how Tailwind CSS structures its <a href="/tools/tailwind-colors.html">default color palette</a>.</p>
+
+      <h2>Using hsl() in CSS</h2>
+      <p>CSS supports the <code>hsl()</code> function in all modern browsers. The legacy syntax uses commas, while the modern syntax uses spaces with an optional slash for alpha:</p>
+      <pre><code>/* Legacy syntax */
+color: hsl(217, 91%, 60%);
+color: hsla(217, 91%, 60%, 0.5);
+
+/* Modern syntax (CSS Colors Level 4) */
+color: hsl(217 91% 60%);
+color: hsl(217 91% 60% / 0.5);
+
+/* Using CSS custom properties */
+:root {
+  --hue-primary: 217;
+  --color-primary: hsl(var(--hue-primary) 91% 60%);
+  --color-primary-light: hsl(var(--hue-primary) 91% 85%);
+  --color-primary-dark: hsl(var(--hue-primary) 91% 35%);
+}</code></pre>
+      <p>Using HSL with CSS custom properties is powerful because you can define a single hue variable and derive an entire color scale from it. Changing the hue variable instantly updates every derived color, making theme switching straightforward.</p>
+    </section>
+
+    <section class="faq-section" style="max-width:720px;margin:2rem auto;">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>What does HSL stand for?</summary>
+        <p>HSL stands for Hue, Saturation, and Lightness. Hue is the color angle on the color wheel (0-360 degrees), saturation is the intensity of the color (0-100%), and lightness is how light or dark the color is (0-100%). HSL is designed to be more intuitive than RGB for humans to read and adjust.</p>
+      </details>
+      <details>
+        <summary>How do I convert RGB to HSL?</summary>
+        <p>First normalize R, G, B to 0-1 by dividing by 255. Find the max and min channel values. Lightness = (max + min) / 2. If max equals min, saturation is 0 and hue is undefined. Otherwise, saturation = (max - min) / (1 - |2L - 1|). Hue depends on which channel is max: if R, hue = 60 * ((G - B) / (max - min)); if G, hue = 60 * ((B - R) / (max - min) + 2); if B, hue = 60 * ((R - G) / (max - min) + 4). Adjust hue to be within 0-360.</p>
+      </details>
+      <details>
+        <summary>Why is HSL better than RGB for palette generation?</summary>
+        <p>HSL separates color identity (hue) from color properties (saturation and lightness), making it natural to create color harmonies. To find a complementary color, add 180 to the hue. To create a lighter tint, increase lightness. To desaturate, lower saturation. These operations are straightforward in HSL but require complex math in RGB.</p>
+      </details>
+      <details>
+        <summary>What is the difference between HSL and HSV/HSB?</summary>
+        <p>HSL and HSV (also called HSB) both use hue and saturation but differ in the third component. HSL uses lightness where 50% is a pure color, 0% is black, and 100% is white. HSV uses value/brightness where 100% is a pure color and 0% is black. HSL is used in CSS; HSV is common in design tools like Photoshop and Figma.</p>
+      </details>
+      <details>
+        <summary>Does CSS support the hsl() function?</summary>
+        <p>Yes. All modern browsers support hsl() and hsla(). The syntax is hsl(hue, saturation%, lightness%) or the modern space-separated form hsl(hue saturation% lightness% / alpha). For example, hsl(217, 91%, 60%) and hsl(217 91% 60%) both produce Tailwind Blue 500.</p>
+      </details>
+    </section>
+
+    <section style="max-width:720px;margin:2rem auto;">
+      <h2>Related Tools</h2>
+      <ul>
+        <li><a href="/tools/hex-to-rgb.html">Hex to RGB Converter</a> — Convert hex color codes to RGB values</li>
+        <li><a href="/tools/color-contrast-checker.html">Color Contrast Checker</a> — Test WCAG accessibility compliance</li>
+        <li><a href="/tools/tailwind-colors.html">Tailwind CSS Color Reference</a> — All default Tailwind colors with hex and HSL values</li>
+      </ul>
+    </section>
+
+    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side.</p>
+  </main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Zovo Tools</div>
+        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
+        <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
+        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
+    </div>
+</footer>
+
+<nav class="zovo-network" aria-label="Zovo Tools Network">
+    <div class="zovo-network-inner">
+        <h3 class="zovo-network-title">Explore More Tools</h3>
+        <div class="zovo-network-links">
+            <a href="https://abwex.com">ABWex — A/B Testing</a>
+            <a href="https://claudflow.com">ClaudFlow — Workflows</a>
+            <a href="https://claudhq.com">ClaudHQ — Prompts</a>
+            <a href="https://claudkit.com">ClaudKit — API</a>
+            <a href="https://enhio.com">Enhio — Text Tools</a>
+            <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
+            <a href="https://gpt0x.com">GPT0X — AI Models</a>
+            <a href="https://heytensor.com">HeyTensor — ML Tools</a>
+            <a href="https://invokebot.com">InvokeBot — Webhooks</a>
+            <a href="https://kappafy.com">Kappafy — JSON</a>
+            <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
+            <a href="https://kickllm.com">KickLLM — LLM Costs</a>
+            <a href="https://krzen.com">Krzen — Image Tools</a>
+            <a href="https://lochbot.com">LochBot — Security</a>
+            <a href="https://lockml.com">LockML — ML Compare</a>
+            <a href="https://ml3x.com">ML3X — Matrix Math</a>
+        </div>
+    </div>
+</nav>
+
+  <script src="/assets/js/share.js"></script>
+</body>
+</html>

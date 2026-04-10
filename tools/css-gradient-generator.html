@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Gradient Generator — Linear &amp; Radial Gradients | Gen8X</title>
+  <meta name="description" content="Generate CSS linear and radial gradients with live preview. Copy CSS code instantly. Create multi-stop gradients with custom angles.">
+  <meta name="keywords" content="css gradient generator, linear gradient, radial gradient, css gradient tool, gradient maker, css background gradient">
+  <link rel="canonical" href="https://gen8x.com/tools/css-gradient-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CSS Gradient Generator — Linear &amp; Radial Gradients | Gen8X">
+  <meta property="og:description" content="Generate CSS linear and radial gradients with live preview. Copy CSS code instantly. Create multi-stop gradients with custom angles.">
+  <meta property="og:url" content="https://gen8x.com/tools/css-gradient-generator.html">
+  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+  <meta property="og:site_name" content="Zovo Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CSS Gradient Generator — Linear &amp; Radial Gradients | Gen8X">
+  <meta name="twitter:description" content="Generate CSS linear and radial gradients with live preview. Copy CSS code instantly. Create multi-stop gradients with custom angles.">
+  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
+  <link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CSS Gradient Generator",
+  "url": "https://gen8x.com/tools/css-gradient-generator.html",
+  "description": "Generate CSS linear and radial gradients with live preview. Copy CSS code instantly. Create multi-stop gradients with custom angles.",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "datePublished": "2026-04-10",
+  "dateModified": "2026-04-10"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the syntax for CSS linear-gradient?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The syntax is background: linear-gradient(direction, color-stop1, color-stop2, ...). The direction can be an angle (e.g., 45deg, 180deg) or a keyword (to right, to bottom left). Color stops can include optional position values as percentages or lengths. For example: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EC4899 100%)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between linear-gradient and radial-gradient?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Linear gradients transition colors along a straight line at a specified angle. Radial gradients transition colors outward from a center point in an elliptical or circular shape. Linear gradients are more common for backgrounds and buttons. Radial gradients are useful for spotlight effects, circular UI elements, and ambient lighting effects."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create a smooth gradient without banding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gradient banding occurs when there aren't enough intermediate colors to create a smooth transition, especially in subtle gradients. To reduce banding: use more color stops at intermediate positions, add a slight noise texture overlay, avoid very long gradients between similar colors, and use colors with enough contrast between stops. The oklch() color space in modern CSS also produces perceptually smoother gradients than sRGB."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use gradients with transparency in CSS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Use rgba() or hsla() color values, or the modern rgb() / hsl() syntax with an alpha parameter. For example: linear-gradient(to right, rgba(59, 130, 246, 1), rgba(59, 130, 246, 0)) fades blue to transparent. You can also use the 'transparent' keyword: linear-gradient(to right, #3B82F6, transparent)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do CSS gradients work in all browsers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. CSS linear-gradient and radial-gradient are supported in all modern browsers including Chrome, Firefox, Safari, and Edge. The unprefixed syntax has been supported since approximately 2013. Vendor prefixes (-webkit-, -moz-) are no longer necessary unless you need to support very old browsers. Conic-gradient has slightly less support but works in all browsers released after 2020."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav>
+        <a href="/">Tool</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about.html">About</a>
+          <div class="nav-right">
+      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
+      <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
+    </div>
+  </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>Gradient Generator</span></nav>
+      <h1>CSS Gradient Generator</h1>
+      <p>Generate CSS linear and radial gradients with custom angles, multiple color stops, and ready-to-copy code.</p>
+    </div>
+
+    <section class="explainer" style="max-width:720px;margin:2rem auto;line-height:1.7;">
+      <h2>CSS Gradient Syntax</h2>
+      <p>CSS gradients are image values generated by the browser, specified using the <code>linear-gradient()</code>, <code>radial-gradient()</code>, or <code>conic-gradient()</code> functions. They can be used anywhere a CSS image is accepted, most commonly as <code>background-image</code> or <code>background</code> values. Unlike solid colors, gradients create smooth transitions between two or more colors.</p>
+      <p>A basic linear gradient requires only two colors. The browser interpolates between them across the element:</p>
+      <pre><code>/* Simple two-color gradient (top to bottom) */
+background: linear-gradient(#3B82F6, #8B5CF6);
+
+/* With direction */
+background: linear-gradient(to right, #3B82F6, #8B5CF6);
+
+/* With angle */
+background: linear-gradient(135deg, #3B82F6, #8B5CF6);</code></pre>
+
+      <h2>Linear Gradients: Direction and Angles</h2>
+      <p>Linear gradients flow along a straight line called the gradient line. The direction can be specified as an angle or a keyword. Angles start from the top (0deg = upward) and rotate clockwise: 90deg goes left-to-right, 180deg goes top-to-bottom, 270deg goes right-to-left. Keyword directions use the <code>to</code> syntax:</p>
+      <ul>
+        <li><code>to top</code> = 0deg</li>
+        <li><code>to right</code> = 90deg</li>
+        <li><code>to bottom</code> = 180deg (default)</li>
+        <li><code>to left</code> = 270deg</li>
+        <li><code>to bottom right</code> = 135deg (approximately)</li>
+      </ul>
+      <p>Color stops can include position values to control where each color appears along the gradient line. Positions can be percentages or absolute lengths:</p>
+      <pre><code>/* Color stops with positions */
+background: linear-gradient(
+  90deg,
+  #3B82F6 0%,
+  #8B5CF6 40%,
+  #EC4899 100%
+);
+
+/* Hard color stop (no transition) */
+background: linear-gradient(
+  to right,
+  #3B82F6 0%,
+  #3B82F6 50%,
+  #EC4899 50%,
+  #EC4899 100%
+);</code></pre>
+
+      <h2>Radial Gradients</h2>
+      <p>Radial gradients radiate outward from a center point. By default, the gradient is elliptical and centered in the element, with the farthest corner determining the extent:</p>
+      <pre><code>/* Basic radial gradient */
+background: radial-gradient(#3B82F6, #1E3A8A);
+
+/* Circle shape */
+background: radial-gradient(circle, #3B82F6, #1E3A8A);
+
+/* Custom position */
+background: radial-gradient(circle at 25% 25%,
+  #3B82F6, #1E3A8A);
+
+/* Size keywords */
+background: radial-gradient(
+  circle closest-side at 50% 50%,
+  #3B82F6, #1E3A8A
+);</code></pre>
+      <p>The size keywords are <code>closest-side</code>, <code>farthest-side</code>, <code>closest-corner</code>, and <code>farthest-corner</code> (default). These determine where the final color stop reaches relative to the element's edges.</p>
+
+      <h2>Multi-Stop Gradients and Advanced Techniques</h2>
+      <p>Complex gradients can layer multiple color stops to create rich visual effects. You can also layer multiple gradients on a single element using comma separation:</p>
+      <pre><code>/* Multi-stop gradient */
+background: linear-gradient(
+  135deg,
+  #667eea 0%,
+  #764ba2 25%,
+  #f093fb 50%,
+  #f5576c 75%,
+  #fda085 100%
+);
+
+/* Layered gradients */
+background:
+  linear-gradient(135deg, #667eea33 0%, transparent 50%),
+  linear-gradient(225deg, #f093fb33 0%, transparent 50%),
+  linear-gradient(315deg, #fda08533 0%, transparent 50%),
+  #1a1a2e;</code></pre>
+      <p>For the smoothest color transitions, consider using the <code>oklch()</code> color space available in modern CSS. Interpolation in oklch produces more perceptually uniform gradients, avoiding the muddy mid-tones that can appear when transitioning between saturated colors in sRGB. Use <a href="/tools/hex-to-rgb.html">hex to RGB conversion</a> to get exact values for your gradient stops, and check text legibility over gradients with the <a href="/tools/color-contrast-checker.html">contrast checker</a>.</p>
+    </section>
+
+    <section class="faq-section" style="max-width:720px;margin:2rem auto;">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>What is the syntax for CSS linear-gradient?</summary>
+        <p>The syntax is <code>background: linear-gradient(direction, color-stop1, color-stop2, ...)</code>. The direction can be an angle (e.g., 45deg, 180deg) or a keyword (to right, to bottom left). Color stops can include optional position values as percentages or lengths. For example: <code>linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EC4899 100%)</code>.</p>
+      </details>
+      <details>
+        <summary>What is the difference between linear-gradient and radial-gradient?</summary>
+        <p>Linear gradients transition colors along a straight line at a specified angle. Radial gradients transition colors outward from a center point in an elliptical or circular shape. Linear gradients are more common for backgrounds and buttons. Radial gradients are useful for spotlight effects, circular UI elements, and ambient lighting effects.</p>
+      </details>
+      <details>
+        <summary>How do I create a smooth gradient without banding?</summary>
+        <p>Gradient banding occurs when there are not enough intermediate colors to create a smooth transition, especially in subtle gradients. To reduce banding: use more color stops at intermediate positions, add a slight noise texture overlay, avoid very long gradients between similar colors, and use colors with enough contrast between stops. The oklch() color space in modern CSS also produces perceptually smoother gradients than sRGB.</p>
+      </details>
+      <details>
+        <summary>Can I use gradients with transparency in CSS?</summary>
+        <p>Yes. Use rgba() or hsla() color values, or the modern rgb() / hsl() syntax with an alpha parameter. For example: <code>linear-gradient(to right, rgba(59, 130, 246, 1), rgba(59, 130, 246, 0))</code> fades blue to transparent. You can also use the 'transparent' keyword: <code>linear-gradient(to right, #3B82F6, transparent)</code>.</p>
+      </details>
+      <details>
+        <summary>Do CSS gradients work in all browsers?</summary>
+        <p>Yes. CSS linear-gradient and radial-gradient are supported in all modern browsers including Chrome, Firefox, Safari, and Edge. The unprefixed syntax has been supported since approximately 2013. Vendor prefixes (-webkit-, -moz-) are no longer necessary unless you need to support very old browsers. Conic-gradient has slightly less support but works in all browsers released after 2020.</p>
+      </details>
+    </section>
+
+    <section style="max-width:720px;margin:2rem auto;">
+      <h2>Related Tools</h2>
+      <ul>
+        <li><a href="/tools/hex-to-rgb.html">Hex to RGB Converter</a> — Get exact values for gradient color stops</li>
+        <li><a href="/tools/rgb-to-hsl.html">RGB to HSL Converter</a> — Adjust hue and lightness for gradient colors</li>
+        <li><a href="/tools/tailwind-colors.html">Tailwind CSS Color Reference</a> — Find colors for your gradients</li>
+      </ul>
+    </section>
+
+    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side.</p>
+  </main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Zovo Tools</div>
+        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
+        <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
+        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
+    </div>
+</footer>
+
+<nav class="zovo-network" aria-label="Zovo Tools Network">
+    <div class="zovo-network-inner">
+        <h3 class="zovo-network-title">Explore More Tools</h3>
+        <div class="zovo-network-links">
+            <a href="https://abwex.com">ABWex — A/B Testing</a>
+            <a href="https://claudflow.com">ClaudFlow — Workflows</a>
+            <a href="https://claudhq.com">ClaudHQ — Prompts</a>
+            <a href="https://claudkit.com">ClaudKit — API</a>
+            <a href="https://enhio.com">Enhio — Text Tools</a>
+            <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
+            <a href="https://gpt0x.com">GPT0X — AI Models</a>
+            <a href="https://heytensor.com">HeyTensor — ML Tools</a>
+            <a href="https://invokebot.com">InvokeBot — Webhooks</a>
+            <a href="https://kappafy.com">Kappafy — JSON</a>
+            <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
+            <a href="https://kickllm.com">KickLLM — LLM Costs</a>
+            <a href="https://krzen.com">Krzen — Image Tools</a>
+            <a href="https://lochbot.com">LochBot — Security</a>
+            <a href="https://lockml.com">LockML — ML Compare</a>
+            <a href="https://ml3x.com">ML3X — Matrix Math</a>
+        </div>
+    </div>
+</nav>
+
+  <script src="/assets/js/share.js"></script>
+</body>
+</html>

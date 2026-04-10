@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hex to RGB Converter — Color Code Translator | Gen8X</title>
+  <meta name="description" content="Convert hex color codes to RGB, HSL, and CMYK values instantly. See live color preview. Supports 3-digit and 6-digit hex codes.">
+  <meta name="keywords" content="hex to rgb, hex color converter, color code translator, hex to hsl, hex to cmyk, color conversion">
+  <link rel="canonical" href="https://gen8x.com/tools/hex-to-rgb.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hex to RGB Converter — Color Code Translator | Gen8X">
+  <meta property="og:description" content="Convert hex color codes to RGB, HSL, and CMYK values instantly. See live color preview. Supports 3-digit and 6-digit hex codes.">
+  <meta property="og:url" content="https://gen8x.com/tools/hex-to-rgb.html">
+  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+  <meta property="og:site_name" content="Zovo Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hex to RGB Converter — Color Code Translator | Gen8X">
+  <meta name="twitter:description" content="Convert hex color codes to RGB, HSL, and CMYK values instantly. See live color preview. Supports 3-digit and 6-digit hex codes.">
+  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
+  <link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Hex to RGB Converter",
+  "url": "https://gen8x.com/tools/hex-to-rgb.html",
+  "description": "Convert hex color codes to RGB, HSL, and CMYK values instantly. See live color preview. Supports 3-digit and 6-digit hex codes.",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "datePublished": "2026-04-10",
+  "dateModified": "2026-04-10"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I convert a hex color code to RGB?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Split the 6-digit hex code into three pairs (RR, GG, BB) and convert each pair from base-16 to base-10. For example, #3B82F6 becomes R=59, G=130, B=246 because parseInt('3B', 16) = 59, parseInt('82', 16) = 130, and parseInt('F6', 16) = 246."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between 3-digit and 6-digit hex codes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 3-digit hex code is shorthand where each digit is doubled to form the 6-digit version. For example, #F0A expands to #FF00AA. The 3-digit form only works when each color channel can be represented by a repeated digit, so it covers 4,096 colors compared to the full 16,777,216 colors available with 6 digits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are hex colors case-sensitive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Hex color codes are case-insensitive in CSS and all major browsers. #3b82f6, #3B82F6, and #3B82f6 all represent the same color. Lowercase is more common in modern CSS tooling and minifiers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the alpha channel in an 8-digit hex code mean?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An 8-digit hex code adds two characters at the end for opacity (alpha). For example, #3B82F680 is the same blue as #3B82F6 but at 50% opacity (0x80 = 128, which is 128/255 = ~50%). CSS supports this format in all modern browsers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert hex to CMYK?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "First convert hex to RGB, then normalize each channel to 0-1 by dividing by 255. Calculate K (key/black) as 1 - max(R', G', B'). Then C = (1 - R' - K) / (1 - K), M = (1 - G' - K) / (1 - K), Y = (1 - B' - K) / (1 - K). Multiply each by 100 for percentages. Note that CMYK is device-dependent, so this gives an approximate conversion."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav>
+        <a href="/">Tool</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about.html">About</a>
+          <div class="nav-right">
+      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
+      <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
+    </div>
+  </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>Hex to RGB</span></nav>
+      <h1>Hex to RGB Color Converter</h1>
+      <p>Convert hex color codes to RGB, HSL, and CMYK values instantly with a live color preview.</p>
+    </div>
+
+    <section class="explainer" style="max-width:720px;margin:2rem auto;line-height:1.7;">
+      <h2>How Hex Color Codes Work</h2>
+      <p>Hexadecimal color codes are the most common way to specify colors on the web. A hex color is written as a hash sign followed by six characters: <code>#RRGGBB</code>. Each pair of characters represents one color channel (red, green, blue) using base-16 notation, where digits range from 0-9 and letters A-F. This gives each channel 256 possible values (00 to FF), producing a total of 16,777,216 unique colors.</p>
+      <p>The shorthand 3-digit format <code>#RGB</code> doubles each digit to create the full 6-digit code. For example, <code>#F80</code> expands to <code>#FF8800</code>. This shorthand covers 4,096 colors and is useful for common values like <code>#FFF</code> (white), <code>#000</code> (black), and <code>#F00</code> (red).</p>
+
+      <h2>The Conversion Formula</h2>
+      <p>Converting hex to RGB is straightforward: parse each two-character pair as a base-16 integer. In JavaScript, the conversion looks like this:</p>
+      <pre><code>const hex = "#3B82F6";
+const r = parseInt(hex.substr(1, 2), 16); // 59
+const g = parseInt(hex.substr(3, 2), 16); // 130
+const b = parseInt(hex.substr(5, 2), 16); // 246</code></pre>
+      <p>For a 3-digit hex code, expand each digit first:</p>
+      <pre><code>const shortHex = "#F80";
+const fullHex = "#" + shortHex[1].repeat(2)
+  + shortHex[2].repeat(2)
+  + shortHex[3].repeat(2); // "#FF8800"</code></pre>
+
+      <h2>Common Hex Color Values</h2>
+      <p>Here are some frequently used hex colors and their RGB equivalents:</p>
+      <ul>
+        <li><strong>#FFFFFF</strong> — White — rgb(255, 255, 255)</li>
+        <li><strong>#000000</strong> — Black — rgb(0, 0, 0)</li>
+        <li><strong>#FF0000</strong> — Red — rgb(255, 0, 0)</li>
+        <li><strong>#00FF00</strong> — Green — rgb(0, 255, 0)</li>
+        <li><strong>#0000FF</strong> — Blue — rgb(0, 0, 255)</li>
+        <li><strong>#3B82F6</strong> — Tailwind Blue 500 — rgb(59, 130, 246)</li>
+        <li><strong>#10B981</strong> — Tailwind Emerald 500 — rgb(16, 185, 129)</li>
+        <li><strong>#F59E0B</strong> — Tailwind Amber 500 — rgb(245, 158, 11)</li>
+      </ul>
+
+      <h2>Using Hex and RGB in CSS</h2>
+      <p>Both hex and RGB formats are valid in CSS and render identically. Hex is more compact, while RGB is easier to read and modify programmatically. Modern CSS also supports the <code>rgb()</code> function without commas and with an optional alpha value:</p>
+      <pre><code>/* Hex notation */
+color: #3B82F6;
+color: #3B82F680; /* 50% opacity */
+
+/* RGB notation */
+color: rgb(59, 130, 246);
+color: rgb(59 130 246 / 0.5); /* 50% opacity, modern syntax */
+color: rgba(59, 130, 246, 0.5); /* 50% opacity, legacy syntax */</code></pre>
+      <p>When choosing between formats, hex is ideal for static values in stylesheets, while RGB works better when you need to manipulate individual channels with CSS custom properties or JavaScript. The <a href="/tools/rgb-to-hsl.html">RGB to HSL converter</a> can help when you need to adjust hue, saturation, or lightness independently.</p>
+    </section>
+
+    <section class="faq-section" style="max-width:720px;margin:2rem auto;">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>How do I convert a hex color code to RGB?</summary>
+        <p>Split the 6-digit hex code into three pairs (RR, GG, BB) and convert each pair from base-16 to base-10. For example, #3B82F6 becomes R=59, G=130, B=246 because parseInt('3B', 16) = 59, parseInt('82', 16) = 130, and parseInt('F6', 16) = 246.</p>
+      </details>
+      <details>
+        <summary>What is the difference between 3-digit and 6-digit hex codes?</summary>
+        <p>A 3-digit hex code is shorthand where each digit is doubled to form the 6-digit version. For example, #F0A expands to #FF00AA. The 3-digit form only works when each color channel can be represented by a repeated digit, so it covers 4,096 colors compared to the full 16,777,216 colors available with 6 digits.</p>
+      </details>
+      <details>
+        <summary>Are hex colors case-sensitive?</summary>
+        <p>No. Hex color codes are case-insensitive in CSS and all major browsers. #3b82f6, #3B82F6, and #3B82f6 all represent the same color. Lowercase is more common in modern CSS tooling and minifiers.</p>
+      </details>
+      <details>
+        <summary>What does the alpha channel in an 8-digit hex code mean?</summary>
+        <p>An 8-digit hex code adds two characters at the end for opacity (alpha). For example, #3B82F680 is the same blue as #3B82F6 but at 50% opacity (0x80 = 128, which is 128/255 = approximately 50%). CSS supports this format in all modern browsers.</p>
+      </details>
+      <details>
+        <summary>How do I convert hex to CMYK?</summary>
+        <p>First convert hex to RGB, then normalize each channel to 0-1 by dividing by 255. Calculate K (key/black) as 1 - max(R', G', B'). Then C = (1 - R' - K) / (1 - K), M = (1 - G' - K) / (1 - K), Y = (1 - B' - K) / (1 - K). Multiply each by 100 for percentages. Note that CMYK is device-dependent, so this gives an approximate conversion.</p>
+      </details>
+    </section>
+
+    <section style="max-width:720px;margin:2rem auto;">
+      <h2>Related Tools</h2>
+      <ul>
+        <li><a href="/tools/rgb-to-hsl.html">RGB to HSL Converter</a> — Convert RGB values to hue, saturation, and lightness</li>
+        <li><a href="/tools/color-contrast-checker.html">Color Contrast Checker</a> — Test WCAG accessibility compliance</li>
+        <li><a href="/tools/css-gradient-generator.html">CSS Gradient Generator</a> — Create linear and radial gradients</li>
+      </ul>
+    </section>
+
+    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side.</p>
+  </main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Zovo Tools</div>
+        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
+        <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
+        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
+    </div>
+</footer>
+
+<nav class="zovo-network" aria-label="Zovo Tools Network">
+    <div class="zovo-network-inner">
+        <h3 class="zovo-network-title">Explore More Tools</h3>
+        <div class="zovo-network-links">
+            <a href="https://abwex.com">ABWex — A/B Testing</a>
+            <a href="https://claudflow.com">ClaudFlow — Workflows</a>
+            <a href="https://claudhq.com">ClaudHQ — Prompts</a>
+            <a href="https://claudkit.com">ClaudKit — API</a>
+            <a href="https://enhio.com">Enhio — Text Tools</a>
+            <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
+            <a href="https://gpt0x.com">GPT0X — AI Models</a>
+            <a href="https://heytensor.com">HeyTensor — ML Tools</a>
+            <a href="https://invokebot.com">InvokeBot — Webhooks</a>
+            <a href="https://kappafy.com">Kappafy — JSON</a>
+            <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
+            <a href="https://kickllm.com">KickLLM — LLM Costs</a>
+            <a href="https://krzen.com">Krzen — Image Tools</a>
+            <a href="https://lochbot.com">LochBot — Security</a>
+            <a href="https://lockml.com">LockML — ML Compare</a>
+            <a href="https://ml3x.com">ML3X — Matrix Math</a>
+        </div>
+    </div>
+</nav>
+
+  <script src="/assets/js/share.js"></script>
+</body>
+</html>

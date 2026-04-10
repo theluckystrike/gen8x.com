@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Color Reference — All Default Colors | Gen8X</title>
+  <meta name="description" content="Complete Tailwind CSS color palette reference. All default colors with hex values, RGB, and HSL. Copy any color class instantly.">
+  <meta name="keywords" content="tailwind css colors, tailwind color palette, tailwind hex values, tailwind default colors, tailwind color reference">
+  <link rel="canonical" href="https://gen8x.com/tools/tailwind-colors.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tailwind CSS Color Reference — All Default Colors | Gen8X">
+  <meta property="og:description" content="Complete Tailwind CSS color palette reference. All default colors with hex values, RGB, and HSL. Copy any color class instantly.">
+  <meta property="og:url" content="https://gen8x.com/tools/tailwind-colors.html">
+  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+  <meta property="og:site_name" content="Zovo Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tailwind CSS Color Reference — All Default Colors | Gen8X">
+  <meta name="twitter:description" content="Complete Tailwind CSS color palette reference. All default colors with hex values, RGB, and HSL. Copy any color class instantly.">
+  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
+  <link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Tailwind CSS Color Reference",
+  "url": "https://gen8x.com/tools/tailwind-colors.html",
+  "description": "Complete Tailwind CSS color palette reference. All default colors with hex values, RGB, and HSL. Copy any color class instantly.",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "datePublished": "2026-04-10",
+  "dateModified": "2026-04-10"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many colors are in the default Tailwind CSS palette?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The default Tailwind CSS palette includes 22 color families: slate, gray, zinc, neutral, stone, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, and rose. Each family has 11 shades (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950) for a total of 242 colors, plus black and white."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I customize colors in tailwind.config.js?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In tailwind.config.js, use the theme.extend.colors object to add custom colors without removing defaults. For example: module.exports = { theme: { extend: { colors: { brand: { 500: '#3B82F6', 600: '#2563EB' } } } } }. To completely replace the default palette, use theme.colors instead of theme.extend.colors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between slate, gray, zinc, neutral, and stone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "These are five gray families with different undertones. Slate has a blue undertone (cool). Gray is a balanced blue-gray. Zinc has a slightly warm tone. Neutral is a pure gray with no color cast. Stone has a warm, slightly brownish undertone. Choose based on your design's color temperature — cool designs pair well with slate, warm designs with stone."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What shade should I use for body text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For body text on a white background, use shades 700-900 for WCAG AA compliance. Gray-700 (#374151) on white gives a contrast ratio of about 10.3:1, which passes both AA and AAA. For dark mode with a gray-900 background, use shades 100-300 for text. Avoid using 400 or 500 for body text as they typically fail contrast requirements on both light and dark backgrounds."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I use Tailwind colors with dark mode?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tailwind's dark mode uses the 'dark:' prefix to apply different colors when dark mode is active. A common pattern is to invert the shade scale: use bg-white dark:bg-gray-900 for backgrounds and text-gray-900 dark:text-gray-100 for text. For colored elements, swap to lighter shades in dark mode: bg-blue-600 dark:bg-blue-400. Enable dark mode in tailwind.config.js with darkMode: 'class' or darkMode: 'media'."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav>
+        <a href="/">Tool</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about.html">About</a>
+          <div class="nav-right">
+      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
+      <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
+    </div>
+  </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>Tailwind Colors</span></nav>
+      <h1>Tailwind CSS Color Reference</h1>
+      <p>Complete Tailwind CSS default color palette with hex, RGB, and HSL values for every shade.</p>
+    </div>
+
+    <section class="explainer" style="max-width:720px;margin:2rem auto;line-height:1.7;">
+      <h2>The Tailwind CSS Color System</h2>
+      <p>Tailwind CSS ships with a carefully designed default color palette of 22 color families, each with 11 shade levels from 50 (lightest) to 950 (darkest). The palette is organized around perceptual uniformity, meaning each step in the scale represents a roughly consistent visual change in lightness. This makes it predictable to build UI components that look balanced without manual color tuning.</p>
+      <p>The five gray families (slate, gray, zinc, neutral, stone) offer different undertones for different design aesthetics. Slate leans cool with a blue tint, making it popular for tech and SaaS interfaces. Neutral is a pure gray with no color cast, ideal when you want your accent colors to be the only chromatic elements. Stone has a warm, organic feel that works well for editorial and lifestyle designs.</p>
+
+      <h2>Core Color Families and Hex Values</h2>
+      <p>Here is a reference for the most commonly used shade levels across key color families. The 500 shade is the "base" color, with lighter shades above and darker shades below:</p>
+      <ul>
+        <li><strong>Red:</strong> 50: #FEF2F2, 100: #FEE2E2, 200: #FECACA, 300: #FCA5A5, 400: #F87171, 500: #EF4444, 600: #DC2626, 700: #B91C1C, 800: #991B1B, 900: #7F1D1D, 950: #450A0A</li>
+        <li><strong>Blue:</strong> 50: #EFF6FF, 100: #DBEAFE, 200: #BFDBFE, 300: #93C5FD, 400: #60A5FA, 500: #3B82F6, 600: #2563EB, 700: #1D4ED8, 800: #1E40AF, 900: #1E3A8A, 950: #172554</li>
+        <li><strong>Green:</strong> 50: #F0FDF4, 100: #DCFCE7, 200: #BBF7D0, 300: #86EFAC, 400: #4ADE80, 500: #22C55E, 600: #16A34A, 700: #15803D, 800: #166534, 900: #14532D, 950: #052E16</li>
+        <li><strong>Amber:</strong> 50: #FFFBEB, 100: #FEF3C7, 200: #FDE68A, 300: #FCD34D, 400: #FBBF24, 500: #F59E0B, 600: #D97706, 700: #B45309, 800: #92400E, 900: #78350F, 950: #451A03</li>
+        <li><strong>Purple:</strong> 50: #FAF5FF, 100: #F3E8FF, 200: #E9D5FF, 300: #D8B4FE, 400: #C084FC, 500: #A855F7, 600: #9333EA, 700: #7E22CE, 800: #6B21A8, 900: #581C87, 950: #3B0764</li>
+      </ul>
+
+      <h2>Customizing Colors in tailwind.config.js</h2>
+      <p>To add custom colors while keeping the defaults, use the <code>extend</code> key in your Tailwind configuration. This is the recommended approach for adding brand colors alongside the built-in palette:</p>
+      <pre><code>// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          50:  '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          950: '#172554',
+        }
+      }
+    }
+  }
+}</code></pre>
+      <p>You can then use classes like <code>bg-brand-500</code>, <code>text-brand-700</code>, and <code>border-brand-200</code> throughout your templates. To generate a complete shade scale from a single base color, use the <a href="/">gen8x.com palette generator</a> in monochromatic mode and export as Tailwind config.</p>
+
+      <h2>Dark Mode Color Strategies</h2>
+      <p>Effective dark mode requires more than inverting colors. The standard approach is to flip the shade scale: backgrounds use 800-950 shades, surfaces use 700-800, and text uses 100-200. Colored elements shift to lighter shades to maintain visibility against dark backgrounds.</p>
+      <pre><code>&lt;!-- Light/dark mode pattern --&gt;
+&lt;div class="bg-white dark:bg-gray-900"&gt;
+  &lt;h1 class="text-gray-900 dark:text-gray-100"&gt;Title&lt;/h1&gt;
+  &lt;p class="text-gray-600 dark:text-gray-400"&gt;Body text&lt;/p&gt;
+  &lt;button class="bg-blue-600 dark:bg-blue-500
+    text-white"&gt;Action&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      <p>Enable dark mode in your config with <code>darkMode: 'class'</code> for manual control (toggled via a class on <code>&lt;html&gt;</code>) or <code>darkMode: 'media'</code> to follow the operating system preference automatically. Always test contrast ratios in both modes using the <a href="/tools/color-contrast-checker.html">color contrast checker</a> to ensure accessibility compliance.</p>
+    </section>
+
+    <section class="faq-section" style="max-width:720px;margin:2rem auto;">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>How many colors are in the default Tailwind CSS palette?</summary>
+        <p>The default Tailwind CSS palette includes 22 color families: slate, gray, zinc, neutral, stone, red, orange, amber, yellow, lime, green, emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, and rose. Each family has 11 shades (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950) for a total of 242 colors, plus black and white.</p>
+      </details>
+      <details>
+        <summary>How do I customize colors in tailwind.config.js?</summary>
+        <p>In tailwind.config.js, use the theme.extend.colors object to add custom colors without removing defaults. For example: module.exports = { theme: { extend: { colors: { brand: { 500: '#3B82F6', 600: '#2563EB' } } } } }. To completely replace the default palette, use theme.colors instead of theme.extend.colors.</p>
+      </details>
+      <details>
+        <summary>What is the difference between slate, gray, zinc, neutral, and stone?</summary>
+        <p>These are five gray families with different undertones. Slate has a blue undertone (cool). Gray is a balanced blue-gray. Zinc has a slightly warm tone. Neutral is a pure gray with no color cast. Stone has a warm, slightly brownish undertone. Choose based on your design's color temperature -- cool designs pair well with slate, warm designs with stone.</p>
+      </details>
+      <details>
+        <summary>What shade should I use for body text?</summary>
+        <p>For body text on a white background, use shades 700-900 for WCAG AA compliance. Gray-700 (#374151) on white gives a contrast ratio of about 10.3:1, which passes both AA and AAA. For dark mode with a gray-900 background, use shades 100-300 for text. Avoid using 400 or 500 for body text as they typically fail contrast requirements on both light and dark backgrounds.</p>
+      </details>
+      <details>
+        <summary>How do I use Tailwind colors with dark mode?</summary>
+        <p>Tailwind's dark mode uses the 'dark:' prefix to apply different colors when dark mode is active. A common pattern is to invert the shade scale: use bg-white dark:bg-gray-900 for backgrounds and text-gray-900 dark:text-gray-100 for text. For colored elements, swap to lighter shades in dark mode: bg-blue-600 dark:bg-blue-400. Enable dark mode in tailwind.config.js with darkMode: 'class' or darkMode: 'media'.</p>
+      </details>
+    </section>
+
+    <section style="max-width:720px;margin:2rem auto;">
+      <h2>Related Tools</h2>
+      <ul>
+        <li><a href="/tools/hex-to-rgb.html">Hex to RGB Converter</a> — Convert Tailwind hex values to RGB</li>
+        <li><a href="/tools/color-contrast-checker.html">Color Contrast Checker</a> — Test Tailwind color pairs for accessibility</li>
+        <li><a href="/tools/css-gradient-generator.html">CSS Gradient Generator</a> — Create gradients with Tailwind colors</li>
+      </ul>
+    </section>
+
+    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side.</p>
+  </main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Zovo Tools</div>
+        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
+        <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
+        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
+    </div>
+</footer>
+
+<nav class="zovo-network" aria-label="Zovo Tools Network">
+    <div class="zovo-network-inner">
+        <h3 class="zovo-network-title">Explore More Tools</h3>
+        <div class="zovo-network-links">
+            <a href="https://abwex.com">ABWex — A/B Testing</a>
+            <a href="https://claudflow.com">ClaudFlow — Workflows</a>
+            <a href="https://claudhq.com">ClaudHQ — Prompts</a>
+            <a href="https://claudkit.com">ClaudKit — API</a>
+            <a href="https://enhio.com">Enhio — Text Tools</a>
+            <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
+            <a href="https://gpt0x.com">GPT0X — AI Models</a>
+            <a href="https://heytensor.com">HeyTensor — ML Tools</a>
+            <a href="https://invokebot.com">InvokeBot — Webhooks</a>
+            <a href="https://kappafy.com">Kappafy — JSON</a>
+            <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
+            <a href="https://kickllm.com">KickLLM — LLM Costs</a>
+            <a href="https://krzen.com">Krzen — Image Tools</a>
+            <a href="https://lochbot.com">LochBot — Security</a>
+            <a href="https://lockml.com">LockML — ML Compare</a>
+            <a href="https://ml3x.com">ML3X — Matrix Math</a>
+        </div>
+    </div>
+</nav>
+
+  <script src="/assets/js/share.js"></script>
+</body>
+</html>
