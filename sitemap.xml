@@ -90,4 +90,22 @@
 <changefreq>monthly</changefreq>
 <priority>0.7</priority>
 </url>
+  <url>
+<loc>https://gen8x.com/answers/wcag-contrast-ratio-explained.html</loc>
+<lastmod>2026-04-11</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+  <url>
+<loc>https://gen8x.com/answers/hex-to-rgb-converter.html</loc>
+<lastmod>2026-04-11</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+  <url>
+<loc>https://gen8x.com/answers/best-colors-for-dark-mode.html</loc>
+<lastmod>2026-04-11</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
 </urlset>
