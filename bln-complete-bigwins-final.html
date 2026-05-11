@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeLikeNative - Complete Big Wins Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#040608;--s1:#0a0d13;--s2:#12161e;--s3:#1a1f2a;
+  --bd:#242a38;--bd2:#2e3548;
+  --t:#bfc3d4;--td:#5e6380;--tw:#eaecf5;--t2:#9498ae;
+  --bln:#24d580;--bln2:#1aab66;--bln-bg:rgba(36,213,128,0.06);--bln-bd:rgba(36,213,128,0.14);
+  --leaf:#2dd4a0;--leaf-bg:rgba(45,212,160,0.05);
+  --amber:#f59e0b;--amber-bg:rgba(245,158,11,0.06);--amber-bd:rgba(245,158,11,0.12);
+  --blue:#6366f1;--blue-bg:rgba(99,102,241,0.06);--blue-bd:rgba(99,102,241,0.12);
+  --rose:#f43f5e;--rose-bg:rgba(244,63,94,0.05);--rose-bd:rgba(244,63,94,0.12);
+  --cyan:#06b6d4;
+  --mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--t);font-family:var(--sans);font-size:13.5px;line-height:1.65}
+.w{max-width:920px;margin:0 auto;padding:32px 20px 80px}
+h1{font-size:2rem;font-weight:800;color:var(--tw);letter-spacing:-0.04em;line-height:1.1}
+h1 span{color:var(--bln)}
+.sub{color:var(--td);font-size:0.76rem;margin:6px 0 24px;font-family:var(--mono);letter-spacing:0.01em}
+h2{font-size:1.15rem;font-weight:700;color:var(--tw);margin:40px 0 6px;letter-spacing:-0.02em}
+h2 .l{font-family:var(--mono);font-size:0.62rem;color:var(--td);display:block;margin-bottom:2px;font-weight:400;text-transform:uppercase;letter-spacing:0.06em}
+h3{font-size:0.88rem;font-weight:600;color:var(--bln);margin:14px 0 5px}
+p{margin:4px 0;font-size:0.83rem;line-height:1.7}
+code{font-family:var(--mono);font-size:0.73rem;background:var(--s2);padding:2px 5px;border-radius:3px;color:var(--cyan)}
+
+.card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:20px 22px;margin:12px 0;transition:border-color 0.15s}
+.card:hover{border-color:var(--bd2)}
+.card-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px}
+.card-t{font-size:1rem;font-weight:700;color:var(--tw)}
+.card-n{font-family:var(--mono);font-size:0.62rem;color:var(--td);margin-bottom:2px}
+.badge{font-family:var(--mono);font-size:0.72rem;font-weight:600;padding:4px 10px;border-radius:6px;white-space:nowrap}
+.b10{background:var(--bln-bg);color:var(--bln);border:1px solid var(--bln-bd)}
+.b9{background:var(--bln-bg);color:var(--bln);border:1px solid rgba(36,213,128,0.1)}
+.b8{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd)}
+.b7{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-bd)}
+
+.mx{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--bd);border-radius:7px;overflow:hidden;margin:8px 0}
+.mx-c{background:var(--s1);padding:6px 10px;text-align:center}
+.mx-l{font-family:var(--mono);font-size:0.55rem;color:var(--td);text-transform:uppercase;letter-spacing:0.05em}
+.mx-v{font-size:0.88rem;font-weight:700;color:var(--tw);margin-top:1px}
+
+.d{font-size:0.82rem;color:var(--t);line-height:1.68;margin:4px 0}
+.note{background:var(--s2);border-left:3px solid var(--amber);padding:8px 12px;border-radius:0 6px 6px 0;margin:8px 0;font-size:0.78rem;color:var(--td)}
+.safe{background:var(--s2);border-left:3px solid var(--bln);padding:8px 12px;border-radius:0 6px 6px 0;margin:8px 0;font-size:0.78rem;color:var(--td)}
+
+table{width:100%;border-collapse:collapse;margin:8px 0}
+th{font-family:var(--mono);font-size:0.57rem;color:var(--td);text-transform:uppercase;letter-spacing:0.05em;text-align:left;padding:5px 8px;border-bottom:1px solid var(--bd)}
+td{padding:7px 8px;border-bottom:1px solid var(--bd);font-size:0.82rem}
+
+.hero{background:linear-gradient(145deg,rgba(36,213,128,0.04),rgba(99,102,241,0.04));border:1px solid var(--bln-bd);border-radius:12px;padding:22px 24px;margin:18px 0}
+.status-shipped{color:var(--bln);font-weight:600}
+.status-partial{color:var(--amber);font-weight:600}
+.status-new{color:var(--blue);font-weight:600}
+
+/* Brand section */
+.brand-card{background:linear-gradient(160deg,#0d1a14,#0a0d13 40%);border:1px solid var(--bln-bd);border-radius:12px;padding:24px;margin:14px 0}
+.color-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.color-chip{width:48px;height:48px;border-radius:8px;display:flex;align-items:flex-end;justify-content:center;font-family:var(--mono);font-size:0.55rem;color:rgba(255,255,255,0.8);padding-bottom:4px}
+
+/* Sticky loop diagram */
+.loop{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:20px;margin:14px 0;text-align:center}
+.loop-step{display:inline-block;background:var(--s3);border:1px solid var(--bd);border-radius:8px;padding:8px 14px;margin:4px;font-size:0.78rem;font-weight:600;color:var(--tw)}
+.loop-arrow{color:var(--bln);font-size:1.1rem;margin:0 4px;vertical-align:middle}
+
+.footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--bd);font-family:var(--mono);font-size:0.62rem;color:var(--td);text-align:center;line-height:1.8}
+
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--bd),transparent);margin:48px 0}
+</style>
+</head>
+<body>
+<div class="w">
+
+<!-- HERO -->
+<h1>BeLikeNative <span>Big Wins</span><br>Complete Report</h1>
+<div class="sub">v1.6.3 | Sprints 18-25 complete | 127 tests | 8/8 build checks | April 27, 2026</div>
+
+<div class="hero">
+  <p class="d"><strong style="color:var(--bln)">Where we are:</strong> 15+ features shipped, 111/119 audit findings fixed, onboarding V2, upgrade modal, FAB with usage state, selection toolbar, milestones, streaks, prompt discovery, result preview, context menu sync, 127 tests, automated ship pipeline. The conversion plumbing works. The codebase is clean.</p>
+  <p class="d" style="margin-top:8px"><strong style="color:var(--blue)">What this report covers:</strong> Every improvement idea, shipped or not, rated 1-10, organized by status. Plus 12 NEW ideas focused on making the side panel a sticky daily-use product, not a settings drawer. Full brand spec, visual design language, and sticky loop architecture.</p>
+</div>
+
+<!-- BRAND SYSTEM -->
+<h2><span class="l">Brand Identity</span>Design Language for All New Components</h2>
+
+<div class="brand-card">
+  <h3>Color System</h3>
+  <div class="color-row">
+    <div class="color-chip" style="background:#24d580">Primary</div>
+    <div class="color-chip" style="background:#1aab66">Pressed</div>
+    <div class="color-chip" style="background:#0f172a">Dark BG</div>
+    <div class="color-chip" style="background:#f0fdf4">Light BG</div>
+    <div class="color-chip" style="background:#f59e0b">Warning</div>
+    <div class="color-chip" style="background:#ef4444">Danger</div>
+    <div class="color-chip" style="background:#6366f1">Pro</div>
+    <div class="color-chip" style="background:#f8fafc">Panel BG</div>
+  </div>
+
+  <h3>Typography</h3>
+  <p class="d">
+    <strong>Side panel:</strong> Instrument Sans (already loaded). Weights: 400 body, 500 labels, 600 section headers, 700 card titles.<br>
+    <strong>Indicator/content scripts:</strong> System font stack (no network request). <code>-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif</code><br>
+    <strong>Monospace (stats/counts):</strong> Tabular numerals via <code>font-variant-numeric: tabular-nums</code> on any number display.
+  </p>
+
+  <h3>Component Specs</h3>
+  <p class="d">
+    <strong>Cards:</strong> <code>bg: white</code>, <code>border: 1px solid #e2e8f0</code>, <code>border-radius: 12px</code>, <code>padding: 16px</code>, <code>shadow: 0 1px 3px rgba(0,0,0,0.04)</code>. Hover: <code>border-color: #24d580</code> with 150ms transition.<br>
+    <strong>Buttons (primary):</strong> <code>bg: #24d580</code>, <code>color: white</code>, <code>border-radius: 10px</code>, <code>height: 44px</code>, <code>font-weight: 600</code>. Hover: <code>bg: #1aab66</code>. Press: <code>transform: scale(0.98)</code>. Disabled: <code>opacity: 0.5</code>.<br>
+    <strong>Badges:</strong> <code>font-size: 11px</code>, <code>font-weight: 600</code>, <code>border-radius: 6px</code>, <code>padding: 2px 8px</code>. Starter: <code>bg: #f0fdf4, color: #16a34a</code>. Pro: <code>bg: #eef2ff, color: #6366f1</code>.<br>
+    <strong>Tab bar:</strong> Active tab underline: 2px solid #24d580. Inactive: <code>color: #64748b</code>. Active: <code>color: #0f172a, font-weight: 600</code>. 200ms transition on underline position.<br>
+    <strong>Spacing:</strong> 16px between cards, 12px internal padding, 8px between label and value. Consistent 16px horizontal margin.
+  </p>
+
+  <h3>Micro-interactions</h3>
+  <p class="d">
+    <strong>Tab switch:</strong> Underline slides left/right (not jump) via CSS <code>transform: translateX()</code> with 200ms ease-out.<br>
+    <strong>Card expand:</strong> Accordion expand/collapse via <code>max-height</code> transition, 250ms ease.<br>
+    <strong>Counter increment:</strong> Number changes use a 300ms count-up animation (CSS <code>@keyframes</code>, not JS interval).<br>
+    <strong>Success state:</strong> Brief green flash (<code>background: #f0fdf4</code> fading to white over 600ms) when a correction is confirmed.<br>
+    <strong>Streak fire:</strong> 🔥 emoji does a subtle 200ms bounce (<code>transform: scale(1.3)</code> -> <code>scale(1)</code>) when streak increments.<br>
+    <strong>Toast entry:</strong> Slide up from FAB position with 200ms ease-out + 10% opacity fade-in.
+  </p>
+</div>
+
+<!-- STICKY LOOP -->
+<h2><span class="l">Architecture</span>The Sticky Loop</h2>
+
+<p class="d">Every feature must feed into this cycle. If a feature doesn't connect to this loop, it doesn't ship.</p>
+
+<div class="loop">
+  <div class="loop-step">Select Text</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">Fix / Rephrase</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">See Value (diff preview)</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">Save to Notes</div>
+  <br style="margin:8px 0">
+  <div class="loop-step">Stats Update</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">Streak / Milestone</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">Level Up</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">Hit Limit</div>
+  <br style="margin:8px 0">
+  <div class="loop-step" style="border-color:var(--bln);color:var(--bln)">Upgrade</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">Unlock Packs</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">More Value</div>
+  <span class="loop-arrow">-></span>
+  <div class="loop-step">Daily Habit</div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- STATUS: SHIPPED -->
+<h2><span class="l">Status: Shipped (Sprints 18-25)</span>What's Done</h2>
+
+<table>
+<thead><tr><th>#</th><th>Feature</th><th>Sprint</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Onboarding V2 "Honest Theater" (6 Acts)</td><td>18, 22</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>2</td><td>Limit-Hit Upgrade Modal</td><td>21</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>3</td><td>FAB Redesign (usage badge, color states)</td><td>21</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>4</td><td>Floating Selection Toolbar</td><td>21</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>5</td><td>Smart Auto-Reselect After Processing</td><td>21</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>6</td><td>Post-Correction Micro-Toast</td><td>21</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>7</td><td>Toast Priority Queue</td><td>23</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>8</td><td>Milestone System (6 thresholds + review CTA)</td><td>23</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>9</td><td>CWS Listing Rewrite (value-led copy)</td><td>23</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>10</td><td>L1 Tooltip Personalization</td><td>23</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>11</td><td>Context Menu Dynamic Sync</td><td>23</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>12</td><td>Uninstall Feedback URL</td><td>23</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>13</td><td>24h Modal Dismiss Persistence</td><td>24</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>14</td><td>Toolbar Shortcut ID Mapping</td><td>24</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>15</td><td>Daily Streak System (7/30-day milestones)</td><td>24</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>16</td><td>Prompt Discovery Card in Side Panel</td><td>24</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>17</td><td>Result Preview Toggle (wired)</td><td>24</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>18</td><td>Dark Mode (side panel: always light, indicator: system)</td><td>20, 22</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>19</td><td>Build Verification Script (8 checks)</td><td>25</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>20</td><td>background.ts Decomposition (18 modules)</td><td>25</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>21</td><td>Indicator Decomposition (17 files)</td><td>25</td><td class="status-shipped">SHIPPED</td></tr>
+<tr><td>22</td><td>127 Tests, 0 Failures</td><td>25</td><td class="status-shipped">SHIPPED</td></tr>
+</tbody>
+</table>
+
+<div class="section-divider"></div>
+
+<!-- NEW IDEAS: SIDE PANEL UX -->
+<h2><span class="l">New Ideas: Side Panel UX Revolution</span>Make It a Daily-Use Product</h2>
+
+<p class="d">The side panel is the most underused surface in Chrome extensions. It persists across page navigations. It stays open while the user browses. It's a companion, not a popup. These 12 ideas transform it from "settings drawer" to "writing command center."</p>
+
+<!-- IDEA: NOTES TAB -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #01</div><div class="card-t">Notes Tab: Personal Writing Workspace</div></div>
+    <span class="badge b10">10/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">3h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--bln)">Retention</div></div>
+    <div class="mx-c"><div class="mx-l">Stickiness</div><div class="mx-v" style="color:var(--bln)">Extreme</div></div>
+  </div>
+
+  <p class="d"><strong>The insight:</strong> Main tab = configuration (open once). Prompts tab = browsing (open sometimes). Notes tab = YOUR content (open daily). Users who store personal content in a tool don't uninstall it.</p>
+
+  <p class="d"><strong>What's inside Notes:</strong></p>
+  <p class="d">
+    &bull; <strong>Quick Draft pad:</strong> Text area at top. User writes, pastes, or drafts. One-tap "Fix with BLN" button sends content through correction pipeline. Result appears inline as a diff. This is the "scratch pad for non-native speakers" that doesn't exist anywhere else.<br>
+    &bull; <strong>Recent Corrections feed:</strong> Last 15 corrections as compact cards: timestamp, original (strikethrough, muted), corrected (green), shortcut used, one-click re-copy. FIFO rotation, max 15 free / 50 pro. Each card is proof the product works.<br>
+    &bull; <strong>Saved snippets:</strong> Star icon on any correction saves it permanently. "Email closings I always use," "My standard intro paragraph." These become the user's personal writing library inside BLN.
+  </p>
+
+  <h3>Visual Spec</h3>
+  <p class="d">
+    Tab icon: Pencil or note icon, same weight as Main (grid) and Prompts (book) icons.<br>
+    Draft pad: White background, 1px border <code>#e2e8f0</code>, 12px radius, 100px min-height, auto-grows to 200px max. Placeholder: "Draft something, paste text to fix, or save a snippet..." in <code>#94a3b8</code>.<br>
+    "Fix with BLN" button: Below draft pad, full-width, 44px height, BLN green. Only shows when draft has >10 characters.<br>
+    Correction cards: White background, left border 3px <code>#24d580</code>, 10px radius. Original text in <code>#94a3b8</code> with strikethrough. Corrected text in <code>#0f172a</code>. Timestamp in <code>#94a3b8</code> mono. Copy icon top-right, star icon next to it.
+  </p>
+
+  <div class="safe"><strong>Why this is the stickiest feature:</strong> Every saved snippet, every correction history entry, every draft is personal data the user created inside BLN. Switching to Grammarly means losing their writing library. That's the switching cost that retains users through any competitor feature comparison.</div>
+</div>
+
+<!-- IDEA: WRITING LEVEL -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #02</div><div class="card-t">Writing Level Progression System</div></div>
+    <span class="badge b10">10/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">2.5h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--bln)">Habit</div></div>
+    <div class="mx-c"><div class="mx-l">Stickiness</div><div class="mx-v" style="color:var(--bln)">Extreme</div></div>
+  </div>
+
+  <p class="d"><strong>The Duolingo principle applied to writing.</strong> Users don't just accumulate corrections. They level up. Levels are based on total corrections + streak consistency + variety of shortcuts used.</p>
+
+  <table>
+    <tr><th>Level</th><th>Name</th><th>Requirement</th><th>Badge Color</th></tr>
+    <tr><td>1</td><td>Beginner</td><td>0 corrections</td><td><code>#94a3b8</code> gray</td></tr>
+    <tr><td>2</td><td>Explorer</td><td>25 corrections</td><td><code>#22c55e</code> green</td></tr>
+    <tr><td>3</td><td>Writer</td><td>100 + 3-day streak</td><td><code>#3b82f6</code> blue</td></tr>
+    <tr><td>4</td><td>Wordsmith</td><td>500 + 7-day streak + 3 shortcuts used</td><td><code>#8b5cf6</code> purple</td></tr>
+    <tr><td>5</td><td>Native</td><td>1000 + 30-day streak + 5 shortcuts used</td><td><code>#f59e0b</code> gold</td></tr>
+  </table>
+
+  <h3>Visual Spec</h3>
+  <p class="d">
+    Level badge replaces the current "0/180 today" text in the header. Shows: level icon + "Level 3: Writer" + XP progress bar to next level. Progress bar: 4px height, <code>border-radius: 2px</code>, bg <code>#e2e8f0</code>, fill with level color gradient. On level-up: the entire header does a 600ms glow animation in the new level's color.<br>
+    <strong>Level-up toast:</strong> Special MilestoneToast variant with level badge, new title, and share button. "You've reached Level 3: Writer! 🎉"
+  </p>
+
+  <p class="d"><strong>Why 10/10:</strong> Levels create identity. A user who is "Level 4: Wordsmith" doesn't think "should I try a competitor?" They think "I'm almost Level 5." The level badge visible in the side panel header is a constant reminder of their investment. This is the retention mechanic that Duolingo proved works for language learning applied directly to writing improvement.</p>
+</div>
+
+<!-- IDEA: PROFESSION NAMING -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #03</div><div class="card-t">Pack Names: Profession-First (Backend Data Fix)</div></div>
+    <span class="badge b10">10/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">30min</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--bln)">Trust</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">None</div></div>
+  </div>
+
+  <p class="d">Rename "magnifier" to <strong>Recruiter</strong>. "scales" to <strong>Paralegal</strong>. "compass" to <strong>Startup Founder</strong>. "feather" to <strong>Copywriter</strong>. "heart" to <strong>Healthcare</strong>. Users scan names, not descriptions. A Korean developer looking for help with technical writing should see "Developer" not "telescope." 30 minutes in MongoDB. Zero code risk. Massive comprehension gain.</p>
+</div>
+
+<!-- IDEA: MOST USED -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #04</div><div class="card-t">"Most Used" Smart Section + Function Reduction</div></div>
+    <span class="badge b10">10/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">2h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--bln)">Personalization</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">Low</div></div>
+  </div>
+
+  <p class="d"><strong>Two changes in one:</strong></p>
+  <p class="d">
+    <strong>A) Most Used section:</strong> Above Main Functions, show user's top 3 shortcuts ranked by actual usage count. Track in <code>bln_shortcut_usage: { [id]: count }</code>. Each row: shortcut key badge + name + count + "Run" button. Before 10 total corrections, show "Your most-used shortcuts will appear here."<br><br>
+    <strong>B) Reduce default view from 9 to 5:</strong> Show Rephrase, Translate, Grammar, Quick Reply, Simplify. Collapse Distill, Punctuation, APA Citation, MLA Citation into "Show more" expander. Persistent: if user expands once, stays expanded (stored in <code>chrome.storage.local</code>).
+  </p>
+
+  <h3>Visual Spec</h3>
+  <p class="d">
+    Most Used section header: "YOUR TOP SHORTCUTS" in <code>#64748b</code>, <code>font-size: 11px</code>, <code>font-weight: 600</code>, <code>letter-spacing: 0.06em</code>.<br>
+    Each row: <code>height: 44px</code>, <code>border-bottom: 1px solid #f1f5f9</code>. Key badge: <code>bg: #0f172a</code>, <code>color: white</code>, <code>border-radius: 6px</code>, <code>width: 28px</code>, <code>height: 28px</code>, centered number. Usage count: <code>color: #94a3b8</code>, <code>font-variant-numeric: tabular-nums</code>. "Run" button: ghost style, <code>color: #24d580</code>, appears on row hover only.<br>
+    "Show more" toggle: <code>color: #64748b</code>, <code>font-size: 12px</code>, chevron rotates 180deg on expand (150ms ease).
+  </p>
+</div>
+
+<!-- IDEA: PER-SITE CONTEXT -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #05</div><div class="card-t">Per-Site Context Switching</div></div>
+    <span class="badge b9">9/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">3h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--bln)">Intelligence</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--amber)">Medium</div></div>
+  </div>
+
+  <p class="d"><strong>The side panel API supports per-site panels.</strong> Use <code>sidePanel.setOptions({ path, tabId })</code> to show different content per domain. On Gmail: highlight "Draft a Quick Reply" and "Make Professional." On LinkedIn: highlight "Connection Request" and "Comment on Post." On generic sites: show default view. A small domain chip at the top of the side panel shows: "📧 Gmail Mode" or "💼 LinkedIn Mode." The user feels the extension understands WHERE they're writing, not just WHAT they're writing.</p>
+
+  <p class="d"><strong>Implementation:</strong> Not separate HTML files per site. One panel, conditionally rendered sections. Read <code>chrome.tabs.query({ active: true })</code> on panel mount, extract hostname, match against known domains, set a context state that reorders/highlights relevant shortcuts and shows site-specific prompt suggestions.</p>
+</div>
+
+<!-- IDEA: TRY-IT PREVIEWS -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #06</div><div class="card-t">Try-It Previews on Pack Cards</div></div>
+    <span class="badge b9">9/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">2h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--bln)">Conversion</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">None</div></div>
+  </div>
+
+  <p class="d"><strong>Critical while database shows 0 prompts.</strong> Every pack card gets a hardcoded before/after example. Even with zero live prompts, the card demonstrates value:</p>
+  <p class="d">
+    <strong>Legal:</strong> <em>"The client want to proceed despite risk"</em> -> <em>"The client wishes to proceed notwithstanding the identified risks"</em><br>
+    <strong>Recruiter:</strong> <em>"We looking for someone good"</em> -> <em>"We're seeking a candidate who excels in this role"</em><br>
+    <strong>Copywriter:</strong> <em>"Our product is very good and you should buy it"</em> -> <em>"The tool that 10,000 writers trust to ship faster"</em>
+  </p>
+
+  <h3>Visual Spec</h3>
+  <p class="d">
+    Before text: <code>color: #94a3b8</code>, <code>text-decoration: line-through</code>, <code>font-size: 12px</code>, italic.<br>
+    Arrow: <code>color: #24d580</code>, "→" character, centered.<br>
+    After text: <code>color: #0f172a</code>, <code>font-weight: 500</code>, <code>font-size: 12px</code>.<br>
+    Container: <code>bg: #f8fafc</code>, <code>border-radius: 8px</code>, <code>padding: 10px</code>, inside the pack card below the description.
+  </p>
+</div>
+
+<!-- IDEA: L1 PATTERN INSIGHTS -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #07</div><div class="card-t">L1 Pattern Insights ("Your Korean Habits")</div></div>
+    <span class="badge b9">9/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">3h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--bln)">Differentiation</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">Low</div></div>
+  </div>
+
+  <p class="d"><strong>No competitor does this.</strong> BLN knows the user's L1 from onboarding. Every L1 has predictable error patterns. Korean speakers drop articles. Spanish speakers add unnecessary pronouns. Japanese speakers struggle with plural/singular. Show a small "Your Patterns" card on the Notes tab or Main tab that says: "As a Korean speaker, you tend to: drop articles (a/the), confuse prepositions (in/on/at), use present tense instead of past." This is static content per L1 (already partially built in <code>onboarding-data.ts</code> which has 16 L1 languages with patterns). Display it as educational content, not correction feedback.</p>
+
+  <p class="d"><strong>Why 9/10:</strong> This makes the user feel understood at a linguistic level. "This tool knows that Korean speakers drop articles" is a fundamentally different value proposition than "this tool fixes grammar." It's the "fingerprints of your first language" brand thesis made tangible in the UI.</p>
+</div>
+
+<!-- IDEA: SMART WELCOME -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #08</div><div class="card-t">Smart Welcome State (0-5 corrections: guided, not generic)</div></div>
+    <span class="badge b8">8/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">1.5h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--blue)">Activation</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">None</div></div>
+  </div>
+
+  <p class="d">For users with <code>bln_total_corrections < 5</code>, replace the Writing Templates card with a guided "First Steps" card. Three steps with checkmark states: 1) Select text on any page, 2) Press your shortcut (shows configured key), 3) Paste the result. Progress: "2/5 corrections to unlock your writing stats." After 5 corrections, card morphs into the Writing Templates card with a 600ms cross-fade. The transition feels like leveling up.</p>
+</div>
+
+<!-- IDEA: USAGE DASHBOARD -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #09</div><div class="card-t">Usage Dashboard Header (replaces "0/180 today")</div></div>
+    <span class="badge b8">8/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">2h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--blue)">Engagement</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">Low</div></div>
+  </div>
+
+  <p class="d">Replace the plain "0/180 today" progress bar with a compact dashboard showing: level badge (from #02) + daily usage ring (circular, not linear) + streak fire + total lifetime corrections. For free users near limit: ring turns amber then red, "Upgrade" link appears. For pro users: green ring, "Unlimited" badge, lifetime stat.</p>
+
+  <h3>Visual Spec</h3>
+  <p class="d">
+    Layout: 64px height row. Left: circular usage ring (32x32px SVG, <code>stroke-dasharray</code> for progress). Center: "Level 3: Writer" + "847 lifetime" stacked. Right: "🔥 5-day streak" vertically centered.<br>
+    Ring colors: <code>#24d580</code> (20+), <code>#f59e0b</code> (5-19), <code>#ef4444</code> (1-4), pulsing red (0).<br>
+    Lifetime counter: <code>font-variant-numeric: tabular-nums</code>, <code>font-weight: 700</code>, <code>color: #0f172a</code>.
+  </p>
+</div>
+
+<!-- IDEA: CUSTOM FUNCTION VALIDATION -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #10</div><div class="card-t">Custom Function: Structured Input + Validation</div></div>
+    <span class="badge b8">8/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">1h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--blue)">Quality</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">None</div></div>
+  </div>
+
+  <p class="d">Replace raw text area with structured form: Name field (40 char max, required) + Prompt textarea (500 char max, char counter) + <code>${text}</code> variable hint ("Use ${text} where selected text should go") + warning if ${text} missing + Save button. Current state (screenshot 3) shows a jailbreak prompt pasted with no limits. This is both a UX and security problem.</p>
+</div>
+
+<!-- IDEA: FAVORITES -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #11</div><div class="card-t">Pinned Functions + Site-Specific Defaults</div></div>
+    <span class="badge b7">7/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">2h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--amber)">Power Users</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">Low</div></div>
+  </div>
+
+  <p class="d">Star icon on each function row. Pinned functions move to top. Combined with per-site context (#05): user can pin different functions per site. On Gmail: "Draft Reply" and "Professional" are pinned. On Slack: "Casual" and "Simplify" are pinned. Pro-only: free users get 2 pins, pro gets unlimited. Stored in <code>bln_pinned: { [hostname]: shortcutId[] }</code>.</p>
+</div>
+
+<!-- IDEA: SOCIAL PROOF -->
+<div class="card">
+  <div class="card-h">
+    <div><div class="card-n">NEW #12</div><div class="card-t">Social Proof Footer: Live Community Stats</div></div>
+    <span class="badge b7">7/10</span>
+  </div>
+  <div class="mx">
+    <div class="mx-c"><div class="mx-l">Effort</div><div class="mx-v">1h</div></div>
+    <div class="mx-c"><div class="mx-l">Impact</div><div class="mx-v" style="color:var(--amber)">Trust</div></div>
+    <div class="mx-c"><div class="mx-l">Risk</div><div class="mx-v" style="color:var(--bln)">None</div></div>
+  </div>
+
+  <p class="d">Replace the current footer ("Sharing the ❤️ of Language...") with a live stat: "8,247 writers improved 47,000+ sentences this week." Pull from a simple backend endpoint that aggregates anonymized usage counts (already tracked via analytics). Updates weekly. The footer becomes social proof instead of a tagline. The user feels part of a community of non-native speakers all improving together.</p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- EXECUTION PRIORITY -->
+<h2><span class="l">Execution Priority</span>What to Build Next</h2>
+
+<div class="card" style="background:var(--s2)">
+  <h3 style="color:var(--bln)">Sprint 26 (2h, highest ROI)</h3>
+  <p class="d">
+    #03 Pack profession naming (30min, backend)<br>
+    #04 Most Used + function reduction (2h)<br>
+    #10 Custom function validation (1h bonus)
+  </p>
+
+  <h3 style="color:var(--blue)">Sprint 27 (dedicated, architecture)</h3>
+  <p class="d">
+    #01 Notes Tab with draft pad + recent corrections + saved snippets (3h)<br>
+    #02 Writing Level progression system (2.5h)<br>
+    #09 Usage dashboard header (2h)
+  </p>
+
+  <h3 style="color:var(--amber)">Sprint 28 (differentiation)</h3>
+  <p class="d">
+    #06 Try-It previews on pack cards (2h)<br>
+    #07 L1 Pattern Insights (3h)<br>
+    #05 Per-site context switching (3h)<br>
+    #08 Smart Welcome State (1.5h)
+  </p>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- REMAINING BACKLOG -->
+<h2><span class="l">Original Big Wins Report</span>Remaining Items Not Yet Shipped</h2>
+
+<table>
+<thead><tr><th>#</th><th>Idea</th><th>Original Rating</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>7</td><td>Writing History + Favorites Panel</td><td>8/10</td><td class="status-new">-> Folded into Notes Tab (#01)</td></tr>
+<tr><td>8</td><td>One-Click Tone Presets</td><td>8/10</td><td class="status-partial">NOT STARTED (Sprint 28+)</td></tr>
+<tr><td>10</td><td>Proactive Grammar Hints (Gemini Nano)</td><td>8/10</td><td class="status-partial">NOT STARTED (requires origin trial)</td></tr>
+<tr><td>11</td><td>Multi-Paragraph Batch Mode</td><td>8/10</td><td class="status-partial">NOT STARTED</td></tr>
+<tr><td>12</td><td>Deep-Link Prompt Pack Auto-Load</td><td>8/10</td><td class="status-partial">NOT STARTED</td></tr>
+<tr><td>13</td><td>Per-Site Settings Memory</td><td>7/10</td><td class="status-new">-> Folded into Per-Site Context (#05)</td></tr>
+<tr><td>14</td><td>55-Locale CWS Listings</td><td>7/10</td><td class="status-partial">NOT STARTED (agent task)</td></tr>
+<tr><td>15</td><td>Weekly Progress Email Digest</td><td>7/10</td><td class="status-partial">NOT STARTED (backend)</td></tr>
+<tr><td>17</td><td>Keyboard Shortcut Customization</td><td>6/10</td><td class="status-partial">NOT STARTED</td></tr>
+<tr><td>20</td><td>Referral / Invite System</td><td>6/10</td><td class="status-partial">NOT STARTED (backend)</td></tr>
+</tbody>
+</table>
+
+<div class="footer">
+  BeLikeNative Complete Big Wins Report<br>
+  22 shipped features | 12 new ideas | 10 backlog items<br>
+  v1.6.3 | 127 tests | 8/8 build checks | NASA P10 compliant<br>
+  April 27, 2026
+</div>
+
+</div>
+</body>
+</html>
