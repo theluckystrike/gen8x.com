@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agentic Operating Stack: From Raw Signal to Shipped Revenue | Zovo Labs</title>
+<meta name="description" content="A 3-layer execution framework: PM Orchestration Engine (strategy), Agentic Sprint OS (execution), and the 10 Biggest Wins (proof). $144 MRR to $8,724 projected in 90 days.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://gen8x.com/agentic-operating-stack-michael-lip">
+<link rel="alternate" hreflang="en" href="https://gen8x.com/agentic-operating-stack-michael-lip">
+<link rel="alternate" hreflang="x-default" href="https://gen8x.com/agentic-operating-stack-michael-lip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Agentic Operating Stack: From Raw Signal to Shipped Revenue">
+<meta property="og:description" content="A 3-layer execution framework that turned 13 projects and 450K monthly impressions into a ranked execution roadmap. PM Engine + Sprint OS + Proof.">
+<meta property="og:url" content="https://gen8x.com/agentic-operating-stack-michael-lip">
+<meta property="og:site_name" content="Zovo Labs">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Agentic Operating Stack: From Raw Signal to Shipped Revenue">
+<meta name="twitter:description" content="3-layer execution framework: PM Orchestration Engine, Agentic Sprint OS, and 10 ranked wins. From $144 to $8,724 MRR projected.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Agentic Operating Stack: From Raw Signal to Shipped Revenue",
+  "description": "A 3-layer execution framework: PM Orchestration Engine (strategy), Agentic Sprint OS (execution), and the 10 Biggest Wins (proof). $144 MRR to $8,724 projected in 90 days.",
+  "url": "https://gen8x.com/agentic-operating-stack-michael-lip",
+  "datePublished": "2026-05-11",
+  "dateModified": "2026-05-11",
+  "author": {"@type": "Person", "name": "Michael Lip", "url": "https://zovo.one"},
+  "publisher": {"@type": "Organization", "name": "Zovo Labs", "url": "https://zovo.one"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0b;
+  --bg-1: #101012;
+  --bg-2: #15161a;
+  --bg-3: #1c1d22;
+  --line: #25262c;
+  --line-bright: #36383f;
+  --ink: #f4f1ec;
+  --ink-2: #b8b5ad;
+  --ink-3: #7a7770;
+  --ink-4: #4a4845;
+  --ink-5: #2a2925;
+  --amber: #e89e3c;
+  --amber-deep: #c47a1a;
+  --amber-tint: rgba(232,158,60,0.08);
+  --amber-line: rgba(232,158,60,0.22);
+  --red: #e25c4d;
+  --red-tint: rgba(226,92,77,0.09);
+  --red-line: rgba(226,92,77,0.20);
+  --green: #6fa86a;
+  --green-tint: rgba(111,168,106,0.09);
+  --green-line: rgba(111,168,106,0.22);
+  --blue: #6585c7;
+  --blue-tint: rgba(101,133,199,0.09);
+
+  --serif: 'Fraunces', 'Times New Roman', serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+  overflow-x: hidden;
+}
+::selection { background: var(--amber); color: var(--bg); }
+a { color: inherit; }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(232,158,60,0.04), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 110%, rgba(226,92,77,0.025), transparent 60%);
+  z-index: 0;
+}
+
+/* ============ TOP STRIP ============ */
+.strip {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10,10,11,0.85);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid var(--line);
+  padding: 0 32px;
+}
+.strip-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 44px;
+}
+.strip-l {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.strip-l .live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--green);
+}
+.strip-l .live::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:0.4 } }
+.btn-cta {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 7px 16px;
+  background: var(--amber);
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn-cta:hover { background: var(--amber-deep); }
+
+/* ============ MASTHEAD ============ */
+.shell { max-width: 1200px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+.masthead { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--amber);
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-size: clamp(48px, 7.6vw, 104px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  max-width: 14ch;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--amber);
+  font-weight: 400;
+}
+.hero-sub {
+  margin-top: 28px;
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+.hero-meta {
+  margin-top: 32px;
+  display: flex;
+  gap: 32px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+.hero-meta span { color: var(--ink-2); }
+
+/* ============ STACK DIAGRAM ============ */
+.stack-section { padding: 96px 0; }
+.sec-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--amber);
+  margin-bottom: 16px;
+}
+section h2 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 4.4vw, 56px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+section h2 em { font-style: italic; color: var(--amber); font-weight: 400; }
+.sec-intro {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 64ch;
+  margin-bottom: 48px;
+}
+
+/* stack visual */
+.stack-visual {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  margin-bottom: 48px;
+}
+.stack-layer {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 32px;
+  padding: 32px;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.stack-layer::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+}
+.stack-layer.layer-1::before { background: var(--amber); }
+.stack-layer.layer-2::before { background: var(--green); }
+.stack-layer.layer-3::before { background: var(--blue); }
+.stack-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.stack-label .num {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink-4);
+}
+.stack-layer.layer-1 .stack-label .num { color: var(--amber); }
+.stack-label .lbl {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+  margin-top: 8px;
+}
+.stack-content h3 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.stack-content .ver {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+}
+.stack-content p {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+.stack-arrow {
+  text-align: center;
+  padding: 8px 0;
+  color: var(--ink-4);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+/* ============ PM ENGINE SECTION ============ */
+.engine-section { padding: 96px 0; border-top: 1px solid var(--line); }
+.protocol-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 48px;
+}
+.protocol-card {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 28px 24px;
+}
+.protocol-card .pc-id {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+.protocol-card h4 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.protocol-card p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+
+/* priority table */
+.priority-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 48px;
+  font-size: 14px;
+}
+.priority-table th {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 500;
+}
+.priority-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  vertical-align: top;
+}
+.priority-table td:first-child {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--amber);
+  white-space: nowrap;
+}
+.priority-table tr:last-child td { border-bottom: none; }
+
+/* ============ SPRINT OS SECTION ============ */
+.sprint-section { padding: 96px 0; border-top: 1px solid var(--line); }
+.phase-flow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+.phase {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 20px 16px;
+  text-align: center;
+  position: relative;
+}
+.phase::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid var(--amber);
+  z-index: 2;
+}
+.phase:last-child::after { display: none; }
+.phase .p-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-4);
+  margin-bottom: 8px;
+}
+.phase .p-name {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+/* governance rules */
+.gov-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 32px;
+}
+.gov-rule {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.gov-rule .icon {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--red);
+  text-align: center;
+  padding-top: 2px;
+}
+.gov-rule p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.gov-rule p strong { color: var(--ink); font-weight: 600; }
+
+/* budget/failure protocols */
+.protocol-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 32px;
+}
+.protocol-box {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 32px;
+}
+.protocol-box h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+  margin-bottom: 16px;
+}
+.protocol-box pre {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ============ PROOF / 10 WINS SECTION ============ */
+.proof-section { padding: 96px 0; border-top: 1px solid var(--line); }
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 48px;
+}
+.stat {
+  padding: 28px 24px;
+  border-right: 1px solid var(--line);
+}
+.stat:last-child { border-right: none; }
+.stat .sv {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+}
+.stat .sv .unit { font-size: 18px; color: var(--ink-3); margin-left: 2px; }
+.stat .sv .pre { font-size: 22px; color: var(--amber); }
+.stat .sl {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  margin-top: 12px;
+}
+
+/* leverage matrix */
+.matrix-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 32px;
+}
+.matrix {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+.matrix th {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  text-align: center;
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 500;
+}
+.matrix th:first-child { text-align: left; }
+.matrix td {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.matrix td:first-child {
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--ink);
+}
+.matrix td:first-child .rank {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--amber);
+  margin-right: 10px;
+}
+.matrix td:last-child {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.matrix .tot {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.dot-s {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+.ds5 { background: var(--amber); color: var(--bg); }
+.ds4 { background: rgba(232,158,60,0.25); color: var(--amber); }
+.ds3 { background: rgba(232,158,60,0.12); color: var(--amber-deep); }
+.ds2 { background: var(--bg-2); color: var(--ink-3); }
+
+/* win cards */
+.wins-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  margin-top: 48px;
+}
+.win-card {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 28px 32px;
+}
+.win-card.featured { border-left: 3px solid var(--amber); }
+.win-card .wc-rank {
+  font-family: var(--serif);
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--ink-4);
+  text-align: center;
+}
+.win-card.featured .wc-rank { color: var(--amber); }
+.win-card .wc-body h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.win-card .wc-body .wc-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.win-card .wc-body .wc-tag strong { color: var(--amber); font-weight: 600; }
+.win-card .wc-score {
+  text-align: right;
+}
+.win-card .wc-score .ws-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+}
+.win-card .wc-score .ws-den {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-4);
+}
+.win-card .wc-score .ws-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-top: 4px;
+}
+
+/* ============ REVENUE PROJECTION ============ */
+.revenue-section { padding: 96px 0; border-top: 1px solid var(--line); }
+.rev-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 48px;
+}
+.rev-stage {
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  padding: 28px 24px;
+  position: relative;
+}
+.rev-stage .rs-period {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-4);
+  margin-bottom: 12px;
+}
+.rev-stage .rs-val {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.rev-stage .rs-val .cur { color: var(--amber); font-size: 20px; }
+.rev-stage .rs-desc {
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+.rev-stage.current .rs-val { color: var(--red); }
+.rev-stage.target .rs-val { color: var(--green); }
+
+/* ============ CTA SECTION ============ */
+.cta-section {
+  padding: 96px 0;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.cta-section h2 {
+  margin-bottom: 16px;
+}
+.cta-section .cta-sub {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--ink-2);
+  margin-bottom: 40px;
+  max-width: 48ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 16px 40px;
+  background: var(--amber);
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.cta-btn:hover { background: var(--amber-deep); }
+.cta-note {
+  margin-top: 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-4);
+}
+
+/* ============ PULL QUOTE ============ */
+.bleed-pull {
+  margin: 0 -32px;
+  padding: 96px 32px;
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.bleed-pull .pull-mark {
+  position: absolute;
+  top: -20px;
+  left: 32px;
+  font-family: var(--serif);
+  font-size: 140px;
+  color: var(--amber);
+  opacity: 0.15;
+  line-height: 1;
+  pointer-events: none;
+}
+.bleed-pull blockquote {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--ink);
+  max-width: 20ch;
+  position: relative;
+}
+.bleed-pull blockquote em { font-style: normal; color: var(--amber); font-weight: 400; }
+.bleed-pull cite {
+  display: block;
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+  font-style: normal;
+}
+
+/* ============ FOOTER ============ */
+footer {
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+}
+.foot-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-4);
+}
+.foot-inner a { color: var(--amber); text-decoration: none; }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1080px) {
+  .phase-flow { grid-template-columns: repeat(4, 1fr); }
+  .phase:nth-child(4)::after { display: none; }
+  .protocol-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-row { grid-template-columns: repeat(3, 1fr); }
+  .rev-flow { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 720px) {
+  .shell { padding: 0 16px; }
+  .strip { padding: 0 16px; }
+  .strip-l .live { display: none; }
+  .hero h1 { font-size: clamp(32px, 8vw, 48px); }
+  .hero-meta { flex-direction: column; gap: 8px; }
+  section h2 { font-size: clamp(26px, 6vw, 36px); }
+  .stack-layer { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; }
+  .stack-label { flex-direction: row; gap: 12px; align-items: baseline; }
+  .stack-label .num { font-size: 32px; }
+  .protocol-grid { grid-template-columns: 1fr; }
+  .phase-flow { grid-template-columns: repeat(3, 1fr); }
+  .phase::after { display: none; }
+  .gov-grid { grid-template-columns: 1fr; }
+  .protocol-pair { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .stat .sv { font-size: 32px; }
+  .win-card { grid-template-columns: 50px 1fr; gap: 16px; }
+  .win-card .wc-score { display: none; }
+  .win-card .wc-rank { font-size: 32px; }
+  .rev-flow { grid-template-columns: 1fr; }
+  .bleed-pull { margin: 0 -16px; padding: 56px 16px; }
+  .bleed-pull .pull-mark { font-size: 72px; }
+  .stack-section, .engine-section, .sprint-section, .proof-section, .revenue-section, .cta-section { padding: 48px 0; }
+  .priority-table { font-size: 13px; }
+  .priority-table th, .priority-table td { padding: 12px 10px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: clamp(28px, 8vw, 36px); }
+  section h2 { font-size: clamp(24px, 6vw, 32px); }
+  .phase-flow { grid-template-columns: repeat(2, 1fr); }
+  .stats-row { grid-template-columns: 1fr; }
+  .stat { border-right: none; border-bottom: 1px solid var(--line); }
+  .stat:last-child { border-bottom: none; }
+  .foot-inner { flex-direction: column; gap: 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP STRIP ============ -->
+<nav class="strip">
+  <div class="strip-inner">
+    <div class="strip-l">
+      <span>Zovo Labs</span>
+      <span class="live">Operational</span>
+    </div>
+    <a href="https://zovo.one/lifetime?utm_source=gen8x&utm_medium=agentic-stack&utm_campaign=operating-stack" class="btn-cta">Get Lifetime Access</a>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="hero">
+      <div class="hero-tag">Framework Publication / May 2026</div>
+      <h1>The Agentic <em>Operating Stack.</em></h1>
+      <p class="hero-sub">Three layers. One system. From raw, contradictory signals to shipped revenue in under 30 minutes of PM decision time. This is how 13 projects, 450K monthly impressions, and $144 MRR became a ranked execution machine targeting $8,724.</p>
+      <div class="hero-meta">
+        <span>Author: Michael Lip</span>
+        <span>Version: 3.1</span>
+        <span>Portfolio: 13 projects</span>
+        <span>Filed: 2026-05-11</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ THE STACK ============ -->
+  <section class="stack-section">
+    <div class="sec-num">01 / Architecture</div>
+    <h2>Three layers, <em>one system.</em></h2>
+    <p class="sec-intro">Most solo operators drown in data, build without direction, and ship without proving impact. This stack eliminates all three failure modes by enforcing a strict pipeline: strategy feeds execution, execution produces proof, proof refines strategy.</p>
+
+    <div class="stack-visual">
+      <div class="stack-layer layer-1">
+        <div class="stack-label">
+          <div class="num">01</div>
+          <div class="lbl">Strategy</div>
+        </div>
+        <div class="stack-content">
+          <h3>PM Orchestration Engine</h3>
+          <div class="ver">v2.0 / 8 output sections / 17-point quality gate</div>
+          <p>Transforms raw feedback, quantitative data, stakeholder inputs, and technical signals into a single decision-ready document. Not a summarizer. A decision accelerator. Every sentence either reduces ambiguity or forces a necessary decision.</p>
+        </div>
+      </div>
+      <div class="stack-arrow">feeds into</div>
+      <div class="stack-layer layer-2">
+        <div class="stack-label">
+          <div class="num">02</div>
+          <div class="lbl">Execution</div>
+        </div>
+        <div class="stack-content">
+          <h3>Agentic Sprint OS</h3>
+          <div class="ver">v3.1 / 7-phase protocol / Leverage Gate enforcement</div>
+          <p>Receives a one-line objective. Generates a sprint plan. Scores it on four axes (S-C-A-R). If it scores below 12/20, it kills the sprint. If it passes, it executes step-by-step with verification, failure recovery, and budget enforcement. Full autonomy.</p>
+        </div>
+      </div>
+      <div class="stack-arrow">produces</div>
+      <div class="stack-layer layer-3">
+        <div class="stack-label">
+          <div class="num">03</div>
+          <div class="lbl">Proof</div>
+        </div>
+        <div class="stack-content">
+          <h3>10 Biggest Wins</h3>
+          <div class="ver">Portfolio Brief No. 27 / May 2026 / Leverage-ranked</div>
+          <p>The output. 10 moves ranked by (Impact x Scale) / Time. Revenue projection: $144 current MRR to $8,724 at 90 days. Each win has a problem statement, execution steps, impact metrics, and time-to-ship. The proof that the system works.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PULL QUOTE ============ -->
+  <div class="bleed-pull">
+    <span class="pull-mark">"</span>
+    <blockquote>The bottleneck is not <em>building.</em> It is monetizing what you have already built.</blockquote>
+    <cite>Field thesis / Portfolio Brief No. 27</cite>
+  </div>
+
+  <!-- ============ PM ENGINE DETAIL ============ -->
+  <section class="engine-section">
+    <div class="sec-num">02 / Strategy Layer</div>
+    <h2>PM Orchestration Engine <em>v2.0</em></h2>
+    <p class="sec-intro">You are not a summarizer. You are a decision accelerator. Every sentence you write must either reduce ambiguity or force a necessary decision. The engine consumes messy, overlapping, contradictory inputs and produces a single action-ready document.</p>
+
+    <div class="protocol-grid">
+      <div class="protocol-card">
+        <div class="pc-id">Section A</div>
+        <h4>Executive Snapshot</h4>
+        <p>100 words max. Three elements: most important thing now, highest risk if unchanged, biggest visible opportunity.</p>
+      </div>
+      <div class="protocol-card">
+        <div class="pc-id">Section B</div>
+        <h4>Signal Registry</h4>
+        <p>Every signal: ID, source, category, impact score (1-5 composite), confidence level, trend classification, affected segment.</p>
+      </div>
+      <div class="protocol-card">
+        <div class="pc-id">Section C</div>
+        <h4>Risk Matrix</h4>
+        <p>Likelihood x Impact scoring. 20-25 = mandatory P0. 12-19 = must appear in sprint. Assess risks before prioritizing features.</p>
+      </div>
+      <div class="protocol-card">
+        <div class="pc-id">Section D</div>
+        <h4>Action Plan</h4>
+        <p>Max 12 items. P0 max 3. P0+P1 max 8. Each item: WHY, WHAT, WHO, SIZE, PRIORITY, SUCCESS METRIC, DEADLINE, DEPENDS ON.</p>
+      </div>
+      <div class="protocol-card">
+        <div class="pc-id">Section E</div>
+        <h4>Dependency Map</h4>
+        <p>Internal blocks, external blocks, critical path with total duration vs. sprint days. Status: ON TRACK / AT RISK / BLOCKED.</p>
+      </div>
+      <div class="protocol-card">
+        <div class="pc-id">Section F</div>
+        <h4>Decision Register</h4>
+        <p>Every decision: context, options with gains/costs, data gap, recommendation, deadline, and default if undecided.</p>
+      </div>
+      <div class="protocol-card">
+        <div class="pc-id">Section G</div>
+        <h4>Stakeholder Comms</h4>
+        <p>Who needs what message, when, via which channel, owned by whom, with escalation triggers defined.</p>
+      </div>
+      <div class="protocol-card">
+        <div class="pc-id">Section H</div>
+        <h4>Feedback Loop</h4>
+        <p>Non-negotiable end-of-sprint review. Delivery, priority accuracy, signal quality, surprise audit, decision review.</p>
+      </div>
+    </div>
+
+    <table class="priority-table">
+      <thead>
+        <tr><th>Level</th><th>Meaning</th><th>Response Time</th><th>Hard Cap</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>P0</td><td>Active damage NOW</td><td>Started within 24 hours</td><td>Maximum 3</td></tr>
+        <tr><td>P1</td><td>Moves north star THIS sprint</td><td>Completed this sprint</td><td>Maximum 5</td></tr>
+        <tr><td>P2</td><td>Moves metric NEXT sprint if scoped now</td><td>Scoped now, executed next</td><td>No cap</td></tr>
+        <tr><td>P3</td><td>Valuable, can wait</td><td>Revisited in sprint [N]</td><td>No cap</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ SPRINT OS DETAIL ============ -->
+  <section class="sprint-section">
+    <div class="sec-num">03 / Execution Layer</div>
+    <h2>Agentic Sprint OS <em>v3.1</em></h2>
+    <p class="sec-intro">Agent receives one-line objective. Reads infrastructure registry. Generates sprint plan. Scores it against the Leverage Gate. Executes step-by-step with verification. Handles failures. Tracks budget. Ships or kills. No middle ground.</p>
+
+    <div class="phase-flow">
+      <div class="phase"><div class="p-num">Phase 1</div><div class="p-name">Receive Objective</div></div>
+      <div class="phase"><div class="p-num">Phase 2</div><div class="p-name">Read Infra</div></div>
+      <div class="phase"><div class="p-num">Phase 3</div><div class="p-name">Generate Plan</div></div>
+      <div class="phase"><div class="p-num">Phase 4</div><div class="p-name">Leverage Gate</div></div>
+      <div class="phase"><div class="p-num">Phase 5</div><div class="p-name">Init State</div></div>
+      <div class="phase"><div class="p-num">Phase 6</div><div class="p-name">Execute Steps</div></div>
+      <div class="phase"><div class="p-num">Phase 7</div><div class="p-name">Finalize</div></div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin-bottom:16px;">The Leverage Gate (S-C-A-R)</h3>
+    <p style="font-size:15px;color:var(--ink-2);line-height:1.6;max-width:64ch;margin-bottom:24px;">Every sprint is scored on four axes before execution begins. If the composite score is below 12/20, the sprint is killed immediately. No execution. No exceptions.</p>
+
+    <div class="gov-grid">
+      <div class="gov-rule">
+        <div class="icon">S</div>
+        <p><strong>Scalability</strong> - Does the result scale beyond a one-to-one effort curve? Weight: 1.5x</p>
+      </div>
+      <div class="gov-rule">
+        <div class="icon">C</div>
+        <p><strong>Compounding</strong> - Does it accelerate every future sprint after this one?</p>
+      </div>
+      <div class="gov-rule">
+        <div class="icon">A</div>
+        <p><strong>Autonomy</strong> - Does it run unattended after the initial deploy?</p>
+      </div>
+      <div class="gov-rule">
+        <div class="icon">R</div>
+        <p><strong>Revenue Path</strong> - Is the path to money direct, or only indirect? Weight: 2x</p>
+      </div>
+    </div>
+
+    <div class="protocol-pair">
+      <div class="protocol-box">
+        <h4>Failure Protocol</h4>
+        <pre>Step verify fails ->
+  retry_count = 0
+  while retry_count < 3:
+    wait (2 ^ retry_count) seconds
+    re-execute step
+    run verify
+    if verify exits 0: break
+    retry_count++
+
+  if retry_count == 3:
+    check dependencies
+    no dependency -> skip, continue
+    has dependency -> blocked, halt</pre>
+      </div>
+      <div class="protocol-box">
+        <h4>Budget Protocol</h4>
+        <pre>Before each step, check:
+  tool_calls >= max (40)?
+    -> budget_exceeded, halt
+  elapsed >= timeout (30min)?
+    -> budget_exceeded, halt
+  current_step > max_steps (20)?
+    -> budget_exceeded, halt
+
+State preserved. Resume with
+'continue' and fresh budget.</pre>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin-top:48px;margin-bottom:16px;">Governance Rules</h3>
+    <div class="gov-grid">
+      <div class="gov-rule">
+        <div class="icon">!</div>
+        <p><strong>Max 50 pages or 200 files per deploy</strong>, 48h between deploys. No exceptions.</p>
+      </div>
+      <div class="gov-rule">
+        <div class="icon">!</div>
+        <p><strong>Escalation gate:</strong> Ask only when ALL THREE are true: irreversible, genuinely ambiguous, material consequence.</p>
+      </div>
+      <div class="gov-rule">
+        <div class="icon">!</div>
+        <p><strong>Every step must have a verify command.</strong> If you cannot write one, the step is too vague. Decompose.</p>
+      </div>
+      <div class="gov-rule">
+        <div class="icon">!</div>
+        <p><strong>Log every non-trivial decision</strong> with step number, what was decided, why, and whether it is reversible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROOF: 10 WINS ============ -->
+  <section class="proof-section">
+    <div class="sec-num">04 / Proof Layer</div>
+    <h2>The output: <em>10 ranked wins.</em></h2>
+    <p class="sec-intro">The stack produced this. A leverage-ranked field guide to the next 90 days of execution across 13 active projects. Revenue trajectory: $144 current MRR to $8,724 projected at 90 days. Every win scored above 12/20 on the Leverage Gate.</p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="sv">13</div>
+        <div class="sl">Active projects</div>
+      </div>
+      <div class="stat">
+        <div class="sv">450<span class="unit">K</span></div>
+        <div class="sl">Monthly impressions</div>
+      </div>
+      <div class="stat">
+        <div class="sv">5,895</div>
+        <div class="sl">Registered users</div>
+      </div>
+      <div class="stat">
+        <div class="sv"><span class="pre">$</span>144</div>
+        <div class="sl">Current MRR</div>
+      </div>
+      <div class="stat">
+        <div class="sv"><span class="pre">$</span>8,724</div>
+        <div class="sl">90-day target MRR</div>
+      </div>
+    </div>
+
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr><th>Move</th><th>Scale</th><th>Compound</th><th>Autonomy</th><th>Revenue</th><th>Total</th><th>Time</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="rank">01</span>BLN Freemium Unlock</td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds5">5</span></td><td class="tot">20/20</td><td>2-4h</td></tr>
+          <tr><td><span class="rank">02</span>BLN Payment UX Fix</td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds5">5</span></td><td class="tot">19/20</td><td>2h</td></tr>
+          <tr><td><span class="rank">03</span>5K User Reactivation</td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds5">5</span></td><td class="tot">18/20</td><td>1 day</td></tr>
+          <tr><td><span class="rank">04</span>Bug Bounty Submissions</td><td><span class="dot-s ds3">3</span></td><td><span class="dot-s ds3">3</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds5">5</span></td><td class="tot">15/20</td><td>2 days</td></tr>
+          <tr><td><span class="rank">05</span>EarlyThunder Paid SaaS</td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds4">4</span></td><td class="tot">18/20</td><td>1-2 wk</td></tr>
+          <tr><td><span class="rank">06</span>ClaudHQ Wave 4 Deploy</td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds3">3</span></td><td class="tot">17/20</td><td>1 day</td></tr>
+          <tr><td><span class="rank">07</span>BLN B2B Follow-up Engine</td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds3">3</span></td><td><span class="dot-s ds5">5</span></td><td class="tot">17/20</td><td>1 week</td></tr>
+          <tr><td><span class="rank">08</span>Sprint OS Open Source</td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds3">3</span></td><td class="tot">17/20</td><td>1 week</td></tr>
+          <tr><td><span class="rank">09</span>Cross-Extension Portfolio</td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds4">4</span></td><td class="tot">17/20</td><td>2 weeks</td></tr>
+          <tr><td><span class="rank">10</span>pSEO Playbook Productize</td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds4">4</span></td><td><span class="dot-s ds5">5</span></td><td><span class="dot-s ds3">3</span></td><td class="tot">17/20</td><td>1 week</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="wins-grid">
+      <div class="win-card featured">
+        <div class="wc-rank">01</div>
+        <div class="wc-body">
+          <h3>Remove the hard paywall. Let users feel the product first.</h3>
+          <div class="wc-tag"><strong>BeLikeNative</strong> / $144 MRR to $1,770 at 5% conversion / quota code already exists</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">20</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">2-4 hrs</div>
+        </div>
+      </div>
+      <div class="win-card featured">
+        <div class="wc-rank">02</div>
+        <div class="wc-body">
+          <h3>Repair the post-payment dead-end. Every paying customer's first moment is broken.</h3>
+          <div class="wc-tag"><strong>BeLikeNative</strong> / 0% post-pay success rate / +30-50% retention lift</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">19</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">2 hrs</div>
+        </div>
+      </div>
+      <div class="win-card featured">
+        <div class="wc-rank">03</div>
+        <div class="wc-body">
+          <h3>Reactivate 5,043 stranded users. They already raised their hand.</h3>
+          <div class="wc-tag"><strong>BeLikeNative</strong> / 85.5% of users never got a single email / $150-$300 incremental MRR</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">18</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">1 day</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="wc-rank">04</div>
+        <div class="wc-body">
+          <h3>Submit 5 PoC-validated bounties. $2,960 EV sitting in a folder.</h3>
+          <div class="wc-tag"><strong>Bug Bounty</strong> / Ollama, MLflow, Triton, LocalAI / $1,480/day effective rate</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">15</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">2 days</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="wc-rank">05</div>
+        <div class="wc-body">
+          <h3>Package EarlyThunder signals as a paid SaaS. 100% margin product.</h3>
+          <div class="wc-tag"><strong>EarlyThunder</strong> / 200+ tokens scanned weekly / $0 opex / $1,000 MRR target</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">18</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">1-2 wk</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="wc-rank">06</div>
+        <div class="wc-body">
+          <h3>Deploy ClaudHQ Wave 4. Forty staged articles, one push.</h3>
+          <div class="wc-tag"><strong>ClaudHQ</strong> / +125% clicks growth / 562 impression breakout page</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">17</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">1 day</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="wc-rank">07</div>
+        <div class="wc-body">
+          <h3>BLN B2B follow-up engine. 41 emails sent, zero follow-ups.</h3>
+          <div class="wc-tag"><strong>BeLikeNative</strong> / Language schools + content agencies / $1K-$5K ARPU</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">17</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">1 week</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="wc-rank">08</div>
+        <div class="wc-body">
+          <h3>Open-source the Agentic Sprint OS. Distribution play.</h3>
+          <div class="wc-tag"><strong>Sprint OS</strong> / Compounds into brand authority / Feeds zovo.one pipeline</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">17</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">1 week</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="wc-rank">09</div>
+        <div class="wc-body">
+          <h3>Cross-extension portfolio. Tab Suspender Pro as distribution channel.</h3>
+          <div class="wc-tag"><strong>Portfolio</strong> / Cross-promote BLN to existing extension users</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">17</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">2 weeks</div>
+        </div>
+      </div>
+      <div class="win-card">
+        <div class="wc-rank">10</div>
+        <div class="wc-body">
+          <h3>Productize the pSEO playbook. Sell what you learned.</h3>
+          <div class="wc-tag"><strong>pSEO</strong> / 3,760 articles shipped / Complete operational data</div>
+        </div>
+        <div class="wc-score">
+          <div class="ws-num">17</div>
+          <div class="ws-den">/20</div>
+          <div class="ws-time">1 week</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVENUE PROJECTION ============ -->
+  <section class="revenue-section">
+    <div class="sec-num">05 / Trajectory</div>
+    <h2>Revenue projection: <em>$144 to $8,724.</em></h2>
+    <p class="sec-intro">Conservative estimates. No new acquisition required. All projections convert existing inventory: users who already signed up, code that already exists, findings that already have PoCs, content that is already staged.</p>
+
+    <div class="rev-flow">
+      <div class="rev-stage current">
+        <div class="rs-period">Today</div>
+        <div class="rs-val"><span class="cur">$</span>144</div>
+        <div class="rs-desc">Current MRR. 24 paying BLN users at $6/mo average.</div>
+      </div>
+      <div class="rev-stage">
+        <div class="rs-period">30 Days</div>
+        <div class="rs-val"><span class="cur">$</span>2,920</div>
+        <div class="rs-desc">Freemium unlock + payment fix + reactivation. 5% conversion of existing base.</div>
+      </div>
+      <div class="rev-stage">
+        <div class="rs-period">60 Days</div>
+        <div class="rs-val"><span class="cur">$</span>5,460</div>
+        <div class="rs-desc">+ EarlyThunder SaaS launch + bug bounty payouts + B2B pipeline conversion.</div>
+      </div>
+      <div class="rev-stage target">
+        <div class="rs-period">90 Days</div>
+        <div class="rs-val"><span class="cur">$</span>8,724</div>
+        <div class="rs-desc">Full stack operational. Cross-extension portfolio. ClaudHQ monetized. pSEO productized.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-section">
+    <div class="sec-num">Access</div>
+    <h2>Get the <em>full stack.</em></h2>
+    <p class="cta-sub">Complete PM Orchestration Engine. Full Agentic Sprint OS with templates. Infra registry. Sprint state files. The entire operational system, ready to deploy.</p>
+    <a href="https://zovo.one/lifetime?utm_source=gen8x&utm_medium=agentic-stack&utm_campaign=operating-stack" class="cta-btn">Get Lifetime Access - $99</a>
+    <div class="cta-note">One payment. All frameworks. All future versions.</div>
+  </section>
+
+</div><!-- .shell -->
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="shell">
+    <div class="foot-inner">
+      <span>Zovo Labs / May 2026</span>
+      <span>Michael Lip</span>
+      <a href="https://zovo.one?utm_source=gen8x&utm_medium=agentic-stack&utm_campaign=footer">zovo.one</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
