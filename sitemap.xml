@@ -1,135 +1,141 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-<loc>https://gen8x.com/</loc>
-<lastmod>2026-04-06</lastmod>
-<changefreq>weekly</changefreq>
-<priority>1.0</priority>
-</url>
+    <loc>https://gen8x.com/</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/about.html</loc>
-<lastmod>2026-04-06</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/about.html</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/blog/</loc>
-<lastmod>2026-04-06</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.7</priority>
-</url>
+    <loc>https://gen8x.com/blog/</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/blog/post-1.html</loc>
-<lastmod>2026-04-06</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
-</url>
+    <loc>https://gen8x.com/blog/post-1.html</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/blog/post-2.html</loc>
-<lastmod>2026-04-06</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.6</priority>
-</url>
+    <loc>https://gen8x.com/blog/post-2.html</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/tools/</loc>
-<lastmod>2026-04-10</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/tools/</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/tools/hex-to-rgb.html</loc>
-<lastmod>2026-04-10</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/tools/hex-to-rgb.html</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/tools/rgb-to-hsl.html</loc>
-<lastmod>2026-04-10</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/tools/rgb-to-hsl.html</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/tools/color-contrast-checker.html</loc>
-<lastmod>2026-04-10</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/tools/color-contrast-checker.html</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/tools/tailwind-colors.html</loc>
-<lastmod>2026-04-10</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/tools/tailwind-colors.html</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/tools/css-gradient-generator.html</loc>
-<lastmod>2026-04-10</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/tools/css-gradient-generator.html</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/research/</loc>
-<lastmod>2026-04-14</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/research/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/research/color-accessibility-guide.html</loc>
-<lastmod>2026-04-10</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/research/color-accessibility-guide.html</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/research/css-color-trends-2026.html</loc>
-<lastmod>2026-04-10</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/research/css-color-trends-2026.html</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/research/website-color-audit.html</loc>
-<lastmod>2026-04-11</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
-</url>
+    <loc>https://gen8x.com/research/website-color-audit.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/research/tailwind-color-usage.html</loc>
-<lastmod>2026-04-11</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.7</priority>
-</url>
+    <loc>https://gen8x.com/research/tailwind-color-usage.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/answers/</loc>
-<lastmod>2026-04-14</lastmod>
-<changefreq>weekly</changefreq>
-<priority>0.7</priority>
-</url>
+    <loc>https://gen8x.com/answers/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/answers/wcag-contrast-ratio-explained.html</loc>
-<lastmod>2026-04-11</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
+    <loc>https://gen8x.com/answers/wcag-contrast-ratio-explained.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/answers/hex-to-rgb-converter.html</loc>
-<lastmod>2026-04-11</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
+    <loc>https://gen8x.com/answers/hex-to-rgb-converter.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/answers/best-colors-for-dark-mode.html</loc>
-<lastmod>2026-04-11</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.5</priority>
-</url>
+    <loc>https://gen8x.com/answers/best-colors-for-dark-mode.html</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/secret-insights-pseo-zovo-one-michael-lip</loc>
-<lastmod>2026-05-10</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/secret-insights-pseo-zovo-one-michael-lip</loc>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
-<loc>https://gen8x.com/agentic-operating-stack-michael-lip</loc>
-<lastmod>2026-05-11</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.8</priority>
-</url>
+    <loc>https://gen8x.com/agentic-operating-stack-michael-lip</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gen8x.com/guides/color-palette-generator-guide.html</loc>
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

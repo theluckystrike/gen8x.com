@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Palette Generator Guide — Color Theory & Harmony Calculator | Gen8X</title>
+<meta name="description" content="Complete guide to creating color palettes with interactive harmony calculator and WCAG contrast checker. Learn color theory, 7 harmony types, accessibility requirements, and industry-specific palettes.">
+<meta name="keywords" content="color palette generator, how to create color palette, color theory for web design, website color scheme generator, complementary color calculator, color harmony, WCAG contrast checker">
+<link rel="canonical" href="https://gen8x.com/guides/color-palette-generator-guide.html">
+<link rel="alternate" hreflang="en" href="https://gen8x.com/guides/color-palette-generator-guide.html">
+<link rel="alternate" hreflang="x-default" href="https://gen8x.com/guides/color-palette-generator-guide.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Color Palette Generator Guide — Color Theory & Harmony Calculator">
+<meta property="og:description" content="Complete guide to creating color palettes with interactive harmony calculator and WCAG contrast checker. Learn color theory, 7 harmony types, and accessibility requirements.">
+<meta property="og:url" content="https://gen8x.com/guides/color-palette-generator-guide.html">
+<meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+<meta property="og:site_name" content="Zovo Tools">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Color Palette Generator Guide — Color Theory & Harmony Calculator">
+<meta name="twitter:description" content="Complete guide to creating color palettes with interactive harmony calculator and WCAG contrast checker.">
+<meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Color Palette Generator Guide — Color Theory & Harmony Calculator",
+  "description": "Complete guide to creating color palettes with interactive harmony calculator and WCAG contrast checker. Learn color theory, 7 harmony types, accessibility requirements, and industry-specific palettes.",
+  "url": "https://gen8x.com/guides/color-palette-generator-guide.html",
+  "datePublished": "2026-05-16",
+  "dateModified": "2026-05-16",
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zovo Tools",
+    "url": "https://zovo.one"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://gen8x.com/guides/color-palette-generator-guide.html"
+  },
+  "image": "https://gen8x.com/assets/og-image.png",
+  "articleSection": "Guides",
+  "keywords": ["color palette generator", "color theory", "color harmony", "WCAG contrast", "web design colors", "complementary colors", "website color scheme"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Create a Color Palette for Web Design",
+  "description": "Step-by-step guide to creating harmonious, accessible color palettes for websites and applications.",
+  "totalTime": "PT15M",
+  "tool": [
+    {"@type": "HowToTool", "name": "Color palette generator"},
+    {"@type": "HowToTool", "name": "Contrast ratio checker"}
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Choose a base color",
+      "text": "Select a primary brand color using a hex code or color picker. This color anchors your entire palette and should reflect your brand identity."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Select a harmony type",
+      "text": "Choose a color harmony rule — complementary, analogous, triadic, split-complementary, tetradic, square, or monochromatic — to generate mathematically related colors."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Check contrast ratios",
+      "text": "Verify that text and background color combinations meet WCAG 2.1 requirements: 4.5:1 for normal text (AA) and 7:1 for enhanced contrast (AAA)."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Test in context",
+      "text": "Preview your palette in a realistic UI mockup. Test on light and dark backgrounds, check readability, and verify the palette works for colorblind users."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Export as CSS custom properties",
+      "text": "Copy the generated CSS custom properties into your stylesheet. Use semantic naming (--color-primary, --color-accent) for maintainability."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the best color harmony for web design?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Complementary and split-complementary harmonies are most popular for web design. Complementary pairs (opposite on the color wheel) create strong visual contrast ideal for CTAs and focus areas. Split-complementary provides similar contrast with more flexibility. Analogous harmonies work well for calming, cohesive designs like healthcare or wellness sites."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I check if my color palette is accessible?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use a WCAG contrast ratio checker to test every text-background combination. Normal text requires at least 4.5:1 contrast ratio for AA compliance and 7:1 for AAA. Large text (18pt+ or 14pt bold) requires 3:1 for AA. Test with colorblind simulation tools (protanopia, deuteranopia, tritanopia) and ensure your design does not rely solely on color to convey information."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many colors should a website palette have?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most professional websites use 4-6 colors: 1 primary brand color, 1-2 secondary/accent colors, 1 neutral dark (for text), 1 neutral light (for backgrounds), and optionally 1 semantic color for alerts or success states. The 60-30-10 rule suggests 60% dominant color, 30% secondary, and 10% accent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between complementary and split-complementary colors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Complementary colors sit directly opposite each other on the color wheel (180 degrees apart), creating maximum contrast. Split-complementary uses one base color plus the two colors adjacent to its complement (150 and 210 degrees), offering strong contrast with more nuance and less visual tension. Split-complementary is generally easier to work with for beginners."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I create a dark mode color palette?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For dark mode: use dark grays (#121212 to #1E1E1E) instead of pure black, reduce saturation on accent colors by 10-20% to avoid eye strain, maintain the same contrast ratios as light mode (4.5:1 minimum), use lighter text (#E0E0E0 instead of pure white), and test elevation with slightly lighter card backgrounds. Google Material Design recommends a surface color of #121212 with 87% opacity white text."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What colors convert best for call-to-action buttons?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "High-contrast colors that stand out from the surrounding palette convert best. Research from HubSpot and ConvertKit consistently shows that red and orange CTAs outperform green and blue in many contexts, but the key factor is contrast against the page background rather than the specific hue. The most effective CTA color is whichever color is most distinct from the rest of your palette."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gen8x.com/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://gen8x.com/guides/"},{"@type":"ListItem","position":3,"name":"Color Palette Generator Guide"}]}</script>
+<style>
+  .guide-content { max-width: 820px; margin: 0 auto; padding: 40px 20px 60px; }
+  .guide-content h1 { font-family: var(--font-display); font-size: 2rem; margin-bottom: 12px; line-height: 1.3; }
+  .guide-content h2 { font-family: var(--font-display); font-size: 1.35rem; margin: 40px 0 16px; color: var(--accent); line-height: 1.3; }
+  .guide-content h3 { font-size: 1.1rem; margin: 28px 0 10px; color: var(--text); }
+  .guide-content p { color: var(--text-muted); margin-bottom: 16px; line-height: 1.75; }
+  .guide-content ul, .guide-content ol { color: var(--text-muted); margin: 0 0 16px 24px; line-height: 1.75; }
+  .guide-content li { margin-bottom: 6px; }
+  .guide-content strong { color: var(--text); }
+  .guide-content code { font-family: var(--font-display); background: var(--bg-card); padding: 2px 6px; border-radius: 3px; font-size: 0.88em; }
+  .guide-content pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; overflow-x: auto; font-family: var(--font-display); font-size: 0.85rem; margin-bottom: 16px; color: var(--text-muted); }
+  .guide-meta { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 32px; }
+  .guide-meta a { color: var(--accent); }
+
+  /* Interactive tool panels */
+  .tool-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin: 24px 0; }
+  .tool-panel h3 { font-family: var(--font-display); font-size: 0.9rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 16px 0; }
+  .tool-row { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 16px; }
+  .tool-field { display: flex; flex-direction: column; gap: 6px; }
+  .tool-field label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  .tool-field input[type="text"],
+  .tool-field input[type="color"],
+  .tool-field select {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    color: var(--text); padding: 10px 14px; font-family: var(--font-display); font-size: 0.88rem;
+  }
+  .tool-field input[type="color"] { width: 50px; height: 42px; padding: 4px; cursor: pointer; }
+  .tool-field input[type="text"]:focus,
+  .tool-field select:focus { outline: none; border-color: var(--accent); }
+  .tool-field select { min-width: 180px; }
+
+  /* Harmony result swatches */
+  .harmony-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 16px; }
+  .harmony-swatch {
+    border-radius: var(--radius); padding: 14px; min-height: 90px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    cursor: pointer; position: relative; transition: transform 0.15s;
+  }
+  .harmony-swatch:hover { transform: scale(1.03); }
+  .harmony-swatch .swatch-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; margin-bottom: 4px; }
+  .harmony-swatch .swatch-hex { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; }
+  .harmony-swatch .swatch-copied {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.85); color: #fff; padding: 4px 12px; border-radius: var(--radius);
+    font-size: 0.75rem; font-weight: 600; opacity: 0; transition: opacity 0.2s; pointer-events: none;
+  }
+  .harmony-swatch .swatch-copied.show { opacity: 1; }
+
+  /* CSS output */
+  .css-output { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; font-family: var(--font-display); font-size: 0.82rem; color: var(--text-muted); white-space: pre; overflow-x: auto; margin-top: 12px; position: relative; min-height: 60px; }
+  .copy-css-btn {
+    position: absolute; top: 8px; right: 8px; background: var(--accent); color: var(--bg); border: none;
+    border-radius: var(--radius); padding: 6px 14px; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    font-family: var(--font-body); transition: opacity 0.2s;
+  }
+  .copy-css-btn:hover { opacity: 0.85; }
+
+  /* Contrast checker */
+  .contrast-result { margin-top: 16px; padding: 16px; border-radius: var(--radius); border: 1px solid var(--border); }
+  .contrast-ratio-display { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; margin-bottom: 8px; }
+  .contrast-preview { padding: 16px; border-radius: var(--radius); margin: 12px 0; text-align: center; font-size: 1rem; font-weight: 500; }
+  .contrast-grades { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+  .contrast-grade { padding: 8px 16px; border-radius: var(--radius); font-size: 0.85rem; font-weight: 600; }
+  .grade-pass { background: rgba(63,185,80,0.12); color: #3fb950; border: 1px solid rgba(63,185,80,0.3); }
+  .grade-fail { background: rgba(248,81,73,0.12); color: #f85149; border: 1px solid rgba(248,81,73,0.3); }
+
+  /* Color wheel diagram */
+  .color-wheel-wrap { text-align: center; margin: 24px 0; }
+  .color-wheel-wrap svg { max-width: 300px; width: 100%; }
+
+  /* Harmony visual examples */
+  .harmony-example { display: flex; gap: 6px; margin: 8px 0 16px; }
+  .harmony-dot { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border); }
+
+  /* Industry palette cards */
+  .industry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 16px 0; }
+  .industry-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .industry-card h4 { font-size: 0.95rem; margin-bottom: 8px; color: var(--text); }
+  .industry-card p { font-size: 0.85rem; margin-bottom: 10px; }
+  .industry-colors { display: flex; gap: 4px; }
+  .industry-color { width: 32px; height: 32px; border-radius: var(--radius); border: 1px solid var(--border); }
+
+  /* Psychology table */
+  .psychology-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+  .psychology-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+  .psychology-card .psych-color { width: 100%; height: 8px; border-radius: 4px; margin-bottom: 10px; }
+  .psychology-card h4 { font-size: 0.9rem; margin-bottom: 4px; color: var(--text); }
+  .psychology-card p { font-size: 0.82rem; margin-bottom: 0; }
+
+  /* Breadcrumb */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--text-muted); }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb span { margin: 0 6px; }
+
+  /* TOC */
+  .toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; margin: 24px 0; }
+  .toc h4 { font-family: var(--font-display); font-size: 0.85rem; color: var(--text); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .toc ol { margin: 0 0 0 20px; }
+  .toc li { margin-bottom: 6px; font-size: 0.88rem; }
+  .toc a { color: var(--text-muted); }
+  .toc a:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .guide-content h1 { font-size: 1.5rem; }
+    .guide-content h2 { font-size: 1.15rem; }
+    .tool-row { flex-direction: column; }
+    .harmony-results { grid-template-columns: repeat(2, 1fr); }
+    .contrast-ratio-display { font-size: 1.6rem; }
+    .industry-grid { grid-template-columns: 1fr; }
+    .psychology-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav class="nav">
+        <a href="/" class="nav-logo">gen8x</a>
+        <ul class="nav-links" style="list-style:none;display:flex;gap:16px;margin:0;padding:0;">
+          <li><a href="/">Tool</a></li>
+          <li><a href="/guides/">Guides</a></li>
+          <li><a href="/blog/">Blog</a></li>
+        </ul>
+        <div class="nav-right">
+          <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="guide-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides/">Guides</a><span>/</span><span>Color Palette Generator Guide</span></nav>
+
+    <h1>Color Palette Generator Guide &mdash; Color Theory &amp; Harmony Calculator</h1>
+    <p class="guide-meta">By <a href="https://zovo.one">Michael Lip</a> &middot; May 16, 2026 &middot; 15 min read &middot; <a href="/">Try the Generator</a></p>
+
+    <p>Creating a color palette that looks professional, feels cohesive, and meets accessibility standards is one of the most impactful design decisions you will make. Whether you are designing a SaaS dashboard, an e-commerce storefront, or a portfolio site, the colors you choose influence user trust, readability, conversion rates, and brand recognition.</p>
+
+    <p>This guide covers everything from <strong>color theory fundamentals</strong> to <strong>practical tools</strong> you can use right now. Scroll down to use the interactive color harmony calculator and WCAG contrast checker, or read through each section for a thorough understanding of how professional designers build palettes.</p>
+
+    <div class="toc">
+      <h4>Table of Contents</h4>
+      <ol>
+        <li><a href="#color-theory">Color Theory Fundamentals</a></li>
+        <li><a href="#harmony-types">7 Color Harmony Types Explained</a></li>
+        <li><a href="#harmony-calculator">Interactive Harmony Calculator</a></li>
+        <li><a href="#contrast-checker">WCAG Contrast Checker</a></li>
+        <li><a href="#accessibility">Accessibility &amp; Contrast Requirements</a></li>
+        <li><a href="#industry-palettes">Industry-Specific Palettes</a></li>
+        <li><a href="#dark-mode">Dark Mode Color Considerations</a></li>
+        <li><a href="#color-psychology">Color Psychology in Web Design</a></li>
+        <li><a href="#workflow">Palette Creation Workflow</a></li>
+        <li><a href="#faq">Frequently Asked Questions</a></li>
+      </ol>
+    </div>
+
+    <!-- SECTION 1: Color Theory Fundamentals -->
+    <h2 id="color-theory">1. Color Theory Fundamentals</h2>
+
+    <p>Every color you see on screen can be described using three properties: <strong>hue</strong>, <strong>saturation</strong>, and <strong>lightness</strong> (HSL). Understanding these three dimensions is the foundation of building any color palette generator or choosing colors for your website.</p>
+
+    <h3>Hue: The Color Wheel Position</h3>
+    <p>Hue is the pure color itself, measured in degrees around the color wheel from 0 to 360. Red sits at 0 degrees (and 360), yellow at 60, green at 120, cyan at 180, blue at 240, and magenta at 300. When you use a color palette generator, the harmony algorithms work by calculating specific angular relationships between hues on this wheel.</p>
+
+    <div class="color-wheel-wrap">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Color wheel showing hue positions at 0, 60, 120, 180, 240, and 300 degrees">
+        <defs>
+          <linearGradient id="seg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="hsl(0,100%,50%)"/><stop offset="100%" stop-color="hsl(60,100%,50%)"/></linearGradient>
+          <linearGradient id="seg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="hsl(60,100%,50%)"/><stop offset="100%" stop-color="hsl(120,100%,50%)"/></linearGradient>
+          <linearGradient id="seg3" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="hsl(120,100%,50%)"/><stop offset="100%" stop-color="hsl(180,100%,50%)"/></linearGradient>
+          <linearGradient id="seg4" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="hsl(180,100%,50%)"/><stop offset="100%" stop-color="hsl(240,100%,50%)"/></linearGradient>
+          <linearGradient id="seg5" x1="1" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="hsl(240,100%,50%)"/><stop offset="100%" stop-color="hsl(300,100%,50%)"/></linearGradient>
+          <linearGradient id="seg6" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="hsl(300,100%,50%)"/><stop offset="100%" stop-color="hsl(360,100%,50%)"/></linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="85" fill="none" stroke="url(#seg1)" stroke-width="24" stroke-dasharray="89 445" stroke-dashoffset="0" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="85" fill="none" stroke="url(#seg2)" stroke-width="24" stroke-dasharray="89 445" stroke-dashoffset="-89" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="85" fill="none" stroke="url(#seg3)" stroke-width="24" stroke-dasharray="89 445" stroke-dashoffset="-178" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="85" fill="none" stroke="url(#seg4)" stroke-width="24" stroke-dasharray="89 445" stroke-dashoffset="-267" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="85" fill="none" stroke="url(#seg5)" stroke-width="24" stroke-dasharray="89 445" stroke-dashoffset="-356" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="100" r="85" fill="none" stroke="url(#seg6)" stroke-width="24" stroke-dasharray="89 445" stroke-dashoffset="-445" transform="rotate(-90 100 100)"/>
+        <text x="100" y="12" text-anchor="middle" fill="#e8e8e8" font-size="9" font-family="IBM Plex Sans,sans-serif">0 / Red</text>
+        <text x="186" y="56" text-anchor="end" fill="#e8e8e8" font-size="9" font-family="IBM Plex Sans,sans-serif">60 / Yellow</text>
+        <text x="188" y="155" text-anchor="end" fill="#e8e8e8" font-size="9" font-family="IBM Plex Sans,sans-serif">120 / Green</text>
+        <text x="100" y="198" text-anchor="middle" fill="#e8e8e8" font-size="9" font-family="IBM Plex Sans,sans-serif">180 / Cyan</text>
+        <text x="14" y="155" text-anchor="start" fill="#e8e8e8" font-size="9" font-family="IBM Plex Sans,sans-serif">240 / Blue</text>
+        <text x="14" y="56" text-anchor="start" fill="#e8e8e8" font-size="9" font-family="IBM Plex Sans,sans-serif">300 / Magenta</text>
+      </svg>
+    </div>
+
+    <h3>Saturation: Color Intensity</h3>
+    <p>Saturation controls how vivid or muted a color appears, expressed as a percentage from 0% (grayscale) to 100% (fully saturated). A crimson red at 100% saturation commands attention; at 30% saturation it becomes a dusty rose. In web design, you will typically use high saturation (70-100%) for accent colors and CTAs, medium saturation (40-60%) for supporting elements, and low saturation (10-30%) for backgrounds and large surfaces to avoid visual fatigue.</p>
+
+    <h3>Lightness: Light and Dark</h3>
+    <p>Lightness determines how close a color is to white or black, also expressed as a percentage. At 0% lightness every hue becomes black; at 100% every hue becomes white; and at 50% you see the purest version of the hue. When building a palette, varying lightness is how you create tints (adding white) and shades (adding black) of a single hue, which is the basis of monochromatic palettes.</p>
+
+    <h3>RGB vs HSL: Which Model to Use</h3>
+    <p>RGB (Red, Green, Blue) is the native color model for screens, defining colors as additive mixtures of three light channels from 0-255. HSL (Hue, Saturation, Lightness) is a cylindrical-coordinate representation that maps more intuitively to how humans perceive color. For palette creation, <strong>HSL is overwhelmingly preferred</strong> because adjusting a single property (rotating hue, or tweaking saturation) produces predictable, harmonious results. The gen8x <a href="/">color palette generator</a> uses HSL internally for all harmony calculations, then converts to hex and RGB for output.</p>
+
+    <!-- SECTION 2: Harmony Types -->
+    <h2 id="harmony-types">2. Seven Color Harmony Types Explained</h2>
+
+    <p>Color harmonies are mathematical relationships between hues on the color wheel. A color palette generator applies these rules to produce sets of colors that are inherently pleasing. Here are the seven primary harmony types, each with its angle formula, visual character, and best use cases.</p>
+
+    <h3>Complementary (180 degrees)</h3>
+    <div class="harmony-example">
+      <div class="harmony-dot" style="background:#3b82f6;"></div>
+      <div class="harmony-dot" style="background:#f69f3b;"></div>
+    </div>
+    <p>Complementary colors sit directly opposite each other on the wheel. Blue and orange, red and green, purple and yellow. This pairing creates maximum contrast and visual energy. Use complementary palettes when you need a single accent color that pops against a dominant background. The risk is visual tension if both colors are used at equal weight; apply the 60-30-10 rule to keep it balanced.</p>
+
+    <h3>Analogous (30 degrees apart)</h3>
+    <div class="harmony-example">
+      <div class="harmony-dot" style="background:hsl(200,80%,50%);"></div>
+      <div class="harmony-dot" style="background:hsl(220,80%,50%);"></div>
+      <div class="harmony-dot" style="background:hsl(240,80%,50%);"></div>
+    </div>
+    <p>Analogous harmonies use colors that are neighbors on the wheel, typically spanning 30-60 degrees. They create serene, comfortable designs because the colors share underlying hues. Nature is full of analogous palettes: autumn leaves (red-orange-yellow), ocean scenes (blue-teal-green). These work exceptionally well for brands that want to project calm, trustworthiness, or organic warmth.</p>
+
+    <h3>Triadic (120 degrees apart)</h3>
+    <div class="harmony-example">
+      <div class="harmony-dot" style="background:hsl(0,75%,55%);"></div>
+      <div class="harmony-dot" style="background:hsl(120,75%,40%);"></div>
+      <div class="harmony-dot" style="background:hsl(240,75%,55%);"></div>
+    </div>
+    <p>Triadic palettes use three colors equally spaced at 120-degree intervals. Red, green, blue is the classic triadic set. These palettes are vibrant and balanced, offering diversity without the harsh contrast of complementary pairs. Triadic schemes are popular for children's brands, creative agencies, and applications that need to categorize three distinct data types or sections.</p>
+
+    <h3>Split-Complementary (150 and 210 degrees)</h3>
+    <div class="harmony-example">
+      <div class="harmony-dot" style="background:hsl(0,75%,55%);"></div>
+      <div class="harmony-dot" style="background:hsl(150,70%,40%);"></div>
+      <div class="harmony-dot" style="background:hsl(210,75%,55%);"></div>
+    </div>
+    <p>Instead of taking the direct complement, split-complementary uses the two colors flanking the complement (30 degrees to each side). This gives you the visual interest of complementary contrast but with more nuance and less risk of clashing. It is often recommended as the best starting point for designers new to color theory because it is forgiving yet visually rich.</p>
+
+    <h3>Tetradic / Rectangle (60, 180, 240 degrees)</h3>
+    <div class="harmony-example">
+      <div class="harmony-dot" style="background:hsl(0,75%,55%);"></div>
+      <div class="harmony-dot" style="background:hsl(60,75%,45%);"></div>
+      <div class="harmony-dot" style="background:hsl(180,75%,40%);"></div>
+      <div class="harmony-dot" style="background:hsl(240,75%,55%);"></div>
+    </div>
+    <p>Tetradic harmonies use four colors arranged in two complementary pairs, forming a rectangle on the color wheel. This is the richest of all harmonies but also the hardest to balance. The key is letting one color dominate and using the other three as accents. Tetradic palettes work well for complex UIs with many distinct sections, dashboards, or data visualization where you need four clearly distinct categories.</p>
+
+    <h3>Square (90 degrees apart)</h3>
+    <div class="harmony-example">
+      <div class="harmony-dot" style="background:hsl(0,75%,55%);"></div>
+      <div class="harmony-dot" style="background:hsl(90,65%,40%);"></div>
+      <div class="harmony-dot" style="background:hsl(180,75%,40%);"></div>
+      <div class="harmony-dot" style="background:hsl(270,75%,55%);"></div>
+    </div>
+    <p>Square harmony is a special case of tetradic where all four colors are evenly spaced at 90 degrees. This produces the most uniformly diverse palette possible with four colors. Like tetradic, it requires careful attention to dominance hierarchies. Square palettes are excellent for infographics, categorical data displays, and brand systems that need maximum differentiation between color-coded elements.</p>
+
+    <h3>Monochromatic (single hue, varying S/L)</h3>
+    <div class="harmony-example">
+      <div class="harmony-dot" style="background:hsl(220,70%,25%);"></div>
+      <div class="harmony-dot" style="background:hsl(220,65%,40%);"></div>
+      <div class="harmony-dot" style="background:hsl(220,60%,55%);"></div>
+      <div class="harmony-dot" style="background:hsl(220,55%,70%);"></div>
+      <div class="harmony-dot" style="background:hsl(220,50%,85%);"></div>
+    </div>
+    <p>Monochromatic palettes use a single hue with variations in saturation and lightness. This is the safest, most cohesive approach and impossible to get wrong. Monochromatic designs feel polished and minimal. The trade-off is lower contrast between elements, which can make it harder to establish clear visual hierarchy. Pair a monochromatic palette with a single contrasting accent color for the best of both worlds.</p>
+
+    <!-- SECTION 3: Interactive Harmony Calculator -->
+    <h2 id="harmony-calculator">3. Interactive Color Harmony Calculator</h2>
+
+    <p>Enter a base color using the hex input or color picker below, select a harmony type, and the calculator will generate your palette instantly. Click any swatch to copy its hex value. Use the "Copy CSS" button to grab the full set as CSS custom properties.</p>
+
+    <div class="tool-panel">
+      <h3>Color Harmony Calculator</h3>
+      <div class="tool-row">
+        <div class="tool-field">
+          <label for="harmony-picker">Pick Color</label>
+          <input type="color" id="harmony-picker" value="#3b82f6">
+        </div>
+        <div class="tool-field">
+          <label for="harmony-hex">Hex Code</label>
+          <input type="text" id="harmony-hex" value="#3b82f6" maxlength="7" placeholder="#3b82f6" style="width:120px;">
+        </div>
+        <div class="tool-field">
+          <label for="harmony-type">Harmony Type</label>
+          <select id="harmony-type">
+            <option value="complementary">Complementary</option>
+            <option value="analogous">Analogous</option>
+            <option value="triadic">Triadic</option>
+            <option value="split-complementary">Split-Complementary</option>
+            <option value="tetradic">Tetradic</option>
+            <option value="square">Square</option>
+            <option value="monochromatic">Monochromatic</option>
+          </select>
+        </div>
+      </div>
+      <div id="harmony-swatches" class="harmony-results"></div>
+      <div id="harmony-css-output" class="css-output" style="display:none;"></div>
+    </div>
+
+    <!-- SECTION 4: Contrast Checker -->
+    <h2 id="contrast-checker">4. WCAG Contrast Checker</h2>
+
+    <p>Enter a foreground (text) color and background color to check whether they meet <strong>WCAG 2.1</strong> contrast requirements. The tool calculates the precise contrast ratio and reports pass/fail for AA and AAA standards at both normal and large text sizes.</p>
+
+    <div class="tool-panel">
+      <h3>Contrast Ratio Checker</h3>
+      <div class="tool-row">
+        <div class="tool-field">
+          <label for="contrast-fg-picker">Text Color</label>
+          <input type="color" id="contrast-fg-picker" value="#ffffff">
+        </div>
+        <div class="tool-field">
+          <label for="contrast-fg-hex">Hex</label>
+          <input type="text" id="contrast-fg-hex" value="#ffffff" maxlength="7" style="width:100px;">
+        </div>
+        <div class="tool-field">
+          <label for="contrast-bg-picker">Background</label>
+          <input type="color" id="contrast-bg-picker" value="#1e3a5f">
+        </div>
+        <div class="tool-field">
+          <label for="contrast-bg-hex">Hex</label>
+          <input type="text" id="contrast-bg-hex" value="#1e3a5f" maxlength="7" style="width:100px;">
+        </div>
+      </div>
+      <div id="contrast-result" class="contrast-result"></div>
+    </div>
+
+    <!-- SECTION 5: Accessibility -->
+    <h2 id="accessibility">5. Accessibility &amp; Contrast Requirements (WCAG 2.1)</h2>
+
+    <p>The Web Content Accessibility Guidelines (WCAG) 2.1 define minimum contrast ratios to ensure text is readable for users with low vision or color deficiencies. Approximately 1 in 12 men and 1 in 200 women have some form of color vision deficiency, which means accessible color choices directly impact a significant portion of your audience.</p>
+
+    <h3>Minimum Contrast Ratios</h3>
+    <ul>
+      <li><strong>AA Normal Text:</strong> 4.5:1 minimum contrast ratio. Applies to body text under 18pt (24px) or under 14pt (18.66px) bold.</li>
+      <li><strong>AA Large Text:</strong> 3:1 minimum. Applies to text 18pt+ or 14pt+ bold.</li>
+      <li><strong>AAA Normal Text:</strong> 7:1 minimum. This is the enhanced standard, required for critical content like legal text, medical instructions, or government sites.</li>
+      <li><strong>AAA Large Text:</strong> 4.5:1 minimum for large text under the enhanced standard.</li>
+      <li><strong>Non-text UI Components:</strong> 3:1 minimum for active UI components (buttons, form inputs, icons) and graphical objects needed to understand content.</li>
+    </ul>
+
+    <h3>The Contrast Ratio Formula</h3>
+    <p>Contrast ratio is calculated as <code>(L1 + 0.05) / (L2 + 0.05)</code>, where L1 is the relative luminance of the lighter color and L2 is the relative luminance of the darker color. Relative luminance uses linearized sRGB values: <code>L = 0.2126R + 0.7152G + 0.0722B</code>, where each channel is linearized from its gamma-encoded sRGB value.</p>
+
+    <h3>Common Mistakes</h3>
+    <ul>
+      <li><strong>Light gray text on white:</strong> #999 on #FFF yields only 2.85:1, failing AA. Use #595959 or darker for AA compliance.</li>
+      <li><strong>Colored text on colored backgrounds:</strong> Blue on purple or green on teal may look distinct to you but often fail contrast checks and are worse for colorblind users.</li>
+      <li><strong>Relying solely on color:</strong> Never use color as the only indicator of meaning. Links should have underlines, error states should have icons, chart data should have patterns or labels.</li>
+      <li><strong>Forgetting hover/focus states:</strong> Interactive element state changes must also maintain minimum contrast ratios.</li>
+    </ul>
+
+    <h3>Testing Recommendations</h3>
+    <p>Beyond contrast ratios, test your palette with colorblind simulation tools. The three most common types of color vision deficiency are protanopia (red-blind, ~1% of males), deuteranopia (green-blind, ~1% of males), and tritanopia (blue-blind, very rare). Avoid red/green as the sole differentiator in any interface. Use the <a href="/tools/color-contrast-checker.html">gen8x contrast checker tool</a> for quick compliance verification.</p>
+
+    <!-- SECTION 6: Industry Palettes -->
+    <h2 id="industry-palettes">6. Industry-Specific Color Palettes</h2>
+
+    <p>Different industries have established color conventions that influence user expectations. Using colors that align with industry norms builds instant credibility, while breaking conventions can signal innovation, depending on context.</p>
+
+    <div class="industry-grid">
+      <div class="industry-card">
+        <h4>Technology &amp; SaaS</h4>
+        <p>Blues, purples, and dark backgrounds signal trust, innovation, and technical sophistication. Gradient accents are common for modern feel.</p>
+        <div class="industry-colors">
+          <div class="industry-color" style="background:#1a1a2e;"></div>
+          <div class="industry-color" style="background:#3b82f6;"></div>
+          <div class="industry-color" style="background:#8b5cf6;"></div>
+          <div class="industry-color" style="background:#06b6d4;"></div>
+          <div class="industry-color" style="background:#e2e8f0;"></div>
+        </div>
+      </div>
+      <div class="industry-card">
+        <h4>Healthcare &amp; Wellness</h4>
+        <p>Calming blues, greens, and whites convey cleanliness, safety, and trust. Avoid aggressive reds (associated with emergencies) for general branding.</p>
+        <div class="industry-colors">
+          <div class="industry-color" style="background:#ffffff;border-color:#ccc;"></div>
+          <div class="industry-color" style="background:#0ea5e9;"></div>
+          <div class="industry-color" style="background:#10b981;"></div>
+          <div class="industry-color" style="background:#e0f2fe;"></div>
+          <div class="industry-color" style="background:#1e293b;"></div>
+        </div>
+      </div>
+      <div class="industry-card">
+        <h4>Finance &amp; Banking</h4>
+        <p>Navy, dark green, and gold communicate stability, wealth, and authority. Minimal palettes with high contrast reinforce professionalism.</p>
+        <div class="industry-colors">
+          <div class="industry-color" style="background:#0f172a;"></div>
+          <div class="industry-color" style="background:#1e3a5f;"></div>
+          <div class="industry-color" style="background:#16a34a;"></div>
+          <div class="industry-color" style="background:#ca8a04;"></div>
+          <div class="industry-color" style="background:#f1f5f9;"></div>
+        </div>
+      </div>
+      <div class="industry-card">
+        <h4>Creative &amp; Design</h4>
+        <p>Bold, saturated colors and unexpected combinations signal creativity and confidence. Black-and-accent minimalism is popular for portfolios.</p>
+        <div class="industry-colors">
+          <div class="industry-color" style="background:#0a0a0a;"></div>
+          <div class="industry-color" style="background:#f43f5e;"></div>
+          <div class="industry-color" style="background:#a855f7;"></div>
+          <div class="industry-color" style="background:#fbbf24;"></div>
+          <div class="industry-color" style="background:#ffffff;border-color:#ccc;"></div>
+        </div>
+      </div>
+      <div class="industry-card">
+        <h4>E-Commerce &amp; Retail</h4>
+        <p>Warm accent colors (orange, red) for CTAs drive urgency and action. Clean whites and light grays keep product images as the hero.</p>
+        <div class="industry-colors">
+          <div class="industry-color" style="background:#ffffff;border-color:#ccc;"></div>
+          <div class="industry-color" style="background:#f97316;"></div>
+          <div class="industry-color" style="background:#ef4444;"></div>
+          <div class="industry-color" style="background:#1f2937;"></div>
+          <div class="industry-color" style="background:#f3f4f6;"></div>
+        </div>
+      </div>
+      <div class="industry-card">
+        <h4>Education &amp; EdTech</h4>
+        <p>Friendly blues, greens, and warm accents create approachable, encouraging environments. Avoid overly corporate navy tones.</p>
+        <div class="industry-colors">
+          <div class="industry-color" style="background:#2563eb;"></div>
+          <div class="industry-color" style="background:#16a34a;"></div>
+          <div class="industry-color" style="background:#f59e0b;"></div>
+          <div class="industry-color" style="background:#f0fdf4;"></div>
+          <div class="industry-color" style="background:#1e293b;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 7: Dark Mode -->
+    <h2 id="dark-mode">7. Dark Mode Color Considerations</h2>
+
+    <p>Dark mode has evolved from a niche preference to a standard expectation. As of 2026, over 80% of smartphone users enable dark mode, and many web applications ship with it as the default. Building an effective dark mode palette requires more than inverting colors; it demands careful recalibration of your entire color system.</p>
+
+    <h3>Surface Colors: Avoid Pure Black</h3>
+    <p>Pure black (#000000) backgrounds cause excessive contrast against white text, producing visual vibration and eye strain, especially on OLED screens. Google Material Design recommends <code>#121212</code> as the base surface color. Build elevation hierarchy using progressively lighter grays: <code>#121212</code> for the background, <code>#1E1E1E</code> for cards, <code>#252525</code> for elevated surfaces, and <code>#2C2C2C</code> for dialogs or popovers.</p>
+
+    <h3>Text Colors: Soften Pure White</h3>
+    <p>Pure white (#FFFFFF) text on dark backgrounds creates a halation effect where letters appear to bleed into the background. Use <code>#E0E0E0</code> (87% opacity white) for primary text, <code>#A0A0A0</code> for secondary text, and <code>#6B6B6B</code> for disabled or placeholder text. Contrast ratios against #121212 background: #E0E0E0 = 13.2:1 (AAA pass), #A0A0A0 = 7.0:1 (AAA pass), #6B6B6B = 3.7:1 (AA large text only).</p>
+
+    <h3>Accent Color Adjustments</h3>
+    <p>Highly saturated accent colors that look vibrant on white backgrounds can feel harsh and overpowering in dark mode. Reduce saturation by 10-20% and increase lightness by 5-10% for dark mode variants. For example, a primary blue of <code>hsl(220, 90%, 50%)</code> in light mode might become <code>hsl(220, 75%, 60%)</code> in dark mode. This maintains visual hierarchy without causing eye fatigue.</p>
+
+    <h3>Semantic Colors in Dark Mode</h3>
+    <p>Success (green), warning (yellow), and error (red) colors need recalibration too. Standard #EF4444 red on a dark background can dominate the visual field; consider using #F87171 (lighter, less saturated) with a subtle background tint of <code>rgba(239, 68, 68, 0.1)</code>. The same principle applies to success greens: shift from #16A34A to #4ADE80 in dark mode.</p>
+
+    <h3>CSS Implementation Pattern</h3>
+    <pre>:root {
+  --bg: #ffffff;
+  --bg-card: #f8fafc;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --accent: hsl(220, 90%, 50%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --bg-card: #1e1e1e;
+    --text: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --accent: hsl(220, 75%, 60%);
+  }
+}</pre>
+
+    <!-- SECTION 8: Color Psychology -->
+    <h2 id="color-psychology">8. Color Psychology in Web Design</h2>
+
+    <p>Color psychology studies how different hues influence human emotion, perception, and behavior. While individual reactions vary by culture and personal experience, decades of research in marketing and cognitive psychology reveal consistent patterns that inform effective web design decisions.</p>
+
+    <div class="psychology-grid">
+      <div class="psychology-card">
+        <div class="psych-color" style="background:#3b82f6;"></div>
+        <h4>Blue</h4>
+        <p>Trust, stability, professionalism. Used by 33% of top 100 brands. Dominant in finance, tech, healthcare.</p>
+      </div>
+      <div class="psychology-card">
+        <div class="psych-color" style="background:#ef4444;"></div>
+        <h4>Red</h4>
+        <p>Urgency, energy, passion. Increases heart rate. Effective for CTAs, sale badges, food brands.</p>
+      </div>
+      <div class="psychology-card">
+        <div class="psych-color" style="background:#22c55e;"></div>
+        <h4>Green</h4>
+        <p>Growth, health, nature. Associated with money and success. Strong in wellness, finance, sustainability.</p>
+      </div>
+      <div class="psychology-card">
+        <div class="psych-color" style="background:#f59e0b;"></div>
+        <h4>Yellow / Orange</h4>
+        <p>Optimism, warmth, attention. High visibility for warnings. Popular in food, entertainment, children's brands.</p>
+      </div>
+      <div class="psychology-card">
+        <div class="psych-color" style="background:#8b5cf6;"></div>
+        <h4>Purple</h4>
+        <p>Creativity, luxury, wisdom. Historical association with royalty. Used in beauty, premium brands, EdTech.</p>
+      </div>
+      <div class="psychology-card">
+        <div class="psych-color" style="background:#1e293b;"></div>
+        <h4>Black / Dark Gray</h4>
+        <p>Sophistication, authority, elegance. Dominant in luxury fashion, high-end tech, professional services.</p>
+      </div>
+    </div>
+
+    <h3>The 60-30-10 Rule</h3>
+    <p>Interior designers have used this proportion rule for decades, and it applies directly to web design. Allocate <strong>60%</strong> of your visual space to your dominant color (usually the background or neutral), <strong>30%</strong> to a secondary color (navigation, cards, sections), and <strong>10%</strong> to your accent color (CTAs, links, highlights). This ratio creates natural visual hierarchy and prevents any single color from overwhelming the composition.</p>
+
+    <h3>Cultural Considerations</h3>
+    <p>Color associations vary significantly across cultures. White symbolizes purity in Western cultures but mourning in parts of East Asia. Red means danger in the West but good fortune in China. Green is associated with Islam in the Middle East and is sometimes avoided for secular branding. If your website serves a global audience, test your palette choices with users from your target markets and avoid relying on color alone to convey meaning.</p>
+
+    <!-- SECTION 9: Workflow -->
+    <h2 id="workflow">9. Palette Creation Workflow</h2>
+
+    <p>Here is the step-by-step process professional designers use to create production-ready color palettes. Follow this workflow with the <a href="/">gen8x color palette generator</a> for best results.</p>
+
+    <ol>
+      <li><strong>Define your brand attributes.</strong> Write down 3-5 adjectives that describe the feeling you want your site to evoke (trustworthy, playful, cutting-edge, calm, bold). These adjectives map to specific color families.</li>
+      <li><strong>Choose a base color.</strong> Select a single hue that best represents your primary brand adjective. This becomes your palette anchor.</li>
+      <li><strong>Apply a harmony rule.</strong> Use the harmony calculator above to generate 3-5 related colors. Split-complementary is the safest starting point; analogous for cohesion; triadic for vibrancy.</li>
+      <li><strong>Build a full scale.</strong> For each color, generate 9-11 tints and shades (50-950 scale, similar to Tailwind CSS). This gives you enough range for backgrounds, borders, hover states, and text.</li>
+      <li><strong>Assign semantic roles.</strong> Map colors to functional roles: primary action, secondary action, success, warning, error, info, background, surface, text primary, text secondary.</li>
+      <li><strong>Verify accessibility.</strong> Test every text/background combination with the contrast checker. Fix any pair below 4.5:1 by adjusting lightness or swapping to a darker/lighter shade.</li>
+      <li><strong>Test in context.</strong> Apply the palette to your actual UI components: buttons, forms, navigation, cards, tables. Check that the hierarchy is clear and the palette works at both mobile and desktop sizes.</li>
+      <li><strong>Create dark mode variants.</strong> Desaturate accents, lighten them slightly, swap background and text values, and re-verify all contrast ratios.</li>
+      <li><strong>Document and export.</strong> Export as CSS custom properties with semantic names. Store your palette in a design system or style guide. Use the "Copy CSS" button in the calculator above for instant export.</li>
+    </ol>
+
+    <!-- SECTION 10: FAQ -->
+    <h2 id="faq">10. Frequently Asked Questions</h2>
+
+    <details>
+      <summary><strong>What is the best color harmony for web design?</strong></summary>
+      <p>Complementary and split-complementary harmonies are the most popular for web design. Complementary pairs create strong visual contrast ideal for CTAs and focus areas. Split-complementary provides similar contrast with more flexibility and is recommended for beginners. Analogous harmonies work well for calming, cohesive designs.</p>
+    </details>
+
+    <details>
+      <summary><strong>How many colors should a website palette have?</strong></summary>
+      <p>Most professional websites use 4-6 colors: 1 primary brand color, 1-2 secondary/accent colors, 1 neutral dark (for text), 1 neutral light (for backgrounds), and optionally 1 semantic color for alerts. The 60-30-10 rule guides proportion: 60% dominant, 30% secondary, 10% accent.</p>
+    </details>
+
+    <details>
+      <summary><strong>How do I check if my color palette is accessible?</strong></summary>
+      <p>Use the WCAG contrast checker above to test every text-background combination. Normal text requires at least 4.5:1 contrast for AA compliance and 7:1 for AAA. Test with colorblind simulation tools and ensure color is never the sole indicator of meaning. The <a href="/tools/color-contrast-checker.html">gen8x contrast checker</a> provides instant compliance verification.</p>
+    </details>
+
+    <details>
+      <summary><strong>What is the difference between complementary and split-complementary?</strong></summary>
+      <p>Complementary colors are directly opposite on the color wheel (180 degrees), creating maximum contrast. Split-complementary uses the two colors adjacent to the complement (150 and 210 degrees), offering strong contrast with more nuance. Split-complementary is generally easier to balance.</p>
+    </details>
+
+    <details>
+      <summary><strong>How do I create a dark mode color palette?</strong></summary>
+      <p>Use dark grays (#121212 to #1E1E1E) instead of pure black. Reduce accent saturation by 10-20%. Use #E0E0E0 for primary text instead of pure white. Maintain the same WCAG contrast ratios. Test elevation with progressively lighter card backgrounds. See the <a href="#dark-mode">dark mode section</a> above for the complete implementation pattern.</p>
+    </details>
+
+    <details>
+      <summary><strong>What colors convert best for CTA buttons?</strong></summary>
+      <p>The most effective CTA color is whichever color is most distinct from the rest of your palette. Research consistently shows that contrast against the page background matters more than the specific hue. Red and orange CTAs often outperform in A/B tests, but only because they tend to contrast more with typical blue/white layouts.</p>
+    </details>
+
+    <details>
+      <summary><strong>Can I use the generated CSS variables directly in production?</strong></summary>
+      <p>Yes. The CSS custom properties generated by the harmony calculator use the <code>:root</code> selector and standard <code>var()</code> syntax, which is supported by all modern browsers (97%+ global coverage). Copy them directly into your stylesheet and reference them throughout your CSS.</p>
+    </details>
+
+    <details>
+      <summary><strong>What is the 60-30-10 rule in web design?</strong></summary>
+      <p>The 60-30-10 rule suggests allocating 60% of your visual space to a dominant color (background/neutral), 30% to a secondary color (navigation, cards), and 10% to an accent color (CTAs, links, highlights). This ratio creates natural visual hierarchy and prevents any single color from overwhelming the design.</p>
+    </details>
+
+    <!-- Related Links -->
+    <section class="related-links" style="margin-top:40px;">
+      <h2>Related Tools &amp; Resources</h2>
+      <div class="related-grid">
+        <a href="/" class="related-card">Color Palette Generator Tool</a>
+        <a href="/tools/color-contrast-checker.html" class="related-card">Color Contrast Checker</a>
+        <a href="/tools/hex-to-rgb.html" class="related-card">Hex to RGB Converter</a>
+        <a href="/tools/rgb-to-hsl.html" class="related-card">RGB to HSL Converter</a>
+        <a href="/tools/css-gradient-generator.html" class="related-card">CSS Gradient Generator</a>
+        <a href="/tools/tailwind-colors.html" class="related-card">Tailwind Color Reference</a>
+        <a href="/research/color-accessibility-guide.html" class="related-card">WCAG Color Accessibility Data</a>
+        <a href="/answers/best-colors-for-dark-mode.html" class="related-card">Best Colors for Dark Mode</a>
+      </div>
+    </section>
+
+  </main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Zovo Tools</div>
+        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
+        <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime &mdash; $99 once, free forever &rarr;</a>
+        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
+    </div>
+</footer>
+
+<nav class="zovo-network" aria-label="Zovo Tools Network">
+    <div class="zovo-network-inner">
+        <h3 class="zovo-network-title">Explore More Tools</h3>
+        <div class="zovo-network-links">
+            <a href="https://abwex.com">ABWex &mdash; A/B Testing</a>
+            <a href="https://claudflow.com">ClaudFlow &mdash; Workflows</a>
+            <a href="https://claudhq.com">ClaudHQ &mdash; AI Code Tools &amp; Fixes</a>
+            <a href="https://claudkit.com">ClaudKit &mdash; API</a>
+            <a href="https://enhio.com">Enhio &mdash; Text Tools</a>
+            <a href="https://epochpilot.com">EpochPilot &mdash; Timestamps</a>
+            <a href="https://gpt0x.com">GPT0X &mdash; AI Models</a>
+            <a href="https://heytensor.com">HeyTensor &mdash; ML Tools</a>
+            <a href="https://invokebot.com">InvokeBot &mdash; Webhooks</a>
+            <a href="https://kappafy.com">Kappafy &mdash; JSON</a>
+            <a href="https://kappakit.com">KappaKit &mdash; Dev Toolkit</a>
+            <a href="https://kickllm.com">KickLLM &mdash; LLM Costs</a>
+            <a href="https://krzen.com">Krzen &mdash; Image Tools</a>
+            <a href="https://lochbot.com">LochBot &mdash; Security</a>
+            <a href="https://lockml.com">LockML &mdash; ML Compare</a>
+            <a href="https://ml3x.com">ML3X &mdash; Matrix Math</a>
+        </div>
+    </div>
+</nav>
+
+<script>
+/* ===========================
+   Color Harmony Calculator
+   =========================== */
+
+function hexToHSL(hex) {
+  hex = hex.replace('#', '');
+  if (hex.length === 3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+  const r = parseInt(hex.substring(0,2),16)/255;
+  const g = parseInt(hex.substring(2,4),16)/255;
+  const b = parseInt(hex.substring(4,6),16)/255;
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  let h, s, l = (max+min)/2;
+  if (max === min) { h = s = 0; }
+  else {
+    const d = max - min;
+    s = l > 0.5 ? d/(2-max-min) : d/(max+min);
+    switch(max) {
+      case r: h = ((g-b)/d + (g<b?6:0))/6; break;
+      case g: h = ((b-r)/d + 2)/6; break;
+      case b: h = ((r-g)/d + 4)/6; break;
+    }
+  }
+  return { h: Math.round(h*360), s: Math.round(s*100), l: Math.round(l*100) };
+}
+
+function hslToHex(h, s, l) {
+  h = ((h%360)+360)%360;
+  s = Math.max(0,Math.min(100,s))/100;
+  l = Math.max(0,Math.min(100,l))/100;
+  const c = (1 - Math.abs(2*l-1)) * s;
+  const x = c * (1 - Math.abs((h/60)%2 - 1));
+  const m = l - c/2;
+  let r,g,b;
+  if(h<60){r=c;g=x;b=0;}
+  else if(h<120){r=x;g=c;b=0;}
+  else if(h<180){r=0;g=c;b=x;}
+  else if(h<240){r=0;g=x;b=c;}
+  else if(h<300){r=x;g=0;b=c;}
+  else{r=c;g=0;b=x;}
+  r=Math.round((r+m)*255);g=Math.round((g+m)*255);b=Math.round((b+m)*255);
+  return '#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
+}
+
+function generateHarmony(hex, type) {
+  const hsl = hexToHSL(hex);
+  const base = { label:'Base', h:hsl.h, s:hsl.s, l:hsl.l };
+  let colors = [base];
+  switch(type) {
+    case 'complementary':
+      colors.push({ label:'Complementary', h:(hsl.h+180)%360, s:hsl.s, l:hsl.l });
+      break;
+    case 'analogous':
+      colors.push({ label:'Analogous -30', h:(hsl.h-30+360)%360, s:hsl.s, l:hsl.l });
+      colors.push({ label:'Analogous +30', h:(hsl.h+30)%360, s:hsl.s, l:hsl.l });
+      break;
+    case 'triadic':
+      colors.push({ label:'Triadic +120', h:(hsl.h+120)%360, s:hsl.s, l:hsl.l });
+      colors.push({ label:'Triadic +240', h:(hsl.h+240)%360, s:hsl.s, l:hsl.l });
+      break;
+    case 'split-complementary':
+      colors.push({ label:'Split-Comp +150', h:(hsl.h+150)%360, s:hsl.s, l:hsl.l });
+      colors.push({ label:'Split-Comp +210', h:(hsl.h+210)%360, s:hsl.s, l:hsl.l });
+      break;
+    case 'tetradic':
+      colors.push({ label:'Tetradic +60', h:(hsl.h+60)%360, s:hsl.s, l:hsl.l });
+      colors.push({ label:'Tetradic +180', h:(hsl.h+180)%360, s:hsl.s, l:hsl.l });
+      colors.push({ label:'Tetradic +240', h:(hsl.h+240)%360, s:hsl.s, l:hsl.l });
+      break;
+    case 'square':
+      colors.push({ label:'Square +90', h:(hsl.h+90)%360, s:hsl.s, l:hsl.l });
+      colors.push({ label:'Square +180', h:(hsl.h+180)%360, s:hsl.s, l:hsl.l });
+      colors.push({ label:'Square +270', h:(hsl.h+270)%360, s:hsl.s, l:hsl.l });
+      break;
+    case 'monochromatic':
+      colors.push({ label:'Light +20', h:hsl.h, s:Math.max(hsl.s-10,0), l:Math.min(hsl.l+20,95) });
+      colors.push({ label:'Light +10', h:hsl.h, s:Math.max(hsl.s-5,0), l:Math.min(hsl.l+10,90) });
+      colors.push({ label:'Dark -10', h:hsl.h, s:Math.min(hsl.s+5,100), l:Math.max(hsl.l-10,10) });
+      colors.push({ label:'Dark -20', h:hsl.h, s:Math.min(hsl.s+10,100), l:Math.max(hsl.l-20,5) });
+      break;
+  }
+  return colors.map(c => ({
+    label: c.label,
+    hex: hslToHex(c.h, c.s, c.l).toUpperCase(),
+    h: c.h, s: c.s, l: c.l
+  }));
+}
+
+function getContrastColor(hex) {
+  const hsl = hexToHSL(hex);
+  return hsl.l > 55 ? '#000000' : '#FFFFFF';
+}
+
+function renderHarmony() {
+  const hex = document.getElementById('harmony-hex').value;
+  const type = document.getElementById('harmony-type').value;
+  if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return;
+
+  const colors = generateHarmony(hex, type);
+  const container = document.getElementById('harmony-swatches');
+  const cssOut = document.getElementById('harmony-css-output');
+
+  container.innerHTML = colors.map(c => {
+    const fg = getContrastColor(c.hex);
+    return '<div class="harmony-swatch" style="background:'+c.hex+';color:'+fg+';" data-hex="'+c.hex+'" onclick="copySwatch(this)">' +
+      '<span class="swatch-label">'+c.label+'</span>' +
+      '<span class="swatch-hex">'+c.hex+'</span>' +
+      '<span class="swatch-copied">Copied!</span>' +
+    '</div>';
+  }).join('');
+
+  // Generate CSS
+  const cssVars = colors.map((c,i) => {
+    const name = i === 0 ? 'primary' : c.label.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-$/,'');
+    return '  --color-' + name + ': ' + c.hex + ';';
+  }).join('\n');
+  cssOut.innerHTML = '<button class="copy-css-btn" onclick="copyCSSOutput(this)">Copy CSS</button>:root {\n' + cssVars + '\n}';
+  cssOut.style.display = 'block';
+}
+
+function copySwatch(el) {
+  const hex = el.getAttribute('data-hex');
+  navigator.clipboard.writeText(hex).then(() => {
+    const badge = el.querySelector('.swatch-copied');
+    badge.classList.add('show');
+    setTimeout(() => badge.classList.remove('show'), 1200);
+  });
+}
+
+function copyCSSOutput(btn) {
+  const cssOut = document.getElementById('harmony-css-output');
+  const text = cssOut.textContent.replace('Copy CSS', '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy CSS', 1500);
+  });
+}
+
+// Sync picker <-> hex input
+document.getElementById('harmony-picker').addEventListener('input', function() {
+  document.getElementById('harmony-hex').value = this.value;
+  renderHarmony();
+});
+document.getElementById('harmony-hex').addEventListener('input', function() {
+  let v = this.value;
+  if (v.length === 7 && /^#[0-9a-fA-F]{6}$/.test(v)) {
+    document.getElementById('harmony-picker').value = v;
+    renderHarmony();
+  }
+});
+document.getElementById('harmony-type').addEventListener('change', renderHarmony);
+
+// Initial render
+renderHarmony();
+
+
+/* ===========================
+   WCAG Contrast Checker
+   =========================== */
+
+function hexToRGBArray(hex) {
+  hex = hex.replace('#','');
+  if (hex.length===3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+  return [parseInt(hex.substring(0,2),16), parseInt(hex.substring(2,4),16), parseInt(hex.substring(4,6),16)];
+}
+
+function relativeLuminance(rgb) {
+  const [r,g,b] = rgb.map(c => {
+    c = c/255;
+    return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4);
+  });
+  return 0.2126*r + 0.7152*g + 0.0722*b;
+}
+
+function contrastRatio(hex1, hex2) {
+  const l1 = relativeLuminance(hexToRGBArray(hex1));
+  const l2 = relativeLuminance(hexToRGBArray(hex2));
+  const lighter = Math.max(l1,l2);
+  const darker = Math.min(l1,l2);
+  return (lighter + 0.05)/(darker + 0.05);
+}
+
+function renderContrast() {
+  const fg = document.getElementById('contrast-fg-hex').value;
+  const bg = document.getElementById('contrast-bg-hex').value;
+  if (!/^#[0-9a-fA-F]{6}$/.test(fg) || !/^#[0-9a-fA-F]{6}$/.test(bg)) return;
+
+  const ratio = contrastRatio(fg, bg);
+  const r = ratio.toFixed(2);
+
+  const aaNormal = ratio >= 4.5;
+  const aaLarge = ratio >= 3;
+  const aaaNormal = ratio >= 7;
+  const aaaLarge = ratio >= 4.5;
+
+  const result = document.getElementById('contrast-result');
+  result.innerHTML =
+    '<div class="contrast-preview" style="background:'+bg+';color:'+fg+';">The quick brown fox jumps over the lazy dog. <strong>Bold sample text for large text ratio.</strong></div>' +
+    '<div class="contrast-ratio-display" style="color:var(--text);">'+r+':1</div>' +
+    '<div class="contrast-grades">' +
+      '<span class="contrast-grade '+(aaNormal?'grade-pass':'grade-fail')+'">AA Normal: '+(aaNormal?'Pass':'Fail')+'</span>' +
+      '<span class="contrast-grade '+(aaLarge?'grade-pass':'grade-fail')+'">AA Large: '+(aaLarge?'Pass':'Fail')+'</span>' +
+      '<span class="contrast-grade '+(aaaNormal?'grade-pass':'grade-fail')+'">AAA Normal: '+(aaaNormal?'Pass':'Fail')+'</span>' +
+      '<span class="contrast-grade '+(aaaLarge?'grade-pass':'grade-fail')+'">AAA Large: '+(aaaLarge?'Pass':'Fail')+'</span>' +
+    '</div>' +
+    '<p style="font-size:0.82rem;color:var(--text-muted);margin-top:12px;margin-bottom:0;">WCAG 2.1 requires 4.5:1 for normal text (AA), 3:1 for large text (AA), 7:1 for normal text (AAA), and 4.5:1 for large text (AAA). Large text is 18pt+ or 14pt bold+.</p>';
+}
+
+// Sync contrast pickers <-> hex inputs
+document.getElementById('contrast-fg-picker').addEventListener('input', function() {
+  document.getElementById('contrast-fg-hex').value = this.value;
+  renderContrast();
+});
+document.getElementById('contrast-fg-hex').addEventListener('input', function() {
+  if (/^#[0-9a-fA-F]{6}$/.test(this.value)) {
+    document.getElementById('contrast-fg-picker').value = this.value;
+    renderContrast();
+  }
+});
+document.getElementById('contrast-bg-picker').addEventListener('input', function() {
+  document.getElementById('contrast-bg-hex').value = this.value;
+  renderContrast();
+});
+document.getElementById('contrast-bg-hex').addEventListener('input', function() {
+  if (/^#[0-9a-fA-F]{6}$/.test(this.value)) {
+    document.getElementById('contrast-bg-picker').value = this.value;
+    renderContrast();
+  }
+});
+
+// Initial render
+renderContrast();
+</script>
+<script src="/assets/js/share.js"></script>
+</body>
+</html>
