@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Tester — Build &amp; Debug Regular Expressions | Gen8X</title>
+  <meta name="description" content="Live regex tester with match highlighting, capture group display, and execution time. Includes a cheatsheet of common patterns and quick-insert buttons for character classes, quantifiers, and anchors.">
+  <meta name="keywords" content="regex tester, regular expression tester, regex debugger, live regex, regex cheatsheet, capture groups, regex flags, javascript regex">
+  <link rel="canonical" href="https://gen8x.com/tools/regex-tester-tool.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Regex Tester — Build &amp; Debug Regular Expressions | Gen8X">
+  <meta property="og:description" content="Live regex tester with match highlighting, capture group display, and execution time. Includes a cheatsheet of common patterns and quick-insert buttons.">
+  <meta property="og:url" content="https://gen8x.com/tools/regex-tester-tool.html">
+  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+  <meta property="og:site_name" content="Zovo Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Regex Tester — Build &amp; Debug Regular Expressions | Gen8X">
+  <meta name="twitter:description" content="Live regex tester with match highlighting, capture group display, and execution time. Includes a cheatsheet of common patterns and quick-insert buttons.">
+  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
+  <link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Regex Tester",
+  "url": "https://gen8x.com/tools/regex-tester-tool.html",
+  "description": "Live regex tester with match highlighting, capture group display, execution time, cheatsheet, and quick-insert buttons for building and debugging regular expressions.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "datePublished": "2026-05-28",
+  "dateModified": "2026-05-28"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Regex Tester — Build & Debug Regular Expressions",
+  "description": "A comprehensive guide to building and debugging regular expressions, with live testing, match highlighting, and a complete cheatsheet of patterns.",
+  "url": "https://gen8x.com/tools/regex-tester-tool.html",
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Gen8X",
+    "url": "https://gen8x.com"
+  },
+  "datePublished": "2026-05-28",
+  "dateModified": "2026-05-28"
+}
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gen8x.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://gen8x.com/tools/"},{"@type":"ListItem","position":3,"name":"Regex Tester"}]}</script>
+<style>
+/* ---- Layout ---- */
+.tool-wrap {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 20px;
+  max-width: 1060px;
+  margin: 0 auto 32px;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .tool-wrap { grid-template-columns: 1fr; }
+}
+
+/* ---- Regex input bar ---- */
+.regex-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.regex-input-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: 12px;
+}
+.regex-delimiter {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--accent);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+.regex-delimiter:first-child { border-radius: var(--radius) 0 0 var(--radius); border-right: none; }
+.regex-delimiter:last-of-type { border-radius: 0; border-left: none; border-right: none; }
+#regexInput {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  outline: none;
+  min-width: 0;
+}
+#regexInput:focus { border-color: var(--accent); }
+.flags-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: none;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0 10px;
+}
+.flag-toggle {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 4px 7px;
+  border-radius: 4px;
+  transition: all 0.15s;
+  line-height: 1;
+}
+.flag-toggle:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.flag-toggle.active { color: var(--accent); background: rgba(244,114,182,0.12); }
+
+.status-bar {
+  display: flex;
+  gap: 16px;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.status-ok { color: #4ade80; font-weight: 700; font-family: 'Space Mono', monospace; }
+.status-error { color: #f87171; font-weight: 700; font-family: 'Space Mono', monospace; }
+.status-info { color: var(--text-muted); }
+
+/* ---- Quick insert ---- */
+.quick-insert-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.qi-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.qi-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  width: 100%;
+  margin-bottom: 2px;
+}
+.qi-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  padding: 4px 9px;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 1.4;
+}
+.qi-btn:hover { color: var(--accent); border-color: var(--accent); background: rgba(244,114,182,0.06); }
+
+/* ---- Test string + highlighted output ---- */
+.test-str-area {
+  width: 100%;
+  min-height: 110px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  resize: vertical;
+  margin-bottom: 8px;
+}
+.test-str-area:focus { outline: none; border-color: var(--accent); }
+
+.highlight-output {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-all;
+  min-height: 64px;
+  margin-bottom: 14px;
+  color: var(--text-muted);
+}
+.highlight-output mark {
+  background: rgba(244,114,182,0.35);
+  color: var(--text);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.highlight-output mark.m-alt {
+  background: rgba(167,139,250,0.35);
+}
+
+/* ---- Groups table ---- */
+.groups-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 14px;
+}
+.groups-table th {
+  text-align: left;
+  padding: 7px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+}
+.groups-table td {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  vertical-align: top;
+}
+.groups-table tr:hover td { background: var(--bg-hover); }
+.match-idx { color: var(--accent); font-weight: 700; }
+.match-val { color: var(--text); }
+.match-pos { color: var(--text-muted); font-size: 0.75rem; }
+.group-val { color: #a5b4fc; }
+
+/* ---- Cheatsheet sidebar ---- */
+.cheatsheet {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  font-size: 0.8rem;
+  position: sticky;
+  top: 80px;
+}
+.cheatsheet h3 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+}
+.cs-section {
+  margin-bottom: 14px;
+}
+.cs-section h4 {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.cs-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+.cs-pattern {
+  font-family: 'Space Mono', monospace;
+  color: var(--accent);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 1px 4px;
+  transition: background 0.1s;
+}
+.cs-pattern:hover { background: rgba(244,114,182,0.15); }
+.cs-desc {
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  text-align: right;
+}
+.cs-divider { border: none; border-top: 1px solid var(--border); margin: 10px 0; }
+
+/* ---- Common patterns ---- */
+.common-patterns {
+  margin-bottom: 14px;
+}
+.cp-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.1s;
+  border-radius: 3px;
+}
+.cp-item:hover { background: var(--bg-hover); padding-left: 6px; }
+.cp-name {
+  font-size: 0.78rem;
+  color: var(--text);
+  font-weight: 600;
+  min-width: 90px;
+}
+.cp-pat {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--accent);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- Explainer section ---- */
+.explainer { max-width: 720px; margin: 2rem auto; line-height: 1.7; }
+.explainer h2 { font-family: 'Space Mono', monospace; font-size: 1.15rem; margin: 1.6rem 0 0.6rem; color: var(--text); }
+.explainer p { color: var(--text-muted); margin-bottom: 0.9rem; font-size: 0.9rem; }
+.explainer ul { color: var(--text-muted); margin: 0 0 0.9rem 1.2rem; font-size: 0.9rem; }
+.explainer li { margin-bottom: 0.3rem; }
+.explainer code { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--accent); background: rgba(244,114,182,0.08); padding: 1px 5px; border-radius: 3px; }
+.explainer pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; overflow-x: auto; margin-bottom: 1rem; }
+.explainer pre code { background: none; padding: 0; color: #a5b4fc; }
+
+.faq-section { max-width: 720px; margin: 2rem auto; }
+.faq-section h2 { font-family: 'Space Mono', monospace; font-size: 1.15rem; margin-bottom: 1rem; }
+details { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 8px; }
+details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text); list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: '+ '; color: var(--accent); font-family: 'Space Mono', monospace; }
+details[open] summary::before { content: '- '; }
+details p { margin-top: 10px; font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav>
+        <a href="/">Tool</a>
+        <a href="/tools/" class="active">Tools</a>
+        <a href="/research/">Research</a>
+        <a href="/answers/">Answers</a>
+        <a href="/blog/">Blog</a>
+        <div class="nav-right">
+          <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
+          <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>Regex Tester</span></nav>
+      <h1>Regex Tester</h1>
+      <p>Build, test, and debug regular expressions with live match highlighting, capture group display, and a full cheatsheet. 100% client-side.</p>
+    </div>
+
+    <div class="tool-wrap">
+      <!-- Main Panel -->
+      <div>
+        <!-- Regex input -->
+        <div class="regex-bar">
+          <div class="regex-input-row">
+            <span class="regex-delimiter">/</span>
+            <input type="text" id="regexInput" placeholder="([a-z]+)\d+" autocomplete="off" spellcheck="false" aria-label="Regular expression pattern">
+            <span class="regex-delimiter">/</span>
+            <div class="flags-wrap" aria-label="Regex flags">
+              <button class="flag-toggle active" data-flag="g" title="Global — find all matches">g</button>
+              <button class="flag-toggle" data-flag="i" title="Case insensitive">i</button>
+              <button class="flag-toggle" data-flag="m" title="Multiline — ^ and $ match line boundaries">m</button>
+              <button class="flag-toggle" data-flag="s" title="Dotall — . matches newlines">s</button>
+            </div>
+          </div>
+          <div class="status-bar" id="statusBar">
+            <span class="status-info">Enter a pattern above to start matching.</span>
+          </div>
+        </div>
+
+        <!-- Quick insert buttons -->
+        <div style="margin-bottom:14px;">
+          <div class="qi-group">
+            <span class="qi-label">Character classes</span>
+            <button class="qi-btn" data-insert="\d" title="Digit [0-9]">\d</button>
+            <button class="qi-btn" data-insert="\w" title="Word char [a-zA-Z0-9_]">\w</button>
+            <button class="qi-btn" data-insert="\s" title="Whitespace">\s</button>
+            <button class="qi-btn" data-insert="\D" title="Non-digit">\D</button>
+            <button class="qi-btn" data-insert="\W" title="Non-word">\W</button>
+            <button class="qi-btn" data-insert="\S" title="Non-whitespace">\S</button>
+            <button class="qi-btn" data-insert="[a-z]" title="Lowercase letter">[a-z]</button>
+            <button class="qi-btn" data-insert="[A-Z]" title="Uppercase letter">[A-Z]</button>
+            <button class="qi-btn" data-insert="[^abc]" title="Not a, b, or c">[^abc]</button>
+          </div>
+          <div class="qi-group">
+            <span class="qi-label">Quantifiers</span>
+            <button class="qi-btn" data-insert="*" title="0 or more">*</button>
+            <button class="qi-btn" data-insert="+" title="1 or more">+</button>
+            <button class="qi-btn" data-insert="?" title="0 or 1">?</button>
+            <button class="qi-btn" data-insert="{2,5}" title="Between 2 and 5">{n,m}</button>
+            <button class="qi-btn" data-insert="+?" title="1 or more, lazy">+?</button>
+            <button class="qi-btn" data-insert="*?" title="0 or more, lazy">*?</button>
+          </div>
+          <div class="qi-group">
+            <span class="qi-label">Anchors &amp; groups</span>
+            <button class="qi-btn" data-insert="^" title="Start of string / line">^</button>
+            <button class="qi-btn" data-insert="$" title="End of string / line">$</button>
+            <button class="qi-btn" data-insert="\b" title="Word boundary">\b</button>
+            <button class="qi-btn" data-insert="()" title="Capturing group">()</button>
+            <button class="qi-btn" data-insert="(?:)" title="Non-capturing group">(?:)</button>
+            <button class="qi-btn" data-insert="(?=)" title="Lookahead">(?=)</button>
+            <button class="qi-btn" data-insert="(?!)" title="Negative lookahead">(?!)</button>
+            <button class="qi-btn" data-insert="(?&lt;=)" title="Lookbehind">(?&lt;=)</button>
+            <button class="qi-btn" data-insert="|" title="Alternation (or)">|</button>
+          </div>
+        </div>
+
+        <!-- Test string -->
+        <label for="testInput" style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;display:block;margin-bottom:6px;">Test String</label>
+        <textarea class="test-str-area" id="testInput" spellcheck="false" aria-label="Test string to match against">The quick brown fox jumps over the lazy dog.
+Email: user123@example.com, admin@test.org
+Phone: +1-800-555-0199
+Date: 2026-05-28
+IP: 192.168.1.100
+Hex color: #F472B6 and #a3e635</textarea>
+
+        <!-- Highlighted output -->
+        <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:6px;">Match Preview</div>
+        <div class="highlight-output" id="highlightOutput" aria-live="polite">Enter a regex pattern to see highlighted matches here.</div>
+
+        <!-- Groups / matches table -->
+        <div id="groupsWrap" style="display:none;">
+          <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-bottom:8px;">Matches &amp; Capture Groups</div>
+          <div style="overflow-x:auto;">
+            <table class="groups-table" id="groupsTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Match</th>
+                  <th>Position</th>
+                  <th>Groups</th>
+                </tr>
+              </thead>
+              <tbody id="groupsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cheatsheet Sidebar -->
+      <aside class="cheatsheet" aria-label="Regex cheatsheet">
+        <h3>Cheatsheet</h3>
+
+        <div class="cs-section">
+          <h4>Character Classes</h4>
+          <div class="cs-row"><span class="cs-pattern" data-insert="\d">\d</span><span class="cs-desc">digit [0–9]</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="\w">\w</span><span class="cs-desc">word [a-zA-Z0-9_]</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="\s">\s</span><span class="cs-desc">whitespace</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert=".">[.]</span><span class="cs-desc">any char (not \n)</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="[aeiou]">[aeiou]</span><span class="cs-desc">char set</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="[^aeiou]">[^aeiou]</span><span class="cs-desc">negated set</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="[a-z0-9]">[a-z0-9]</span><span class="cs-desc">range</span></div>
+        </div>
+        <hr class="cs-divider">
+        <div class="cs-section">
+          <h4>Quantifiers</h4>
+          <div class="cs-row"><span class="cs-pattern" data-insert="a*">a*</span><span class="cs-desc">0 or more</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="a+">a+</span><span class="cs-desc">1 or more</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="a?">a?</span><span class="cs-desc">0 or 1</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="a{3}">a{3}</span><span class="cs-desc">exactly 3</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="a{2,5}">a{2,5}</span><span class="cs-desc">2 to 5</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="a+?">a+?</span><span class="cs-desc">lazy (min)</span></div>
+        </div>
+        <hr class="cs-divider">
+        <div class="cs-section">
+          <h4>Anchors</h4>
+          <div class="cs-row"><span class="cs-pattern" data-insert="^">^</span><span class="cs-desc">start of line</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="$">$</span><span class="cs-desc">end of line</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="\b">\b</span><span class="cs-desc">word boundary</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="\B">\B</span><span class="cs-desc">non-boundary</span></div>
+        </div>
+        <hr class="cs-divider">
+        <div class="cs-section">
+          <h4>Groups</h4>
+          <div class="cs-row"><span class="cs-pattern" data-insert="(abc)">(abc)</span><span class="cs-desc">capture</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="(?:abc)">(?:abc)</span><span class="cs-desc">non-capture</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="(?&lt;name&gt;abc)">(?&lt;n&gt;abc)</span><span class="cs-desc">named group</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="a|b">a|b</span><span class="cs-desc">alternation</span></div>
+        </div>
+        <hr class="cs-divider">
+        <div class="cs-section">
+          <h4>Lookaround</h4>
+          <div class="cs-row"><span class="cs-pattern" data-insert="(?=abc)">(?=abc)</span><span class="cs-desc">lookahead</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="(?!abc)">(?!abc)</span><span class="cs-desc">neg. lookahead</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="(?&lt;=abc)">(?&lt;=abc)</span><span class="cs-desc">lookbehind</span></div>
+          <div class="cs-row"><span class="cs-pattern" data-insert="(?&lt;!abc)">(?&lt;!abc)</span><span class="cs-desc">neg. lookbehind</span></div>
+        </div>
+        <hr class="cs-divider">
+        <div class="cs-section">
+          <h4>Common Patterns <small style="color:var(--text-muted);font-weight:400;">(click to load)</small></h4>
+          <div class="cp-item" data-load-pattern="[\w.-]+@[\w-]+\.[a-z]{2,}" data-load-flags="gi" data-load-test="Contact user@example.com or support@co.io">
+            <span class="cp-name">Email</span>
+            <span class="cp-pat">[\w.-]+@[\w-]+\.[a-z]{2,}</span>
+          </div>
+          <div class="cp-item" data-load-pattern="\b\d{1,3}(?:\.\d{1,3}){3}\b" data-load-flags="g" data-load-test="Server at 192.168.1.1 and 10.0.0.254">
+            <span class="cp-name">IPv4</span>
+            <span class="cp-pat">\b\d{1,3}(?:\.\d{1,3}){3}\b</span>
+          </div>
+          <div class="cp-item" data-load-pattern="https?://[\w.-]+(?:/[\w./?=&amp;%#-]*)?" data-load-flags="gi" data-load-test="Visit https://gen8x.com or http://example.com/path?q=1">
+            <span class="cp-name">URL</span>
+            <span class="cp-pat">https?://[\w.-]+...</span>
+          </div>
+          <div class="cp-item" data-load-pattern="#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b" data-load-flags="g" data-load-test="Colors: #F472B6, #333, #a3e635, #fff">
+            <span class="cp-name">Hex color</span>
+            <span class="cp-pat">#([0-9a-fA-F]{6}|{3})\b</span>
+          </div>
+          <div class="cp-item" data-load-pattern="\d{4}-\d{2}-\d{2}" data-load-flags="g" data-load-test="Dates: 2026-05-28, 2025-01-01, 1999-12-31">
+            <span class="cp-name">ISO Date</span>
+            <span class="cp-pat">\d{4}-\d{2}-\d{2}</span>
+          </div>
+          <div class="cp-item" data-load-pattern="(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}" data-load-flags="g" data-load-test="Call +1-800-555-0199 or (415) 555-2671">
+            <span class="cp-name">Phone (US)</span>
+            <span class="cp-pat">(?:\+?1...)\(?\d{3}...</span>
+          </div>
+          <div class="cp-item" data-load-pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$" data-load-flags="m" data-load-test="Password1&#10;weak&#10;Strong99&#10;NoDigits">
+            <span class="cp-name">Strong password</span>
+            <span class="cp-pat">^(?=.*[A-Z])(?=.*\d)...</span>
+          </div>
+          <div class="cp-item" data-load-pattern="&lt;[^&gt;]+&gt;" data-load-flags="g" data-load-test="&lt;div class=&quot;foo&quot;&gt;Hello &lt;strong&gt;world&lt;/strong&gt;&lt;/div&gt;">
+            <span class="cp-name">HTML tag</span>
+            <span class="cp-pat">&lt;[^&gt;]+&gt;</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Explainer -->
+    <section class="explainer">
+      <h2>How Regular Expressions Work</h2>
+      <p>A regular expression (regex) is a sequence of characters that defines a search pattern. The JavaScript regex engine processes patterns using a state machine — it advances through the input string character by character, attempting to match the pattern at each position. When it finds a match, it records the position and (if using the global flag) continues searching from the end of that match.</p>
+      <p>Modern JavaScript regexes support the full ECMAScript specification including named capture groups (<code>(?&lt;name&gt;...)</code>), Unicode property escapes (<code>\p{Letter}</code> with the u flag), lookbehind assertions, and the <code>d</code> flag for match indices. All matching in this tool runs in your browser using the built-in JavaScript <code>RegExp</code> engine.</p>
+
+      <h2>Regex Flags Explained</h2>
+      <ul>
+        <li><strong>g (global)</strong> — Find all matches in the string, not just the first. Without this flag, <code>exec()</code> and <code>match()</code> return only the first match.</li>
+        <li><strong>i (case-insensitive)</strong> — Match regardless of case. <code>/hello/i</code> matches "hello", "Hello", "HELLO".</li>
+        <li><strong>m (multiline)</strong> — <code>^</code> and <code>$</code> match the start and end of each line, not just the full string. Essential for line-by-line matching.</li>
+        <li><strong>s (dotAll)</strong> — Makes <code>.</code> match any character including newline (<code>\n</code>). Without this flag, <code>.</code> does not match line breaks.</li>
+      </ul>
+
+      <h2>Capture Groups vs Non-Capturing Groups</h2>
+      <p>A capturing group <code>(abc)</code> records the matched substring and makes it available as a numbered back-reference (<code>$1</code>, <code>$2</code>) or in the match array. Use capturing groups when you need to extract specific parts of a match.</p>
+      <p>A non-capturing group <code>(?:abc)</code> groups part of a pattern without creating a reference. This is more efficient when you only need the grouping behavior for quantifiers or alternation, not the captured value.</p>
+      <pre><code>// Capturing — $1 = area code
+const phone = '(415) 555-1234'.match(/\((\d{3})\)\s(\d{3}-\d{4})/);
+// phone[1] = '415', phone[2] = '555-1234'
+
+// Non-capturing — just grouping for the quantifier
+const date = '2026-05-28'.match(/(?:\d{4})-(\d{2})-(\d{2})/);
+// date[1] = '05', date[2] = '28' (year not captured)</code></pre>
+
+      <h2>Lookahead and Lookbehind</h2>
+      <p>Lookaround assertions match positions in the string without consuming characters. They are zero-width — they test that a condition is (or is not) true at the current position, then let the rest of the pattern match from that same position.</p>
+      <pre><code>// Positive lookahead: match word only if followed by a digit
+/\w+(?=\d)/.exec('foo3 bar baz2')  // 'foo', 'baz'
+
+// Negative lookahead: match word NOT followed by a digit
+/\w+(?!\d)\b/.exec('foo3 bar')     // 'bar'
+
+// Positive lookbehind: match digits preceded by '$'
+/(?&lt;=\$)\d+/.exec('price $42')    // '42'</code></pre>
+
+      <h2>Catastrophic Backtracking</h2>
+      <p>Catastrophic backtracking occurs when a regex with nested quantifiers and ambiguous patterns is applied to a string that almost-but-not-quite matches. The engine explores an exponential number of combinations. The classic example is <code>(a+)+</code> on the string "aaaaaab" — the engine tries every possible grouping before concluding no match.</p>
+      <p>To avoid it: use possessive quantifiers or atomic groups where available, prefer specific character classes over <code>.*</code>, and test patterns on long near-miss strings before deploying to production. Regular expression denial-of-service (ReDoS) is a real security vulnerability that has affected Node.js applications and web servers.</p>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>What is the difference between greedy and lazy quantifiers?</summary>
+        <p>Greedy quantifiers (<code>*</code>, <code>+</code>, <code>{n,m}</code>) match as many characters as possible while still allowing the overall pattern to match. Lazy (non-greedy) quantifiers (<code>*?</code>, <code>+?</code>, <code>{n,m}?</code>) match as few characters as possible. For example, given the string "&lt;b&gt;bold&lt;/b&gt;", the pattern <code>&lt;.+&gt;</code> greedily matches the entire string, while <code>&lt;.+?&gt;</code> lazily matches just &lt;b&gt; and then &lt;/b&gt; separately.</p>
+      </details>
+      <details>
+        <summary>How do I match a literal dot, star, or other special character?</summary>
+        <p>Escape special regex characters with a backslash. The special characters are: <code>. * + ? ^ $ { } [ ] | ( ) \</code>. To match a literal dot use <code>\.</code>, a literal asterisk use <code>\*</code>, a literal backslash use <code>\\</code>, and so on. When building regex patterns from user input programmatically, use a helper function to escape all special characters before constructing the pattern.</p>
+      </details>
+      <details>
+        <summary>Why does my regex match differently with and without the global flag?</summary>
+        <p>Without the global flag, <code>String.match()</code> returns the first match plus its capture groups in a single array. With the global flag, it returns an array of all full-match strings but does not include capture group details. To iterate over all matches with their capture groups, use <code>String.matchAll()</code> (returns an iterator), or call <code>RegExp.exec()</code> in a loop. Also note that stateful regex objects with the global flag remember lastIndex — calling exec() repeatedly on the same regex object advances through the string.</p>
+      </details>
+      <details>
+        <summary>How do I match across multiple lines?</summary>
+        <p>Use the <code>s</code> (dotAll) flag to make <code>.</code> match newline characters. Use the <code>m</code> (multiline) flag to make <code>^</code> and <code>$</code> match at the start and end of each line rather than the entire string. For matching an entire block across lines, a common pattern is <code>[\s\S]+?</code> or <code>(?:.|\n)+?</code> which explicitly includes whitespace and non-whitespace characters.</p>
+      </details>
+      <details>
+        <summary>What are named capture groups and when should I use them?</summary>
+        <p>Named capture groups <code>(?&lt;name&gt;pattern)</code> let you reference matched substrings by name instead of position number. They are available in JavaScript since ES2018. Use them when you have multiple groups and index-based references would be fragile — especially if the order of groups might change. In replacement strings, use <code>$&lt;name&gt;</code>. In the match object, access them via <code>match.groups.name</code>. Named groups make regex patterns self-documenting.</p>
+      </details>
+    </section>
+
+    <section style="max-width:720px;margin:2rem auto;">
+      <h2 style="font-family:'Space Mono',monospace;font-size:1.15rem;margin-bottom:1rem;">Related Tools</h2>
+      <ul style="color:var(--text-muted);margin-left:1.2rem;font-size:0.9rem;line-height:1.8;">
+        <li><a href="/tools/code-complexity-analyzer.html">Code Complexity Analyzer</a> — Measure cyclomatic and cognitive complexity of your code</li>
+        <li><a href="/tools/css-gradient-generator.html">CSS Gradient Generator</a> — Generate linear and radial gradients with live preview</li>
+        <li><a href="/tools/color-contrast-checker.html">Color Contrast Checker</a> — Test WCAG AA/AAA accessibility compliance</li>
+      </ul>
+    </section>
+
+    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side. No data leaves your browser.</p>
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Zovo Tools</div>
+    <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
+    <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
+    <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
+  </div>
+</footer>
+
+<nav class="zovo-network" aria-label="Zovo Tools Network">
+  <div class="zovo-network-inner">
+    <h3 class="zovo-network-title">Explore More Tools</h3>
+    <div class="zovo-network-links">
+      <a href="https://abwex.com">ABWex — A/B Testing</a>
+      <a href="https://claudflow.com">ClaudFlow — Workflows</a>
+      <a href="https://claudhq.com">ClaudHQ — AI Code Tools &amp; Fixes</a>
+      <a href="https://claudkit.com">ClaudKit — API</a>
+      <a href="https://enhio.com">Enhio — Text Tools</a>
+      <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
+      <a href="https://gpt0x.com">GPT0X — AI Models</a>
+      <a href="https://heytensor.com">HeyTensor — ML Tools</a>
+      <a href="https://invokebot.com">InvokeBot — Webhooks</a>
+      <a href="https://kappafy.com">Kappafy — JSON</a>
+      <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
+      <a href="https://kickllm.com">KickLLM — LLM Costs</a>
+      <a href="https://krzen.com">Krzen — Image Tools</a>
+      <a href="https://lochbot.com">LochBot — Security</a>
+      <a href="https://lockml.com">LockML — ML Compare</a>
+      <a href="https://ml3x.com">ML3X — Matrix Math</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function() {
+  'use strict';
+
+  const regexInput = document.getElementById('regexInput');
+  const testInput = document.getElementById('testInput');
+  const highlightOutput = document.getElementById('highlightOutput');
+  const statusBar = document.getElementById('statusBar');
+  const groupsWrap = document.getElementById('groupsWrap');
+  const groupsBody = document.getElementById('groupsBody');
+
+  // ---- Flags management ----
+  const flagState = { g: true, i: false, m: false, s: false };
+
+  document.querySelectorAll('.flag-toggle').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const f = this.dataset.flag;
+      flagState[f] = !flagState[f];
+      this.classList.toggle('active', flagState[f]);
+      runMatch();
+    });
+  });
+
+  function getFlags() {
+    return Object.entries(flagState).filter(([,v]) => v).map(([k]) => k).join('');
+  }
+
+  // ---- Quick insert buttons ----
+  document.querySelectorAll('.qi-btn[data-insert]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      insertAtCursor(regexInput, this.dataset.insert);
+      runMatch();
+    });
+  });
+
+  // Cheatsheet pattern clicks
+  document.querySelectorAll('.cs-pattern[data-insert]').forEach(el => {
+    el.addEventListener('click', function() {
+      insertAtCursor(regexInput, this.dataset.insert);
+      runMatch();
+    });
+  });
+
+  // Common patterns load
+  document.querySelectorAll('.cp-item[data-load-pattern]').forEach(el => {
+    el.addEventListener('click', function() {
+      regexInput.value = this.dataset.loadPattern;
+      // Set flags
+      const loadFlags = this.dataset.loadFlags || 'g';
+      ['g','i','m','s'].forEach(f => {
+        flagState[f] = loadFlags.includes(f);
+        const btn = document.querySelector(`.flag-toggle[data-flag="${f}"]`);
+        if (btn) btn.classList.toggle('active', flagState[f]);
+      });
+      // Set test string
+      const lt = this.dataset.loadTest;
+      if (lt) testInput.value = lt;
+      runMatch();
+    });
+  });
+
+  function insertAtCursor(el, text) {
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const val = el.value;
+    el.value = val.slice(0, start) + text + val.slice(end);
+    const newPos = start + text.length;
+    el.setSelectionRange(newPos, newPos);
+    el.focus();
+  }
+
+  // ---- Live matching ----
+  regexInput.addEventListener('input', runMatch);
+  testInput.addEventListener('input', runMatch);
+
+  function escHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function runMatch() {
+    const pattern = regexInput.value;
+    const text = testInput.value;
+
+    if (!pattern) {
+      highlightOutput.textContent = text || 'Enter a regex pattern to see highlighted matches here.';
+      highlightOutput.style.color = 'var(--text-muted)';
+      statusBar.innerHTML = '<span class="status-info">Enter a pattern above to start matching.</span>';
+      groupsWrap.style.display = 'none';
+      return;
+    }
+
+    let re;
+    try {
+      // Always include 'g' for collecting all matches + 'd' for indices if available
+      const flags = getFlags();
+      const useFlags = flags.includes('g') ? flags : flags + 'g';
+      re = new RegExp(pattern, useFlags);
+    } catch (e) {
+      highlightOutput.textContent = text;
+      highlightOutput.style.color = 'var(--text-muted)';
+      statusBar.innerHTML = `<span class="status-error">Error: ${escHtml(e.message)}</span>`;
+      groupsWrap.style.display = 'none';
+      return;
+    }
+
+    const t0 = performance.now();
+    const matches = [];
+    let m;
+    let safetyCount = 0;
+    try {
+      while ((m = re.exec(text)) !== null && safetyCount < 500) {
+        matches.push({
+          index: m.index,
+          length: m[0].length,
+          value: m[0],
+          groups: m.slice(1),
+          namedGroups: m.groups || {}
+        });
+        safetyCount++;
+        if (m[0].length === 0) { re.lastIndex++; } // avoid infinite loop on zero-width matches
+      }
+    } catch(e) {
+      statusBar.innerHTML = `<span class="status-error">Runtime error: ${escHtml(e.message)}</span>`;
+      groupsWrap.style.display = 'none';
+      return;
+    }
+    const t1 = performance.now();
+    const elapsed = (t1 - t0).toFixed(3);
+
+    // Build highlighted output
+    highlightOutput.style.color = '';
+    let html = '';
+    let lastIdx = 0;
+    const textLen = text.length;
+    matches.forEach((match, mi) => {
+      if (match.index > lastIdx) {
+        html += escHtml(text.slice(lastIdx, match.index));
+      }
+      const cls = mi % 2 === 0 ? 'mark' : 'mark m-alt';
+      html += `<mark class="${cls}">${escHtml(match.value)}</mark>`;
+      lastIdx = match.index + match.length;
+    });
+    if (lastIdx < textLen) html += escHtml(text.slice(lastIdx));
+    highlightOutput.innerHTML = html || '<span style="color:var(--text-muted);">No matches found.</span>';
+
+    // Status bar
+    const matchWord = matches.length === 1 ? 'match' : 'matches';
+    statusBar.innerHTML = matches.length > 0
+      ? `<span class="status-ok">${matches.length} ${matchWord}</span><span class="status-info">flags: /${getFlags()} &nbsp;&bull;&nbsp; ${elapsed}ms</span>`
+      : `<span style="color:var(--text-muted);font-weight:600;">0 matches</span><span class="status-info">flags: /${getFlags()} &nbsp;&bull;&nbsp; ${elapsed}ms</span>`;
+
+    // Groups table
+    if (matches.length > 0) {
+      groupsWrap.style.display = 'block';
+      const rows = matches.slice(0, 100).map((match, mi) => {
+        const groupCells = match.groups.length > 0
+          ? match.groups.map((g, gi) => {
+              const name = Object.entries(match.namedGroups || {}).find(([,v]) => v === g)?.[0] || null;
+              return `<span class="group-val" title="Group ${gi+1}${name ? ` (${name})` : ''}">${g === undefined ? '<em style="color:var(--text-muted)">undefined</em>' : escHtml(g)}</span>`;
+            }).join('<br>')
+          : '<span style="color:var(--text-muted);font-size:0.75rem;">none</span>';
+        return `<tr>
+          <td class="match-idx">${mi + 1}</td>
+          <td class="match-val">${escHtml(match.value)}</td>
+          <td class="match-pos">${match.index}–${match.index + match.length}</td>
+          <td>${groupCells}</td>
+        </tr>`;
+      }).join('');
+      groupsBody.innerHTML = rows;
+      if (matches.length > 100) {
+        groupsBody.innerHTML += `<tr><td colspan="4" style="color:var(--text-muted);text-align:center;font-size:0.78rem;padding:8px;">... ${matches.length - 100} more matches not shown</td></tr>`;
+      }
+    } else {
+      groupsWrap.style.display = 'none';
+    }
+  }
+
+  // Initial run on load
+  runMatch();
+
+})();
+</script>
+  <script src="/assets/js/share.js"></script>
+  <script src="/assets/js/pro-nudge.js"></script>
+</body>
+</html>

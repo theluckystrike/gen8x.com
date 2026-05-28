@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Complexity Analyzer — Cyclomatic &amp; Cognitive Complexity | Gen8X</title>
+  <meta name="description" content="Analyze cyclomatic complexity, cognitive complexity, nesting depth, and line count for JavaScript, Python, and Java code. Color-coded scores and refactoring suggestions.">
+  <meta name="keywords" content="code complexity analyzer, cyclomatic complexity, cognitive complexity, nesting depth, code quality, refactoring, JavaScript complexity, Python complexity">
+  <link rel="canonical" href="https://gen8x.com/tools/code-complexity-analyzer.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Code Complexity Analyzer — Cyclomatic &amp; Cognitive Complexity | Gen8X">
+  <meta property="og:description" content="Analyze cyclomatic complexity, cognitive complexity, nesting depth, and line count for JavaScript, Python, and Java code. Color-coded scores and refactoring suggestions.">
+  <meta property="og:url" content="https://gen8x.com/tools/code-complexity-analyzer.html">
+  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+  <meta property="og:site_name" content="Zovo Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Code Complexity Analyzer — Cyclomatic &amp; Cognitive Complexity | Gen8X">
+  <meta name="twitter:description" content="Analyze cyclomatic complexity, cognitive complexity, nesting depth, and line count for JavaScript, Python, and Java code. Color-coded scores and refactoring suggestions.">
+  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
+  <link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Code Complexity Analyzer",
+  "url": "https://gen8x.com/tools/code-complexity-analyzer.html",
+  "description": "Analyze cyclomatic complexity, cognitive complexity, nesting depth, and line count for JavaScript, Python, and Java code. Color-coded scores with function-level breakdown and refactoring suggestions.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "datePublished": "2026-05-28",
+  "dateModified": "2026-05-28"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Code Complexity Analyzer — Cyclomatic & Cognitive Complexity",
+  "description": "Learn how cyclomatic and cognitive complexity metrics work, how to interpret scores, and how to refactor high-complexity code blocks.",
+  "url": "https://gen8x.com/tools/code-complexity-analyzer.html",
+  "author": {
+    "@type": "Person",
+    "name": "Michael Lip",
+    "url": "https://zovo.one"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Gen8X",
+    "url": "https://gen8x.com"
+  },
+  "datePublished": "2026-05-28",
+  "dateModified": "2026-05-28"
+}
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gen8x.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://gen8x.com/tools/"},{"@type":"ListItem","position":3,"name":"Code Complexity Analyzer"}]}</script>
+<style>
+.tool-layout {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.lang-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.lang-tab {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  padding: 7px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--font-body);
+}
+.lang-tab:hover { color: var(--text); border-color: #444; }
+.lang-tab.active { border-color: var(--accent); color: var(--accent); background: rgba(244,114,182,0.08); }
+
+.code-input {
+  width: 100%;
+  min-height: 260px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  resize: vertical;
+  tab-size: 2;
+}
+.code-input:focus { outline: none; border-color: var(--accent); }
+
+.analyze-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0 20px;
+  flex-wrap: wrap;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+  margin: 0 0 24px;
+}
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+}
+.metric-card .metric-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.metric-card .metric-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.metric-card .metric-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.score-low .metric-value { color: #4ade80; }
+.score-low .metric-badge { background: rgba(74,222,128,0.15); color: #4ade80; }
+.score-medium .metric-value { color: #facc15; }
+.score-medium .metric-badge { background: rgba(250,204,21,0.15); color: #facc15; }
+.score-high .metric-value { color: #f87171; }
+.score-high .metric-badge { background: rgba(248,113,113,0.15); color: #f87171; }
+
+.section-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 14px;
+  color: var(--text);
+}
+
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-bottom: 24px;
+}
+.breakdown-table th {
+  text-align: left;
+  padding: 9px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+}
+.breakdown-table td {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+}
+.breakdown-table tr:hover td { background: var(--bg-hover); }
+.complexity-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.complexity-bar {
+  height: 6px;
+  border-radius: 3px;
+  min-width: 4px;
+  transition: width 0.3s;
+}
+.bar-low { background: #4ade80; }
+.bar-medium { background: #facc15; }
+.bar-high { background: #f87171; }
+
+.suggestions-list {
+  list-style: none;
+  margin: 0 0 24px;
+}
+.suggestions-list li {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.suggestions-list li strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text);
+}
+.suggestions-list li span {
+  color: var(--text-muted);
+}
+.suggest-warn { border-left-color: #facc15 !important; }
+.suggest-error { border-left-color: #f87171 !important; }
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+}
+
+.explainer { max-width: 720px; margin: 2rem auto; line-height: 1.7; }
+.explainer h2 { font-family: 'Space Mono', monospace; font-size: 1.15rem; margin: 1.6rem 0 0.6rem; color: var(--text); }
+.explainer p { color: var(--text-muted); margin-bottom: 0.9rem; font-size: 0.9rem; }
+.explainer ul { color: var(--text-muted); margin: 0 0 0.9rem 1.2rem; font-size: 0.9rem; }
+.explainer li { margin-bottom: 0.3rem; }
+.explainer pre { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; overflow-x: auto; margin-bottom: 1rem; }
+.explainer code { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: #a5b4fc; }
+.faq-section { max-width: 720px; margin: 2rem auto; }
+.faq-section h2 { font-family: 'Space Mono', monospace; font-size: 1.15rem; margin-bottom: 1rem; }
+details { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 8px; }
+details summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; color: var(--text); list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: '+ '; color: var(--accent); font-family: 'Space Mono', monospace; }
+details[open] summary::before { content: '- '; }
+details p { margin-top: 10px; font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav>
+        <a href="/">Tool</a>
+        <a href="/tools/" class="active">Tools</a>
+        <a href="/research/">Research</a>
+        <a href="/answers/">Answers</a>
+        <a href="/blog/">Blog</a>
+        <div class="nav-right">
+          <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
+          <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>Code Complexity Analyzer</span></nav>
+      <h1>Code Complexity Analyzer</h1>
+      <p>Measure cyclomatic complexity, cognitive complexity, nesting depth, and line count. Spot high-complexity functions before they become technical debt.</p>
+    </div>
+
+    <div class="tool-layout">
+      <div class="lang-tabs" role="tablist" aria-label="Language selector">
+        <button class="lang-tab active" data-lang="js" role="tab" aria-selected="true">JavaScript</button>
+        <button class="lang-tab" data-lang="python" role="tab" aria-selected="false">Python</button>
+        <button class="lang-tab" data-lang="java" role="tab" aria-selected="false">Java</button>
+      </div>
+
+      <textarea class="code-input" id="codeInput" spellcheck="false" aria-label="Paste your code here" placeholder="// Paste your JavaScript, Python, or Java code here...
+
+function processOrder(order, user, config) {
+  if (!order) return null;
+  if (order.items.length === 0) return null;
+  for (const item of order.items) {
+    if (item.inStock) {
+      if (user.isPremium) {
+        if (config.discountEnabled) {
+          item.price *= 0.9;
+        }
+      }
+    } else {
+      if (config.allowBackorder) {
+        item.status = 'backordered';
+      } else {
+        return { error: 'out_of_stock', item: item.id };
+      }
+    }
+  }
+  return order;
+}"></textarea>
+
+      <div class="analyze-row">
+        <button class="btn" id="analyzeBtn" onclick="analyzeCode()">Analyze Complexity</button>
+        <button class="btn" style="background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);" onclick="loadSample()">Load Sample</button>
+        <button class="btn" style="background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);" onclick="clearAll()">Clear</button>
+      </div>
+
+      <div id="resultsArea">
+        <div class="empty-state" id="emptyState">
+          Paste code above and click <strong>Analyze Complexity</strong> to see metrics.
+        </div>
+      </div>
+    </div>
+
+    <section class="explainer">
+      <h2>What Is Cyclomatic Complexity?</h2>
+      <p>Cyclomatic complexity (CC), introduced by Thomas McCabe in 1976, counts the number of linearly independent paths through a piece of code. The metric is derived from the control flow graph: each decision point (if, else if, for, while, case, catch, &&, ||, ternary) adds 1 to the base score of 1.</p>
+      <p>A function with cyclomatic complexity of 1 has a single straight-line path. Every branch doubles potential paths. The standard thresholds are:</p>
+      <ul>
+        <li><strong>1–10</strong> — Simple, low risk. Easy to test and understand.</li>
+        <li><strong>11–20</strong> — Moderate complexity. Consider refactoring.</li>
+        <li><strong>21+</strong> — High complexity. Very difficult to test completely. Refactor urgently.</li>
+      </ul>
+      <p>Cyclomatic complexity directly correlates with the minimum number of test cases needed for full branch coverage. A CC of 12 means you need at least 12 test cases to cover all paths.</p>
+
+      <h2>What Is Cognitive Complexity?</h2>
+      <p>Cognitive complexity, developed by G. Ann Campbell at SonarSource (2018), measures how hard code is to <em>understand</em>, not just how many paths it has. Unlike cyclomatic complexity, cognitive complexity penalizes nesting more heavily — each additional level of nesting adds an extra increment to the penalty for control structures inside it.</p>
+      <p>The key differences from cyclomatic complexity:</p>
+      <ul>
+        <li>Nested structures are penalized with a nesting increment (depth x 1 added per control flow statement)</li>
+        <li>Logical operators in sequences (a &amp;&amp; b &amp;&amp; c) count as 1, not 2</li>
+        <li>Recursion adds a penalty of 1</li>
+        <li>Linear jumps (break, continue with labels) add 1</li>
+      </ul>
+      <p>A function with cognitive complexity above 15 is considered hard to read. Above 25 is considered unmaintainable by most teams.</p>
+
+      <h2>Nesting Depth and Why It Matters</h2>
+      <p>Nesting depth measures the deepest level of nested control structures in a function. Each if, for, while, try, or switch that contains another adds a level. Deep nesting is the primary driver of cognitive complexity and is one of the most common sources of bugs in production code.</p>
+      <p>A nesting depth above 4 is a strong signal to extract inner blocks into helper functions. The early-return pattern (guard clauses) and strategy/command patterns are the most effective refactoring techniques for reducing nesting.</p>
+
+      <h2>How to Reduce Complexity</h2>
+      <pre><code>// HIGH COMPLEXITY — nesting depth 4, CC 7
+function processUser(user) {
+  if (user) {
+    if (user.active) {
+      if (user.role === 'admin') {
+        if (user.permissions.length > 0) {
+          return user.permissions.map(p => p.name);
+        }
+      }
+    }
+  }
+  return [];
+}
+
+// REFACTORED — nesting depth 1, CC 4
+function processUser(user) {
+  if (!user) return [];
+  if (!user.active) return [];
+  if (user.role !== 'admin') return [];
+  if (user.permissions.length === 0) return [];
+  return user.permissions.map(p => p.name);
+}</code></pre>
+      <p>The refactored version uses guard clauses (early returns) to eliminate nesting. This pattern is also called the "bouncer pattern" — fail fast and exit early, so the happy path remains at nesting level 0.</p>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>What cyclomatic complexity score is acceptable?</summary>
+        <p>For most production codebases, a cyclomatic complexity of 10 or below per function is considered acceptable. Scores of 11–20 indicate the function should be reviewed for potential refactoring. Above 20 is considered high risk — such functions are statistically associated with a much higher defect rate and are very difficult to test completely. NASA and many safety-critical coding standards cap functions at a CC of 10.</p>
+      </details>
+      <details>
+        <summary>What is the difference between cyclomatic and cognitive complexity?</summary>
+        <p>Cyclomatic complexity counts the number of independent execution paths through a function (useful for measuring testability). Cognitive complexity measures how difficult the code is to read and understand by penalizing nesting more severely than linear decision points. A deeply nested if-inside-for-inside-while scores higher on cognitive complexity than a flat chain of if/else statements with the same cyclomatic score, because nesting is harder for humans to mentally parse.</p>
+      </details>
+      <details>
+        <summary>Does this tool parse the code with an AST?</summary>
+        <p>This tool uses pattern-based analysis on the raw text rather than a full abstract syntax tree (AST) parser. It counts decision keywords (if, else if, for, while, switch case, catch, ternary, logical operators) using language-specific regex patterns. This approach works well for standard imperative code but may miss complex edge cases like multi-line ternaries or deeply interpolated expressions. For production CI integration, use ESLint's complexity rule or tools like SonarQube that perform true AST analysis.</p>
+      </details>
+      <details>
+        <summary>How do I integrate complexity checking into CI/CD?</summary>
+        <p>For JavaScript/TypeScript projects, add ESLint's built-in complexity rule to your .eslintrc: <code>"complexity": ["error", 10]</code>. For cognitive complexity, use the eslint-plugin-sonarjs plugin with the cognitive-complexity rule. For Python, tools like Radon (radon cc -n C src/) integrate with pre-commit hooks and GitHub Actions. For Java, use Checkstyle's CyclomaticComplexity check or SonarQube's cognitive complexity metric in your build pipeline.</p>
+      </details>
+      <details>
+        <summary>What are the best refactoring patterns for high-complexity functions?</summary>
+        <p>The most effective patterns are: (1) Guard clauses — replace nested conditionals with early returns to flatten nesting depth. (2) Extract method — pull inner blocks into well-named helper functions, each with a single responsibility. (3) Strategy pattern — replace large switch/case blocks or if-else chains with a lookup table or polymorphism. (4) Decompose conditional — extract complex boolean conditions into named functions that document intent. (5) Replace nested loops with LINQ/streams/map-filter-reduce chains, which are more declarative and readable.</p>
+      </details>
+    </section>
+
+    <section style="max-width:720px;margin:2rem auto;">
+      <h2 style="font-family:'Space Mono',monospace;font-size:1.15rem;margin-bottom:1rem;">Related Tools</h2>
+      <ul style="color:var(--text-muted);margin-left:1.2rem;font-size:0.9rem;line-height:1.8;">
+        <li><a href="/tools/regex-tester-tool.html">Regex Tester</a> — Build and debug regular expressions with live match highlighting</li>
+        <li><a href="/tools/css-gradient-generator.html">CSS Gradient Generator</a> — Generate linear and radial gradients with live preview</li>
+        <li><a href="/tools/color-contrast-checker.html">Color Contrast Checker</a> — Test WCAG AA/AAA accessibility compliance</li>
+      </ul>
+    </section>
+
+    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side. No code leaves your browser.</p>
+  </main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Zovo Tools</div>
+    <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
+    <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
+    <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
+  </div>
+</footer>
+
+<nav class="zovo-network" aria-label="Zovo Tools Network">
+  <div class="zovo-network-inner">
+    <h3 class="zovo-network-title">Explore More Tools</h3>
+    <div class="zovo-network-links">
+      <a href="https://abwex.com">ABWex — A/B Testing</a>
+      <a href="https://claudflow.com">ClaudFlow — Workflows</a>
+      <a href="https://claudhq.com">ClaudHQ — AI Code Tools &amp; Fixes</a>
+      <a href="https://claudkit.com">ClaudKit — API</a>
+      <a href="https://enhio.com">Enhio — Text Tools</a>
+      <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
+      <a href="https://gpt0x.com">GPT0X — AI Models</a>
+      <a href="https://heytensor.com">HeyTensor — ML Tools</a>
+      <a href="https://invokebot.com">InvokeBot — Webhooks</a>
+      <a href="https://kappafy.com">Kappafy — JSON</a>
+      <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
+      <a href="https://kickllm.com">KickLLM — LLM Costs</a>
+      <a href="https://krzen.com">Krzen — Image Tools</a>
+      <a href="https://lochbot.com">LochBot — Security</a>
+      <a href="https://lockml.com">LockML — ML Compare</a>
+      <a href="https://ml3x.com">ML3X — Matrix Math</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function() {
+  'use strict';
+
+  let currentLang = 'js';
+
+  // Lang tab switching
+  document.querySelectorAll('.lang-tab').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.lang-tab').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      this.classList.add('active');
+      this.setAttribute('aria-selected','true');
+      currentLang = this.dataset.lang;
+      updatePlaceholder();
+    });
+  });
+
+  function updatePlaceholder() {
+    const ta = document.getElementById('codeInput');
+    const placeholders = {
+      js: '// Paste JavaScript code here...\nfunction example(x, y) {\n  if (x > 0) {\n    for (let i = 0; i < y; i++) {\n      if (i % 2 === 0) return i;\n    }\n  }\n  return -1;\n}',
+      python: '# Paste Python code here...\ndef example(x, y):\n    if x > 0:\n        for i in range(y):\n            if i % 2 == 0:\n                return i\n    return -1',
+      java: '// Paste Java code here...\npublic int example(int x, int y) {\n    if (x > 0) {\n        for (int i = 0; i < y; i++) {\n            if (i % 2 == 0) return i;\n        }\n    }\n    return -1;\n}'
+    };
+    ta.placeholder = placeholders[currentLang] || placeholders.js;
+  }
+
+  // ---- Complexity Analysis Engine ----
+
+  function getDecisionKeywords(lang) {
+    // returns regex patterns for branch decision points
+    const patterns = {
+      js: [
+        /\bif\s*\(/g,
+        /\belse\s+if\s*\(/g,
+        /\bfor\s*\(/g,
+        /\bwhile\s*\(/g,
+        /\bdo\s*\{/g,
+        /\bcase\s+[^:]+:/g,
+        /\bcatch\s*\(/g,
+        /\?\s*[^:]/g,            // ternary
+        /\?\?/g,                  // nullish coalescing
+        /&&/g,
+        /\|\|/g,
+      ],
+      python: [
+        /\bif\b/g,
+        /\belif\b/g,
+        /\bfor\b/g,
+        /\bwhile\b/g,
+        /\bexcept\b/g,
+        /\band\b/g,
+        /\bor\b/g,
+      ],
+      java: [
+        /\bif\s*\(/g,
+        /\belse\s+if\s*\(/g,
+        /\bfor\s*\(/g,
+        /\bwhile\s*\(/g,
+        /\bdo\s*\{/g,
+        /\bcase\s+[^:]+:/g,
+        /\bcatch\s*\(/g,
+        /\?\s*[^:]/g,
+        /&&/g,
+        /\|\|/g,
+      ]
+    };
+    return patterns[lang] || patterns.js;
+  }
+
+  function extractFunctions(code, lang) {
+    const fns = [];
+    if (lang === 'js') {
+      // Named function declarations
+      const re1 = /function\s+(\w+)\s*\([^)]*\)\s*\{/g;
+      // Arrow functions assigned to variable
+      const re2 = /(?:const|let|var)\s+(\w+)\s*=\s*(?:async\s*)?\([^)]*\)\s*=>/g;
+      // Method shorthand
+      const re3 = /(\w+)\s*\([^)]*\)\s*\{/g;
+      let m;
+      while ((m = re1.exec(code)) !== null) {
+        fns.push({ name: m[1], start: m.index, bodyStart: m.index + m[0].length - 1 });
+      }
+      while ((m = re2.exec(code)) !== null) {
+        fns.push({ name: m[1], start: m.index, bodyStart: m.index + m[0].length });
+      }
+    } else if (lang === 'python') {
+      const re = /def\s+(\w+)\s*\([^)]*\)\s*:/g;
+      let m;
+      while ((m = re.exec(code)) !== null) {
+        fns.push({ name: m[1], start: m.index, bodyStart: m.index + m[0].length });
+      }
+    } else if (lang === 'java') {
+      const re = /(?:public|private|protected|static|\s)+[\w<>\[\]]+\s+(\w+)\s*\([^)]*\)\s*(?:throws\s+\w+\s*)?\{/g;
+      let m;
+      while ((m = re.exec(code)) !== null) {
+        if (m[1] !== 'if' && m[1] !== 'for' && m[1] !== 'while') {
+          fns.push({ name: m[1], start: m.index, bodyStart: m.index + m[0].length - 1 });
+        }
+      }
+    }
+    return fns;
+  }
+
+  function extractFunctionBody(code, fnInfo, lang) {
+    // Extract the body by matching braces (JS/Java) or indentation (Python)
+    if (lang === 'python') {
+      const lines = code.split('\n');
+      let startLineIdx = -1;
+      let charCount = 0;
+      for (let i = 0; i < lines.length; i++) {
+        charCount += lines[i].length + 1;
+        if (charCount > fnInfo.bodyStart && startLineIdx === -1) {
+          startLineIdx = i;
+          break;
+        }
+      }
+      if (startLineIdx === -1) return '';
+      // Detect base indent
+      const baseIndent = (lines[startLineIdx].match(/^(\s*)/) || ['',''])[1].length;
+      const bodyLines = [lines[startLineIdx]];
+      for (let i = startLineIdx + 1; i < lines.length; i++) {
+        const lineIndent = (lines[i].match(/^(\s*)/) || ['',''])[1].length;
+        if (lines[i].trim() === '') { bodyLines.push(lines[i]); continue; }
+        if (lineIndent <= baseIndent && lines[i].trim().startsWith('def ')) break;
+        bodyLines.push(lines[i]);
+      }
+      return bodyLines.join('\n');
+    } else {
+      // Brace-matching for JS/Java
+      const start = fnInfo.bodyStart;
+      let depth = 0;
+      let started = false;
+      let end = start;
+      for (let i = start; i < code.length; i++) {
+        if (code[i] === '{') { depth++; started = true; }
+        else if (code[i] === '}') { depth--; if (started && depth === 0) { end = i; break; } }
+      }
+      return code.substring(fnInfo.bodyStart, end + 1);
+    }
+  }
+
+  function stripStringsAndComments(code, lang) {
+    // Remove string literals and comments to avoid counting keywords inside them
+    let result = code;
+    // Remove single-line comments
+    if (lang === 'python') {
+      result = result.replace(/#[^\n]*/g, '');
+    } else {
+      result = result.replace(/\/\/[^\n]*/g, '');
+      result = result.replace(/\/\*[\s\S]*?\*\//g, '');
+    }
+    // Remove string literals (single, double, template)
+    result = result.replace(/"(?:[^"\\]|\\.)*"/g, '""');
+    result = result.replace(/'(?:[^'\\]|\\.)*'/g, "''");
+    result = result.replace(/`(?:[^`\\]|\\.)*`/g, '``');
+    return result;
+  }
+
+  function calcCyclomatic(body, lang) {
+    const clean = stripStringsAndComments(body, lang);
+    let cc = 1;
+    const patterns = getDecisionKeywords(lang);
+    for (const re of patterns) {
+      const matches = clean.match(re);
+      if (matches) cc += matches.length;
+    }
+    return cc;
+  }
+
+  function calcCognitive(body, lang) {
+    // Simplified cognitive complexity:
+    // - control flow at nesting level N adds (N+1)
+    // - logical operators in a sequence count as 1 total
+    const lines = body.split('\n');
+    let cog = 0;
+    let depth = 0;
+
+    const nestIncrKeywords = lang === 'python'
+      ? [/^\s*(if|elif|for|while|with|try|except|else)\b/]
+      : [/\b(if|else\s+if|for|while|do|switch|try|catch)\b/];
+
+    const logicalRe = lang === 'python' ? /\b(and|or)\b/ : /(\&\&|\|\|)/;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+
+      // Track depth
+      if (lang !== 'python') {
+        const opens = (line.match(/\{/g) || []).length;
+        const closes = (line.match(/\}/g) || []).length;
+        const netOpen = opens - closes;
+        if (netOpen > 0) depth += netOpen;
+        else if (netOpen < 0) depth = Math.max(0, depth + netOpen);
+      } else {
+        // Python: use indent level
+        const indent = (line.match(/^(\s*)/) || ['',''])[1].length;
+        depth = Math.floor(indent / 4);
+      }
+
+      for (const re of nestIncrKeywords) {
+        if (re.test(trimmed)) {
+          cog += 1 + depth;
+          break;
+        }
+      }
+
+      // Logical operators: count sequences as 1
+      if (logicalRe.test(stripStringsAndComments(trimmed, lang))) {
+        cog += 1;
+      }
+
+      // Recursion hint (function name called inside itself) — +1 if detected
+      // (simplified: skip for pattern-based approach)
+    }
+    return cog;
+  }
+
+  function calcNestingDepth(body, lang) {
+    if (lang === 'python') {
+      let maxDepth = 0;
+      const lines = body.split('\n');
+      for (const line of lines) {
+        if (!line.trim()) continue;
+        const indent = (line.match(/^(\s*)/) || ['',''])[1].length;
+        const depth = Math.floor(indent / 4);
+        if (depth > maxDepth) maxDepth = depth;
+      }
+      return maxDepth;
+    } else {
+      let depth = 0, maxDepth = 0;
+      const clean = stripStringsAndComments(body, lang);
+      for (const ch of clean) {
+        if (ch === '{') { depth++; if (depth > maxDepth) maxDepth = depth; }
+        else if (ch === '}') depth = Math.max(0, depth - 1);
+      }
+      return maxDepth;
+    }
+  }
+
+  function scoreClass(cc) {
+    if (cc <= 10) return 'score-low';
+    if (cc <= 20) return 'score-medium';
+    return 'score-high';
+  }
+
+  function scoreLabel(cc) {
+    if (cc <= 10) return 'Low';
+    if (cc <= 20) return 'Medium';
+    return 'High';
+  }
+
+  function barClass(cc) {
+    if (cc <= 10) return 'bar-low';
+    if (cc <= 20) return 'bar-medium';
+    return 'bar-high';
+  }
+
+  function generateSuggestions(fns, lang) {
+    const suggestions = [];
+    for (const fn of fns) {
+      if (fn.cc > 20) {
+        suggestions.push({
+          level: 'error',
+          title: `${fn.name}() — Cyclomatic complexity ${fn.cc} (critical)`,
+          detail: `This function has ${fn.cc} independent execution paths. It requires at least ${fn.cc} test cases for full coverage. Extract inner blocks into focused helper functions, each doing one thing.`
+        });
+      } else if (fn.cc > 10) {
+        suggestions.push({
+          level: 'warn',
+          title: `${fn.name}() — Cyclomatic complexity ${fn.cc} (moderate)`,
+          detail: `Consider breaking this into 2–3 smaller functions. Apply guard clauses to eliminate nesting and flatten the control flow.`
+        });
+      }
+      if (fn.cog > 25) {
+        suggestions.push({
+          level: 'error',
+          title: `${fn.name}() — Cognitive complexity ${fn.cog} (unmaintainable)`,
+          detail: `Deeply nested logic makes this function very hard to understand at a glance. Use the extract method refactoring and replace nested conditionals with early returns.`
+        });
+      } else if (fn.cog > 15) {
+        suggestions.push({
+          level: 'warn',
+          title: `${fn.name}() — Cognitive complexity ${fn.cog} (hard to read)`,
+          detail: `Reduce nesting depth with guard clauses or decompose complex boolean expressions into named predicate functions.`
+        });
+      }
+      if (fn.nest > 4) {
+        suggestions.push({
+          level: 'warn',
+          title: `${fn.name}() — Nesting depth ${fn.nest} (excessive)`,
+          detail: `Nesting beyond level 4 is a strong smell. Invert conditions and return early, or extract deeply nested blocks into helper functions.`
+        });
+      }
+      if (fn.lines > 60) {
+        suggestions.push({
+          level: 'warn',
+          title: `${fn.name}() — ${fn.lines} lines (long function)`,
+          detail: `Functions over 50 lines are hard to hold in working memory. Aim for functions that fit on one screen (20–40 lines).`
+        });
+      }
+    }
+    if (suggestions.length === 0 && fns.length > 0) {
+      suggestions.push({
+        level: 'ok',
+        title: 'No high-complexity issues detected',
+        detail: 'All analyzed functions are within acceptable complexity thresholds. Keep writing clean, focused code.'
+      });
+    }
+    return suggestions;
+  }
+
+  window.analyzeCode = function() {
+    const code = document.getElementById('codeInput').value.trim();
+    if (!code) {
+      showEmpty('Paste some code above to analyze.');
+      return;
+    }
+
+    const fns = extractFunctions(code, currentLang);
+
+    // If no functions detected, analyze whole code as one block
+    const analyzeList = fns.length > 0 ? fns : [{ name: '(global scope)', start: 0, bodyStart: 0 }];
+
+    const results = analyzeList.map(fn => {
+      const body = fn.start === 0 && fn.bodyStart === 0
+        ? code
+        : extractFunctionBody(code, fn, currentLang);
+      const bodyLines = body ? body.split('\n').filter(l => l.trim()).length : 0;
+      const cc = calcCyclomatic(body || code, currentLang);
+      const cog = calcCognitive(body || code, currentLang);
+      const nest = calcNestingDepth(body || code, currentLang);
+      return { name: fn.name, cc, cog, nest, lines: bodyLines };
+    });
+
+    const totalLines = code.split('\n').filter(l => l.trim()).length;
+    const maxCC = Math.max(...results.map(r => r.cc));
+    const maxCog = Math.max(...results.map(r => r.cog));
+    const maxNest = Math.max(...results.map(r => r.nest));
+
+    const suggestions = generateSuggestions(results, currentLang);
+
+    renderResults(results, totalLines, maxCC, maxCog, maxNest, suggestions);
+  };
+
+  function renderResults(results, totalLines, maxCC, maxCog, maxNest, suggestions) {
+    const area = document.getElementById('resultsArea');
+    const maxBarCC = Math.max(maxCC, 1);
+
+    const metricsHTML = `
+      <div class="metrics-grid">
+        <div class="metric-card ${scoreClass(maxCC)}">
+          <div class="metric-label">Cyclomatic (max)</div>
+          <div class="metric-value">${maxCC}</div>
+          <span class="metric-badge">${scoreLabel(maxCC)}</span>
+        </div>
+        <div class="metric-card ${scoreClass(maxCog)}">
+          <div class="metric-label">Cognitive (max)</div>
+          <div class="metric-value">${maxCog}</div>
+          <span class="metric-badge">${maxCog <= 15 ? 'Low' : maxCog <= 25 ? 'Medium' : 'High'}</span>
+        </div>
+        <div class="metric-card ${maxNest <= 3 ? 'score-low' : maxNest <= 4 ? 'score-medium' : 'score-high'}">
+          <div class="metric-label">Max Nesting</div>
+          <div class="metric-value">${maxNest}</div>
+          <span class="metric-badge">${maxNest <= 3 ? 'Good' : maxNest <= 4 ? 'Deep' : 'Too Deep'}</span>
+        </div>
+        <div class="metric-card score-low">
+          <div class="metric-label">Lines (non-blank)</div>
+          <div class="metric-value">${totalLines}</div>
+          <span class="metric-badge">Total</span>
+        </div>
+      </div>`;
+
+    const tableRows = results.map(r => {
+      const barW = Math.min(100, Math.round((r.cc / maxBarCC) * 100));
+      return `<tr>
+        <td style="font-family:'Space Mono',monospace;font-size:0.82rem;">${escHtml(r.name)}</td>
+        <td>
+          <div class="complexity-bar-wrap">
+            <div class="complexity-bar ${barClass(r.cc)}" style="width:${barW}px;"></div>
+            <span style="font-weight:700;color:${r.cc <= 10 ? '#4ade80' : r.cc <= 20 ? '#facc15' : '#f87171'}">${r.cc}</span>
+          </div>
+        </td>
+        <td style="color:${r.cog <= 15 ? '#4ade80' : r.cog <= 25 ? '#facc15' : '#f87171'};font-weight:700;">${r.cog}</td>
+        <td style="color:${r.nest <= 3 ? '#4ade80' : r.nest <= 4 ? '#facc15' : '#f87171'};font-weight:700;">${r.nest}</td>
+        <td style="color:var(--text-muted);">${r.lines}</td>
+      </tr>`;
+    }).join('');
+
+    const tableHTML = results.length > 0 ? `
+      <div class="section-title">Function Breakdown</div>
+      <table class="breakdown-table">
+        <thead>
+          <tr>
+            <th>Function</th>
+            <th>Cyclomatic CC</th>
+            <th>Cognitive CC</th>
+            <th>Nest Depth</th>
+            <th>Lines</th>
+          </tr>
+        </thead>
+        <tbody>${tableRows}</tbody>
+      </table>` : '';
+
+    const suggestHTML = suggestions.length > 0 ? `
+      <div class="section-title">Refactoring Suggestions</div>
+      <ul class="suggestions-list">
+        ${suggestions.map(s => `
+          <li class="${s.level === 'error' ? 'suggest-error' : s.level === 'warn' ? 'suggest-warn' : ''}">
+            <strong>${escHtml(s.title)}</strong>
+            <span>${escHtml(s.detail)}</span>
+          </li>`).join('')}
+      </ul>` : '';
+
+    area.innerHTML = metricsHTML + tableHTML + suggestHTML;
+  }
+
+  function showEmpty(msg) {
+    document.getElementById('resultsArea').innerHTML = `<div class="empty-state">${escHtml(msg)}</div>`;
+  }
+
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  window.loadSample = function() {
+    const samples = {
+      js: `function processOrder(order, user, config) {
+  if (!order) return null;
+  if (order.items.length === 0) return null;
+  for (const item of order.items) {
+    if (item.inStock) {
+      if (user.isPremium) {
+        if (config.discountEnabled) {
+          item.price *= 0.9;
+        } else if (config.voucherEnabled && user.voucher) {
+          item.price *= 0.95;
+        }
+      }
+    } else {
+      if (config.allowBackorder) {
+        item.status = 'backordered';
+      } else {
+        return { error: 'out_of_stock', item: item.id };
+      }
+    }
+  }
+  return order;
+}
+
+function validateUser(user) {
+  if (user && user.email && user.email.includes('@')) {
+    if (user.role === 'admin' || user.role === 'superadmin') {
+      return true;
+    }
+  }
+  return false;
+}`,
+      python: `def process_order(order, user, config):
+    if not order:
+        return None
+    if len(order['items']) == 0:
+        return None
+    for item in order['items']:
+        if item['in_stock']:
+            if user['is_premium']:
+                if config['discount_enabled']:
+                    item['price'] *= 0.9
+                elif config['voucher_enabled'] and user.get('voucher'):
+                    item['price'] *= 0.95
+        else:
+            if config['allow_backorder']:
+                item['status'] = 'backordered'
+            else:
+                return {'error': 'out_of_stock', 'item': item['id']}
+    return order
+
+def validate_user(user):
+    if user and user.get('email') and '@' in user['email']:
+        if user.get('role') in ('admin', 'superadmin'):
+            return True
+    return False`,
+      java: `public Order processOrder(Order order, User user, Config config) {
+    if (order == null) return null;
+    if (order.getItems().isEmpty()) return null;
+    for (Item item : order.getItems()) {
+        if (item.isInStock()) {
+            if (user.isPremium()) {
+                if (config.isDiscountEnabled()) {
+                    item.setPrice(item.getPrice() * 0.9);
+                } else if (config.isVoucherEnabled() && user.getVoucher() != null) {
+                    item.setPrice(item.getPrice() * 0.95);
+                }
+            }
+        } else {
+            if (config.isAllowBackorder()) {
+                item.setStatus("backordered");
+            } else {
+                return null;
+            }
+        }
+    }
+    return order;
+}
+
+public boolean validateUser(User user) {
+    if (user != null && user.getEmail() != null && user.getEmail().contains("@")) {
+        if (user.getRole().equals("admin") || user.getRole().equals("superadmin")) {
+            return true;
+        }
+    }
+    return false;
+}`
+    };
+    document.getElementById('codeInput').value = samples[currentLang] || samples.js;
+    analyzeCode();
+  };
+
+  window.clearAll = function() {
+    document.getElementById('codeInput').value = '';
+    document.getElementById('resultsArea').innerHTML = `<div class="empty-state" id="emptyState">Paste code above and click <strong>Analyze Complexity</strong> to see metrics.</div>`;
+  };
+
+})();
+</script>
+  <script src="/assets/js/share.js"></script>
+  <script src="/assets/js/pro-nudge.js"></script>
+</body>
+</html>
