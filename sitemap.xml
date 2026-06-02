@@ -27,4 +27,10 @@
   <url><loc>https://gen8x.com/tools/regex-tester-tool.html</loc></url>
   <url><loc>https://gen8x.com/tools/rgb-to-hsl.html</loc></url>
   <url><loc>https://gen8x.com/tools/tailwind-colors.html</loc></url>
+  <url>
+    <loc>https://gen8x.com/tools/gradient-generator-css-linear-radial-conic</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
