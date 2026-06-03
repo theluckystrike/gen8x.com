@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>Border Radius Visualizer — Design Rounded Corners & Shapes</title>
+  <meta name="description" content="Interactive border-radius tool: adjust each corner, switch units, preview shapes, copy CSS. Presets: Pill, Circle, Squircle, Leaf, Blob, Message Bubble.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://gen8x.com/tools/border-radius-visualizer">
+  <!-- JSON-LD FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I link all corners?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Toggle the 'Link all corners' switch. When active, adjusting any corner applies the same value to all four corners."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use percentage units?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, switch between px and % using the unit toggle. Percentage values are relative to the element's dimensions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What presets are available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pill, Circle, Squircle, Leaf, Blob, and Message Bubble. Each preset sets specific border-radius values."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 0.5rem;
+    }
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      background: #1e293b;
+      border-radius: 2rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    h1 small {
+      font-size: 1rem;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-left: 0.5rem;
+    }
+    .subhead {
+      color: #94a3b8;
+      margin-bottom: 2rem;
+      border-left: 4px solid #38bdf8;
+      padding-left: 1rem;
+      font-size: 1rem;
+    }
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 800px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      h1 { font-size: 1.8rem; }
+    }
+    /* controls panel */
+    .controls {
+      background: #0f172a80;
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      backdrop-filter: blur(2px);
+    }
+    .control-group {
+      margin-bottom: 1.5rem;
+    }
+    .control-group label {
+      display: block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #94a3b8;
+      margin-bottom: 0.4rem;
+    }
+    .corner-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem 1.2rem;
+    }
+    .corner-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .corner-item span {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      margin-bottom: 0.2rem;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: #38bdf8;
+      background: #1e293b;
+      height: 6px;
+      border-radius: 4px;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #38bdf8;
+      cursor: pointer;
+      border: 2px solid #0f172a;
+    }
+    .value-badge {
+      background: #0f172a;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #38bdf8;
+      display: inline-block;
+      min-width: 48px;
+      text-align: center;
+    }
+    .row-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.5rem;
+      margin-top: 0.5rem;
+    }
+    .toggle-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .toggle-group label {
+      margin-bottom: 0;
+      text-transform: none;
+      letter-spacing: normal;
+      color: #e2e8f0;
+      font-size: 0.95rem;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #334155;
+      transition: .3s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #e2e8f0;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #38bdf8;
+    }
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+    .unit-toggle {
+      display: flex;
+      background: #0f172a;
+      border-radius: 40px;
+      overflow: hidden;
+      border: 1px solid #334155;
+    }
+    .unit-btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      transition: 0.2s;
+    }
+    .unit-btn.active {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+    .dimension-group {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .dim-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dim-item input[type="number"] {
+      width: 70px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 0.3rem 0.5rem;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+    .dim-item input[type="number"]:focus {
+      outline: 2px solid #38bdf8;
+    }
+    .color-pick {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    input[type="color"] {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #334155;
+      border-radius: 12px;
+      background: none;
+      cursor: pointer;
+    }
+    .preset-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 0.5rem 0 0.2rem;
+    }
+    .preset-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .preset-btn:hover {
+      background: #38bdf8;
+      color: #0f172a;
+      border-color: #38bdf8;
+    }
+    /* preview panel */
+    .preview-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .preview-box {
+      background: #38bdf8;
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+      transition: all 0.08s ease;
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
+      margin: 1rem 0;
+    }
+    .code-area {
+      background: #0f172a;
+      padding: 1rem 1.2rem;
+      border-radius: 1.2rem;
+      width: 100%;
+      margin-top: 0.8rem;
+    }
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .code-header span {
+      font-weight: 500;
+      color: #94a3b8;
+    }
+    .copy-btn {
+      background: #38bdf8;
+      border: none;
+      color: #0f172a;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.2s;
+    }
+    .copy-btn:hover {
+      background: #7dd3fc;
+    }
+    .copy-btn:active {
+      transform: scale(0.95);
+    }
+    pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin: 0;
+    }
+    .full-syntax {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      border-top: 1px solid #1e293b;
+      padding-top: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      color: #475569;
+      font-size: 0.9rem;
+      padding: 1rem 0 0.5rem;
+    }
+    .badge-copy {
+      background: #1e293b;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🔲 Border Radius Visualizer <small>gen8x.com</small></h1>
+    <div class="subhead">Adjust each corner · px / % · real‑time preview · copy CSS</div>
+  </header>
+
+  <div class="grid-2col">
+    <!-- Controls -->
+    <div class="controls">
+      <div class="control-group">
+        <label>Corners</label>
+        <div class="corner-grid" id="cornerGrid">
+          <div class="corner-item"><span>↖ top-left</span> <input type="range" id="tl" min="0" max="200" value="20"> <span class="value-badge" id="tlVal">20px</span></div>
+          <div class="corner-item"><span>↗ top-right</span> <input type="range" id="tr" min="0" max="200" value="40"> <span class="value-badge" id="trVal">40px</span></div>
+          <div class="corner-item"><span>↘ bottom-right</span> <input type="range" id="br" min="0" max="200" value="60"> <span class="value-badge" id="brVal">60px</span></div>
+          <div class="corner-item"><span>↙ bottom-left</span> <input type="range" id="bl" min="0" max="200" value="80"> <span class="value-badge" id="blVal">80px</span></div>
+        </div>
+      </div>
+
+      <div class="row-flex">
+        <div class="toggle-group">
+          <label class="switch">
+            <input type="checkbox" id="linkCorners">
+            <span class="slider"></span>
+          </label>
+          <label>Link all corners</label>
+        </div>
+        <div class="unit-toggle" id="unitToggle">
+          <button class="unit-btn active" data-unit="px">px</button>
+          <button class="unit-btn" data-unit="%">%</button>
+        </div>
+      </div>
+
+      <div class="control-group" style="margin-top:1.2rem">
+        <label>Dimensions (width × height)</label>
+        <div class="dimension-group">
+          <div class="dim-item"><span>W</span> <input type="number" id="elemWidth" value="200" min="50" max="500" step="1"> px</div>
+          <div class="dim-item"><span>H</span> <input type="number" id="elemHeight" value="200" min="50" max="500" step="1"> px</div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Background color</label>
+        <div class="color-pick">
+          <input type="color" id="bgColor" value="#38bdf8">
+          <span id="colorHex">#38bdf8</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Presets</label>
+        <div class="preset-grid">
+          <button class="preset-btn" data-preset="pill">💊 Pill</button>
+          <button class="preset-btn" data-preset="circle">⭕ Circle</button>
+          <button class="preset-btn" data-preset="squircle">⬜ Squircle</button>
+          <button class="preset-btn" data-preset="leaf">🍃 Leaf</button>
+          <button class="preset-btn" data-preset="blob">🫧 Blob</button>
+          <button class="preset-btn" data-preset="bubble">💬 Bubble</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview + Code -->
+    <div class="preview-panel">
+      <div class="preview-box" id="previewBox"></div>
+      <div class="code-area">
+        <div class="code-header">
+          <span>border-radius</span>
+          <button class="copy-btn" id="copyBtn">📋 Copy</button>
+        </div>
+        <pre id="cssCode">20px 40px 60px 80px</pre>
+        <div class="full-syntax" id="fullSyntax">8-value: 20px 40px 60px 80px / 20px 40px 60px 80px</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>© 2025 gen8x.com</footer>
+
+<script>
+  (function() {
+    // DOM refs
+    const tl = document.getElementById('tl');
+    const tr = document.getElementById('tr');
+    const br = document.getElementById('br');
+    const bl = document.getElementById('bl');
+    const tlVal = document.getElementById('tlVal');
+    const trVal = document.getElementById('trVal');
+    const brVal = document.getElementById('brVal');
+    const blVal = document.getElementById('blVal');
+    const linkCheck = document.getElementById('linkCorners');
+    const unitBtns = document.querySelectorAll('.unit-btn');
+    const preview = document.getElementById('previewBox');
+    const cssCode = document.getElementById('cssCode');
+    const fullSyntax = document.getElementById('fullSyntax');
+    const copyBtn = document.getElementById('copyBtn');
+    const elemWidth = document.getElementById('elemWidth');
+    const elemHeight = document.getElementById('elemHeight');
+    const bgColor = document.getElementById('bgColor');
+    const colorHex = document.getElementById('colorHex');
+
+    let currentUnit = 'px'; // 'px' or '%'
+
+    // Helper: get corner values in current unit (as number)
+    function getCornerValues() {
+      return {
+        tl: parseFloat(tl.value) || 0,
+        tr: parseFloat(tr.value) || 0,
+        br: parseFloat(br.value) || 0,
+        bl: parseFloat(bl.value) || 0
+      };
+    }
+
+    // Update all displays & preview
+    function updateAll() {
+      const unit = currentUnit;
+      const vals = getCornerValues();
+      const suffix = unit;
+
+      // update badges
+      tlVal.textContent = vals.tl + suffix;
+      trVal.textContent = vals.tr + suffix;
+      brVal.textContent = vals.br + suffix;
+      blVal.textContent = vals.bl + suffix;
+
+      // build CSS string (shorthand: tl tr br bl)
+      const shorthand = `${vals.tl}${suffix} ${vals.tr}${suffix} ${vals.br}${suffix} ${vals.bl}${suffix}`;
+      cssCode.textContent = shorthand;
+
+      // full 8-value syntax (horizontal / vertical)
+      const full = `${vals.tl}${suffix} ${vals.tr}${suffix} ${vals.br}${suffix} ${vals.bl}${suffix} / ${vals.tl}${suffix} ${vals.tr}${suffix} ${vals.br}${suffix} ${vals.bl}${suffix}`;
+      fullSyntax.textContent = `8-value: ${full}`;
+
+      // apply to preview
+      const w = parseInt(elemWidth.value, 10) || 200;
+      const h = parseInt(elemHeight.value, 10) || 200;
+      preview.style.width = w + 'px';
+      preview.style.height = h + 'px';
+      preview.style.background = bgColor.value;
+      preview.style.borderRadius = shorthand;
+
+      // color hex label
+      colorHex.textContent = bgColor.value;
+    }
+
+    // Sync corners when linked
+    function syncCorners(sourceId) {
+      if (!linkCheck.checked) return;
+      const source = document.getElementById(sourceId);
+      const val = source.value;
+      tl.value = val;
+      tr.value = val;
+      br.value = val;
+      bl.value = val;
+      updateAll();
+    }
+
+    // Event listeners for sliders
+    [tl, tr, br, bl].forEach(slider => {
+      slider.addEventListener('input', function() {
+        if (linkCheck.checked) {
+          const val = this.value;
+          tl.value = val;
+          tr.value = val;
+          br.value = val;
+          bl.value = val;
+        }
+        updateAll();
+      });
+    });
+
+    // link toggle: if turning on, sync all to first corner (tl)
+    linkCheck.addEventListener('change', function() {
+      if (this.checked) {
+        const val = tl.value;
+        tr.value = val;
+        br.value = val;
+        bl.value = val;
+        updateAll();
+      }
+    });
+
+    // unit toggle
+    unitBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        unitBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentUnit = this.dataset.unit;
+        // when unit changes, we keep numeric values, just update display
+        updateAll();
+      });
+    });
+
+    // dimension inputs
+    elemWidth.addEventListener('input', updateAll);
+    elemHeight.addEventListener('input', updateAll);
+
+    // color picker
+    bgColor.addEventListener('input', updateAll);
+
+    // presets
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const preset = this.dataset.preset;
+        let tlV, trV, brV, blV;
+        const unit = currentUnit;
+        // values in px (or % later)
+        switch(preset) {
+          case 'pill':
+            tlV = 100; trV = 100; brV = 100; blV = 100; break;
+          case 'circle':
+            tlV = 200; trV = 200; brV = 200; blV = 200; break;
+          case 'squircle':
+            tlV = 40; trV = 40; brV = 40; blV = 40; break;
+          case 'leaf':
+            tlV = 80; trV = 10; brV = 80; blV = 10; break;
+          case 'blob':
+            tlV = 60; trV = 20; brV = 100; blV = 40; break;
+          case 'bubble':
+            tlV = 30; trV = 30; brV = 30; blV = 80; break;
+          default: tlV=20; trV=40; brV=60; blV=80;
+        }
+        // clamp to 0-200
+        tlV = Math.min(200, Math.max(0, tlV));
+        trV = Math.min(200, Math.max(0, trV));
+        brV = Math.min(200, Math.max(0, brV));
+        blV = Math.min(200, Math.max(0, blV));
+        tl.value = tlV;
+        tr.value = trV;
+        br.value = brV;
+        bl.value = blV;
+        // if linked, override
+        if (linkCheck.checked) {
+          const avg = tlV;
+          tl.value = avg; tr.value = avg; br.value = avg; bl.value = avg;
+        }
+        updateAll();
+      });
+    });
+
+    // copy to clipboard
+    copyBtn.addEventListener('click', function() {
+      const code = cssCode.textContent;
+      navigator.clipboard.writeText(`border-radius: ${code};`).then(() => {
+        const orig = copyBtn.textContent;
+        copyBtn.textContent = '✅ Copied!';
+        setTimeout(() => { copyBtn.textContent = orig; }, 1800);
+      }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = `border-radius: ${code};`;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        const orig = copyBtn.textContent;
+        copyBtn.textContent = '✅ Copied!';
+        setTimeout(() => { copyBtn.textContent = orig; }, 1800);
+      });
+    });
+
+    // initial update
+    updateAll();
+
+    // extra: if user changes dimension via number, update
+    // also ensure min/max
+    [elemWidth, elemHeight].forEach(inp => {
+      inp.addEventListener('change', function() {
+        let v = parseInt(this.value, 10);
+        if (isNaN(v)) v = 200;
+        v = Math.min(500, Math.max(50, v));
+        this.value = v;
+        updateAll();
+      });
+    });
+
+  })();
+</script>
+</body>
+</html>

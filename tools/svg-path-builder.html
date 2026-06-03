@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>SVG Path Builder — Draw & Edit Vector Paths Visually</title>
+  <meta name="description" content="Interactive SVG path builder: click to add points, drag control handles, edit curves, export SVG code. Free online tool at gen8x.com.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://gen8x.com/tools/svg-path-builder">
+  <!-- JSON-LD FAQ -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I add a point?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Click on the canvas. The point will be added using the selected command type (M, L, C, Q, A)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I edit curves?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. After adding a point with C or Q, drag the control handles (blue circles) to adjust the curve."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use the 'Export SVG' button to download the SVG file, or copy the path 'd' attribute from the live preview."
+          }
+        }
+      ]
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      padding: 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 1200px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin: 0.5rem 0 0.2rem;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .sub {
+      color: #94a3b8;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.8rem;
+      align-items: center;
+      background: #1e293b;
+      padding: 0.75rem 1rem;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      border: 1px solid #334155;
+    }
+    .toolbar label {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+    .toolbar select, .toolbar input[type="color"], .toolbar input[type="number"] {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 0.25rem 0.5rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      max-width: 100px;
+    }
+    .toolbar input[type="number"] {
+      width: 60px;
+    }
+    .toolbar button {
+      background: #1e293b;
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      padding: 0.3rem 0.9rem;
+      border-radius: 30px;
+      font-weight: 500;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+    .toolbar button:hover {
+      background: #38bdf8;
+      color: #0f172a;
+    }
+    .toolbar .spacer {
+      flex: 1;
+    }
+    .canvas-wrapper {
+      background: #1e293b;
+      border-radius: 24px;
+      padding: 0.5rem;
+      border: 1px solid #334155;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      position: relative;
+      touch-action: none;
+    }
+    #svgCanvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #0f172a;
+      border-radius: 16px;
+      cursor: crosshair;
+      touch-action: none;
+    }
+    .info-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+      align-items: flex-start;
+    }
+    .path-display {
+      flex: 2;
+      min-width: 200px;
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 0.8rem 1rem;
+      border: 1px solid #334155;
+    }
+    .path-display code {
+      display: block;
+      background: #0f172a;
+      padding: 0.6rem;
+      border-radius: 12px;
+      word-break: break-all;
+      font-size: 0.8rem;
+      color: #a5f3fc;
+      margin-top: 0.3rem;
+      border: 1px solid #2d3a52;
+    }
+    .presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-left: auto;
+    }
+    .presets button {
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #e2e8f0;
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .presets button:hover {
+      border-color: #38bdf8;
+      background: #2d3a52;
+    }
+    footer {
+      margin-top: 2rem;
+      color: #64748b;
+      font-size: 0.8rem;
+      text-align: center;
+      border-top: 1px solid #1e293b;
+      padding-top: 1.5rem;
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .toolbar label { flex-wrap: wrap; }
+      .presets { margin-left: 0; margin-top: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>✧ SVG Path Builder</h1>
+    <div class="sub">Draw & edit vector paths visually · gen8x.com</div>
+  </header>
+
+  <div class="toolbar">
+    <label>Command:
+      <select id="cmdType">
+        <option value="M">M (move)</option>
+        <option value="L" selected>L (line)</option>
+        <option value="C">C (cubic)</option>
+        <option value="Q">Q (quad)</option>
+        <option value="A">A (arc)</option>
+        <option value="Z">Z (close)</option>
+      </select>
+    </label>
+    <label>Stroke:
+      <input type="color" id="strokeColor" value="#38bdf8">
+    </label>
+    <label>Width:
+      <input type="number" id="strokeWidth" min="0.5" max="20" step="0.5" value="2.5">
+    </label>
+    <label>Fill:
+      <input type="color" id="fillColor" value="#1e293b">
+    </label>
+    <button id="undoBtn">↩ Undo</button>
+    <button id="redoBtn">↪ Redo</button>
+    <button id="clearBtn">✕ Clear</button>
+    <button id="exportBtn">⬇ Export SVG</button>
+    <button id="copyPathBtn">📋 Copy d</button>
+    <span class="spacer"></span>
+    <div class="presets">
+      <span style="color:#94a3b8;font-size:0.8rem;">Presets:</span>
+      <button data-preset="star">★ Star</button>
+      <button data-preset="heart">♥ Heart</button>
+      <button data-preset="arrow">→ Arrow</button>
+      <button data-preset="check">✓ Check</button>
+      <button data-preset="speech">💬 Speech</button>
+    </div>
+  </div>
+
+  <div class="canvas-wrapper">
+    <svg id="svgCanvas" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+      <!-- grid pattern -->
+      <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+      <!-- axes -->
+      <line x1="0" y1="0" x2="600" y2="0" stroke="#334155" stroke-width="1"/>
+      <line x1="0" y1="0" x2="0" y2="400" stroke="#334155" stroke-width="1"/>
+      <!-- main path -->
+      <path id="mainPath" d="" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <!-- control points & handles (drawn via JS) -->
+    </svg>
+  </div>
+
+  <div class="info-panel">
+    <div class="path-display">
+      <span style="font-weight:500;">path d</span>
+      <code id="pathDDisplay">(click canvas to add points)</code>
+    </div>
+  </div>
+
+  <footer>© 2025 gen8x.com</footer>
+</div>
+
+<script>
+  (function() {
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    const canvas = document.getElementById('svgCanvas');
+    const mainPath = document.getElementById('mainPath');
+    const pathDisplay = document.getElementById('pathDDisplay');
+
+    // UI elements
+    const cmdSelect = document.getElementById('cmdType');
+    const strokeColorInput = document.getElementById('strokeColor');
+    const strokeWidthInput = document.getElementById('strokeWidth');
+    const fillColorInput = document.getElementById('fillColor');
+
+    // State
+    let points = [];          // [{x, y, cmd, cp1x, cp1y, cp2x, cp2y, rx, ry, xAxisRot, largeArc, sweep}]
+    let history = [];
+    let historyIndex = -1;
+    const MAX_HISTORY = 40;
+
+    // Refs for control handles (SVG elements)
+    let controlElements = [];
+
+    // --- helpers ---
+    function getCanvasPoint(e) {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = 600 / rect.width;
+      const scaleY = 400 / rect.height;
+      let clientX, clientY;
+      if (e.touches) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+        e.preventDefault();
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      }
+      const x = (clientX - rect.left) * scaleX;
+      const y = (clientY - rect.top) * scaleY;
+      return { x: Math.min(590, Math.max(10, x)), y: Math.min(390, Math.max(10, y)) };
+    }
+
+    // build d string from points
+    function buildD() {
+      if (!points.length) return '';
+      let parts = [];
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        const cmd = p.cmd || 'L';
+        if (cmd === 'Z') {
+          parts.push('Z');
+          continue;
+        }
+        if (cmd === 'M' || cmd === 'L') {
+          parts.push(`${cmd} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`);
+        } else if (cmd === 'C') {
+          const cp1x = p.cp1x ?? p.x; const cp1y = p.cp1y ?? p.y;
+          const cp2x = p.cp2x ?? p.x; const cp2y = p.cp2y ?? p.y;
+          parts.push(`C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)} ${cp2x.toFixed(1)} ${cp2y.toFixed(1)} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`);
+        } else if (cmd === 'Q') {
+          const cpx = p.cp1x ?? p.x; const cpy = p.cp1y ?? p.y;
+          parts.push(`Q ${cpx.toFixed(1)} ${cpy.toFixed(1)} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`);
+        } else if (cmd === 'A') {
+          const rx = p.rx ?? 30; const ry = p.ry ?? 20;
+          const rot = p.xAxisRot ?? 0; const la = p.largeArc ?? 0; const sw = p.sweep ?? 1;
+          parts.push(`A ${rx.toFixed(1)} ${ry.toFixed(1)} ${rot} ${la} ${sw} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`);
+        }
+      }
+      return parts.join(' ');
+    }
+
+    function updatePath() {
+      const d = buildD();
+      mainPath.setAttribute('d', d || '');
+      pathDisplay.textContent = d || '(click canvas to add points)';
+      // update stroke/fill
+      mainPath.setAttribute('stroke', strokeColorInput.value);
+      mainPath.setAttribute('stroke-width', strokeWidthInput.value);
+      mainPath.setAttribute('fill', fillColorInput.value);
+      drawControlPoints();
+    }
+
+    function drawControlPoints() {
+      // remove old controls
+      controlElements.forEach(el => el.remove());
+      controlElements = [];
+
+      if (!points.length) return;
+
+      // draw point circles and handles for last point (or all)
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        const cmd = p.cmd || 'L';
+        if (cmd === 'Z') continue;
+
+        // main point
+        const circle = document.createElementNS(SVG_NS, 'circle');
+        circle.setAttribute('cx', p.x);
+        circle.setAttribute('cy', p.y);
+        circle.setAttribute('r', 5);
+        circle.setAttribute('fill', '#38bdf8');
+        circle.setAttribute('stroke', '#0f172a');
+        circle.setAttribute('stroke-width', '1.5');
+        circle.dataset.index = i;
+        circle.style.cursor = 'grab';
+        controlElements.push(circle);
+        canvas.appendChild(circle);
+
+        // control handles for C, Q
+        if (cmd === 'C') {
+          const cp1x = p.cp1x ?? p.x; const cp1y = p.cp1y ?? p.y;
+          const cp2x = p.cp2x ?? p.x; const cp2y = p.cp2y ?? p.y;
+          addHandle(cp1x, cp1y, i, 'cp1');
+          addHandle(cp2x, cp2y, i, 'cp2');
+          // lines
+          addLine(p.x, p.y, cp1x, cp1y);
+          addLine(p.x, p.y, cp2x, cp2y);
+        } else if (cmd === 'Q') {
+          const cpx = p.cp1x ?? p.x; const cpy = p.cp1y ?? p.y;
+          addHandle(cpx, cpy, i, 'cp1');
+          addLine(p.x, p.y, cpx, cpy);
+        }
+      }
+    }
+
+    function addHandle(cx, cy, index, type) {
+      const g = document.createElementNS(SVG_NS, 'g');
+      g.dataset.index = index;
+      g.dataset.handle = type;
+      const circle = document.createElementNS(SVG_NS, 'circle');
+      circle.setAttribute('cx', cx);
+      circle.setAttribute('cy', cy);
+      circle.setAttribute('r', 6);
+      circle.setAttribute('fill', '#fbbf24');
+      circle.setAttribute('stroke', '#0f172a');
+      circle.setAttribute('stroke-width', '1.5');
+      circle.style.cursor = 'pointer';
+      g.appendChild(circle);
+      controlElements.push(g);
+      canvas.appendChild(g);
+    }
+
+    function addLine(x1, y1, x2, y2) {
+      const line = document.createElementNS(SVG_NS, 'line');
+      line.setAttribute('x1', x1);
+      line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2);
+      line.setAttribute('y2', y2);
+      line.setAttribute('stroke', '#facc15');
+      line.setAttribute('stroke-width', '1');
+      line.setAttribute('stroke-dasharray', '3 3');
+      controlElements.push(line);
+      canvas.appendChild(line);
+    }
+
+    // --- history ---
+    function saveState() {
+      const snap = JSON.stringify(points);
+      history = history.slice(0, historyIndex + 1);
+      history.push(snap);
+      if (history.length > MAX_HISTORY) history.shift();
+      historyIndex = history.length - 1;
+    }
+
+    function undo() {
+      if (historyIndex > 0) {
+        historyIndex--;
+        points = JSON.parse(history[historyIndex]);
+        updatePath();
+      }
+    }
+
+    function redo() {
+      if (historyIndex < history.length - 1) {
+        historyIndex++;
+        points = JSON.parse(history[historyIndex]);
+        updatePath();
+      }
+    }
+
+    // --- add point ---
+    function addPoint(e) {
+      const pt = getCanvasPoint(e);
+      const cmd = cmdSelect.value;
+      if (cmd === 'Z') {
+        // close path: add Z point
+        points.push({ cmd: 'Z', x: pt.x, y: pt.y });
+        saveState();
+        updatePath();
+        return;
+      }
+
+      const newPoint = { x: pt.x, y: pt.y, cmd: cmd };
+      if (cmd === 'C') {
+        newPoint.cp1x = pt.x - 20; newPoint.cp1y = pt.y - 20;
+        newPoint.cp2x = pt.x + 20; newPoint.cp2y = pt.y + 20;
+      } else if (cmd === 'Q') {
+        newPoint.cp1x = pt.x - 20; newPoint.cp1y = pt.y - 20;
+      } else if (cmd === 'A') {
+        newPoint.rx = 30; newPoint.ry = 20; newPoint.xAxisRot = 0; newPoint.largeArc = 0; newPoint.sweep = 1;
+      }
+      points.push(newPoint);
+      saveState();
+      updatePath();
+    }
+
+    // --- drag control points ---
+    let dragging = null; // { index, type, startX, startY, origPoint }
+
+    function startDrag(e) {
+      const target = e.target.closest('circle, g');
+      if (!target) return;
+      let index, type;
+      if (target.tagName === 'circle' && target.parentElement?.dataset?.handle) {
+        const g = target.parentElement;
+        index = parseInt(g.dataset.index);
+        type = g.dataset.handle;
+      } else if (target.dataset?.index !== undefined && target.tagName === 'circle') {
+        // main point drag
+        index = parseInt(target.dataset.index);
+        type = 'point';
+      } else {
+        return;
+      }
+      const pt = getCanvasPoint(e);
+      dragging = {
+        index,
+        type,
+        startX: pt.x,
+        startY: pt.y,
+        origPoint: JSON.parse(JSON.stringify(points[index]))
+      };
+      e.preventDefault();
+    }
+
+    function moveDrag(e) {
+      if (!dragging) return;
+      const pt = getCanvasPoint(e);
+      const dx = pt.x - dragging.startX;
+      const dy = pt.y - dragging.startY;
+      const idx = dragging.index;
+      const p = points[idx];
+      if (!p) return;
+      const orig = dragging.origPoint;
+
+      if (dragging.type === 'point') {
+        p.x = orig.x + dx;
+        p.y = orig.y + dy;
+        // also move control points relative?
+        if (p.cmd === 'C') {
+          p.cp1x = (orig.cp1x ?? orig.x) + dx;
+          p.cp1y = (orig.cp1y ?? orig.y) + dy;
+          p.cp2x = (orig.cp2x ?? orig.x) + dx;
+          p.cp2y = (orig.cp2y ?? orig.y) + dy;
+        } else if (p.cmd === 'Q') {
+          p.cp1x = (orig.cp1x ?? orig.x) + dx;
+          p.cp1y = (orig.cp1y ?? orig.y) + dy;
+        }
+      } else if (dragging.type === 'cp1') {
+        p.cp1x = (orig.cp1x ?? orig.x) + dx;
+        p.cp1y = (orig.cp1y ?? orig.y) + dy;
+      } else if (dragging.type === 'cp2') {
+        p.cp2x = (orig.cp2x ?? orig.x) + dx;
+        p.cp2y = (orig.cp2y ?? orig.y) + dy;
+      }
+      updatePath();
+      e.preventDefault();
+    }
+
+    function endDrag(e) {
+      if (dragging) {
+        // save history after drag
+        saveState();
+        dragging = null;
+      }
+    }
+
+    // --- presets ---
+    function loadPreset(name) {
+      let newPoints = [];
+      switch(name) {
+        case 'star': {
+          const cx=300, cy=200, r=80, n=5;
+          for(let i=0; i<2*n; i++) {
+            const angle = (i * Math.PI / n) - Math.PI/2;
+            const rad = i%2===0 ? r : r*0.45;
+            const x = cx + rad*Math.cos(angle);
+            const y = cy + rad*Math.sin(angle);
+            newPoints.push({ x, y, cmd: i===0 ? 'M' : 'L' });
+          }
+          newPoints.push({ cmd: 'Z', x:0, y:0 });
+          break;
+        }
+        case 'heart': {
+          newPoints = [
+            {x:300, y:280, cmd:'M'},
+            {x:300, y:280, cmd:'C', cp1x:200, cp1y:180, cp2x:160, cp2y:260},
+            {x:300, y:280, cmd:'C', cp1x:440, cp1y:260, cp2x:400, cp2y:180},
+          ];
+          break;
+        }
+        case 'arrow': {
+          newPoints = [
+            {x:100, y:200, cmd:'M'}, {x:450, y:200, cmd:'L'},
+            {x:380, y:140, cmd:'L'}, {x:500, y:200, cmd:'M'},
+            {x:380, y:260, cmd:'L'}
+          ];
+          break;
+        }
+        case 'check': {
+          newPoints = [
+            {x:120, y:220, cmd:'M'}, {x:240, y:300, cmd:'L'}, {x:480, y:120, cmd:'L'}
+          ];
+          break;
+        }
+        case 'speech': {
+          newPoints = [
+            {x:200, y:120, cmd:'M'}, {x:400, y:120, cmd:'C', cp1x:450, cp1y:120, cp2x:450, cp2y:200},
+            {x:400, y:240, cmd:'C', cp1x:450, cp1y:240, cp2x:420, cp2y:280},
+            {x:320, y:280, cmd:'L'}, {x:280, y:330, cmd:'L'}, {x:280, y:280, cmd:'L'},
+            {x:200, y:280, cmd:'C', cp1x:150, cp1y:280, cp2x:150, cp2y:200},
+            {x:200, y:120, cmd:'Z'}
+          ];
+          break;
+        }
+        default: return;
+      }
+      points = newPoints;
+      saveState();
+      updatePath();
+    }
+
+    // --- export ---
+    function exportSVG() {
+      const d = buildD();
+      const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+        <rect width="600" height="400" fill="#0f172a"/>
+        <path d="${d}" fill="${fillColorInput.value}" stroke="${strokeColorInput.value}" stroke-width="${strokeWidthInput.value}" stroke-linejoin="round"/>
+      </svg>`;
+      const blob = new Blob([svgContent], {type: 'image/svg+xml'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'path.svg'; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function copyPath() {
+      const d = buildD();
+      navigator.clipboard.writeText(d).then(() => {
+        alert('Path d copied to clipboard!');
+      }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = d; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+        alert('Copied!');
+      });
+    }
+
+    // --- init events ---
+    canvas.addEventListener('click', addPoint);
+    canvas.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', moveDrag);
+    document.addEventListener('mouseup', endDrag);
+    canvas.addEventListener('touchstart', (e) => { startDrag(e); }, { passive: false });
+    document.addEventListener('touchmove', (e) => { moveDrag(e); }, { passive: false });
+    document.addEventListener('touchend', endDrag);
+
+    document.getElementById('undoBtn').addEventListener('click', undo);
+    document.getElementById('redoBtn').addEventListener('click', redo);
+    document.getElementById('clearBtn').addEventListener('click', () => { points = []; saveState(); updatePath(); });
+    document.getElementById('exportBtn').addEventListener('click', exportSVG);
+    document.getElementById('copyPathBtn').addEventListener('click', copyPath);
+
+    // preset buttons
+    document.querySelectorAll('[data-preset]').forEach(btn => {
+      btn.addEventListener('click', () => loadPreset(btn.dataset.preset));
+    });
+
+    // live style update
+    strokeColorInput.addEventListener('input', updatePath);
+    strokeWidthInput.addEventListener('input', updatePath);
+    fillColorInput.addEventListener('input', updatePath);
+
+    // initial state
+    saveState();
+    updatePath();
+    // load a demo star
+    loadPreset('star');
+  })();
+</script>
+</body>
+</html>
