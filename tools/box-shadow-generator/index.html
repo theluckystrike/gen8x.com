@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>Box Shadow Generator — Visual CSS Shadow Builder | gen8x.com</title>
+  <meta name="description" content="Interactive CSS box shadow generator with multiple layers, presets, and real-time preview. Adjust offset, blur, spread, color, inset. Up to 5 layers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://gen8x.com/tools/box-shadow-generator">
+  <!-- JSON-LD FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I add multiple shadow layers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Click 'Add layer' (up to 5). Each layer has independent controls for offset, blur, spread, color, and inset toggle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the preset shadows?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Material Design, Soft UI/Neumorphism, Sharp, Layered Depth, and Neon Glow. Each preset sets multiple layers automatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I copy the generated CSS?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, click the 'Copy CSS' button to copy the box-shadow declaration to your clipboard."
+        }
+      }
+    ]
+  }
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #0f172a;
+      color: #e2e8f0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .container {
+      max-width: 1200px;
+      width: 100%;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.25rem;
+    }
+    .subhead {
+      color: #94a3b8;
+      font-size: 1rem;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    @media (max-width: 800px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    /* controls panel */
+    .controls-panel {
+      background: #1e293b;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .layer-card {
+      background: #0f172a;
+      border-radius: 1rem;
+      padding: 1rem 1rem 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #2d3a52;
+      transition: border 0.2s;
+    }
+    .layer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    .layer-header .layer-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .layer-header .layer-actions button {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0.2rem 0.4rem;
+      border-radius: 0.3rem;
+      transition: background 0.2s;
+    }
+    .layer-header .layer-actions button:hover {
+      background: #3b1f2a;
+    }
+    .slider-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+    .slider-group label {
+      font-size: 0.8rem;
+      color: #b9c7db;
+      min-width: 70px;
+    }
+    .slider-group input[type="range"] {
+      flex: 1;
+      min-width: 80px;
+      height: 5px;
+      background: #2d3a52;
+      border-radius: 10px;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .slider-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #38bdf8;
+      cursor: pointer;
+      border: 2px solid #0f172a;
+      box-shadow: 0 0 6px #38bdf8;
+    }
+    .slider-group input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #38bdf8;
+      cursor: pointer;
+      border: 2px solid #0f172a;
+    }
+    .slider-value {
+      min-width: 40px;
+      text-align: right;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+    .color-inset-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem 1.5rem;
+      margin-top: 0.3rem;
+    }
+    .color-picker-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .color-picker-wrap label {
+      font-size: 0.8rem;
+      color: #b9c7db;
+    }
+    input[type="color"] {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+    }
+    .opacity-slider {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .opacity-slider input[type="range"] {
+      width: 80px;
+    }
+    .inset-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+    }
+    .inset-toggle input {
+      accent-color: #38bdf8;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    .add-layer-btn {
+      background: #2d3a52;
+      border: 1px dashed #38bdf8;
+      color: #38bdf8;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 0.5rem;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+    .add-layer-btn:hover:not(:disabled) {
+      background: #1e2a44;
+      border-color: #7dd3fc;
+    }
+    .add-layer-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      border-color: #475569;
+      color: #94a3b8;
+    }
+    .preset-area {
+      margin: 1.5rem 0 0.5rem;
+    }
+    .preset-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+    .preset-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #e2e8f0;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .preset-btn:hover {
+      background: #2d3a52;
+      border-color: #38bdf8;
+    }
+    /* preview panel */
+    .preview-panel {
+      background: #1e293b;
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .preview-card {
+      width: 220px;
+      height: 220px;
+      background: #1e293b;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      color: #94a3b8;
+      transition: box-shadow 0.1s, background 0.2s;
+      margin: 1rem 0;
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      box-shadow: 0 0 0 #000; /* reset */
+      border: 1px solid #2d3a52;
+    }
+    .css-output {
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+    .css-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .css-header span {
+      font-weight: 500;
+      color: #94a3b8;
+    }
+    .copy-btn {
+      background: #38bdf8;
+      border: none;
+      color: #0f172a;
+      padding: 0.3rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .copy-btn:hover {
+      background: #7dd3fc;
+    }
+    .copy-btn.copied {
+      background: #4ade80;
+    }
+    code {
+      display: block;
+      background: #0f172a;
+      padding: 1rem;
+      border-radius: 1rem;
+      font-family: 'Fira Code', 'Cascadia Code', monospace;
+      font-size: 0.8rem;
+      word-break: break-all;
+      white-space: pre-wrap;
+      border: 1px solid #2d3a52;
+      color: #cbd5e1;
+      max-height: 160px;
+      overflow-y: auto;
+    }
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #475569;
+      font-size: 0.9rem;
+      border-top: 1px solid #1e293b;
+      padding-top: 2rem;
+      width: 100%;
+    }
+    .layer-count-badge {
+      background: #2d3a52;
+      padding: 0.1rem 0.6rem;
+      border-radius: 1rem;
+      font-size: 0.7rem;
+      color: #b9c7db;
+    }
+  </style>
+
+    <meta property="og:title" content="Box Shadow Generator — Visual CSS Shadow Builder | gen8x.com">
+    <meta property="og:description" content="Interactive CSS box shadow generator with multiple layers, presets, and real-time preview. Adjust offset, blur, spread, color, inset. Up to 5 layers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gen8x.com/tools/box-shadow-generator">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Box Shadow Generator</h1>
+    <div class="subhead">Visual CSS Shadow Builder · up to 5 layers</div>
+  </header>
+
+  <div class="main-grid">
+    <!-- Controls -->
+    <div class="controls-panel" id="controlsPanel">
+      <div id="layersContainer"></div>
+      <button class="add-layer-btn" id="addLayerBtn">+ Add layer</button>
+
+      <div class="preset-area">
+        <div style="color:#94a3b8; font-size:0.9rem;">Presets</div>
+        <div class="preset-buttons">
+          <button class="preset-btn" data-preset="material">Material Design</button>
+          <button class="preset-btn" data-preset="neumorphism">Soft UI / Neumorphism</button>
+          <button class="preset-btn" data-preset="sharp">Sharp</button>
+          <button class="preset-btn" data-preset="layered">Layered Depth</button>
+          <button class="preset-btn" data-preset="neon">Neon Glow</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preview + CSS -->
+    <div class="preview-panel">
+      <div class="preview-card" id="previewCard">preview</div>
+      <div class="css-output">
+        <div class="css-header">
+          <span>box-shadow</span>
+          <button class="copy-btn" id="copyBtn">Copy CSS</button>
+        </div>
+        <code id="cssCode">box-shadow: none;</code>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2025 gen8x.com</footer>
+</div>
+
+<script>
+  (function() {
+    // ----- state -----
+    let layers = []; // array of layer objects
+    const MAX_LAYERS = 5;
+
+    // DOM refs
+    const container = document.getElementById('layersContainer');
+    const previewCard = document.getElementById('previewCard');
+    const cssCode = document.getElementById('cssCode');
+    const copyBtn = document.getElementById('copyBtn');
+    const addBtn = document.getElementById('addLayerBtn');
+
+    // ----- default layer factory -----
+    function createLayerData(overrides = {}) {
+      return {
+        hOffset: 0,
+        vOffset: 0,
+        blur: 10,
+        spread: 0,
+        color: '#000000',
+        opacity: 0.5,
+        inset: false,
+        ...overrides
+      };
+    }
+
+    // ----- init with 2 default layers (material-like) -----
+    function initLayers() {
+      layers = [
+        createLayerData({ hOffset: 0, vOffset: 4, blur: 12, spread: 0, color: '#000000', opacity: 0.15, inset: false }),
+        createLayerData({ hOffset: 0, vOffset: 2, blur: 4, spread: 0, color: '#000000', opacity: 0.1, inset: false })
+      ];
+    }
+    initLayers();
+
+    // ----- render all layers -----
+    function render() {
+      let html = '';
+      layers.forEach((layer, idx) => {
+        const hue = layer.color;
+        const opacityPercent = Math.round(layer.opacity * 100);
+        const insetChecked = layer.inset ? 'checked' : '';
+        html += `
+          <div class="layer-card" data-index="${idx}">
+            <div class="layer-header">
+              <span class="layer-label">Layer ${idx+1} <span class="layer-count-badge">${idx+1}/${MAX_LAYERS}</span></span>
+              <div class="layer-actions">
+                ${layers.length > 1 ? `<button class="remove-layer" data-index="${idx}">✕</button>` : ''}
+              </div>
+            </div>
+            <div class="slider-group">
+              <label>H-offset</label>
+              <input type="range" min="-50" max="50" value="${layer.hOffset}" class="layer-slider" data-prop="hOffset" data-index="${idx}">
+              <span class="slider-value">${layer.hOffset}px</span>
+            </div>
+            <div class="slider-group">
+              <label>V-offset</label>
+              <input type="range" min="-50" max="50" value="${layer.vOffset}" class="layer-slider" data-prop="vOffset" data-index="${idx}">
+              <span class="slider-value">${layer.vOffset}px</span>
+            </div>
+            <div class="slider-group">
+              <label>Blur</label>
+              <input type="range" min="0" max="100" value="${layer.blur}" class="layer-slider" data-prop="blur" data-index="${idx}">
+              <span class="slider-value">${layer.blur}px</span>
+            </div>
+            <div class="slider-group">
+              <label>Spread</label>
+              <input type="range" min="-50" max="50" value="${layer.spread}" class="layer-slider" data-prop="spread" data-index="${idx}">
+              <span class="slider-value">${layer.spread}px</span>
+            </div>
+            <div class="color-inset-row">
+              <div class="color-picker-wrap">
+                <label>Color</label>
+                <input type="color" value="${layer.color}" class="layer-color" data-index="${idx}">
+              </div>
+              <div class="opacity-slider">
+                <label>Opacity</label>
+                <input type="range" min="0" max="1" step="0.01" value="${layer.opacity}" class="layer-opacity" data-index="${idx}">
+                <span class="slider-value" style="min-width:35px;">${opacityPercent}%</span>
+              </div>
+              <div class="inset-toggle">
+                <label>Inset</label>
+                <input type="checkbox" ${insetChecked} class="layer-inset" data-index="${idx}">
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+
+      // update add button
+      addBtn.disabled = layers.length >= MAX_LAYERS;
+      addBtn.textContent = layers.length >= MAX_LAYERS ? 'Max 5 layers' : '+ Add layer';
+
+      // attach events (delegation not used for simplicity, but we attach per element)
+      document.querySelectorAll('.remove-layer').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const idx = parseInt(this.dataset.index);
+          removeLayer(idx);
+        });
+      });
+
+      document.querySelectorAll('.layer-slider').forEach(slider => {
+        slider.addEventListener('input', function(e) {
+          const idx = parseInt(this.dataset.index);
+          const prop = this.dataset.prop;
+          const val = parseFloat(this.value);
+          layers[idx][prop] = val;
+          // update display
+          const parent = this.closest('.slider-group');
+          parent.querySelector('.slider-value').textContent = val + 'px';
+          updatePreviewAndCSS();
+        });
+      });
+
+      document.querySelectorAll('.layer-color').forEach(picker => {
+        picker.addEventListener('input', function(e) {
+          const idx = parseInt(this.dataset.index);
+          layers[idx].color = this.value;
+          updatePreviewAndCSS();
+        });
+      });
+
+      document.querySelectorAll('.layer-opacity').forEach(slider => {
+        slider.addEventListener('input', function(e) {
+          const idx = parseInt(this.dataset.index);
+          const val = parseFloat(this.value);
+          layers[idx].opacity = val;
+          const percent = Math.round(val * 100);
+          const parent = this.closest('.opacity-slider');
+          parent.querySelector('.slider-value').textContent = percent + '%';
+          updatePreviewAndCSS();
+        });
+      });
+
+      document.querySelectorAll('.layer-inset').forEach(chk => {
+        chk.addEventListener('change', function(e) {
+          const idx = parseInt(this.dataset.index);
+          layers[idx].inset = this.checked;
+          updatePreviewAndCSS();
+        });
+      });
+
+      updatePreviewAndCSS();
+    }
+
+    // ----- remove layer -----
+    function removeLayer(idx) {
+      if (layers.length <= 1) return;
+      layers.splice(idx, 1);
+      render();
+    }
+
+    // ----- add layer -----
+    function addLayer() {
+      if (layers.length >= MAX_LAYERS) return;
+      layers.push(createLayerData({ hOffset: 0, vOffset: 0, blur: 6, spread: 0, color: '#000000', opacity: 0.2, inset: false }));
+      render();
+    }
+
+    // ----- compute shadow css string -----
+    function computeShadowCSS() {
+      if (layers.length === 0) return 'none';
+      const parts = layers.map(l => {
+        const r = Math.round(l.opacity * 255);
+        const hexOpacity = r.toString(16).padStart(2, '0');
+        const colorWithOpacity = l.color + hexOpacity;
+        const insetStr = l.inset ? 'inset ' : '';
+        return `${insetStr}${l.hOffset}px ${l.vOffset}px ${l.blur}px ${l.spread}px ${colorWithOpacity}`;
+      });
+      return parts.join(', ');
+    }
+
+    // ----- update preview + code -----
+    function updatePreviewAndCSS() {
+      const shadow = computeShadowCSS();
+      previewCard.style.boxShadow = shadow;
+      cssCode.textContent = `box-shadow: ${shadow};`;
+    }
+
+    // ----- presets -----
+    function applyPreset(name) {
+      let newLayers = [];
+      switch(name) {
+        case 'material':
+          newLayers = [
+            createLayerData({ hOffset: 0, vOffset: 4, blur: 12, spread: 0, color: '#000000', opacity: 0.15, inset: false }),
+            createLayerData({ hOffset: 0, vOffset: 2, blur: 4, spread: 0, color: '#000000', opacity: 0.1, inset: false })
+          ];
+          break;
+        case 'neumorphism':
+          newLayers = [
+            createLayerData({ hOffset: 8, vOffset: 8, blur: 16, spread: 0, color: '#a3b1c6', opacity: 0.3, inset: false }),
+            createLayerData({ hOffset: -8, vOffset: -8, blur: 16, spread: 0, color: '#ffffff', opacity: 0.2, inset: false })
+          ];
+          break;
+        case 'sharp':
+          newLayers = [
+            createLayerData({ hOffset: 6, vOffset: 6, blur: 0, spread: 0, color: '#000000', opacity: 0.3, inset: false })
+          ];
+          break;
+        case 'layered':
+          newLayers = [
+            createLayerData({ hOffset: 0, vOffset: 1, blur: 3, spread: 0, color: '#000000', opacity: 0.12, inset: false }),
+            createLayerData({ hOffset: 0, vOffset: 4, blur: 8, spread: 0, color: '#000000', opacity: 0.10, inset: false }),
+            createLayerData({ hOffset: 0, vOffset: 10, blur: 20, spread: 0, color: '#000000', opacity: 0.08, inset: false })
+          ];
+          break;
+        case 'neon':
+          newLayers = [
+            createLayerData({ hOffset: 0, vOffset: 0, blur: 8, spread: 2, color: '#38bdf8', opacity: 0.8, inset: false }),
+            createLayerData({ hOffset: 0, vOffset: 0, blur: 20, spread: 4, color: '#38bdf8', opacity: 0.4, inset: false }),
+            createLayerData({ hOffset: 0, vOffset: 0, blur: 40, spread: 8, color: '#38bdf8', opacity: 0.2, inset: false })
+          ];
+          break;
+        default: return;
+      }
+      layers = newLayers;
+      render();
+    }
+
+    // ----- event listeners -----
+    addBtn.addEventListener('click', addLayer);
+
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const preset = this.dataset.preset;
+        applyPreset(preset);
+      });
+    });
+
+    // copy button
+    copyBtn.addEventListener('click', function() {
+      const code = cssCode.textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        copyBtn.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.textContent = 'Copy CSS';
+          copyBtn.classList.remove('copied');
+        }, 1800);
+      }).catch(() => {
+        // fallback
+        const textarea = document.createElement('textarea');
+        textarea.value = code;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        copyBtn.textContent = 'Copied!';
+        setTimeout(() => { copyBtn.textContent = 'Copy CSS'; }, 1500);
+      });
+    });
+
+    // initial render
+    render();
+  })();
+</script>
+</body>
+</html>
