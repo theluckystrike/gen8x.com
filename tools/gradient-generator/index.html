@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Generator - gen8x.com</title>
+    <meta name="description" content="Create linear, radial, and conic gradients with live preview. Generate CSS with presets and custom color stops.">
+    <link rel="canonical" href="https://gen8x.com/tools/gradient-generator">
+    <meta property="og:title" content="Gradient Generator - gen8x.com">
+    <meta property="og:description" content="Create linear, radial, and conic gradients with live preview. Generate CSS with presets and custom color stops.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gen8x.com/tools/gradient-generator">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Gradient Generator",
+        "description": "Generate linear, radial, and conic gradients with CSS output and live preview",
+        "url": "https://gen8x.com/tools/gradient-generator",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #999;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .panel {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .panel-title {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        input[type="number"],
+        input[type="color"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        input[type="color"] {
+            height: 45px;
+            cursor: pointer;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: #00d4ff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #00b8d4;
+            transform: translateY(-2px);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .button-group button {
+            width: auto;
+            flex: 1;
+        }
+
+        .secondary-btn {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .secondary-btn:hover {
+            background-color: #444;
+        }
+
+        .color-stop {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 10px;
+            align-items: end;
+        }
+
+        .color-stop-remove {
+            padding: 8px 12px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .color-stop-remove:hover {
+            background-color: #c82333;
+        }
+
+        .gradient-preview {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            color: #00d4ff;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .code-output {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #00d4ff;
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .presets-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .preset-btn {
+            padding: 10px;
+            font-size: 0.8rem;
+        }
+
+        .info-text {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .angle-dial {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+            border: 2px solid #333;
+            position: relative;
+            margin: 10px auto;
+            cursor: pointer;
+        }
+
+        .angle-indicator {
+            position: absolute;
+            width: 2px;
+            height: 45px;
+            background-color: #00d4ff;
+            left: 50%;
+            top: 50%;
+            transform-origin: center -50px;
+            transform: translateX(-50%) rotate(0deg);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .presets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .color-stop {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gradient Generator</h1>
+            <p class="subtitle">Create linear, radial, and conic CSS gradients</p>
+        </header>
+
+        <div class="main-content">
+            <div class="panel" style="max-height: fit-content;">
+                <div class="panel-title">Settings</div>
+
+                <div class="control-group">
+                    <label>Gradient Type</label>
+                    <select id="gradientType">
+                        <option value="linear">Linear</option>
+                        <option value="radial">Radial</option>
+                        <option value="conic">Conic</option>
+                    </select>
+                </div>
+
+                <div class="control-group" id="angleControl">
+                    <label>Angle (degrees)</label>
+                    <input type="number" id="angle" value="45" min="0" max="360">
+                    <div class="angle-dial" id="angleDial">
+                        <div class="angle-indicator" id="angleIndicator"></div>
+                    </div>
+                </div>
+
+                <div class="control-group" id="radialControl" style="display: none;">
+                    <label>Radial Shape</label>
+                    <select id="radialShape">
+                        <option value="circle">Circle</option>
+                        <option value="ellipse">Ellipse</option>
+                    </select>
+                </div>
+
+                <div class="section-title">Color Stops</div>
+                <div id="colorStops"></div>
+
+                <button onclick="addColorStop()">+ Add Color Stop</button>
+
+                <div class="button-group" style="margin-top: 20px;">
+                    <button class="secondary-btn" onclick="randomGradient()">Random</button>
+                    <button class="secondary-btn" onclick="copyCSSCode()">Copy CSS</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">Preview</div>
+                <div class="gradient-preview" id="gradientPreview"></div>
+
+                <div class="section-title">CSS Output</div>
+                <div class="code-output" id="codeOutput"></div>
+
+                <div class="section-title">Presets</div>
+                <div class="presets-grid" id="presetsGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 gen8x.com
+    </footer>
+
+    <script>
+        const presets = {
+            sunset: {
+                type: 'linear',
+                angle: 135,
+                stops: [
+                    { color: '#FF6B00', position: 0 },
+                    { color: '#FF8C00', position: 30 },
+                    { color: '#FF4500', position: 70 },
+                    { color: '#8B0000', position: 100 }
+                ]
+            },
+            ocean: {
+                type: 'linear',
+                angle: 45,
+                stops: [
+                    { color: '#0047AB', position: 0 },
+                    { color: '#00A3E0', position: 50 },
+                    { color: '#87CEEB', position: 100 }
+                ]
+            },
+            aurora: {
+                type: 'radial',
+                shape: 'circle',
+                stops: [
+                    { color: '#00FF00', position: 0 },
+                    { color: '#00FFFF', position: 40 },
+                    { color: '#0047AB', position: 100 }
+                ]
+            },
+            neon: {
+                type: 'linear',
+                angle: 90,
+                stops: [
+                    { color: '#FF006E', position: 0 },
+                    { color: '#FFBE0B', position: 50 },
+                    { color: '#00F5FF', position: 100 }
+                ]
+            },
+            forest: {
+                type: 'linear',
+                angle: 180,
+                stops: [
+                    { color: '#1B4332', position: 0 },
+                    { color: '#2D6A4F', position: 50 },
+                    { color: '#40916C', position: 100 }
+                ]
+            },
+            cosmic: {
+                type: 'radial',
+                shape: 'circle',
+                stops: [
+                    { color: '#2C2C54', position: 0 },
+                    { color: '#8B4789', position: 40 },
+                    { color: '#E56B6F', position: 100 }
+                ]
+            }
+        };
+
+        let colorStops = [
+            { color: '#FF6B6B', position: 0 },
+            { color: '#4ECDC4', position: 100 }
+        ];
+
+        function initializeUI() {
+            const gradientType = document.getElementById('gradientType');
+            gradientType.addEventListener('change', updateGradient);
+
+            document.getElementById('angle').addEventListener('input', updateAngle);
+            document.getElementById('radialShape').addEventListener('change', updateGradient);
+
+            const angleDial = document.getElementById('angleDial');
+            angleDial.addEventListener('click', (e) => {
+                const rect = angleDial.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const x = e.clientX - rect.left - centerX;
+                const y = e.clientY - rect.top - centerY;
+                const angle = Math.atan2(y, x) * 180 / Math.PI + 90;
+                document.getElementById('angle').value = Math.max(0, Math.min(360, Math.round(angle) % 360));
+                updateAngle();
+            });
+
+            renderColorStops();
+            renderPresets();
+            updateGradient();
+        }
+
+        function updateAngle() {
+            const angle = parseInt(document.getElementById('angle').value);
+            const indicator = document.getElementById('angleIndicator');
+            indicator.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+            updateGradient();
+        }
+
+        function renderColorStops() {
+            const container = document.getElementById('colorStops');
+            container.innerHTML = '';
+
+            colorStops.forEach((stop, index) => {
+                const div = document.createElement('div');
+                div.className = 'color-stop';
+
+                const colorInput = document.createElement('input');
+                colorInput.type = 'color';
+                colorInput.value = stop.color;
+                colorInput.addEventListener('input', (e) => {
+                    colorStops[index].color = e.target.value;
+                    updateGradient();
+                });
+
+                const posInput = document.createElement('input');
+                posInput.type = 'number';
+                posInput.value = stop.position;
+                posInput.min = '0';
+                posInput.max = '100';
+                posInput.addEventListener('input', (e) => {
+                    colorStops[index].position = parseInt(e.target.value);
+                    updateGradient();
+                });
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'color-stop-remove';
+                removeBtn.textContent = 'Remove';
+                removeBtn.onclick = (e) => {
+                    e.preventDefault();
+                    if (colorStops.length > 2) {
+                        colorStops.splice(index, 1);
+                        renderColorStops();
+                        updateGradient();
+                    }
+                };
+
+                div.appendChild(colorInput);
+                div.appendChild(posInput);
+                div.appendChild(removeBtn);
+                container.appendChild(div);
+            });
+        }
+
+        function addColorStop() {
+            if (colorStops.length < 10) {
+                const lastStop = colorStops[colorStops.length - 1];
+                colorStops.push({
+                    color: lastStop.color,
+                    position: Math.min(100, lastStop.position + 20)
+                });
+                renderColorStops();
+                updateGradient();
+            }
+        }
+
+        function updateGradient() {
+            const type = document.getElementById('gradientType').value;
+            const angleControl = document.getElementById('angleControl');
+            const radialControl = document.getElementById('radialControl');
+
+            angleControl.style.display = type === 'linear' ? 'block' : 'none';
+            radialControl.style.display = type === 'radial' ? 'block' : 'none';
+
+            const stops = colorStops.map(s => `${s.color} ${s.position}%`).join(', ');
+            let css = '';
+
+            if (type === 'linear') {
+                const angle = document.getElementById('angle').value;
+                css = `linear-gradient(${angle}deg, ${stops})`;
+            } else if (type === 'radial') {
+                const shape = document.getElementById('radialShape').value;
+                css = `radial-gradient(${shape}, ${stops})`;
+            } else if (type === 'conic') {
+                css = `conic-gradient(${stops})`;
+            }
+
+            const preview = document.getElementById('gradientPreview');
+            preview.style.backgroundImage = css;
+
+            const output = document.getElementById('codeOutput');
+            output.textContent = `background: ${css};
+/* Fallback */
+background: linear-gradient(${document.getElementById('angle').value}deg, ${stops});`;
+        }
+
+        function randomGradient() {
+            const randomColor = () => '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+            colorStops = [
+                { color: randomColor(), position: 0 },
+                { color: randomColor(), position: 50 },
+                { color: randomColor(), position: 100 }
+            ];
+            renderColorStops();
+            updateGradient();
+        }
+
+        function renderPresets() {
+            const grid = document.getElementById('presetsGrid');
+            grid.innerHTML = '';
+
+            Object.entries(presets).forEach(([name, preset]) => {
+                const btn = document.createElement('button');
+                btn.className = 'preset-btn secondary-btn';
+                btn.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+                btn.onclick = () => applyPreset(preset);
+                grid.appendChild(btn);
+            });
+        }
+
+        function applyPreset(preset) {
+            document.getElementById('gradientType').value = preset.type;
+            if (preset.angle !== undefined) {
+                document.getElementById('angle').value = preset.angle;
+            }
+            if (preset.shape !== undefined) {
+                document.getElementById('radialShape').value = preset.shape;
+            }
+            colorStops = [...preset.stops];
+            renderColorStops();
+            updateGradient();
+        }
+
+        function copyCSSCode() {
+            const code = document.getElementById('codeOutput').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        initializeUI();
+    </script>
+</body>
+</html>

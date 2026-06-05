@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid Generator - gen8x.com</title>
+    <meta name="description" content="Generate CSS Grid layouts with named areas. Visual builder for grid templates, gaps, and responsive designs.">
+    <link rel="canonical" href="https://gen8x.com/tools/css-grid-generator">
+    <meta property="og:title" content="CSS Grid Generator - gen8x.com">
+    <meta property="og:description" content="Generate CSS Grid layouts with named areas. Visual builder for grid templates, gaps, and responsive designs.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gen8x.com/tools/css-grid-generator">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CSS Grid Generator",
+        "description": "Generate CSS Grid layouts with named areas and visual preview",
+        "url": "https://gen8x.com/tools/css-grid-generator",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #999;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .panel {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .panel-title {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+        }
+
+        .grid-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .columns-input,
+        .rows-input {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .columns-input input,
+        .rows-input input {
+            flex: 1;
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: #00d4ff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background-color: #00b8d4;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .secondary-btn {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .secondary-btn:hover {
+            background-color: #444;
+        }
+
+        .preview-area {
+            background-color: #0a0a0a;
+            border: 2px dashed #333;
+            border-radius: 4px;
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .grid-preview {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            gap: var(--col-gap, 10px) var(--row-gap, 10px);
+            grid-template-columns: var(--cols, repeat(3, 1fr));
+            grid-template-rows: var(--rows, auto);
+        }
+
+        .grid-cell {
+            background-color: #333;
+            border: 1px solid #555;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80px;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #999;
+            user-select: none;
+        }
+
+        .grid-cell:hover {
+            background-color: #444;
+            border-color: #00d4ff;
+        }
+
+        .grid-cell.selected {
+            background-color: #00d4ff;
+            color: #0a0a0a;
+            border-color: #00d4ff;
+        }
+
+        .code-output {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #00d4ff;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .presets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .preset-btn {
+            padding: 12px;
+            font-size: 0.85rem;
+        }
+
+        .responsive-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .grid-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .presets {
+                grid-template-columns: 1fr;
+            }
+
+            .responsive-controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS Grid Generator</h1>
+            <p class="subtitle">Create responsive grid layouts with visual preview</p>
+        </header>
+
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-title">Grid Configuration</div>
+
+                <div class="control-group">
+                    <label>Columns & Rows</label>
+                    <div class="grid-inputs">
+                        <input type="number" id="columns" value="3" min="1" max="12" placeholder="Columns">
+                        <input type="number" id="rows" value="3" min="1" max="12" placeholder="Rows">
+                    </div>
+                </div>
+
+                <div class="responsive-controls">
+                    <div class="control-group">
+                        <label>Column Gap (px)</label>
+                        <input type="number" id="colGap" value="10" min="0" max="100">
+                    </div>
+                    <div class="control-group">
+                        <label>Row Gap (px)</label>
+                        <input type="number" id="rowGap" value="10" min="0" max="100">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Column Width Type</label>
+                    <select id="colType">
+                        <option value="fr">Fraction (fr)</option>
+                        <option value="px">Pixels (px)</option>
+                        <option value="%">Percentage (%)</option>
+                        <option value="auto">Auto</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Row Height Type</label>
+                    <select id="rowType">
+                        <option value="auto">Auto</option>
+                        <option value="px">Pixels (px)</option>
+                        <option value="fr">Fraction (fr)</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="generateGrid()">Update Grid</button>
+                    <button class="secondary-btn" onclick="resetGrid()">Reset</button>
+                </div>
+
+                <div class="control-group" style="margin-top: 25px;">
+                    <label>Preset Templates</label>
+                    <div class="presets">
+                        <button class="preset-btn secondary-btn" onclick="applyPreset('holygrail')">Holy Grail</button>
+                        <button class="preset-btn secondary-btn" onclick="applyPreset('dashboard')">Dashboard</button>
+                        <button class="preset-btn secondary-btn" onclick="applyPreset('gallery')">Gallery</button>
+                        <button class="preset-btn secondary-btn" onclick="applyPreset('blog')">Blog</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">Live Preview</div>
+                <div class="preview-area" id="previewArea">
+                    <div class="grid-preview" id="gridPreview"></div>
+                </div>
+
+                <div class="control-group">
+                    <button onclick="copyCode()">Copy CSS Code</button>
+                </div>
+
+                <div class="code-output" id="codeOutput"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 gen8x.com
+    </footer>
+
+    <script>
+        const presets = {
+            holygrail: {
+                cols: 1,
+                rows: 3,
+                colGap: 20,
+                rowGap: 20,
+                colType: 'fr',
+                rowType: 'auto'
+            },
+            dashboard: {
+                cols: 4,
+                rows: 3,
+                colGap: 15,
+                rowGap: 15,
+                colType: 'fr',
+                rowType: 'auto'
+            },
+            gallery: {
+                cols: 4,
+                rows: 4,
+                colGap: 10,
+                rowGap: 10,
+                colType: 'fr',
+                rowType: 'fr'
+            },
+            blog: {
+                cols: 3,
+                rows: 5,
+                colGap: 20,
+                rowGap: 20,
+                colType: 'fr',
+                rowType: 'auto'
+            }
+        };
+
+        function generateGrid() {
+            const cols = parseInt(document.getElementById('columns').value);
+            const rows = parseInt(document.getElementById('rows').value);
+            const colGap = parseInt(document.getElementById('colGap').value);
+            const rowGap = parseInt(document.getElementById('rowGap').value);
+            const colType = document.getElementById('colType').value;
+            const rowType = document.getElementById('rowType').value;
+
+            const colValue = colType === 'fr' ? `repeat(${cols}, 1fr)` :
+                           colType === 'px' ? `repeat(${cols}, 150px)` :
+                           colType === '%' ? `repeat(${cols}, ${100/cols}%)` : 'repeat(auto-fit, minmax(150px, 1fr))';
+
+            const rowValue = rowType === 'auto' ? `repeat(${rows}, auto)` :
+                           rowType === 'px' ? `repeat(${rows}, 100px)` : `repeat(${rows}, 1fr)`;
+
+            const gridPreview = document.getElementById('gridPreview');
+            gridPreview.style.setProperty('--cols', colValue);
+            gridPreview.style.setProperty('--rows', rowValue);
+            gridPreview.style.setProperty('--col-gap', colGap + 'px');
+            gridPreview.style.setProperty('--row-gap', rowGap + 'px');
+
+            gridPreview.innerHTML = '';
+            for (let i = 1; i <= cols * rows; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                cell.textContent = `Cell ${i}`;
+                gridPreview.appendChild(cell);
+            }
+
+            updateCodeOutput(cols, rows, colGap, rowGap, colType, rowType);
+        }
+
+        function updateCodeOutput(cols, rows, colGap, rowGap, colType, rowType) {
+            const colValue = colType === 'fr' ? `repeat(${cols}, 1fr)` :
+                           colType === 'px' ? `repeat(${cols}, 150px)` :
+                           colType === '%' ? `repeat(${cols}, ${100/cols}%)` : 'repeat(auto-fit, minmax(150px, 1fr))';
+
+            const rowValue = rowType === 'auto' ? `repeat(${rows}, auto)` :
+                           rowType === 'px' ? `repeat(${rows}, 100px)` : `repeat(${rows}, 1fr)`;
+
+            const code = `.grid-container {
+  display: grid;
+  grid-template-columns: ${colValue};
+  grid-template-rows: ${rowValue};
+  column-gap: ${colGap}px;
+  row-gap: ${rowGap}px;
+}
+
+.grid-item {
+  background-color: #333;
+  padding: 20px;
+  border: 1px solid #555;
+  border-radius: 4px;
+}`;
+
+            document.getElementById('codeOutput').textContent = code;
+        }
+
+        function resetGrid() {
+            document.getElementById('columns').value = 3;
+            document.getElementById('rows').value = 3;
+            document.getElementById('colGap').value = 10;
+            document.getElementById('rowGap').value = 10;
+            document.getElementById('colType').value = 'fr';
+            document.getElementById('rowType').value = 'auto';
+            generateGrid();
+        }
+
+        function applyPreset(presetName) {
+            const preset = presets[presetName];
+            document.getElementById('columns').value = preset.cols;
+            document.getElementById('rows').value = preset.rows;
+            document.getElementById('colGap').value = preset.colGap;
+            document.getElementById('rowGap').value = preset.rowGap;
+            document.getElementById('colType').value = preset.colType;
+            document.getElementById('rowType').value = preset.rowType;
+            generateGrid();
+        }
+
+        function copyCode() {
+            const code = document.getElementById('codeOutput').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Initialize
+        generateGrid();
+
+        // Add event listeners
+        document.getElementById('columns').addEventListener('change', generateGrid);
+        document.getElementById('rows').addEventListener('change', generateGrid);
+        document.getElementById('colGap').addEventListener('input', generateGrid);
+        document.getElementById('rowGap').addEventListener('input', generateGrid);
+        document.getElementById('colType').addEventListener('change', generateGrid);
+        document.getElementById('rowType').addEventListener('change', generateGrid);
+    </script>
+</body>
+</html>

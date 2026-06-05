@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typography Scale Calculator - gen8x.com</title>
+    <meta name="description" content="Create modular type scales with live preview. Generate CSS with clamp() for fluid typography and responsive sizing.">
+    <link rel="canonical" href="https://gen8x.com/tools/typography-scale-calculator">
+    <meta property="og:title" content="Typography Scale Calculator - gen8x.com">
+    <meta property="og:description" content="Create modular type scales with live preview. Generate CSS with clamp() for fluid typography and responsive sizing.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gen8x.com/tools/typography-scale-calculator">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Typography Scale Calculator",
+        "description": "Generate modular type scales with fluid typography and live preview",
+        "url": "https://gen8x.com/tools/typography-scale-calculator",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #999;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .panel {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .panel-title {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: #00d4ff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #00b8d4;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            color: #00d4ff;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .secondary-btn {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .secondary-btn:hover {
+            background-color: #444;
+        }
+
+        .scale-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .scale-table th {
+            background-color: #0a0a0a;
+            color: #00d4ff;
+            padding: 10px;
+            text-align: left;
+            border-bottom: 2px solid #333;
+        }
+
+        .scale-table td {
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .preview-section {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .preview-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .preview-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .preview-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .preview-text {
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .code-output {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #00d4ff;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .control-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Typography Scale Calculator</h1>
+            <p class="subtitle">Generate modular type scales with fluid typography</p>
+        </header>
+
+        <div class="main-content">
+            <div class="panel" style="max-height: fit-content;">
+                <div class="panel-title">Settings</div>
+
+                <div class="control-group">
+                    <label>Base Font Size (px)</label>
+                    <input type="number" id="baseSize" value="16" min="10" max="24">
+                </div>
+
+                <div class="control-group">
+                    <label>Scale Ratio</label>
+                    <select id="scaleRatio">
+                        <option value="1.067">Minor Second (1.067)</option>
+                        <option value="1.125">Major Second (1.125)</option>
+                        <option value="1.2">Minor Third (1.2)</option>
+                        <option value="1.25">Major Third (1.25)</option>
+                        <option value="1.333">Perfect Fourth (1.333)</option>
+                        <option value="1.414">Augmented Fourth (1.414)</option>
+                        <option value="1.5">Perfect Fifth (1.5)</option>
+                        <option value="1.618">Golden Ratio (1.618)</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+
+                <div class="control-group" id="customRatioGroup" style="display: none;">
+                    <label>Custom Ratio</label>
+                    <input type="number" id="customRatio" value="1.5" step="0.01" min="1">
+                </div>
+
+                <div class="control-row">
+                    <div class="control-group">
+                        <label>Steps Up</label>
+                        <input type="number" id="stepsUp" value="6" min="1" max="10">
+                    </div>
+                    <div class="control-group">
+                        <label>Steps Down</label>
+                        <input type="number" id="stepsDown" value="2" min="1" max="5">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Line Height Multiplier</label>
+                    <input type="number" id="lineHeight" value="1.5" step="0.1" min="1" max="2">
+                </div>
+
+                <div class="control-group">
+                    <label>Font Family</label>
+                    <input type="text" id="fontFamily" value="Georgia, serif">
+                </div>
+
+                <button onclick="generateScale()">Generate Scale</button>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">Type Scale</div>
+
+                <table class="scale-table" id="scaleTable">
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>px</th>
+                            <th>rem</th>
+                            <th>em</th>
+                            <th>Line Height</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scaleRows"></tbody>
+                </table>
+
+                <div class="section-title">Live Preview</div>
+                <div class="preview-section" id="previewSection"></div>
+
+                <div class="section-title">CSS Output</div>
+                <div class="code-output" id="codeOutput"></div>
+
+                <button class="secondary-btn" onclick="copyCSSCode()">Copy CSS Code</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 gen8x.com
+    </footer>
+
+    <script>
+        const scaleRatioSelect = document.getElementById('scaleRatio');
+        const customRatioGroup = document.getElementById('customRatioGroup');
+
+        scaleRatioSelect.addEventListener('change', function() {
+            customRatioGroup.style.display = this.value === 'custom' ? 'block' : 'none';
+            generateScale();
+        });
+
+        function generateScale() {
+            const baseSize = parseInt(document.getElementById('baseSize').value);
+            const stepsUp = parseInt(document.getElementById('stepsUp').value);
+            const stepsDown = parseInt(document.getElementById('stepsDown').value);
+            const lineHeightMult = parseFloat(document.getElementById('lineHeight').value);
+            const fontFamily = document.getElementById('fontFamily').value;
+
+            let ratio = parseFloat(document.getElementById('scaleRatio').value);
+            if (scaleRatioSelect.value === 'custom') {
+                ratio = parseFloat(document.getElementById('customRatio').value);
+            }
+
+            const scale = [];
+
+            // Generate down
+            for (let i = stepsDown; i > 0; i--) {
+                const size = baseSize / Math.pow(ratio, i);
+                scale.push({
+                    step: -i,
+                    name: `xs${i}`,
+                    px: Math.round(size * 100) / 100,
+                    ratio: ratio
+                });
+            }
+
+            // Base
+            scale.push({
+                step: 0,
+                name: 'body',
+                px: baseSize,
+                ratio: ratio
+            });
+
+            // Generate up (h6, h5, h4, h3, h2, h1)
+            const headingNames = ['h6', 'h5', 'h4', 'h3', 'h2', 'h1'];
+            for (let i = 1; i <= stepsUp; i++) {
+                const size = baseSize * Math.pow(ratio, i);
+                scale.push({
+                    step: i,
+                    name: headingNames[Math.min(i - 1, headingNames.length - 1)],
+                    px: Math.round(size * 100) / 100,
+                    ratio: ratio
+                });
+            }
+
+            // Update table
+            const scaleRows = document.getElementById('scaleRows');
+            scaleRows.innerHTML = '';
+
+            scale.forEach(item => {
+                const rem = (item.px / 16).toFixed(3);
+                const em = (item.px / baseSize).toFixed(3);
+                const lh = (item.px * lineHeightMult / 16).toFixed(3);
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${item.name}</strong></td>
+                    <td>${item.px}</td>
+                    <td>${rem}</td>
+                    <td>${em}</td>
+                    <td>${lh}rem (${Math.round(lineHeightMult * 100)}%)</td>
+                `;
+                scaleRows.appendChild(row);
+            });
+
+            // Update preview
+            const previewSection = document.getElementById('previewSection');
+            previewSection.innerHTML = '';
+            previewSection.style.fontFamily = fontFamily;
+
+            scale.slice(-6).reverse().forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'preview-item';
+                div.innerHTML = `
+                    <div class="preview-label">${item.name} / ${item.px}px / ${(item.px / 16).toFixed(3)}rem</div>
+                    <div class="preview-text" style="font-size: ${item.px}px; line-height: ${lineHeightMult};">
+                        The quick brown fox jumps over the lazy dog
+                    </div>
+                `;
+                previewSection.appendChild(div);
+            });
+
+            // Generate CSS
+            generateCSS(scale, baseSize, lineHeightMult, fontFamily);
+        }
+
+        function generateCSS(scale, baseSize, lineHeightMult, fontFamily) {
+            let css = `:root {
+  --font-family: "${fontFamily}";
+  --base-font-size: ${baseSize}px;
+  --line-height-multiplier: ${lineHeightMult};
+`;
+
+            scale.forEach(item => {
+                const rem = (item.px / 16).toFixed(3);
+                css += `  --size-${item.name}: ${rem}rem; /* ${item.px}px */\n`;
+            });
+
+            css += `}\n\nbody {
+  font-family: var(--font-family);
+  font-size: var(--size-body);
+  line-height: var(--line-height-multiplier);
+}\n\n`;
+
+            // Generate heading styles
+            const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+            headings.forEach(h => {
+                css += `${h} {
+  font-size: var(--size-${h});
+  line-height: calc(var(--size-${h}) * var(--line-height-multiplier));
+  margin-bottom: 1rem;
+}\n\n`;
+            });
+
+            document.getElementById('codeOutput').textContent = css.trim();
+        }
+
+        function copyCSSCode() {
+            const code = document.getElementById('codeOutput').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Add event listeners
+        document.getElementById('baseSize').addEventListener('change', generateScale);
+        document.getElementById('stepsUp').addEventListener('change', generateScale);
+        document.getElementById('stepsDown').addEventListener('change', generateScale);
+        document.getElementById('lineHeight').addEventListener('input', generateScale);
+        document.getElementById('fontFamily').addEventListener('change', generateScale);
+        document.getElementById('customRatio').addEventListener('input', generateScale);
+
+        generateScale();
+    </script>
+</body>
+</html>

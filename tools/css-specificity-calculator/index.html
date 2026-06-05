@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Specificity Calculator - gen8x.com</title>
+    <meta name="description" content="Calculate CSS selector specificity with visual comparison. Understand :not(), :is(), :has() and find winning selectors.">
+    <link rel="canonical" href="https://gen8x.com/tools/css-specificity-calculator">
+    <meta property="og:title" content="CSS Specificity Calculator - gen8x.com">
+    <meta property="og:description" content="Calculate CSS selector specificity with visual comparison. Understand :not(), :is(), :has() and find winning selectors.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gen8x.com/tools/css-specificity-calculator">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "CSS Specificity Calculator",
+        "description": "Calculate and compare CSS selector specificity scores",
+        "url": "https://gen8x.com/tools/css-specificity-calculator",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #00d4ff;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: #999;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .panel {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .panel-title {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: #00d4ff;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #00b8d4;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            color: #00d4ff;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .specificity-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .specificity-table th {
+            background-color: #0a0a0a;
+            color: #00d4ff;
+            padding: 10px;
+            text-align: left;
+            border-bottom: 2px solid #333;
+        }
+
+        .specificity-table td {
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .selector-cell {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+        }
+
+        .specificity-value {
+            font-weight: 600;
+            color: #00d4ff;
+        }
+
+        .specificity-bars {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+            height: 20px;
+        }
+
+        .bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 2px;
+            color: #0a0a0a;
+            min-width: 20px;
+        }
+
+        .bar-a {
+            background-color: #ff6b6b;
+        }
+
+        .bar-b {
+            background-color: #ffd93d;
+        }
+
+        .bar-c {
+            background-color: #6bcf7f;
+        }
+
+        .bar-d {
+            background-color: #4d96ff;
+        }
+
+        .comparison-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .comparison-input {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comparison-input input {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .comparison-input input:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+
+        .winner-badge {
+            padding: 6px 12px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .winner-badge.winner {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .winner-badge.loser {
+            background-color: #666;
+            color: white;
+        }
+
+        .winner-badge.tie {
+            background-color: #00d4ff;
+            color: #0a0a0a;
+        }
+
+        .explanation {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-box {
+            background-color: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-section {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS Specificity Calculator</h1>
+            <p class="subtitle">Calculate and compare CSS selector specificity</p>
+        </header>
+
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-title">Calculate Specificity</div>
+
+                <div class="control-group">
+                    <label>CSS Selectors (one per line)</label>
+                    <textarea id="selectorsInput" rows="8" placeholder="Enter CSS selectors:&#10;.class&#10;#id&#10;div.class:hover&#10;[data-attr]"></textarea>
+                </div>
+
+                <button onclick="calculateSpecificity()">Calculate</button>
+
+                <div class="section-title">Specificity Legend</div>
+                <div class="info-grid">
+                    <div class="info-box">
+                        <div class="info-label">A</div>
+                        <div class="info-value" style="color: #ff6b6b;">Inline</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">B</div>
+                        <div class="info-value" style="color: #ffd93d;">IDs</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">C</div>
+                        <div class="info-value" style="color: #6bcf7f;">Classes</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-label">D</div>
+                        <div class="info-value" style="color: #4d96ff;">Elements</div>
+                    </div>
+                </div>
+
+                <div class="explanation">
+                    <strong>How Specificity Works:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Inline styles (A): 1000</li>
+                        <li>IDs (B): 100</li>
+                        <li>Classes, attributes, pseudo-classes (C): 10</li>
+                        <li>Elements and pseudo-elements (D): 1</li>
+                        <li>Universal selector (*): 0</li>
+                        <li>Combinators (+, >, ~, space): no value</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">Results</div>
+                <table class="specificity-table" id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Selector</th>
+                            <th>Specificity</th>
+                            <th style="width: 200px;">Visualization</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody">
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: #999;">Enter selectors and calculate</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="section-title">Compare Two Selectors</div>
+                <div class="comparison-section">
+                    <div class="comparison-input">
+                        <label>Selector 1</label>
+                        <input type="text" id="selector1" placeholder="Enter first selector">
+                    </div>
+                    <div class="comparison-input">
+                        <label>Selector 2</label>
+                        <input type="text" id="selector2" placeholder="Enter second selector">
+                    </div>
+                </div>
+
+                <button onclick="compareSelectors()">Compare</button>
+
+                <div id="comparisonResult" style="margin-top: 20px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 gen8x.com
+    </footer>
+
+    <script>
+        function parseSelector(selector) {
+            let a = 0, b = 0, c = 0, d = 0;
+
+            // Remove whitespace
+            selector = selector.trim();
+
+            // Count inline styles (not applicable in CSS selectors, only in HTML)
+            // We'll handle this separately if needed
+
+            // Remove pseudo-elements (they don't add specificity in :is(), :where(), :not())
+            let workingSelector = selector.replace(/::(before|after|first-line|first-letter|selection|placeholder|backdrop)/gi, '');
+
+            // Handle :not(), :is(), :where() - the arguments count, not the pseudo-class itself
+            workingSelector = workingSelector.replace(/:not\(([^)]+)\)/g, (match, content) => {
+                const inner = parseSelector(content);
+                return '';
+            });
+
+            workingSelector = workingSelector.replace(/:is\(([^)]+)\)/g, (match, content) => {
+                const inner = parseSelector(content);
+                return '';
+            });
+
+            workingSelector = workingSelector.replace(/:where\(([^)]+)\)/g, (match, content) => {
+                return '';
+            });
+
+            // Count IDs
+            b += (workingSelector.match(/#[\w-]+/g) || []).length;
+
+            // Count classes
+            c += (workingSelector.match(/\.[\w-]+/g) || []).length;
+
+            // Count attributes
+            c += (workingSelector.match(/\[[\w\-\^$*|~"'=:. ]+\]/g) || []).length;
+
+            // Count pseudo-classes (not :not, :is, :where, :has)
+            c += (workingSelector.match(/:(hover|focus|active|visited|link|checked|disabled|enabled|target|lang|first-child|last-child|nth-child|nth-of-type|only-child|empty|root|valid|invalid|required|optional|read-only|read-write|in-range|out-of-range|user-valid|user-invalid)/gi) || []).length;
+
+            // Count elements (but exclude combinators and pseudo-elements)
+            const elementRegex = /^[a-z][\w-]*(?:\s*[>+~]\s*[a-z][\w-]*)*$/i;
+            const parts = workingSelector.split(/[\s>+~]+/).filter(p => p && !p.match(/^[:.\[\]#*]/));
+            d += parts.length;
+
+            return { a, b, c, d };
+        }
+
+        function calculateSpecificity() {
+            const input = document.getElementById('selectorsInput').value;
+            const selectors = input.split('\n').filter(s => s.trim());
+
+            const results = selectors.map(selector => {
+                const spec = parseSelector(selector);
+                const value = spec.a * 1000 + spec.b * 100 + spec.c * 10 + spec.d;
+                return {
+                    selector: selector.trim(),
+                    ...spec,
+                    value: value,
+                    notation: `(${spec.a},${spec.b},${spec.c},${spec.d})`
+                };
+            });
+
+            // Sort by value descending
+            results.sort((a, b) => b.value - a.value);
+
+            const tbody = document.getElementById('resultsBody');
+            tbody.innerHTML = '';
+
+            results.forEach(result => {
+                const maxValue = results[0]?.value || 1;
+                const barWidth = (result.value / maxValue) * 100;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="selector-cell">${escapeHtml(result.selector)}</td>
+                    <td><span class="specificity-value">${result.notation}</span><br><small style="color: #999;">${result.value}</small></td>
+                    <td>
+                        <div class="specificity-bars">
+                            ${result.a ? `<div class="bar bar-a" style="width: ${Math.max(20, result.a * 10)}px;" title="Inline: ${result.a}">${result.a}</div>` : ''}
+                            ${result.b ? `<div class="bar bar-b" style="width: ${Math.max(20, result.b * 10)}px;" title="IDs: ${result.b}">${result.b}</div>` : ''}
+                            ${result.c ? `<div class="bar bar-c" style="width: ${Math.max(20, result.c * 10)}px;" title="Classes: ${result.c}">${result.c}</div>` : ''}
+                            ${result.d ? `<div class="bar bar-d" style="width: ${Math.max(20, result.d * 10)}px;" title="Elements: ${result.d}">${result.d}</div>` : ''}
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function compareSelectors() {
+            const sel1 = document.getElementById('selector1').value.trim();
+            const sel2 = document.getElementById('selector2').value.trim();
+
+            if (!sel1 || !sel2) {
+                alert('Please enter both selectors');
+                return;
+            }
+
+            const spec1 = parseSelector(sel1);
+            const spec2 = parseSelector(sel2);
+
+            const val1 = spec1.a * 1000 + spec1.b * 100 + spec1.c * 10 + spec1.d;
+            const val2 = spec2.a * 1000 + spec2.b * 100 + spec2.c * 10 + spec2.d;
+
+            let result = '';
+            let winner = '';
+
+            if (val1 > val2) {
+                result = `<span style="color: #28a745; font-weight: 600;">${sel1} WINS!</span><br>
+                    ${sel1}: ${spec1.a},${spec1.b},${spec1.c},${spec1.d} (${val1})<br>
+                    ${sel2}: ${spec2.a},${spec2.b},${spec2.c},${spec2.d} (${val2})`;
+                winner = 'winner';
+            } else if (val2 > val1) {
+                result = `<span style="color: #28a745; font-weight: 600;">${sel2} WINS!</span><br>
+                    ${sel1}: ${spec1.a},${spec1.b},${spec1.c},${spec1.d} (${val1})<br>
+                    ${sel2}: ${spec2.a},${spec2.b},${spec2.c},${spec2.d} (${val2})`;
+                winner = 'winner';
+            } else {
+                result = `<span style="color: #00d4ff; font-weight: 600;">TIE!</span><br>
+                    Both have equal specificity: ${val1}`;
+                winner = 'tie';
+            }
+
+            document.getElementById('comparisonResult').innerHTML = `
+                <div class="explanation">
+                    ${result}
+                </div>
+            `;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Event listeners
+        document.getElementById('selectorsInput').addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                calculateSpecificity();
+            }
+        });
+
+        document.getElementById('selector1').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') compareSelectors();
+        });
+
+        document.getElementById('selector2').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') compareSelectors();
+        });
+    </script>
+</body>
+</html>
