@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Generator — CSS Linear, Radial & Conic</title>
+  <meta name="description" content="Interactive CSS gradient builder: linear, radial, conic. Multi-stop, opacity, blend modes, presets, SVG export. Real-time code.">
+  <link rel="canonical" href="https://gen8x.com/gradient-generator">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Gradient Generator — CSS Linear, Radial & Conic",
+    "url": "https://gen8x.com/gradient-generator",
+    "description": "Interactive CSS gradient builder with linear, radial, conic modes. Multi-stop, opacity, blend modes, presets, SVG export.",
+    "applicationCategory": "Design Tool",
+    "operatingSystem": "All",
+    "browserRequirements": "JavaScript enabled"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "gen8x", "item": "https://gen8x.com" },
+      { "@type": "ListItem", "position": 2, "name": "Design Tools", "item": "https://gen8x.com/tools" },
+      { "@type": "ListItem", "position": 3, "name": "Gradient Generator" }
+    ]
+  }
+  </script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0f0f0f; color: #e0e0e0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; padding: 2rem 1.5rem; line-height: 1.4; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 { font-size: 2.2rem; font-weight: 600; color: #f5f5f5; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    h1 small { font-size: 1rem; font-weight: 400; color: #84cc16; margin-left: 0.5rem; }
+    .accent { color: #84cc16; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+    @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+    .card { background: #1a1a1a; border-radius: 1.5rem; padding: 1.5rem; border: 1px solid #2a2a2a; box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
+    .card-title { font-weight: 500; letter-spacing: 0.3px; margin-bottom: 1rem; color: #ccc; display: flex; justify-content: space-between; align-items: center; }
+    .badge { background: #84cc16; color: #0f0f0f; padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+    .preview-box { width: 100%; height: 180px; border-radius: 1rem; background: linear-gradient(135deg, #84cc16, #0f0f0f); margin-bottom: 1.5rem; border: 1px solid #333; transition: background 0.1s; position: relative; overflow: hidden; }
+    .preview-box img { width: 100%; height: 100%; object-fit: cover; opacity: 0.2; mix-blend-mode: overlay; }
+    .preview-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.8rem; text-shadow: 0 2px 12px rgba(0,0,0,0.8); mix-blend-mode: overlay; background: transparent; pointer-events: none; }
+    .preview-overlay span { background: rgba(0,0,0,0.3); padding: 0.4rem 1.2rem; border-radius: 40px; backdrop-filter: blur(2px); }
+    .flex-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .mode-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .mode-btn { background: #2a2a2a; border: none; color: #bbb; padding: 0.5rem 1.2rem; border-radius: 40px; font-weight: 500; cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+    .mode-btn.active { background: #84cc16; color: #0f0f0f; border-color: #84cc16; box-shadow: 0 0 12px #84cc1655; }
+    .mode-btn:hover { background: #3a3a3a; }
+    .control-group { background: #222; border-radius: 1rem; padding: 1rem; margin: 0.8rem 0; }
+    .control-group label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 0.2rem; }
+    input[type="range"] { width: 100%; accent-color: #84cc16; background: #333; height: 6px; border-radius: 10px; }
+    input[type="color"] { background: #1a1a1a; border: 1px solid #444; height: 32px; width: 48px; border-radius: 8px; cursor: pointer; }
+    .stop-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; background: #1e1e1e; padding: 0.4rem 0.8rem; border-radius: 40px; margin: 0.3rem 0; }
+    .stop-row input[type="color"] { width: 36px; height: 30px; }
+    .stop-row input[type="range"] { width: 60px; }
+    .stop-row .remove-btn { background: #3a1a1a; border: none; color: #ff6b6b; border-radius: 30px; padding: 0.1rem 0.6rem; cursor: pointer; font-weight: bold; }
+    .add-stop { background: #2a3a1a; border: 1px dashed #84cc16; color: #84cc16; padding: 0.3rem 1rem; border-radius: 40px; cursor: pointer; font-size: 0.8rem; }
+    .preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.5rem; margin: 1rem 0; }
+    .preset-swatch { height: 50px; border-radius: 12px; cursor: pointer; border: 2px solid transparent; transition: 0.1s; }
+    .preset-swatch:hover { border-color: #84cc16; transform: scale(0.96); }
+    .code-area { background: #111; padding: 1rem; border-radius: 12px; font-family: 'Fira Code', monospace; font-size: 0.8rem; white-space: pre-wrap; word-break: break-all; border: 1px solid #2a2a2a; max-height: 200px; overflow-y: auto; }
+    .copy-btn { background: #84cc16; color: #0f0f0f; border: none; padding: 0.4rem 1.2rem; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.15s; }
+    .copy-btn:hover { background: #a3e635; }
+    .flex-between { display: flex; justify-content: space-between; align-items: center; }
+    .blend-select { background: #222; color: #eee; border: 1px solid #444; border-radius: 30px; padding: 0.3rem 0.8rem; }
+    .svg-export-btn { background: #2a2a2a; border: 1px solid #444; color: #ccc; padding: 0.4rem 1rem; border-radius: 30px; cursor: pointer; }
+    .svg-export-btn:hover { background: #3a3a3a; }
+    .repeating-toggle { display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0; }
+    .repeating-toggle input { width: 18px; height: 18px; accent-color: #84cc16; }
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; margin-top: 1rem; }
+    .demo-card { background: #1f1f1f; border-radius: 1rem; padding: 1.2rem 0.8rem; text-align: center; border: 1px solid #2f2f2f; }
+    .demo-card .mini-preview { height: 60px; border-radius: 10px; margin-bottom: 0.5rem; }
+    .demo-card span { font-size: 0.7rem; color: #aaa; }
+  </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241192243363112" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+  <header style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+    <h1>🌀 Gradient Generator <small>linear · radial · conic</small></h1>
+    <div><span class="badge">gen8x tool</span></div>
+  </header>
+
+  <div class="grid-2">
+    <!-- left panel: controls -->
+    <div class="card">
+      <div class="card-title"><span>🎛️ Builder</span> <span class="badge">interactive</span></div>
+      <div class="mode-tabs">
+        <button class="mode-btn active" data-mode="linear">Linear</button>
+        <button class="mode-btn" data-mode="radial">Radial</button>
+        <button class="mode-btn" data-mode="conic">Conic</button>
+      </div>
+
+      <!-- linear specific -->
+      <div id="linear-controls" class="control-group">
+        <label>Angle: <span id="angle-val">135</span>°</label>
+        <input type="range" id="angle-slider" min="0" max="360" value="135">
+      </div>
+      <div id="radial-controls" class="control-group" style="display:none;">
+        <label>Shape: <select id="radial-shape"><option value="ellipse">Ellipse</option><option value="circle">Circle</option></select></label>
+        <label>Position X: <span id="posX-val">50</span>%</label>
+        <input type="range" id="posX" min="0" max="100" value="50">
+        <label>Position Y: <span id="posY-val">50</span>%</label>
+        <input type="range" id="posY" min="0" max="100" value="50">
+        <label>Size: <select id="radial-size"><option value="farthest-corner">farthest-corner</option><option value="closest-side">closest-side</option><option value="closest-corner">closest-corner</option><option value="farthest-side">farthest-side</option></select></label>
+      </div>
+      <div id="conic-controls" class="control-group" style="display:none;">
+        <label>Rotation: <span id="rot-val">0</span>°</label>
+        <input type="range" id="conic-rotation" min="0" max="360" value="0">
+        <label>Center X: <span id="cx-val">50</span>%</label>
+        <input type="range" id="conic-cx" min="0" max="100" value="50">
+        <label>Center Y: <span id="cy-val">50</span>%</label>
+        <input type="range" id="conic-cy" min="0" max="100" value="50">
+      </div>
+
+      <!-- color stops -->
+      <div class="control-group">
+        <div class="flex-between"><span>🎨 Color stops</span> <button class="add-stop" id="add-stop-btn">+ add stop</button></div>
+        <div id="stops-container"></div>
+      </div>
+
+      <!-- repeating + blend -->
+      <div class="flex-row" style="justify-content:space-between;">
+        <div class="repeating-toggle"><input type="checkbox" id="repeating-check"> <label>Repeating</label></div>
+        <div><label style="font-size:0.8rem;">Blend mode: </label><select id="blend-mode" class="blend-select"><option value="normal">normal</option><option value="multiply">multiply</option><option value="screen">screen</option><option value="overlay">overlay</option><option value="darken">darken</option><option value="lighten">lighten</option><option value="color-dodge">color-dodge</option></select></div>
+      </div>
+
+      <!-- presets -->
+      <div style="margin-top:1rem;"><span style="color:#aaa;font-size:0.8rem;">🔥 30 presets (popular UI)</span></div>
+      <div class="preset-grid" id="preset-grid"></div>
+
+      <div class="flex-between" style="margin-top:1.2rem;">
+        <button class="copy-btn" id="copy-css-btn">📋 Copy CSS</button>
+        <button class="svg-export-btn" id="export-svg-btn">⬇️ Export SVG</button>
+      </div>
+    </div>
+
+    <!-- right panel: preview + code -->
+    <div class="card">
+      <div class="card-title"><span>👁️ Preview & code</span> <span class="badge">live</span></div>
+      <!-- gradient preview box -->
+      <div class="preview-box" id="main-preview">
+        <div style="width:100%;height:100%;background:transparent;display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;font-size:1.2rem;text-shadow:0 2px 10px black;mix-blend-mode:overlay;">gradient</div>
+      </div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">
+        <span style="background:#2a2a2a;padding:0.2rem 0.8rem;border-radius:30px;font-size:0.7rem;">over text</span>
+        <span style="background:#2a2a2a;padding:0.2rem 0.8rem;border-radius:30px;font-size:0.7rem;">over image</span>
+        <span style="background:#2a2a2a;padding:0.2rem 0.8rem;border-radius:30px;font-size:0.7rem;">cards ↓</span>
+      </div>
+      <!-- card previews -->
+      <div class="card-grid" id="card-previews">
+        <div class="demo-card"><div class="mini-preview" id="card1"></div><span>card 1</span></div>
+        <div class="demo-card"><div class="mini-preview" id="card2"></div><span>card 2</span></div>
+        <div class="demo-card"><div class="mini-preview" id="card3"></div><span>card 3</span></div>
+      </div>
+      <!-- css code -->
+      <div class="flex-between" style="margin-top:1rem;"><span style="color:#aaa;">CSS output</span> <span style="font-size:0.7rem;background:#2a2a2a;padding:0.1rem 0.6rem;border-radius:20px;">auto</span></div>
+      <div class="code-area" id="css-code">background: linear-gradient(135deg, #84cc16, #0f0f0f);</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // state
+    let mode = 'linear';
+    let stops = [
+      { color: '#84cc16', pos: 0, opacity: 1 },
+      { color: '#0f0f0f', pos: 100, opacity: 1 }
+    ];
+    let angle = 135;
+    let radialShape = 'ellipse', radialSize = 'farthest-corner', posX = 50, posY = 50;
+    let conicRotation = 0, conicCx = 50, conicCy = 50;
+    let repeating = false;
+    let blendMode = 'normal';
+
+    // presets (30 popular UI gradients)
+    const presets = [
+      ['#ff7e5f','#feb47b'], ['#6a11cb','#2575fc'], ['#fc5c7d','#6a82fb'], ['#11998e','#38ef7d'],
+      ['#108dc7','#ef8e38'], ['#fc4a1a','#f7b733'], ['#00b4db','#0083b0'], ['#56ab2f','#a8e063'],
+      ['#614385','#516395'], ['#e65c00','#f9d423'], ['#2193b0','#6dd5ed'], ['#cc2b5e','#753a88'],
+      ['#42275a','#734b6d'], ['#bdc3c7','#2c3e50'], ['#de6262','#ffb88c'], ['#06beb6','#48b1bf'],
+      ['#eb3349','#f45c43'], ['#dd5e89','#f7bb97'], ['#56ab2f','#a8e063'], ['#52c234','#061700'],
+      ['#1e9600','#fff200'], ['#000428','#004e92'], ['#fc5c7d','#6a82fb'], ['#4776e6','#8e54e9'],
+      ['#8e0e00','#1f1c18'], ['#dce35b','#45b649'], ['#c94b4b','#4b134f'], ['#23074d','#cc5333'],
+      ['#f857a6','#ff5858'], ['#4facfe','#00f2fe']
+    ];
+
+    const container = document.getElementById('stops-container');
+    const mainPreview = document.getElementById('main-preview');
+    const cssCode = document.getElementById('css-code');
+    const presetGrid = document.getElementById('preset-grid');
+
+    // render presets
+    presets.forEach((p, idx) => {
+      const swatch = document.createElement('div');
+      swatch.className = 'preset-swatch';
+      swatch.style.background = `linear-gradient(135deg, ${p[0]}, ${p[1]})`;
+      swatch.addEventListener('click', () => {
+        stops = [
+          { color: p[0], pos: 0, opacity: 1 },
+          { color: p[1], pos: 100, opacity: 1 }
+        ];
+        renderStops();
+        updateGradient();
+      });
+      presetGrid.appendChild(swatch);
+    });
+
+    // render stops UI
+    function renderStops() {
+      container.innerHTML = '';
+      stops.forEach((stop, i) => {
+        const row = document.createElement('div');
+        row.className = 'stop-row';
+        const colorInput = document.createElement('input');
+        colorInput.type = 'color';
+        colorInput.value = stop.color;
+        colorInput.addEventListener('input', (e) => { stops[i].color = e.target.value; updateGradient(); });
+        const posRange = document.createElement('input');
+        posRange.type = 'range';
+        posRange.min = 0; posRange.max = 100; posRange.value = stop.pos;
+        posRange.addEventListener('input', (e) => { stops[i].pos = parseInt(e.target.value); updateGradient(); });
+        const posLabel = document.createElement('span');
+        posLabel.style.fontSize = '0.7rem'; posLabel.style.width = '30px';
+        posLabel.textContent = stop.pos + '%';
+        posRange.addEventListener('input', () => posLabel.textContent = posRange.value + '%');
+        const opacityRange = document.createElement('input');
+        opacityRange.type = 'range';
+        opacityRange.min = 0; opacityRange.max = 100; opacityRange.value = stop.opacity * 100;
+        opacityRange.style.width = '50px';
+        opacityRange.addEventListener('input', (e) => { stops[i].opacity = e.target.value / 100; updateGradient(); });
+        const opLabel = document.createElement('span');
+        opLabel.style.fontSize = '0.7rem'; opLabel.textContent = Math.round(stop.opacity*100)+'%';
+        opacityRange.addEventListener('input', () => opLabel.textContent = Math.round(opacityRange.value)+'%');
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = '✕';
+        if (stops.length > 2) {
+          removeBtn.addEventListener('click', () => { stops.splice(i,1); renderStops(); updateGradient(); });
+        } else { removeBtn.style.opacity = '0.3'; removeBtn.disabled = true; }
+        row.appendChild(colorInput);
+        row.appendChild(posRange);
+        row.appendChild(posLabel);
+        row.appendChild(opacityRange);
+        row.appendChild(opLabel);
+        row.appendChild(removeBtn);
+        container.appendChild(row);
+      });
+    }
+
+    // build gradient string
+    function buildGradient() {
+      const stopParts = stops.map(s => {
+        const color = s.color;
+        const alpha = s.opacity !== undefined ? s.opacity : 1;
+        let rgba = hexToRgba(color, alpha);
+        return `${rgba} ${s.pos}%`;
+      }).join(', ');
+      let gradient = '';
+      const rep = repeating ? 'repeating-' : '';
+      switch(mode) {
+        case 'linear':
+          gradient = `${rep}linear-gradient(${angle}deg, ${stopParts})`;
+          break;
+        case 'radial':
+          const shape = radialShape === 'circle' ? 'circle' : 'ellipse';
+          gradient = `${rep}radial-gradient(${shape} ${radialSize} at ${posX}% ${posY}%, ${stopParts})`;
+          break;
+        case 'conic':
+          gradient = `${rep}conic-gradient(from ${conicRotation}deg at ${conicCx}% ${conicCy}%, ${stopParts})`;
+          break;
+        default: gradient = `linear-gradient(135deg, #84cc16, #0f0f0f)`;
+      }
+      return gradient;
+    }
+
+    function hexToRgba(hex, alpha) {
+      const r = parseInt(hex.slice(1,3), 16);
+      const g = parseInt(hex.slice(3,5), 16);
+      const b = parseInt(hex.slice(5,7), 16);
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    function updateGradient() {
+      const grad = buildGradient();
+      const blend = blendMode || 'normal';
+      mainPreview.style.background = grad;
+      mainPreview.style.mixBlendMode = 'normal';
+      // apply blend via wrapper?
+      document.querySelectorAll('.mini-preview').forEach(el => {
+        el.style.background = grad;
+      });
+      document.getElementById('card1').style.background = grad;
+      document.getElementById('card2').style.background = grad;
+      document.getElementById('card3').style.background = grad;
+      // update css code
+      let css = `background: ${grad};`;
+      if (blend !== 'normal') css += `\nmix-blend-mode: ${blend};`;
+      cssCode.textContent = css;
+    }
+
+    // event listeners
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        mode = this.dataset.mode;
+        document.getElementById('linear-controls').style.display = mode === 'linear' ? 'block' : 'none';
+        document.getElementById('radial-controls').style.display = mode === 'radial' ? 'block' : 'none';
+        document.getElementById('conic-controls').style.display = mode === 'conic' ? 'block' : 'none';
+        updateGradient();
+      });
+    });
+
+    // sliders
+    document.getElementById('angle-slider').addEventListener('input', function() {
+      angle = this.value; document.getElementById('angle-val').textContent = angle; updateGradient();
+    });
+    document.getElementById('radial-shape').addEventListener('change', function() { radialShape = this.value; updateGradient(); });
+    document.getElementById('radial-size').addEventListener('change', function() { radialSize = this.value; updateGradient(); });
+    document.getElementById('posX').addEventListener('input', function() { posX = this.value; document.getElementById('posX-val').textContent = posX; updateGradient(); });
+    document.getElementById('posY').addEventListener('input', function() { posY = this.value; document.getElementById('posY-val').textContent = posY; updateGradient(); });
+    document.getElementById('conic-rotation').addEventListener('input', function() { conicRotation = this.value; document.getElementById('rot-val').textContent = conicRotation; updateGradient(); });
+    document.getElementById('conic-cx').addEventListener('input', function() { conicCx = this.value; document.getElementById('cx-val').textContent = conicCx; updateGradient(); });
+    document.getElementById('conic-cy').addEventListener('input', function() { conicCy = this.value; document.getElementById('cy-val').textContent = conicCy; updateGradient(); });
+    document.getElementById('repeating-check').addEventListener('change', function() { repeating = this.checked; updateGradient(); });
+    document.getElementById('blend-mode').addEventListener('change', function() { blendMode = this.value; updateGradient(); });
+
+    document.getElementById('add-stop-btn').addEventListener('click', function() {
+      const lastPos = stops.length > 0 ? stops[stops.length-1].pos : 50;
+      const newPos = Math.min(100, lastPos + 10);
+      stops.push({ color: '#84cc16', pos: newPos, opacity: 1 });
+      renderStops();
+      updateGradient();
+    });
+
+    document.getElementById('copy-css-btn').addEventListener('click', function() {
+      navigator.clipboard.writeText(cssCode.textContent).then(() => { alert('CSS copied!'); });
+    });
+
+    document.getElementById('export-svg-btn').addEventListener('click', function() {
+      const grad = buildGradient();
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+        <defs><style>.g{background:${grad};width:100%;height:100%;}</style></defs>
+        <rect width="400" height="200" fill="url(#g)" /><defs><linearGradient id="g">${stops.map(s => `<stop offset="${s.pos}%" stop-color="${s.color}" stop-opacity="${s.opacity}"/>`).join('')}</linearGradient></defs></svg>`;
+      const blob = new Blob([svg], {type: 'image/svg+xml'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'gradient.svg'; a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    // init
+    renderStops();
+    updateGradient();
+  })();
+</script>
+<div style="margin:20px auto;max-width:728px;text-align:center">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2241192243363112" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+</body>
+</html>
