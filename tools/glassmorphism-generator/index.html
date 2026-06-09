@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism Generator - gen8x.com</title>
+    <meta name="description" content="Generate glassmorphism CSS effects with blur, opacity, saturation controls. Create frosted glass effects instantly.">
+    <meta name="canonical" content="https://gen8x.com/tools/glassmorphism-generator">
+    <meta property="og:title" content="Glassmorphism Generator">
+    <meta property="og:description" content="Design beautiful frosted glass effects with interactive CSS generator.">
+    <meta property="og:url" content="https://gen8x.com/tools/glassmorphism-generator">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241192243363112" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Glassmorphism Generator",
+      "url": "https://gen8x.com/tools/glassmorphism-generator",
+      "applicationCategory": "Design Tool"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .panel h2 {
+            color: #ec4899;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        .control-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: white;
+            font-size: 0.95rem;
+        }
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ec4899;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #ec4899;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+        .value-display {
+            min-width: 60px;
+            text-align: right;
+            color: #ec4899;
+            font-weight: 600;
+            font-family: monospace;
+        }
+        input[type="color"] {
+            width: 60px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .color-input-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .color-input-group input[type="color"] {
+            flex-shrink: 0;
+        }
+        .color-input-group label {
+            margin-bottom: 0;
+            flex: 1;
+        }
+        textarea {
+            width: 100%;
+            min-height: 280px;
+            padding: 15px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 8px;
+            color: #f1f5f9;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+        }
+        button {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+        }
+        .copy-btn {
+            width: 100%;
+            margin-top: 15px;
+            background: rgba(236, 72, 153, 0.1);
+            color: #ec4899;
+            border: 2px solid #ec4899;
+        }
+        .copy-btn:hover {
+            background: #ec4899;
+            color: white;
+        }
+        .preview-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .preview-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(236, 72, 153, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.3), transparent 50%);
+            border-radius: 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glass-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .glass-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        .glass-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .preset-btn {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        .preset-btn:hover {
+            background: rgba(236, 72, 153, 0.3);
+            border-color: #ec4899;
+        }
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .preset-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+    </style>
+<link rel="canonical" href="https://gen8x.com/tools/glassmorphism-generator">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Glassmorphism Generator</h1>
+            <p class="subtitle">Create beautiful frosted glass effects with CSS</p>
+        </header>
+
+        <div class="content">
+            <div class="panel">
+                <h2>Effect Controls</h2>
+
+                <div class="preset-buttons">
+                    <button class="preset-btn" onclick="applyPreset('soft')">Soft</button>
+                    <button class="preset-btn" onclick="applyPreset('medium')">Medium</button>
+                    <button class="preset-btn" onclick="applyPreset('dense')">Dense</button>
+                    <button class="preset-btn" onclick="applyPreset('vibrant')">Vibrant</button>
+                </div>
+
+                <div class="control-group">
+                    <label>Blur</label>
+                    <div class="slider-group">
+                        <input type="range" id="blur" min="0" max="30" value="10" oninput="updatePreview()">
+                        <span class="value-display" id="blurValue">10px</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Opacity</label>
+                    <div class="slider-group">
+                        <input type="range" id="opacity" min="0" max="100" value="20" oninput="updatePreview()">
+                        <span class="value-display" id="opacityValue">20%</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Border Opacity</label>
+                    <div class="slider-group">
+                        <input type="range" id="borderOpacity" min="0" max="100" value="20" oninput="updatePreview()">
+                        <span class="value-display" id="borderOpacityValue">20%</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Saturation</label>
+                    <div class="slider-group">
+                        <input type="range" id="saturation" min="0" max="100" value="100" oninput="updatePreview()">
+                        <span class="value-display" id="saturationValue">100%</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Background Color</label>
+                    <input type="color" id="bgColor" value="#ffffff" oninput="updatePreview()">
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Generated CSS</h2>
+                <textarea id="output" readonly></textarea>
+                <button class="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <div class="glass-card" id="preview">
+                <h3>Glassmorphism</h3>
+                <p>Beautiful frosted glass effect with CSS backdrop filters.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 gen8x.com — CSS & Design Tools
+    </footer>
+
+    <script>
+        const presets = {
+            soft: { blur: 5, opacity: 15, borderOpacity: 15, saturation: 80 },
+            medium: { blur: 10, opacity: 20, borderOpacity: 20, saturation: 100 },
+            dense: { blur: 20, opacity: 30, borderOpacity: 25, saturation: 120 },
+            vibrant: { blur: 15, opacity: 25, borderOpacity: 30, saturation: 140 }
+        };
+
+        function applyPreset(name) {
+            const preset = presets[name];
+            document.getElementById('blur').value = preset.blur;
+            document.getElementById('opacity').value = preset.opacity;
+            document.getElementById('borderOpacity').value = preset.borderOpacity;
+            document.getElementById('saturation').value = preset.saturation;
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const blur = document.getElementById('blur').value;
+            const opacity = document.getElementById('opacity').value;
+            const borderOpacity = document.getElementById('borderOpacity').value;
+            const saturation = document.getElementById('saturation').value;
+            const bgColor = document.getElementById('bgColor').value;
+
+            document.getElementById('blurValue').textContent = blur + 'px';
+            document.getElementById('opacityValue').textContent = opacity + '%';
+            document.getElementById('borderOpacityValue').textContent = borderOpacity + '%';
+            document.getElementById('saturationValue').textContent = saturation + '%';
+
+            const bgRgb = hexToRgb(bgColor);
+            const bgRgba = `rgba(${bgRgb.r}, ${bgRgb.g}, ${bgRgb.b}, ${opacity / 100})`;
+            const borderRgba = `rgba(255, 255, 255, ${borderOpacity / 100})`;
+
+            const css = `.glassmorphism {
+  background: ${bgRgba};
+  backdrop-filter: blur(${blur}px) saturate(${saturation}%);
+  -webkit-backdrop-filter: blur(${blur}px) saturate(${saturation}%);
+  border: 1px solid ${borderRgba};
+  border-radius: 20px;
+  padding: 40px;
+}`;
+
+            document.getElementById('output').value = css;
+
+            const preview = document.getElementById('preview');
+            preview.style.background = bgRgba;
+            preview.style.backdropFilter = `blur(${blur}px) saturate(${saturation}%)`;
+            preview.style.WebkitBackdropFilter = `blur(${blur}px) saturate(${saturation}%)`;
+            preview.style.border = `1px solid ${borderRgba}`;
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : { r: 255, g: 255, b: 255 };
+        }
+
+        function copyCode() {
+            document.getElementById('output').select();
+            document.execCommand('copy');
+            alert('CSS copied to clipboard!');
+        }
+
+        // Initialize
+        applyPreset('medium');
+    </script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Clip Path Maker - gen8x.com</title>
+    <meta name="description" content="Create CSS clip-path shapes interactively. Build polygons, circles, ellipses with draggable points. Get instant code output.">
+    <meta name="canonical" content="https://gen8x.com/tools/css-clip-path-maker">
+    <meta property="og:title" content="CSS Clip Path Maker">
+    <meta property="og:description" content="Design complex clip-path shapes with visual editor and instant CSS code.">
+    <meta property="og:url" content="https://gen8x.com/tools/css-clip-path-maker">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241192243363112" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CSS Clip Path Maker",
+      "url": "https://gen8x.com/tools/css-clip-path-maker",
+      "applicationCategory": "Design Tool"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ec4899;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .panel {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+        .panel h2 {
+            color: #ec4899;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        .control-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 12px;
+            background: #475569;
+            color: white;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        button:hover {
+            border-color: #ec4899;
+            background: #64748b;
+        }
+        button.active {
+            background: #ec4899;
+            border-color: #ec4899;
+        }
+        .primary-btn {
+            grid-column: 1 / -1;
+            background: #ec4899;
+            color: white;
+        }
+        .primary-btn:hover {
+            background: #db2777;
+            transform: translateY(-2px);
+        }
+        canvas {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 2px solid #334155;
+            border-radius: 8px;
+            cursor: crosshair;
+            margin-bottom: 15px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 250px;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: #f1f5f9;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+        }
+        .copy-btn {
+            background: #0f172a;
+            color: #ec4899;
+            border: 1px solid #ec4899;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            width: 100%;
+        }
+        .copy-btn:hover {
+            background: #ec4899;
+            color: white;
+        }
+        .preview-panel {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+        .preview-box {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #ec4899, #06b6d4);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .info-text {
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            padding: 12px;
+            background: rgba(236, 72, 153, 0.1);
+            border-left: 3px solid #ec4899;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .preset-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            margin-top: 40px;
+        }
+    </style>
+<link rel="canonical" href="https://gen8x.com/tools/css-clip-path-maker">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS Clip Path Maker</h1>
+            <p class="subtitle">Create complex shapes with interactive clip-path editor</p>
+        </header>
+
+        <div class="content">
+            <div class="panel">
+                <h2>Shape Editor</h2>
+                <div class="control-group">
+                    <label>Presets</label>
+                    <div class="preset-buttons">
+                        <button onclick="loadPreset('triangle')">Triangle</button>
+                        <button onclick="loadPreset('pentagon')">Pentagon</button>
+                        <button onclick="loadPreset('hexagon')">Hexagon</button>
+                        <button onclick="loadPreset('star')">Star</button>
+                        <button onclick="loadPreset('arrow')">Arrow</button>
+                        <button onclick="loadPreset('circle')">Circle</button>
+                        <button class="primary-btn" onclick="clearPoints()">Clear</button>
+                    </div>
+                </div>
+                <canvas id="canvas"></canvas>
+                <div class="info-text">
+                    Click on canvas to add points. Drag points to move them. Double-click a point to remove it.
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Generated Code</h2>
+                <textarea id="output" readonly></textarea>
+                <button class="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+            </div>
+        </div>
+
+        <div class="preview-panel">
+            <h2>Live Preview</h2>
+            <div class="preview-box" id="preview"></div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 gen8x.com — CSS & Design Tools
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const preview = document.getElementById('preview');
+
+        let points = [];
+        let dragIndex = -1;
+
+        // DPI scaling
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = canvas.offsetWidth * dpr;
+        canvas.height = canvas.offsetHeight * dpr;
+        ctx.scale(dpr, dpr);
+        const canvasWidth = canvas.offsetWidth;
+        const canvasHeight = canvas.offsetHeight;
+
+        const presets = {
+            triangle: [
+                { x: 0.5, y: 0.1 },
+                { x: 0.1, y: 0.9 },
+                { x: 0.9, y: 0.9 }
+            ],
+            pentagon: [
+                { x: 0.5, y: 0 },
+                { x: 1, y: 0.36 },
+                { x: 0.81, y: 1 },
+                { x: 0.19, y: 1 },
+                { x: 0, y: 0.36 }
+            ],
+            hexagon: [
+                { x: 0.5, y: 0 },
+                { x: 1, y: 0.25 },
+                { x: 1, y: 0.75 },
+                { x: 0.5, y: 1 },
+                { x: 0, y: 0.75 },
+                { x: 0, y: 0.25 }
+            ],
+            star: [
+                { x: 0.5, y: 0 },
+                { x: 0.61, y: 0.35 },
+                { x: 1, y: 0.35 },
+                { x: 0.68, y: 0.57 },
+                { x: 0.79, y: 0.91 },
+                { x: 0.5, y: 0.7 },
+                { x: 0.21, y: 0.91 },
+                { x: 0.32, y: 0.57 },
+                { x: 0, y: 0.35 },
+                { x: 0.39, y: 0.35 }
+            ],
+            arrow: [
+                { x: 0.5, y: 0 },
+                { x: 1, y: 0.4 },
+                { x: 0.6, y: 0.4 },
+                { x: 0.6, y: 1 },
+                { x: 0.4, y: 1 },
+                { x: 0.4, y: 0.4 },
+                { x: 0, y: 0.4 }
+            ],
+            circle: [
+                { x: 0.5, y: 0 },
+                { x: 1, y: 0.5 },
+                { x: 0.5, y: 1 },
+                { x: 0, y: 0.5 }
+            ]
+        };
+
+        function loadPreset(name) {
+            points = presets[name].map(p => ({
+                x: p.x * canvasWidth,
+                y: p.y * canvasHeight
+            }));
+            draw();
+            generateClipPath();
+        }
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            points.push({ x, y });
+            draw();
+            generateClipPath();
+        });
+
+        canvas.addEventListener('mousedown', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            dragIndex = points.findIndex(p => Math.hypot(p.x - x, p.y - y) < 10);
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (dragIndex !== -1) {
+                const rect = canvas.getBoundingClientRect();
+                points[dragIndex].x = e.clientX - rect.left;
+                points[dragIndex].y = e.clientY - rect.top;
+                draw();
+                generateClipPath();
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            dragIndex = -1;
+        });
+
+        canvas.addEventListener('dblclick', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const idx = points.findIndex(p => Math.hypot(p.x - x, p.y - y) < 10);
+            if (idx !== -1) {
+                points.splice(idx, 1);
+                draw();
+                generateClipPath();
+            }
+        });
+
+        function draw() {
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            if (points.length > 0) {
+                ctx.strokeStyle = '#ec4899';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, points[0].y);
+                for (let i = 1; i < points.length; i++) {
+                    ctx.lineTo(points[i].x, points[i].y);
+                }
+                ctx.closePath();
+                ctx.stroke();
+
+                ctx.fillStyle = 'rgba(236, 72, 153, 0.2)';
+                ctx.fill();
+
+                points.forEach((p, idx) => {
+                    ctx.fillStyle = '#ec4899';
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#f1f5f9';
+                    ctx.font = '10px monospace';
+                    ctx.fillText(idx, p.x + 8, p.y + 4);
+                });
+            }
+        }
+
+        function generateClipPath() {
+            if (points.length < 2) {
+                document.getElementById('output').value = '/* Draw a shape on the canvas */';
+                return;
+            }
+
+            const percentPoints = points.map(p => ({
+                x: (p.x / canvasWidth * 100).toFixed(1),
+                y: (p.y / canvasHeight * 100).toFixed(1)
+            }));
+
+            const clipPathString = percentPoints.map(p => `${p.x}% ${p.y}%`).join(', ');
+            const css = `clip-path: polygon(${clipPathString});`;
+
+            document.getElementById('output').value = css;
+
+            preview.style.clipPath = `polygon(${clipPathString})`;
+        }
+
+        function clearPoints() {
+            points = [];
+            draw();
+            document.getElementById('output').value = '';
+            preview.style.clipPath = 'none';
+        }
+
+        function copyCode() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            alert('Code copied to clipboard!');
+        }
+
+        draw();
+    </script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Breakpoint Tester - gen8x.com</title>
+    <meta name="description" content="Test CSS media query breakpoints visually. Preview responsive designs at Tailwind, Bootstrap, and MUI breakpoints.">
+    <meta name="canonical" content="https://gen8x.com/tools/responsive-breakpoint-tester">
+    <meta property="og:title" content="Responsive Breakpoint Tester">
+    <meta property="og:description" content="Visualize and test CSS breakpoints with framework presets and custom queries.">
+    <meta property="og:url" content="https://gen8x.com/tools/responsive-breakpoint-tester">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241192243363112" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Responsive Breakpoint Tester",
+      "url": "https://gen8x.com/tools/responsive-breakpoint-tester",
+      "applicationCategory": "Design Tool"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ec4899;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        .controls {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        .control-group {
+            margin-bottom: 20px;
+        }
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+        .preset-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .preset-btn {
+            padding: 10px 16px;
+            background: #475569;
+            color: white;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .preset-btn:hover {
+            border-color: #ec4899;
+            background: #64748b;
+        }
+        .preset-btn.active {
+            background: #ec4899;
+            border-color: #ec4899;
+        }
+        .breakpoint-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="number"] {
+            flex: 1;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: #f1f5f9;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+        }
+        button {
+            padding: 10px 16px;
+            background: #ec4899;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #db2777;
+            transform: translateY(-2px);
+        }
+        .ruler {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .ruler-title {
+            color: #ec4899;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .ruler-timeline {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            height: 80px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .breakpoint-bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .breakpoint-bar:hover {
+            transform: scale(1.1);
+        }
+        .bar {
+            width: 100%;
+            background: linear-gradient(180deg, #ec4899, #db2777);
+            border-radius: 6px 6px 0 0;
+            min-height: 40px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .breakpoint-bar:hover .bar {
+            border-color: #60a5fa;
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+        .bar-label {
+            font-size: 0.75rem;
+            margin-top: 5px;
+            color: #cbd5e1;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .preview-container {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        .preview-title {
+            color: #ec4899;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .preview-window {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 2px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .preview-window:hover {
+            border-color: #ec4899;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+        }
+        .window-label {
+            font-weight: 600;
+            color: #ec4899;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .window-size {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+        .sample-ui {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(90deg, #475569, #334155);
+            border-radius: 6px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+        .breakpoint-list {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        .breakpoint-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #334155;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+        .breakpoint-item:last-child {
+            border-bottom: none;
+        }
+        .remove-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-left: 10px;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .preset-buttons {
+                flex-direction: column;
+            }
+            .preset-btn {
+                width: 100%;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            margin-top: 40px;
+        }
+    </style>
+<link rel="canonical" href="https://gen8x.com/tools/responsive-breakpoint-tester">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Responsive Breakpoint Tester</h1>
+            <p class="subtitle">Visualize and test CSS media queries at different viewport sizes</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Framework Presets</label>
+                <div class="preset-buttons">
+                    <button class="preset-btn" onclick="loadPreset('tailwind')">Tailwind</button>
+                    <button class="preset-btn" onclick="loadPreset('bootstrap')">Bootstrap</button>
+                    <button class="preset-btn" onclick="loadPreset('mui')">Material-UI</button>
+                    <button class="preset-btn" onclick="loadPreset('custom')">Custom</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Add Custom Breakpoint</label>
+                <div class="breakpoint-input">
+                    <input type="text" id="bpName" placeholder="e.g., xl2">
+                    <input type="number" id="bpValue" placeholder="2400" min="0">
+                    <button onclick="addBreakpoint()">Add</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Breakpoints</label>
+                <div class="breakpoint-list" id="breakpointsList"></div>
+            </div>
+        </div>
+
+        <div class="ruler">
+            <div class="ruler-title">Breakpoint Timeline</div>
+            <div class="ruler-timeline" id="rullerTimeline"></div>
+        </div>
+
+        <div class="preview-container">
+            <div class="preview-title">Preview at Key Breakpoints</div>
+            <div class="preview-grid" id="previewGrid"></div>
+            <div class="sample-ui">Sample responsive content</div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 gen8x.com — CSS & Design Tools
+    </footer>
+
+    <script>
+        const presets = {
+            tailwind: [
+                { name: 'xs', value: 0 },
+                { name: 'sm', value: 640 },
+                { name: 'md', value: 768 },
+                { name: 'lg', value: 1024 },
+                { name: 'xl', value: 1280 },
+                { name: '2xl', value: 1536 }
+            ],
+            bootstrap: [
+                { name: 'xs', value: 0 },
+                { name: 'sm', value: 576 },
+                { name: 'md', value: 768 },
+                { name: 'lg', value: 992 },
+                { name: 'xl', value: 1200 },
+                { name: 'xxl', value: 1400 }
+            ],
+            mui: [
+                { name: 'xs', value: 0 },
+                { name: 'sm', value: 600 },
+                { name: 'md', value: 960 },
+                { name: 'lg', value: 1280 },
+                { name: 'xl', value: 1920 }
+            ],
+            custom: [
+                { name: 'mobile', value: 320 },
+                { name: 'tablet', value: 768 },
+                { name: 'desktop', value: 1024 }
+            ]
+        };
+
+        let currentBreakpoints = [...presets.tailwind];
+        let activePreset = 'tailwind';
+
+        function loadPreset(name) {
+            activePreset = name;
+            currentBreakpoints = [...presets[name]];
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            render();
+        }
+
+        function addBreakpoint() {
+            const name = document.getElementById('bpName').value.trim();
+            const value = parseInt(document.getElementById('bpValue').value);
+            if (name && !isNaN(value)) {
+                currentBreakpoints.push({ name, value });
+                currentBreakpoints.sort((a, b) => a.value - b.value);
+                document.getElementById('bpName').value = '';
+                document.getElementById('bpValue').value = '';
+                render();
+            }
+        }
+
+        function removeBreakpoint(idx) {
+            currentBreakpoints.splice(idx, 1);
+            render();
+        }
+
+        function render() {
+            renderBreakpointsList();
+            renderTimeline();
+            renderPreview();
+        }
+
+        function renderBreakpointsList() {
+            const list = document.getElementById('breakpointsList');
+            list.innerHTML = '';
+            currentBreakpoints.forEach((bp, idx) => {
+                const html = `
+                    <div class="breakpoint-item">
+                        <span><strong>${bp.name}:</strong> ${bp.value}px</span>
+                        <button class="remove-btn" onclick="removeBreakpoint(${idx})">Remove</button>
+                    </div>
+                `;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function renderTimeline() {
+            const timeline = document.getElementById('rullerTimeline');
+            timeline.innerHTML = '';
+            const maxWidth = Math.max(...currentBreakpoints.map(bp => bp.value), 1920);
+
+            currentBreakpoints.forEach(bp => {
+                const percentage = (bp.value / maxWidth) * 100;
+                const html = `
+                    <div class="breakpoint-bar">
+                        <div class="bar" style="height: ${40 + (bp.value / maxWidth) * 60}px;"></div>
+                        <div class="bar-label">${bp.name}<br>${bp.value}px</div>
+                    </div>
+                `;
+                timeline.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function renderPreview() {
+            const grid = document.getElementById('previewGrid');
+            grid.innerHTML = '';
+            currentBreakpoints.forEach(bp => {
+                const html = `
+                    <div class="preview-window">
+                        <div class="window-label">${bp.name}</div>
+                        <div class="window-size">@media (min-width: ${bp.value}px)</div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        // Load Tailwind by default
+        loadPreset('tailwind');
+    </script>
+</body>
+</html>

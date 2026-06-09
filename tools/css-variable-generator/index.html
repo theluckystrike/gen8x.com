@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Variable Generator - gen8x.com</title>
+    <meta name="description" content="Generate CSS custom property systems with brand colors, font sizes, and spacing scales. Create design token systems instantly.">
+    <meta name="canonical" content="https://gen8x.com/tools/css-variable-generator">
+    <meta property="og:title" content="CSS Variable Generator">
+    <meta property="og:description" content="Create organized CSS custom property systems for your design tokens.">
+    <meta property="og:url" content="https://gen8x.com/tools/css-variable-generator">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241192243363112" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CSS Variable Generator",
+      "url": "https://gen8x.com/tools/css-variable-generator",
+      "applicationCategory": "Design Tool",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ec4899;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .panel {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+        .panel h2 {
+            color: #ec4899;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
+        input[type="text"],
+        input[type="color"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: #f1f5f9;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        input[type="text"]:focus,
+        input[type="color"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+        }
+        .color-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .color-input-wrapper input[type="color"] {
+            width: 50px;
+            height: 40px;
+            padding: 2px;
+            cursor: pointer;
+        }
+        .color-input-wrapper input[type="text"] {
+            flex: 1;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            flex: 1;
+            padding: 12px 20px;
+            background: #ec4899;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        button:hover {
+            background: #db2777;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(236, 72, 153, 0.3);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .secondary-btn {
+            background: #475569;
+        }
+        .secondary-btn:hover {
+            background: #64748b;
+        }
+        textarea {
+            min-height: 300px;
+            resize: vertical;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .preview-box {
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+            border: 1px solid #334155;
+            transition: transform 0.2s;
+        }
+        .preview-box:hover {
+            transform: scale(1.05);
+        }
+        .preview-box-label {
+            color: #94a3b8;
+            margin-top: 8px;
+            font-size: 0.75rem;
+        }
+        .copy-btn {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            width: auto;
+            background: #0f172a;
+            color: #ec4899;
+            border: 1px solid #ec4899;
+        }
+        .copy-btn:hover {
+            background: #ec4899;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            margin-top: 40px;
+        }
+        .added-item {
+            background: rgba(236, 72, 153, 0.1);
+            padding: 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        .remove-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .remove-btn:hover {
+            background: #dc2626;
+        }
+    </style>
+<link rel="canonical" href="https://gen8x.com/tools/css-variable-generator">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS Variable Generator</h1>
+            <p class="subtitle">Create organized design token systems with custom properties</p>
+        </header>
+
+        <div class="content">
+            <div class="panel">
+                <h2>Design Tokens Input</h2>
+
+                <div class="input-group">
+                    <label>Brand Colors</label>
+                    <div id="colorsContainer"></div>
+                    <button class="secondary-btn" onclick="addColorInput()">+ Add Color</button>
+                </div>
+
+                <div class="input-group">
+                    <label>Font Sizes (px)</label>
+                    <div id="fontsContainer"></div>
+                    <button class="secondary-btn" onclick="addFontInput()">+ Add Font Size</button>
+                </div>
+
+                <div class="input-group">
+                    <label>Spacing Scale (px)</label>
+                    <div id="spacingContainer"></div>
+                    <button class="secondary-btn" onclick="addSpacingInput()">+ Add Spacing</button>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="generateVariables()">Generate Variables</button>
+                    <button class="secondary-btn" onclick="resetForm()">Reset</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Generated CSS</h2>
+                <div style="margin-bottom: 15px;">
+                    <button class="copy-btn" onclick="copyToClipboard()">📋 Copy Code</button>
+                </div>
+                <textarea id="output" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Live Preview</h2>
+            <div id="preview"></div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 gen8x.com — CSS & Design Tools
+    </footer>
+
+    <script>
+        // Initialize with defaults
+        const defaultColors = [
+            { name: 'primary', value: '#ec4899' },
+            { name: 'secondary', value: '#06b6d4' },
+            { name: 'success', value: '#10b981' }
+        ];
+
+        const defaultFonts = [
+            { name: 'xs', value: '12' },
+            { name: 'sm', value: '14' },
+            { name: 'base', value: '16' },
+            { name: 'lg', value: '18' }
+        ];
+
+        const defaultSpacing = [
+            { name: 'xs', value: '4' },
+            { name: 'sm', value: '8' },
+            { name: 'md', value: '16' },
+            { name: 'lg', value: '24' }
+        ];
+
+        function renderColorInputs() {
+            const container = document.getElementById('colorsContainer');
+            container.innerHTML = '';
+            defaultColors.forEach((color, idx) => {
+                const html = `
+                    <div class="color-input-wrapper" style="margin-bottom: 10px;">
+                        <input type="text" placeholder="Color name" value="${color.name}" onchange="defaultColors[${idx}].name = this.value">
+                        <input type="color" value="${color.value}" onchange="defaultColors[${idx}].value = this.value">
+                        <input type="text" placeholder="#000000" value="${color.value}" readonly style="flex: 0.5;">
+                        <button class="remove-btn" onclick="defaultColors.splice(${idx}, 1); renderColorInputs()">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function renderFontInputs() {
+            const container = document.getElementById('fontsContainer');
+            container.innerHTML = '';
+            defaultFonts.forEach((font, idx) => {
+                const html = `
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" placeholder="Size name" value="${font.name}" style="flex: 0.5;" onchange="defaultFonts[${idx}].name = this.value">
+                        <input type="text" placeholder="px" value="${font.value}" onchange="defaultFonts[${idx}].value = this.value">
+                        <button class="remove-btn" onclick="defaultFonts.splice(${idx}, 1); renderFontInputs()">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function renderSpacingInputs() {
+            const container = document.getElementById('spacingContainer');
+            container.innerHTML = '';
+            defaultSpacing.forEach((space, idx) => {
+                const html = `
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" placeholder="Space name" value="${space.name}" style="flex: 0.5;" onchange="defaultSpacing[${idx}].name = this.value">
+                        <input type="text" placeholder="px" value="${space.value}" onchange="defaultSpacing[${idx}].value = this.value">
+                        <button class="remove-btn" onclick="defaultSpacing.splice(${idx}, 1); renderSpacingInputs()">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        function addColorInput() {
+            defaultColors.push({ name: 'color-' + Date.now(), value: '#888888' });
+            renderColorInputs();
+        }
+
+        function addFontInput() {
+            defaultFonts.push({ name: 'size-' + Date.now(), value: '16' });
+            renderFontInputs();
+        }
+
+        function addSpacingInput() {
+            defaultSpacing.push({ name: 'space-' + Date.now(), value: '12' });
+            renderSpacingInputs();
+        }
+
+        function generateVariables() {
+            let css = ':root {\n';
+
+            defaultColors.forEach(color => {
+                css += `  --color-${color.name}: ${color.value};\n`;
+            });
+
+            css += '\n';
+            defaultFonts.forEach(font => {
+                css += `  --font-size-${font.name}: ${font.value}px;\n`;
+            });
+
+            css += '\n';
+            defaultSpacing.forEach(space => {
+                css += `  --spacing-${space.name}: ${space.value}px;\n`;
+            });
+
+            css += '}\n';
+
+            document.getElementById('output').value = css;
+            generatePreview();
+        }
+
+        function generatePreview() {
+            const preview = document.getElementById('preview');
+            let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">';
+
+            defaultColors.forEach(color => {
+                html += `
+                    <div class="preview-box" style="background: ${color.value}; border-color: ${color.value}; color: #fff;">
+                        <strong style="display: block;">--color-${color.name}</strong>
+                        <code style="font-size: 0.8rem;">${color.value}</code>
+                    </div>
+                `;
+            });
+
+            html += '</div><div style="margin-top: 20px; padding: 15px; background: rgba(236, 72, 153, 0.1); border: 1px solid #ec4899; border-radius: 8px;">';
+            html += '<strong style="color: #ec4899;">Font Sizes & Spacing Applied:</strong>';
+            defaultFonts.forEach((font, idx) => {
+                if (idx === defaultFonts.length - 1) {
+                    html += `<p style="font-size: var(--font-size-${font.name}, ${font.value}px); margin: var(--spacing-lg, 24px) 0; color: #cbd5e1;">Sample text at ${font.name}</p>`;
+                }
+            });
+            html += '</div>';
+
+            preview.innerHTML = html;
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            alert('CSS copied to clipboard!');
+        }
+
+        function resetForm() {
+            defaultColors.length = 0;
+            defaultFonts.length = 0;
+            defaultSpacing.length = 0;
+            defaultColors.push(...[
+                { name: 'primary', value: '#ec4899' },
+                { name: 'secondary', value: '#06b6d4' },
+                { name: 'success', value: '#10b981' }
+            ]);
+            defaultFonts.push(...[
+                { name: 'xs', value: '12' },
+                { name: 'sm', value: '14' },
+                { name: 'base', value: '16' },
+                { name: 'lg', value: '18' }
+            ]);
+            defaultSpacing.push(...[
+                { name: 'xs', value: '4' },
+                { name: 'sm', value: '8' },
+                { name: 'md', value: '16' },
+                { name: 'lg', value: '24' }
+            ]);
+            renderColorInputs();
+            renderFontInputs();
+            renderSpacingInputs();
+            document.getElementById('output').value = '';
+            document.getElementById('preview').innerHTML = '';
+        }
+
+        // Initialize
+        renderColorInputs();
+        renderFontInputs();
+        renderSpacingInputs();
+        generateVariables();
+    </script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Filter Playground - gen8x.com</title>
+    <meta name="description" content="Interactive CSS filter effects playground. Adjust blur, brightness, contrast, grayscale, hue-rotate and more with real-time preview.">
+    <meta name="canonical" content="https://gen8x.com/tools/css-filter-playground">
+    <meta property="og:title" content="CSS Filter Playground">
+    <meta property="og:description" content="Apply and customize CSS filters with interactive visual controls and instant code output.">
+    <meta property="og:url" content="https://gen8x.com/tools/css-filter-playground">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241192243363112" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CSS Filter Playground",
+      "url": "https://gen8x.com/tools/css-filter-playground",
+      "applicationCategory": "Design Tool"
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ec4899;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .panel {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+        .panel h2 {
+            color: #ec4899;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        .controls-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .control-item {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+        .slider-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        input[type="range"] {
+            flex: 1;
+            height: 5px;
+            border-radius: 3px;
+            background: #475569;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ec4899;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #ec4899;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
+        }
+        .value-badge {
+            min-width: 50px;
+            text-align: right;
+            color: #ec4899;
+            font-weight: 600;
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+        button {
+            padding: 10px 16px;
+            background: #475569;
+            color: white;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            width: 100%;
+        }
+        button:hover {
+            border-color: #ec4899;
+            background: #64748b;
+        }
+        .reset-btn {
+            background: #ef4444;
+            margin-top: 15px;
+        }
+        .reset-btn:hover {
+            background: #dc2626;
+            border-color: #ef4444;
+        }
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 12px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 8px;
+            color: #f1f5f9;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+        }
+        .copy-btn {
+            background: #0f172a;
+            color: #ec4899;
+            border: 1px solid #ec4899;
+        }
+        .copy-btn:hover {
+            background: #ec4899;
+            color: white;
+        }
+        .preview-panel {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+        }
+        .preview-panel h2 {
+            color: #ec4899;
+            margin-bottom: 25px;
+        }
+        .preview-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            border: 2px solid #334155;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: filter 0.1s ease;
+        }
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .preset-btn {
+            padding: 10px 12px;
+            background: #475569;
+            color: white;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover {
+            background: #64748b;
+            border-color: #ec4899;
+        }
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            .preset-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ec4899;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #db2777;
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            margin-top: 40px;
+        }
+    </style>
+<link rel="canonical" href="https://gen8x.com/tools/css-filter-playground">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CSS Filter Playground</h1>
+            <p class="subtitle">Explore CSS filter effects with interactive visual controls</p>
+        </header>
+
+        <div class="content">
+            <div class="panel">
+                <h2>Filter Controls</h2>
+
+                <div class="preset-buttons">
+                    <button class="preset-btn" onclick="applyPreset('sepia')">Sepia</button>
+                    <button class="preset-btn" onclick="applyPreset('noir')">Noir</button>
+                    <button class="preset-btn" onclick="applyPreset('sunny')">Sunny</button>
+                    <button class="preset-btn" onclick="applyPreset('cool')">Cool</button>
+                </div>
+
+                <div class="controls-group">
+                    <div class="control-item">
+                        <label>Blur</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="blur" min="0" max="20" value="0" oninput="updateFilter()">
+                            <span class="value-badge" id="blurVal">0px</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label>Brightness</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="brightness" min="0" max="200" value="100" oninput="updateFilter()">
+                            <span class="value-badge" id="brightnessVal">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label>Contrast</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="contrast" min="0" max="200" value="100" oninput="updateFilter()">
+                            <span class="value-badge" id="contrastVal">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label>Grayscale</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="grayscale" min="0" max="100" value="0" oninput="updateFilter()">
+                            <span class="value-badge" id="grayscaleVal">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label>Hue Rotate</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="hueRotate" min="0" max="360" value="0" oninput="updateFilter()">
+                            <span class="value-badge" id="hueRotateVal">0°</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label>Invert</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="invert" min="0" max="100" value="0" oninput="updateFilter()">
+                            <span class="value-badge" id="invertVal">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label>Opacity</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="opacity" min="0" max="100" value="100" oninput="updateFilter()">
+                            <span class="value-badge" id="opacityVal">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label>Saturate</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="saturate" min="0" max="200" value="100" oninput="updateFilter()">
+                            <span class="value-badge" id="saturateVal">100%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-item">
+                        <label>Sepia</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="sepia" min="0" max="100" value="0" oninput="updateFilter()">
+                            <span class="value-badge" id="sepiaVal">0%</span>
+                        </div>
+                    </div>
+
+                    <button class="reset-btn" onclick="resetFilters()">Reset All</button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>Generated CSS</h2>
+                <textarea id="output" readonly></textarea>
+                <button class="copy-btn" onclick="copyCode()">📋 Copy Code</button>
+            </div>
+        </div>
+
+        <div class="preview-panel">
+            <h2>Live Preview</h2>
+            <div class="preview-image" id="preview">Filter Preview</div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 gen8x.com — CSS & Design Tools
+    </footer>
+
+    <script>
+        const presets = {
+            sepia: {
+                blur: 0,
+                brightness: 110,
+                contrast: 110,
+                grayscale: 0,
+                hueRotate: 40,
+                invert: 0,
+                opacity: 100,
+                saturate: 80,
+                sepia: 60
+            },
+            noir: {
+                blur: 0,
+                brightness: 80,
+                contrast: 130,
+                grayscale: 100,
+                hueRotate: 0,
+                invert: 0,
+                opacity: 100,
+                saturate: 0,
+                sepia: 0
+            },
+            sunny: {
+                blur: 0,
+                brightness: 130,
+                contrast: 90,
+                grayscale: 0,
+                hueRotate: -10,
+                invert: 0,
+                opacity: 100,
+                saturate: 150,
+                sepia: 20
+            },
+            cool: {
+                blur: 0,
+                brightness: 100,
+                contrast: 110,
+                grayscale: 0,
+                hueRotate: 200,
+                invert: 0,
+                opacity: 100,
+                saturate: 120,
+                sepia: 0
+            }
+        };
+
+        function applyPreset(name) {
+            const preset = presets[name];
+            document.getElementById('blur').value = preset.blur;
+            document.getElementById('brightness').value = preset.brightness;
+            document.getElementById('contrast').value = preset.contrast;
+            document.getElementById('grayscale').value = preset.grayscale;
+            document.getElementById('hueRotate').value = preset.hueRotate;
+            document.getElementById('invert').value = preset.invert;
+            document.getElementById('opacity').value = preset.opacity;
+            document.getElementById('saturate').value = preset.saturate;
+            document.getElementById('sepia').value = preset.sepia;
+            updateFilter();
+        }
+
+        function updateFilter() {
+            const blur = parseInt(document.getElementById('blur').value);
+            const brightness = parseInt(document.getElementById('brightness').value);
+            const contrast = parseInt(document.getElementById('contrast').value);
+            const grayscale = parseInt(document.getElementById('grayscale').value);
+            const hueRotate = parseInt(document.getElementById('hueRotate').value);
+            const invert = parseInt(document.getElementById('invert').value);
+            const opacity = parseInt(document.getElementById('opacity').value);
+            const saturate = parseInt(document.getElementById('saturate').value);
+            const sepia = parseInt(document.getElementById('sepia').value);
+
+            document.getElementById('blurVal').textContent = blur + 'px';
+            document.getElementById('brightnessVal').textContent = brightness + '%';
+            document.getElementById('contrastVal').textContent = contrast + '%';
+            document.getElementById('grayscaleVal').textContent = grayscale + '%';
+            document.getElementById('hueRotateVal').textContent = hueRotate + '°';
+            document.getElementById('invertVal').textContent = invert + '%';
+            document.getElementById('opacityVal').textContent = opacity + '%';
+            document.getElementById('saturateVal').textContent = saturate + '%';
+            document.getElementById('sepiaVal').textContent = sepia + '%';
+
+            const filterValue = `blur(${blur}px) brightness(${brightness}%) contrast(${contrast}%) grayscale(${grayscale}%) hue-rotate(${hueRotate}deg) invert(${invert}%) opacity(${opacity}%) saturate(${saturate}%) sepia(${sepia}%)`;
+
+            const css = `filter: ${filterValue};`;
+
+            document.getElementById('output').value = css;
+            document.getElementById('preview').style.filter = filterValue;
+        }
+
+        function resetFilters() {
+            document.getElementById('blur').value = 0;
+            document.getElementById('brightness').value = 100;
+            document.getElementById('contrast').value = 100;
+            document.getElementById('grayscale').value = 0;
+            document.getElementById('hueRotate').value = 0;
+            document.getElementById('invert').value = 0;
+            document.getElementById('opacity').value = 100;
+            document.getElementById('saturate').value = 100;
+            document.getElementById('sepia').value = 0;
+            updateFilter();
+        }
+
+        function copyCode() {
+            document.getElementById('output').select();
+            document.execCommand('copy');
+            alert('CSS copied to clipboard!');
+        }
+
+        // Initialize
+        updateFilter();
+    </script>
+</body>
+</html>
