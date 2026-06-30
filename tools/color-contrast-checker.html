@@ -1,252 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Color Contrast Checker — WCAG AA/AAA Compliance | Gen8X</title>
-  <meta name="description" content="Check WCAG color contrast ratios for accessibility compliance. Test text and background colors against AA and AAA standards.">
-  <meta name="keywords" content="color contrast checker, WCAG contrast, accessibility checker, AA AAA compliance, contrast ratio calculator">
-  <link rel="canonical" href="https://gen8x.com/tools/color-contrast-checker.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Color Contrast Checker — WCAG AA/AAA Compliance | Gen8X">
-  <meta property="og:description" content="Check WCAG color contrast ratios for accessibility compliance. Test text and background colors against AA and AAA standards.">
-  <meta property="og:url" content="https://gen8x.com/tools/color-contrast-checker.html">
-  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
-  <meta property="og:site_name" content="Zovo Tools">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Color Contrast Checker — WCAG AA/AAA Compliance | Gen8X">
-  <meta name="twitter:description" content="Check WCAG color contrast ratios for accessibility compliance. Test text and background colors against AA and AAA standards.">
-  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
-  <link rel="stylesheet" href="/assets/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Contrast Checker - WCAG Ratio Tool</title>
+<meta name="description" content="Free color contrast checker. Test foreground and background colors against WCAG AA and AAA standards with live contrast ratio and pass/fail results.">
+<link rel="canonical" href="https://gen8x.com/tools/color-contrast-checker">
+<meta property="og:title" content="Color Contrast Checker - WCAG Ratio Tool">
+<meta property="og:description" content="Test color pairs against WCAG AA and AAA accessibility standards with a live contrast ratio calculator.">
+<meta property="og:url" content="https://gen8x.com/tools/color-contrast-checker">
+<meta property="og:type" content="website">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Color Contrast Checker",
-  "url": "https://gen8x.com/tools/color-contrast-checker.html",
-  "description": "Check WCAG color contrast ratios for accessibility compliance. Test text and background colors against AA and AAA standards.",
-  "applicationCategory": "DesignApplication",
-  "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Michael Lip",
-    "url": "https://zovo.one"
-  },
-  "datePublished": "2026-04-10",
-  "dateModified": "2026-04-10"
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "What is the WCAG contrast ratio requirement?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "WCAG 2.1 requires a minimum contrast ratio of 4.5:1 for normal text (AA level) and 7:1 for enhanced contrast (AAA level). Large text (18pt or 14pt bold and above) has relaxed requirements: 3:1 for AA and 4.5:1 for AAA. These ratios ensure text remains readable for people with low vision or color deficiencies."
-      }
+      "@type": "WebApplication",
+      "name": "Color Contrast Checker",
+      "url": "https://gen8x.com/tools/color-contrast-checker",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Michael Lip", "url": "https://zovo.one" }
     },
     {
-      "@type": "Question",
-      "name": "How is contrast ratio calculated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Contrast ratio is calculated as (L1 + 0.05) / (L2 + 0.05) where L1 is the relative luminance of the lighter color and L2 is the relative luminance of the darker color. Relative luminance is computed from linearized RGB values using the formula L = 0.2126 * R + 0.7152 * G + 0.0722 * B, where each channel is linearized by applying a gamma correction curve."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What counts as large text in WCAG?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "WCAG defines large text as 18 point (24px) or larger for regular weight, or 14 point (approximately 18.66px) or larger for bold weight (700+). Large text has more relaxed contrast requirements because the larger character size is inherently easier to read."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What are the most common contrast failures?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The most common failures are light gray text on white backgrounds (like #999 on #FFF at 2.85:1), placeholder text in input fields (often #AAA on #FFF at 2.32:1), and colored text on colored backgrounds where both have similar lightness values. Another frequent issue is white text on bright-colored buttons where the brand color is too light."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I fix low contrast without changing my brand colors?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You have several options: darken the background behind light text, use a darker shade of your brand color for text (e.g., use the 700 shade instead of 500), add a semi-transparent overlay behind text on images, increase font size to qualify for the relaxed large-text requirement, or use your brand color for non-text elements (borders, icons, backgrounds) while keeping text in a high-contrast neutral."
-      }
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gen8x.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://gen8x.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "color contrast checker", "item": "https://gen8x.com/tools/color-contrast-checker" }
+      ]
     }
   ]
 }
 </script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gen8x.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://gen8x.com/tools/"},{"@type":"ListItem","position":3,"name":"Contrast Checker"}]}</script>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--ok:#3fb950;--bad:#f85149}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+nav{display:flex;gap:1.2rem;padding:1rem 1.5rem;border-bottom:1px solid var(--border);background:var(--panel)}
+nav a{color:var(--accent);text-decoration:none;font-weight:600}
+nav a:hover{text-decoration:underline}
+main{max-width:760px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.9rem;margin:.6rem 0}
+h2{font-size:1.3rem;margin-top:2rem;border-bottom:1px solid var(--border);padding-bottom:.3rem}
+p{color:var(--text)}
+.intro{color:var(--muted)}
+#tool{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin:1.5rem 0}
+.row{display:flex;flex-wrap:wrap;gap:1.2rem;margin-bottom:1rem}
+.field{flex:1;min-width:180px}
+label{display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem}
+.colorgrp{display:flex;gap:.5rem;align-items:center}
+input[type=color]{width:48px;height:42px;border:1px solid var(--border);border-radius:6px;background:none;cursor:pointer;padding:2px}
+input[type=text]{flex:1;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:.55rem .7rem;border-radius:6px;font-family:monospace;font-size:.95rem}
+#preview{border-radius:8px;padding:1.6rem;text-align:center;margin:1rem 0;border:1px solid var(--border)}
+#preview .big{font-size:1.6rem;font-weight:700}
+#preview .small{font-size:.9rem}
+#ratio{font-size:2.4rem;font-weight:800;text-align:center;margin:.5rem 0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-top:1rem}
+.badge{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.7rem;text-align:center}
+.badge .lvl{font-size:.8rem;color:var(--muted)}
+.badge .res{font-weight:700;font-size:1.05rem;margin-top:.2rem}
+.pass{color:var(--ok)}.fail{color:var(--bad)}
+.related a{color:var(--accent);text-decoration:none}
+.related a:hover{text-decoration:underline}
+.related li{margin:.3rem 0}
+footer{border-top:1px solid var(--border);margin-top:2.5rem;padding:1.5rem;text-align:center;color:var(--muted);font-size:.9rem}
+footer a{color:var(--accent);text-decoration:none;margin:0 .5rem}
+code{background:var(--bg);padding:.1rem .35rem;border-radius:4px;font-size:.88rem}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a href="/" class="logo">gen8x</a>
-      <nav>
-        <a href="/">Tool</a>
-        <a href="/blog/">Blog</a>
-        <a href="/about.html">About</a>
-          <div class="nav-right">
-      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
-      <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
-    </div>
-  </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <div class="hero">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>Contrast Checker</span></nav>
-      <h1>Color Contrast Checker</h1>
-      <p>Test text and background color combinations against WCAG 2.1 AA and AAA accessibility standards.</p>
-    </div>
-
-    <section class="explainer" style="max-width:720px;margin:2rem auto;line-height:1.7;">
-      <h2>WCAG 2.1 Contrast Requirements</h2>
-      <p>The Web Content Accessibility Guidelines (WCAG) 2.1 define minimum contrast ratios to ensure text is readable by people with moderately low vision. Contrast ratio is expressed as a value between 1:1 (no contrast, identical colors) and 21:1 (maximum contrast, black on white). The requirements are organized into two conformance levels:</p>
-      <ul>
-        <li><strong>AA (minimum)</strong> — 4.5:1 for normal text, 3:1 for large text</li>
-        <li><strong>AAA (enhanced)</strong> — 7:1 for normal text, 4.5:1 for large text</li>
-      </ul>
-      <p>Large text is defined as 18pt (24px) regular weight or 14pt (18.66px) bold (font-weight 700 or greater). Non-text UI components and graphical objects require a minimum of 3:1 contrast against adjacent colors under WCAG 2.1 Success Criterion 1.4.11.</p>
-
-      <h2>How Contrast Ratio Is Calculated</h2>
-      <p>The contrast ratio formula uses the relative luminance of two colors. Relative luminance measures the perceived brightness of a color on a scale from 0 (black) to 1 (white), weighted according to human visual sensitivity to different wavelengths.</p>
-      <p>The calculation involves three steps:</p>
-      <pre><code>// Step 1: Linearize RGB channels (remove gamma)
-function linearize(channel) {
-  const c = channel / 255;
-  return c <= 0.04045
-    ? c / 12.92
-    : Math.pow((c + 0.055) / 1.055, 2.4);
-}
-
-// Step 2: Calculate relative luminance
-function luminance(r, g, b) {
-  const R = linearize(r);
-  const G = linearize(g);
-  const B = linearize(b);
-  return 0.2126 * R + 0.7152 * G + 0.0722 * B;
-}
-
-// Step 3: Calculate contrast ratio
-function contrastRatio(lum1, lum2) {
-  const lighter = Math.max(lum1, lum2);
-  const darker = Math.min(lum1, lum2);
-  return (lighter + 0.05) / (darker + 0.05);
-}</code></pre>
-      <p>The luminance coefficients (0.2126, 0.7152, 0.0722) reflect that the human eye is most sensitive to green light and least sensitive to blue. The gamma linearization step is critical because sRGB values are not linearly proportional to light intensity. Skipping this step produces incorrect contrast ratios.</p>
-
-      <h2>Common Contrast Failures and Fixes</h2>
-      <p>Many popular design patterns fail WCAG contrast requirements. Light gray placeholder text (#AAA on #FFF) has a ratio of only 2.32:1, far below the 4.5:1 minimum. Medium gray body text (#777 on #FFF) sits at 4.48:1, just barely failing AA. White text on brand-colored buttons often fails when the brand color is in the mid-lightness range.</p>
-      <p>To fix contrast issues without abandoning brand colors, use darker shades for text-bearing elements. For example, if your brand blue is #3B82F6 (which fails as text on white at 3.13:1), use #1D4ED8 (the 700 shade at 5.47:1) for text instead. Reserve the lighter shade for non-text elements like backgrounds, borders, or icons. The <a href="/tools/rgb-to-hsl.html">RGB to HSL converter</a> can help you find darker shades by reducing the lightness value while keeping the same hue.</p>
-
-      <h2>Testing Contrast in Your Workflow</h2>
-      <p>Check contrast early in the design process, not as an afterthought. When building a color system, test every text-background combination in your <a href="/tools/tailwind-colors.html">Tailwind color palette</a> or CSS variables against the WCAG thresholds. Automated tools catch the obvious failures, but also test with real content at actual font sizes since the large-text exception depends on rendered size, not just CSS values.</p>
-    </section>
-
-    <section class="faq-section" style="max-width:720px;margin:2rem auto;">
-      <h2>Frequently Asked Questions</h2>
-      <details>
-        <summary>What is the WCAG contrast ratio requirement?</summary>
-        <p>WCAG 2.1 requires a minimum contrast ratio of 4.5:1 for normal text (AA level) and 7:1 for enhanced contrast (AAA level). Large text (18pt or 14pt bold and above) has relaxed requirements: 3:1 for AA and 4.5:1 for AAA. These ratios ensure text remains readable for people with low vision or color deficiencies.</p>
-      </details>
-      <details>
-        <summary>How is contrast ratio calculated?</summary>
-        <p>Contrast ratio is calculated as (L1 + 0.05) / (L2 + 0.05) where L1 is the relative luminance of the lighter color and L2 is the relative luminance of the darker color. Relative luminance is computed from linearized RGB values using the formula L = 0.2126 * R + 0.7152 * G + 0.0722 * B, where each channel is linearized by applying a gamma correction curve.</p>
-      </details>
-      <details>
-        <summary>What counts as large text in WCAG?</summary>
-        <p>WCAG defines large text as 18 point (24px) or larger for regular weight, or 14 point (approximately 18.66px) or larger for bold weight (700+). Large text has more relaxed contrast requirements because the larger character size is inherently easier to read.</p>
-      </details>
-      <details>
-        <summary>What are the most common contrast failures?</summary>
-        <p>The most common failures are light gray text on white backgrounds (like #999 on #FFF at 2.85:1), placeholder text in input fields (often #AAA on #FFF at 2.32:1), and colored text on colored backgrounds where both have similar lightness values. Another frequent issue is white text on bright-colored buttons where the brand color is too light.</p>
-      </details>
-      <details>
-        <summary>How do I fix low contrast without changing my brand colors?</summary>
-        <p>You have several options: darken the background behind light text, use a darker shade of your brand color for text (e.g., use the 700 shade instead of 500), add a semi-transparent overlay behind text on images, increase font size to qualify for the relaxed large-text requirement, or use your brand color for non-text elements (borders, icons, backgrounds) while keeping text in a high-contrast neutral.</p>
-      </details>
-    </section>
-
-    <section style="max-width:720px;margin:2rem auto;">
-      <h2>Related Tools</h2>
-      <ul>
-        <li><a href="/tools/hex-to-rgb.html">Hex to RGB Converter</a> — Convert color codes for contrast testing</li>
-        <li><a href="/tools/rgb-to-hsl.html">RGB to HSL Converter</a> — Adjust lightness to fix contrast issues</li>
-        <li><a href="/tools/tailwind-colors.html">Tailwind CSS Color Reference</a> — Find accessible color pairings in the Tailwind palette</li>
-      </ul>
-    </section>
-
-    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side.</p>
-  </main>
-
-<footer class="site-footer">
-    <div class="footer-inner">
-        <div class="footer-brand">Zovo Tools</div>
-        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
-        <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
-        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
-    </div>
-</footer>
-
-<nav class="zovo-network" aria-label="Zovo Tools Network">
-    <div class="zovo-network-inner">
-        <h3 class="zovo-network-title">Explore More Tools</h3>
-        <div class="zovo-network-links">
-            <a href="https://abwex.com">ABWex — A/B Testing</a>
-            <a href="https://b2berp.com">B2BERP — Business Tools</a>
-            <a href="https://bugbountyreality.com">BugBountyReality — Security</a>
-            <a href="https://claudflow.com">ClaudFlow — Workflows</a>
-            <a href="https://claudkit.com">ClaudKit — API Tools</a>
-            <a href="https://dismissticket.com">DismissTicket — Support</a>
-            <a href="https://enhio.com">Enhio — Text Tools</a>
-            <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
-            <a href="https://gpt0x.com">GPT0X — AI Models</a>
-            <a href="https://heytensor.com">HeyTensor — ML Tools</a>
-            <a href="https://ingredientcalculator.com">IngredientCalc — Recipes</a>
-            <a href="https://invokebot.com">InvokeBot — Webhooks</a>
-            <a href="https://kappafy.com">Kappafy — JSON</a>
-            <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
-            <a href="https://kickllm.com">KickLLM — LLM Costs</a>
-            <a href="https://krzen.com">Krzen — Image Tools</a>
-            <a href="https://lochbot.com">LochBot — Security</a>
-            <a href="https://lockml.com">LockML — ML Security</a>
-            <a href="https://ml0x.com">ML0X — ML Basics</a>
-            <a href="https://ml3x.com">ML3X — Matrix Math</a>
-            <a href="https://pictureeditor.net">PictureEditor — Image Editing</a>
-            <a href="https://recipetool.net">RecipeTool — Cooking</a>
-            <a href="https://viryd.com">Viryd — Dev Tools</a>
-        </div>
-    </div>
+<nav>
+<a href="/">Home</a>
+<a href="/tools/">Tools</a>
 </nav>
+<main>
+<h1>WCAG Color Contrast Checker</h1>
+<p class="intro">Pick a text color and a background color to see the exact contrast ratio and whether the pair passes WCAG AA and AAA accessibility requirements for normal and large text.</p>
 
-<div class="pow-strip">
-  <div class="pow-strip-inner">
-    <span class="pow-label">By the same builder:</span>
-    <a href="https://github.com/theluckystrike" rel="nofollow">GitHub — theluckystrike</a>
-    <a href="https://www.belikenative.com" rel="nofollow">BeLikeNative — Grammar AI</a>
-    <a href="https://earlythunder.com" rel="nofollow">EarlyThunder — Dev Blog</a>
-    <a href="https://bugbountyreality.com" rel="nofollow">Bug Bounty Reality</a>
-    <a href="https://zovo.one" rel="nofollow">Zovo — AI Dev Tools</a>
-  </div>
+<section id="tool">
+<div class="row">
+<div class="field">
+<label for="fgText">Foreground (text) color</label>
+<div class="colorgrp">
+<input type="color" id="fgColor" value="#e6edf3" aria-label="Foreground color picker">
+<input type="text" id="fgText" value="#e6edf3" aria-label="Foreground hex value">
+</div>
+</div>
+<div class="field">
+<label for="bgText">Background color</label>
+<div class="colorgrp">
+<input type="color" id="bgColor" value="#0d1117" aria-label="Background color picker">
+<input type="text" id="bgText" value="#0d1117" aria-label="Background hex value">
+</div>
+</div>
 </div>
 
-  <script src="/assets/js/share.js"></script>
-<script src="/assets/js/pro-nudge.js"></script>
+<div id="preview">
+<div class="big">Almost before we knew it</div>
+<div class="small">we had left the ground — sample preview text</div>
+</div>
+
+<div id="ratio">--</div>
+
+<div class="grid">
+<div class="badge"><div class="lvl">AA Normal (≥4.5)</div><div class="res" id="aaNormal">--</div></div>
+<div class="badge"><div class="lvl">AA Large (≥3.0)</div><div class="res" id="aaLarge">--</div></div>
+<div class="badge"><div class="lvl">AAA Normal (≥7.0)</div><div class="res" id="aaaNormal">--</div></div>
+<div class="badge"><div class="lvl">AAA Large (≥4.5)</div><div class="res" id="aaaLarge">--</div></div>
+</div>
+</section>
+
+<h2>How the contrast ratio is calculated</h2>
+<p>This checker implements the exact algorithm from the Web Content Accessibility Guidelines (WCAG) 2.1. The contrast ratio between two colors is defined as <code>(L1 + 0.05) / (L2 + 0.05)</code>, where <code>L1</code> is the relative luminance of the lighter color and <code>L2</code> is the relative luminance of the darker color. The result ranges from 1:1 (identical colors) to 21:1 (pure black on pure white).</p>
+<p>Relative luminance is not a simple average of the RGB channels. Each channel is first normalized to the 0–1 range, then linearized with a gamma correction: if a normalized channel value <code>c</code> is at or below 0.03928 it becomes <code>c / 12.92</code>, otherwise it becomes <code>((c + 0.055) / 1.055) ^ 2.4</code>. The linearized red, green, and blue values are then weighted by human eye sensitivity using the formula <code>L = 0.2126 R + 0.7152 G + 0.0722 B</code>. Green carries the most weight because our eyes are most sensitive to it, while blue contributes the least.</p>
+<p>Once the ratio is known, the tool compares it against four thresholds. WCAG AA requires at least 4.5:1 for normal body text and 3:1 for large text (18pt, or 14pt bold). The stricter AAA level demands 7:1 for normal text and 4.5:1 for large text. A green pass or red fail badge updates instantly as you change either color, and the live preview panel shows your chosen text directly on its background so you can judge readability by eye as well as by number. Everything runs entirely in your browser with no data ever leaving your device.</p>
+
+<h2>Related Tools</h2>
+<ul class="related">
+<li><a href="/tools/hex-to-rgb-converter">Hex to RGB Converter</a></li>
+<li><a href="/tools/css-gradient-generator">CSS Gradient Generator</a></li>
+<li><a href="/tools/color-picker">Color Picker</a></li>
+</ul>
+</main>
+
+<footer>
+<div>
+<a href="/">Home</a>
+<a href="/tools/">All Tools</a>
+<a href="/tools/css-gradient-generator">Gradient Generator</a>
+</div>
+<div>© 2026 gen8x.com</div>
+</footer>
+
+<script>
+(function(){
+  var fgColor=document.getElementById('fgColor'),fgText=document.getElementById('fgText'),
+      bgColor=document.getElementById('bgColor'),bgText=document.getElementById('bgText'),
+      preview=document.getElementById('preview'),ratioEl=document.getElementById('ratio');
+
+  function parseHex(h){
+    h=(h||'').trim().replace(/^#/,'');
+    if(/^[0-9a-fA-F]{3}$/.test(h)){h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];}
+    if(!/^[0-9a-fA-F]{6}$/.test(h))return null;
+    return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
+  }
+
+  function lum(rgb){
+    var a=rgb.map(function(v){
+      v=v/255;
+      return v<=0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055,2.4);
+    });
+    return 0.2126*a[0]+0.7152*a[1]+0.0722*a[2];
+  }
+
+  function setBadge(id,ratio,thresh){
+    var el=document.getElementById(id);
+    if(ratio>=thresh){el.textContent='Pass';el.className='res pass';}
+    else{el.textContent='Fail';el.className='res fail';}
+  }
+
+  function update(){
+    var fg=parseHex(fgText.value),bg=parseHex(bgText.value);
+    if(!fg||!bg){ratioEl.textContent='Invalid hex';return;}
+    var l1=lum(fg),l2=lum(bg);
+    var hi=Math.max(l1,l2),lo=Math.min(l1,l2);
+    var ratio=(hi+0.05)/(lo+0.05);
+    ratioEl.textContent=ratio.toFixed(2)+' : 1';
+    preview.style.color='#'+fg.map(function(v){return ('0'+v.toString(16)).slice(-2);}).join('');
+    preview.style.background='#'+bg.map(function(v){return ('0'+v.toString(16)).slice(-2);}).join('');
+    setBadge('aaNormal',ratio,4.5);
+    setBadge('aaLarge',ratio,3.0);
+    setBadge('aaaNormal',ratio,7.0);
+    setBadge('aaaLarge',ratio,4.5);
+  }
+
+  function syncFromText(textEl,colorEl){
+    var p=parseHex(textEl.value);
+    if(p){colorEl.value='#'+p.map(function(v){return ('0'+v.toString(16)).slice(-2);}).join('');}
+    update();
+  }
+
+  fgColor.addEventListener('input',function(){fgText.value=fgColor.value;update();});
+  bgColor.addEventListener('input',function(){bgText.value=bgColor.value;update();});
+  fgText.addEventListener('input',function(){syncFromText(fgText,fgColor);});
+  bgText.addEventListener('input',function(){syncFromText(bgText,bgColor);});
+
+  update();
+})();
+</script>
 </body>
 </html>

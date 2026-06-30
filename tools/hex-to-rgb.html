@@ -1,251 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hex to RGB Converter — Color Code Translator | Gen8X</title>
-  <meta name="description" content="Convert hex color codes to RGB, HSL, and CMYK values instantly. See live color preview. Supports 3-digit and 6-digit hex codes.">
-  <meta name="keywords" content="hex to rgb, hex color converter, color code translator, hex to hsl, hex to cmyk, color conversion">
-  <link rel="canonical" href="https://gen8x.com/tools/hex-to-rgb.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Hex to RGB Converter — Color Code Translator | Gen8X">
-  <meta property="og:description" content="Convert hex color codes to RGB, HSL, and CMYK values instantly. See live color preview. Supports 3-digit and 6-digit hex codes.">
-  <meta property="og:url" content="https://gen8x.com/tools/hex-to-rgb.html">
-  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
-  <meta property="og:site_name" content="Zovo Tools">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hex to RGB Converter — Color Code Translator | Gen8X">
-  <meta name="twitter:description" content="Convert hex color codes to RGB, HSL, and CMYK values instantly. See live color preview. Supports 3-digit and 6-digit hex codes.">
-  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
-  <link rel="stylesheet" href="/assets/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hex to RGB Converter - Instant Color Code Tool</title>
+<meta name="description" content="Convert HEX color codes to RGB and RGBA instantly. Free client-side hex to rgb converter with live preview, CSS output, and the exact conversion formula.">
+<link rel="canonical" href="https://gen8x.com/tools/hex-to-rgb">
+<meta property="og:title" content="Hex to RGB Converter - Instant Color Code Tool">
+<meta property="og:description" content="Convert HEX color codes to RGB and RGBA instantly. Free client-side hex to rgb converter with live preview and CSS output.">
+<meta property="og:url" content="https://gen8x.com/tools/hex-to-rgb">
+<meta property="og:type" content="website">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Hex to RGB Converter",
-  "url": "https://gen8x.com/tools/hex-to-rgb.html",
-  "description": "Convert hex color codes to RGB, HSL, and CMYK values instantly. See live color preview. Supports 3-digit and 6-digit hex codes.",
-  "applicationCategory": "DesignApplication",
+  "url": "https://gen8x.com/tools/hex-to-rgb",
+  "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Michael Lip",
-    "url": "https://zovo.one"
-  },
-  "datePublished": "2026-04-10",
-  "dateModified": "2026-04-10"
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Michael Lip", "url": "https://zovo.one" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gen8x.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://gen8x.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "hex to rgb", "item": "https://gen8x.com/tools/hex-to-rgb" }
+    ]
+  }
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How do I convert a hex color code to RGB?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Split the 6-digit hex code into three pairs (RR, GG, BB) and convert each pair from base-16 to base-10. For example, #3B82F6 becomes R=59, G=130, B=246 because parseInt('3B', 16) = 59, parseInt('82', 16) = 130, and parseInt('F6', 16) = 246."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the difference between 3-digit and 6-digit hex codes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A 3-digit hex code is shorthand where each digit is doubled to form the 6-digit version. For example, #F0A expands to #FF00AA. The 3-digit form only works when each color channel can be represented by a repeated digit, so it covers 4,096 colors compared to the full 16,777,216 colors available with 6 digits."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are hex colors case-sensitive?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Hex color codes are case-insensitive in CSS and all major browsers. #3b82f6, #3B82F6, and #3B82f6 all represent the same color. Lowercase is more common in modern CSS tooling and minifiers."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What does the alpha channel in an 8-digit hex code mean?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "An 8-digit hex code adds two characters at the end for opacity (alpha). For example, #3B82F680 is the same blue as #3B82F6 but at 50% opacity (0x80 = 128, which is 128/255 = ~50%). CSS supports this format in all modern browsers."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I convert hex to CMYK?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "First convert hex to RGB, then normalize each channel to 0-1 by dividing by 255. Calculate K (key/black) as 1 - max(R', G', B'). Then C = (1 - R' - K) / (1 - K), M = (1 - G' - K) / (1 - K), Y = (1 - B' - K) / (1 - K). Multiply each by 100 for percentages. Note that CMYK is device-dependent, so this gives an approximate conversion."
-      }
-    }
-  ]
+<style>
+:root{
+  --bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--border:#2a3441;
+  --text:#e6edf3;--muted:#9aa7b4;--accent:#58a6ff;--accent2:#7ee787;
 }
-</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gen8x.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://gen8x.com/tools/"},{"@type":"ListItem","position":3,"name":"Hex to RGB"}]}</script>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:20px 18px 60px}
+nav{display:flex;gap:18px;padding:14px 0;font-size:14px;border-bottom:1px solid var(--border);margin-bottom:26px}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--accent)}
+h1{font-size:1.9rem;line-height:1.25;margin-bottom:12px}
+h2{font-size:1.25rem;margin:34px 0 12px}
+p{color:var(--text);margin-bottom:14px}
+.intro{color:var(--muted);font-size:1.05rem}
+#tool{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;margin:24px 0}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:600;letter-spacing:.02em}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+.field{flex:1;min-width:160px;margin-bottom:16px}
+input[type=text]{
+  width:100%;background:var(--panel2);border:1px solid var(--border);border-radius:9px;
+  color:var(--text);padding:12px 14px;font-size:1.05rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+input[type=text]:focus{outline:none;border-color:var(--accent)}
+input[type=color]{
+  width:64px;height:48px;background:var(--panel2);border:1px solid var(--border);
+  border-radius:9px;padding:4px;cursor:pointer;
+}
+.field.color-pick{flex:0 0 auto;min-width:auto}
+input[type=range]{width:100%;accent-color:var(--accent)}
+#swatch{height:90px;border-radius:11px;border:1px solid var(--border);margin:6px 0 18px;transition:background .12s}
+.out{display:grid;grid-template-columns:1fr;gap:10px}
+.outrow{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  background:var(--panel2);border:1px solid var(--border);border-radius:9px;padding:11px 14px;
+}
+.outrow .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.outrow .v{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem;color:var(--accent2)}
+.copy{
+  background:transparent;border:1px solid var(--border);color:var(--muted);
+  border-radius:7px;padding:5px 10px;font-size:12px;cursor:pointer;
+}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
+.err{color:#ff7b72;font-size:13px;min-height:18px;margin-top:4px}
+.alpha-wrap{margin-top:8px}
+.alpha-val{font-family:ui-monospace,monospace;color:var(--accent);font-size:13px}
+ul{margin:0 0 14px 20px;color:var(--text)}
+li{margin-bottom:6px}
+code{background:var(--panel2);padding:2px 6px;border-radius:5px;font-size:.92em;color:var(--accent2)}
+.related a{display:inline-block;color:var(--accent);text-decoration:none;background:var(--panel);
+  border:1px solid var(--border);border-radius:8px;padding:9px 14px;margin:6px 8px 0 0;font-size:14px}
+.related a:hover{border-color:var(--accent)}
+footer{margin-top:46px;padding-top:20px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:none;margin-right:16px}
+footer a:hover{color:var(--accent)}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a href="/" class="logo">gen8x</a>
-      <nav>
-        <a href="/">Tool</a>
-        <a href="/blog/">Blog</a>
-        <a href="/about.html">About</a>
-          <div class="nav-right">
-      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
-      <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
-    </div>
-  </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <div class="hero">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>Hex to RGB</span></nav>
-      <h1>Hex to RGB Color Converter</h1>
-      <p>Convert hex color codes to RGB, HSL, and CMYK values instantly with a live color preview.</p>
-    </div>
-
-    <section class="explainer" style="max-width:720px;margin:2rem auto;line-height:1.7;">
-      <h2>How Hex Color Codes Work</h2>
-      <p>Hexadecimal color codes are the most common way to specify colors on the web. A hex color is written as a hash sign followed by six characters: <code>#RRGGBB</code>. Each pair of characters represents one color channel (red, green, blue) using base-16 notation, where digits range from 0-9 and letters A-F. This gives each channel 256 possible values (00 to FF), producing a total of 16,777,216 unique colors.</p>
-      <p>The shorthand 3-digit format <code>#RGB</code> doubles each digit to create the full 6-digit code. For example, <code>#F80</code> expands to <code>#FF8800</code>. This shorthand covers 4,096 colors and is useful for common values like <code>#FFF</code> (white), <code>#000</code> (black), and <code>#F00</code> (red).</p>
-
-      <h2>The Conversion Formula</h2>
-      <p>Converting hex to RGB is straightforward: parse each two-character pair as a base-16 integer. In JavaScript, the conversion looks like this:</p>
-      <pre><code>const hex = "#3B82F6";
-const r = parseInt(hex.substr(1, 2), 16); // 59
-const g = parseInt(hex.substr(3, 2), 16); // 130
-const b = parseInt(hex.substr(5, 2), 16); // 246</code></pre>
-      <p>For a 3-digit hex code, expand each digit first:</p>
-      <pre><code>const shortHex = "#F80";
-const fullHex = "#" + shortHex[1].repeat(2)
-  + shortHex[2].repeat(2)
-  + shortHex[3].repeat(2); // "#FF8800"</code></pre>
-
-      <h2>Common Hex Color Values</h2>
-      <p>Here are some frequently used hex colors and their RGB equivalents:</p>
-      <ul>
-        <li><strong>#FFFFFF</strong> — White — rgb(255, 255, 255)</li>
-        <li><strong>#000000</strong> — Black — rgb(0, 0, 0)</li>
-        <li><strong>#FF0000</strong> — Red — rgb(255, 0, 0)</li>
-        <li><strong>#00FF00</strong> — Green — rgb(0, 255, 0)</li>
-        <li><strong>#0000FF</strong> — Blue — rgb(0, 0, 255)</li>
-        <li><strong>#3B82F6</strong> — Tailwind Blue 500 — rgb(59, 130, 246)</li>
-        <li><strong>#10B981</strong> — Tailwind Emerald 500 — rgb(16, 185, 129)</li>
-        <li><strong>#F59E0B</strong> — Tailwind Amber 500 — rgb(245, 158, 11)</li>
-      </ul>
-
-      <h2>Using Hex and RGB in CSS</h2>
-      <p>Both hex and RGB formats are valid in CSS and render identically. Hex is more compact, while RGB is easier to read and modify programmatically. Modern CSS also supports the <code>rgb()</code> function without commas and with an optional alpha value:</p>
-      <pre><code>/* Hex notation */
-color: #3B82F6;
-color: #3B82F680; /* 50% opacity */
-
-/* RGB notation */
-color: rgb(59, 130, 246);
-color: rgb(59 130 246 / 0.5); /* 50% opacity, modern syntax */
-color: rgba(59, 130, 246, 0.5); /* 50% opacity, legacy syntax */</code></pre>
-      <p>When choosing between formats, hex is ideal for static values in stylesheets, while RGB works better when you need to manipulate individual channels with CSS custom properties or JavaScript. The <a href="/tools/rgb-to-hsl.html">RGB to HSL converter</a> can help when you need to adjust hue, saturation, or lightness independently.</p>
-    </section>
-
-    <section class="faq-section" style="max-width:720px;margin:2rem auto;">
-      <h2>Frequently Asked Questions</h2>
-      <details>
-        <summary>How do I convert a hex color code to RGB?</summary>
-        <p>Split the 6-digit hex code into three pairs (RR, GG, BB) and convert each pair from base-16 to base-10. For example, #3B82F6 becomes R=59, G=130, B=246 because parseInt('3B', 16) = 59, parseInt('82', 16) = 130, and parseInt('F6', 16) = 246.</p>
-      </details>
-      <details>
-        <summary>What is the difference between 3-digit and 6-digit hex codes?</summary>
-        <p>A 3-digit hex code is shorthand where each digit is doubled to form the 6-digit version. For example, #F0A expands to #FF00AA. The 3-digit form only works when each color channel can be represented by a repeated digit, so it covers 4,096 colors compared to the full 16,777,216 colors available with 6 digits.</p>
-      </details>
-      <details>
-        <summary>Are hex colors case-sensitive?</summary>
-        <p>No. Hex color codes are case-insensitive in CSS and all major browsers. #3b82f6, #3B82F6, and #3B82f6 all represent the same color. Lowercase is more common in modern CSS tooling and minifiers.</p>
-      </details>
-      <details>
-        <summary>What does the alpha channel in an 8-digit hex code mean?</summary>
-        <p>An 8-digit hex code adds two characters at the end for opacity (alpha). For example, #3B82F680 is the same blue as #3B82F6 but at 50% opacity (0x80 = 128, which is 128/255 = approximately 50%). CSS supports this format in all modern browsers.</p>
-      </details>
-      <details>
-        <summary>How do I convert hex to CMYK?</summary>
-        <p>First convert hex to RGB, then normalize each channel to 0-1 by dividing by 255. Calculate K (key/black) as 1 - max(R', G', B'). Then C = (1 - R' - K) / (1 - K), M = (1 - G' - K) / (1 - K), Y = (1 - B' - K) / (1 - K). Multiply each by 100 for percentages. Note that CMYK is device-dependent, so this gives an approximate conversion.</p>
-      </details>
-    </section>
-
-    <section style="max-width:720px;margin:2rem auto;">
-      <h2>Related Tools</h2>
-      <ul>
-        <li><a href="/tools/rgb-to-hsl.html">RGB to HSL Converter</a> — Convert RGB values to hue, saturation, and lightness</li>
-        <li><a href="/tools/color-contrast-checker.html">Color Contrast Checker</a> — Test WCAG accessibility compliance</li>
-        <li><a href="/tools/css-gradient-generator.html">CSS Gradient Generator</a> — Create linear and radial gradients</li>
-      </ul>
-    </section>
-
-    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side.</p>
-  </main>
-
-<footer class="site-footer">
-    <div class="footer-inner">
-        <div class="footer-brand">Zovo Tools</div>
-        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
-        <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
-        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
-    </div>
-</footer>
-
-<nav class="zovo-network" aria-label="Zovo Tools Network">
-    <div class="zovo-network-inner">
-        <h3 class="zovo-network-title">Explore More Tools</h3>
-        <div class="zovo-network-links">
-            <a href="https://abwex.com">ABWex — A/B Testing</a>
-            <a href="https://b2berp.com">B2BERP — Business Tools</a>
-            <a href="https://bugbountyreality.com">BugBountyReality — Security</a>
-            <a href="https://claudflow.com">ClaudFlow — Workflows</a>
-            <a href="https://claudkit.com">ClaudKit — API Tools</a>
-            <a href="https://dismissticket.com">DismissTicket — Support</a>
-            <a href="https://enhio.com">Enhio — Text Tools</a>
-            <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
-            <a href="https://gpt0x.com">GPT0X — AI Models</a>
-            <a href="https://heytensor.com">HeyTensor — ML Tools</a>
-            <a href="https://ingredientcalculator.com">IngredientCalc — Recipes</a>
-            <a href="https://invokebot.com">InvokeBot — Webhooks</a>
-            <a href="https://kappafy.com">Kappafy — JSON</a>
-            <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
-            <a href="https://kickllm.com">KickLLM — LLM Costs</a>
-            <a href="https://krzen.com">Krzen — Image Tools</a>
-            <a href="https://lochbot.com">LochBot — Security</a>
-            <a href="https://lockml.com">LockML — ML Security</a>
-            <a href="https://ml0x.com">ML0X — ML Basics</a>
-            <a href="https://ml3x.com">ML3X — Matrix Math</a>
-            <a href="https://pictureeditor.net">PictureEditor — Image Editing</a>
-            <a href="https://recipetool.net">RecipeTool — Cooking</a>
-            <a href="https://viryd.com">Viryd — Dev Tools</a>
-        </div>
-    </div>
+<div class="wrap">
+<nav>
+  <a href="/">Home</a>
+  <a href="/tools/">All Tools</a>
 </nav>
 
-<div class="pow-strip">
-  <div class="pow-strip-inner">
-    <span class="pow-label">By the same builder:</span>
-    <a href="https://github.com/theluckystrike" rel="nofollow">GitHub — theluckystrike</a>
-    <a href="https://www.belikenative.com" rel="nofollow">BeLikeNative — Grammar AI</a>
-    <a href="https://earlythunder.com" rel="nofollow">EarlyThunder — Dev Blog</a>
-    <a href="https://bugbountyreality.com" rel="nofollow">Bug Bounty Reality</a>
-    <a href="https://zovo.one" rel="nofollow">Zovo — AI Dev Tools</a>
+<h1>HEX to RGB Color Converter</h1>
+<p class="intro">Paste any 3- or 6-digit hex color and get instant RGB, RGBA, and HSL values with a live swatch preview. Everything runs in your browser — no uploads, no tracking.</p>
+
+<section id="tool">
+  <div class="row">
+    <div class="field">
+      <label for="hexInput">HEX Color Code</label>
+      <input type="text" id="hexInput" value="#58a6ff" maxlength="7" spellcheck="false" autocomplete="off" placeholder="#3498db">
+      <div class="err" id="err"></div>
+    </div>
+    <div class="field color-pick">
+      <label for="picker">Picker</label>
+      <input type="color" id="picker" value="#58a6ff">
+    </div>
   </div>
+
+  <div id="swatch"></div>
+
+  <div class="alpha-wrap field">
+    <label for="alpha">Alpha (opacity) — <span class="alpha-val" id="alphaVal">1.00</span></label>
+    <input type="range" id="alpha" min="0" max="1" step="0.01" value="1">
+  </div>
+
+  <div class="out">
+    <div class="outrow"><span class="k">RGB</span><span class="v" id="outRgb">rgb(88, 166, 255)</span><button class="copy" data-t="outRgb">Copy</button></div>
+    <div class="outrow"><span class="k">RGBA</span><span class="v" id="outRgba">rgba(88, 166, 255, 1)</span><button class="copy" data-t="outRgba">Copy</button></div>
+    <div class="outrow"><span class="k">HSL</span><span class="v" id="outHsl">hsl(212, 100%, 67%)</span><button class="copy" data-t="outHsl">Copy</button></div>
+    <div class="outrow"><span class="k">R G B</span><span class="v" id="outRaw">88 166 255</span><button class="copy" data-t="outRaw">Copy</button></div>
+  </div>
+</section>
+
+<h2>How hex to RGB conversion works</h2>
+<p>A hex color is just three bytes written in base 16. The string <code>#58a6ff</code> packs the red, green, and blue channels into pairs of hexadecimal digits: <code>58</code> for red, <code>a6</code> for green, and <code>ff</code> for blue. Each pair encodes a value from <code>00</code> to <code>ff</code>, which is 0 to 255 in decimal — exactly the range an RGB channel uses.</p>
+<p>The conversion is pure arithmetic. For each channel you take the two-digit hex pair and read it as base 16: the first digit is the sixteens place and the second is the ones place. So <code>a6</code> becomes <code>(10 × 16) + 6 = 166</code>. In JavaScript this is a one-liner per channel: <code>parseInt(pair, 16)</code>. The tool above splits the cleaned hex string into <code>R = parseInt(hex.slice(0,2),16)</code>, <code>G = parseInt(hex.slice(2,4),16)</code>, and <code>B = parseInt(hex.slice(4,6),16)</code>.</p>
+<p>Shorthand three-digit hex like <code>#0bf</code> is expanded first by doubling every digit — <code>0bf</code> becomes <code>00bbff</code> — because each nibble represents both digits of its byte. The reverse trip back to hex pads each channel with <code>toString(16)</code> and a leading zero so values under 16 stay two digits. HSL is then derived by normalizing the channels to 0–1, finding the max and min to get lightness and saturation, and computing hue from whichever channel dominates. Because the math is exact and lossless, you can round-trip hex to RGB and back without ever drifting a single value.</p>
+<p>Use the picker to choose visually, drag the alpha slider for translucent <code>rgba()</code> values, and copy any line straight into your CSS.</p>
+
+<h2>Related Tools</h2>
+<div class="related">
+  <a href="/tools/rgb-to-hex">RGB to Hex Converter</a>
+  <a href="/tools/hex-to-hsl">Hex to HSL Converter</a>
+  <a href="/tools/css-gradient-generator">CSS Gradient Generator</a>
 </div>
 
-  <script src="/assets/js/share.js"></script>
-<script src="/assets/js/pro-nudge.js"></script>
+<footer>
+  <a href="/">Home</a>
+  <a href="/tools/">All Tools</a>
+  <a href="/tools/rgb-to-hex">RGB to Hex</a>
+  <span>© 2026 gen8x.com</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var hexInput = document.getElementById('hexInput');
+  var picker   = document.getElementById('picker');
+  var alpha    = document.getElementById('alpha');
+  var alphaVal = document.getElementById('alphaVal');
+  var swatch   = document.getElementById('swatch');
+  var err      = document.getElementById('err');
+  var outRgb   = document.getElementById('outRgb');
+  var outRgba  = document.getElementById('outRgba');
+  var outHsl   = document.getElementById('outHsl');
+  var outRaw   = document.getElementById('outRaw');
+
+  function normalize(raw){
+    var h = String(raw).trim().replace(/^#/, '').toLowerCase();
+    if (h.length === 3 && /^[0-9a-f]{3}$/.test(h)){
+      h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    }
+    if (/^[0-9a-f]{6}$/.test(h)) return h;
+    return null;
+  }
+
+  function toHsl(r,g,b){
+    r/=255; g/=255; b/=255;
+    var max=Math.max(r,g,b), min=Math.min(r,g,b);
+    var h,s,l=(max+min)/2;
+    if (max===min){ h=s=0; }
+    else {
+      var d=max-min;
+      s = l>0.5 ? d/(2-max-min) : d/(max+min);
+      if (max===r) h=(g-b)/d + (g<b?6:0);
+      else if (max===g) h=(b-r)/d + 2;
+      else h=(r-g)/d + 4;
+      h/=6;
+    }
+    return [Math.round(h*360), Math.round(s*100), Math.round(l*100)];
+  }
+
+  function compute(){
+    var hex = normalize(hexInput.value);
+    if (!hex){
+      err.textContent = 'Enter a valid 3- or 6-digit hex color (e.g. #58a6ff).';
+      return;
+    }
+    err.textContent = '';
+    var r = parseInt(hex.slice(0,2),16);
+    var g = parseInt(hex.slice(2,4),16);
+    var b = parseInt(hex.slice(4,6),16);
+    var a = parseFloat(alpha.value);
+    var aStr = (a === 1) ? '1' : a.toFixed(2);
+
+    var hsl = toHsl(r,g,b);
+
+    outRgb.textContent  = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    outRgba.textContent = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + aStr + ')';
+    outHsl.textContent  = 'hsl(' + hsl[0] + ', ' + hsl[1] + '%, ' + hsl[2] + '%)';
+    outRaw.textContent  = r + ' ' + g + ' ' + b;
+
+    swatch.style.background = 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+    alphaVal.textContent = a.toFixed(2);
+    picker.value = '#' + hex;
+  }
+
+  hexInput.addEventListener('input', compute);
+  picker.addEventListener('input', function(){
+    hexInput.value = picker.value;
+    compute();
+  });
+  alpha.addEventListener('input', compute);
+
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var txt = document.getElementById(btn.getAttribute('data-t')).textContent;
+      var done = function(){ var o=btn.textContent; btn.textContent='Copied'; setTimeout(function(){btn.textContent=o;},1100); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(done, done);
+      } else {
+        var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta);
+        ta.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta); done();
+      }
+    });
+  });
+
+  compute();
+})();
+</script>
 </body>
 </html>

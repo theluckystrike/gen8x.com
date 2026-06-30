@@ -1,288 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS Gradient Generator — Linear &amp; Radial Gradients | Gen8X</title>
-  <meta name="description" content="Generate CSS linear and radial gradients with live preview. Copy CSS code instantly. Create multi-stop gradients with custom angles.">
-  <meta name="keywords" content="css gradient generator, linear gradient, radial gradient, css gradient tool, gradient maker, css background gradient">
-  <link rel="canonical" href="https://gen8x.com/tools/css-gradient-generator.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="CSS Gradient Generator — Linear &amp; Radial Gradients | Gen8X">
-  <meta property="og:description" content="Generate CSS linear and radial gradients with live preview. Copy CSS code instantly. Create multi-stop gradients with custom angles.">
-  <meta property="og:url" content="https://gen8x.com/tools/css-gradient-generator.html">
-  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
-  <meta property="og:site_name" content="Zovo Tools">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSS Gradient Generator — Linear &amp; Radial Gradients | Gen8X">
-  <meta name="twitter:description" content="Generate CSS linear and radial gradients with live preview. Copy CSS code instantly. Create multi-stop gradients with custom angles.">
-  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
-  <link rel="stylesheet" href="/assets/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Gradient Generator - Live Linear &amp; Radial Tool</title>
+<meta name="description" content="Free CSS gradient generator. Pick colors, angle, type and stops to build linear &amp; radial gradients with copy-ready CSS code. Live preview, no signup.">
+<link rel="canonical" href="https://gen8x.com/tools/css-gradient-generator">
+<meta property="og:title" content="CSS Gradient Generator - Live Linear &amp; Radial Tool">
+<meta property="og:description" content="Build linear and radial CSS gradients visually with copy-ready code and a live preview. Free, fast, browser-based.">
+<meta property="og:url" content="https://gen8x.com/tools/css-gradient-generator">
+<meta property="og:type" content="website">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "CSS Gradient Generator",
-  "url": "https://gen8x.com/tools/css-gradient-generator.html",
-  "description": "Generate CSS linear and radial gradients with live preview. Copy CSS code instantly. Create multi-stop gradients with custom angles.",
-  "applicationCategory": "DesignApplication",
+  "url": "https://gen8x.com/tools/css-gradient-generator",
+  "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Michael Lip",
-    "url": "https://zovo.one"
-  },
-  "datePublished": "2026-04-10",
-  "dateModified": "2026-04-10"
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Michael Lip", "url": "https://zovo.one" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gen8x.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://gen8x.com/tools/" },
+      { "@type": "ListItem", "position": 3, "name": "css gradient generator", "item": "https://gen8x.com/tools/css-gradient-generator" }
+    ]
+  }
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the syntax for CSS linear-gradient?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The syntax is background: linear-gradient(direction, color-stop1, color-stop2, ...). The direction can be an angle (e.g., 45deg, 180deg) or a keyword (to right, to bottom left). Color stops can include optional position values as percentages or lengths. For example: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EC4899 100%)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the difference between linear-gradient and radial-gradient?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Linear gradients transition colors along a straight line at a specified angle. Radial gradients transition colors outward from a center point in an elliptical or circular shape. Linear gradients are more common for backgrounds and buttons. Radial gradients are useful for spotlight effects, circular UI elements, and ambient lighting effects."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do I create a smooth gradient without banding?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Gradient banding occurs when there aren't enough intermediate colors to create a smooth transition, especially in subtle gradients. To reduce banding: use more color stops at intermediate positions, add a slight noise texture overlay, avoid very long gradients between similar colors, and use colors with enough contrast between stops. The oklch() color space in modern CSS also produces perceptually smoother gradients than sRGB."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I use gradients with transparency in CSS?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Use rgba() or hsla() color values, or the modern rgb() / hsl() syntax with an alpha parameter. For example: linear-gradient(to right, rgba(59, 130, 246, 1), rgba(59, 130, 246, 0)) fades blue to transparent. You can also use the 'transparent' keyword: linear-gradient(to right, #3B82F6, transparent)."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do CSS gradients work in all browsers?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. CSS linear-gradient and radial-gradient are supported in all modern browsers including Chrome, Firefox, Safari, and Edge. The unprefixed syntax has been supported since approximately 2013. Vendor prefixes (-webkit-, -moz-) are no longer necessary unless you need to support very old browsers. Conic-gradient has slightly less support but works in all browsers released after 2020."
-      }
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gen8x.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://gen8x.com/tools/"},{"@type":"ListItem","position":3,"name":"Gradient Generator"}]}</script>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2d3543;--text:#e6edf3;--muted:#9aa7b4;--accent:#58a6ff;--accent2:#7ee787}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+nav{display:flex;gap:18px;padding:14px 20px;border-bottom:1px solid var(--line);font-size:14px;background:var(--panel)}
+nav a{color:var(--accent);text-decoration:none}
+nav a:hover{text-decoration:underline}
+main{max-width:880px;margin:0 auto;padding:24px 20px 60px}
+h1{font-size:28px;line-height:1.25;margin:18px 0 8px}
+h2{font-size:20px;margin:34px 0 10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+p{color:var(--text)}
+.lead{color:var(--muted);font-size:16px}
+section#tool{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin:22px 0}
+.preview{height:200px;border-radius:10px;border:1px solid var(--line);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}}
+label{display:block;font-size:13px;color:var(--muted);margin:0 0 6px;font-weight:600;letter-spacing:.02em}
+select,input[type=range],input[type=number]{width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:14px}
+input[type=color]{width:100%;height:40px;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:3px;cursor:pointer}
+.field{margin-bottom:14px}
+.stops{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.stop{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:10px}
+.stop input[type=color]{height:34px}
+.stop .pos{display:flex;align-items:center;gap:8px}
+.stop .pos span{font-size:12px;color:var(--muted);min-width:40px;text-align:right}
+.rowbtns{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+button{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px 14px;font-size:14px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);color:#06121f;border-color:var(--accent);font-weight:700}
+.del{background:transparent;border:1px solid var(--line);color:var(--muted);padding:6px 10px}
+.codewrap{margin-top:18px}
+pre{background:#0a0e14;border:1px solid var(--line);border-radius:8px;padding:14px;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:var(--accent2);white-space:pre-wrap;word-break:break-word;margin:0}
+.angwrap{display:flex;align-items:center;gap:10px}
+.angwrap span{font-size:13px;color:var(--muted);min-width:54px}
+.related a{display:inline-block;margin:4px 12px 4px 0;color:var(--accent);text-decoration:none}
+.related a:hover{text-decoration:underline}
+footer{border-top:1px solid var(--line);padding:24px 20px;text-align:center;color:var(--muted);font-size:13px}
+footer a{color:var(--accent);text-decoration:none;margin:0 8px}
+code.inline{background:var(--panel2);padding:1px 6px;border-radius:5px;font-family:ui-monospace,monospace;font-size:13px}
+.hide{display:none}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a href="/" class="logo">gen8x</a>
-      <nav>
-        <a href="/">Tool</a>
-        <a href="/blog/">Blog</a>
-        <a href="/about.html">About</a>
-          <div class="nav-right">
-      <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
-      <a href="https://zovo.one/tools" class="nav-zovo">Zovo Tools</a>
+<nav>
+  <a href="/">Home</a>
+  <a href="/tools/">Tools</a>
+</nav>
+<main>
+  <h1>Live CSS Gradient Generator</h1>
+  <p class="lead">Design linear and radial CSS gradients in your browser. Adjust colors, angle, type and color stops, watch the live preview update, and copy clean, production-ready CSS in one click.</p>
+
+  <section id="tool" aria-label="CSS gradient generator tool">
+    <div id="preview" class="preview" role="img" aria-label="Gradient preview"></div>
+
+    <div class="grid">
+      <div class="field">
+        <label for="type">Gradient type</label>
+        <select id="type">
+          <option value="linear">Linear</option>
+          <option value="radial">Radial</option>
+          <option value="conic">Conic</option>
+        </select>
+      </div>
+      <div class="field" id="angle-field">
+        <label for="angle">Angle / start (degrees)</label>
+        <div class="angwrap">
+          <input type="range" id="angle" min="0" max="360" value="90" step="1">
+          <span id="angleVal">90&deg;</span>
+        </div>
+      </div>
     </div>
-  </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <div class="hero">
-      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> <span>/</span> <a href="/tools/">Tools</a> <span>/</span> <span>Gradient Generator</span></nav>
-      <h1>CSS Gradient Generator</h1>
-      <p>Generate CSS linear and radial gradients with custom angles, multiple color stops, and ready-to-copy code.</p>
+    <div class="field" id="radial-field" style="display:none">
+      <label for="shape">Radial shape</label>
+      <select id="shape">
+        <option value="circle">Circle</option>
+        <option value="ellipse">Ellipse</option>
+      </select>
     </div>
 
-    <section class="explainer" style="max-width:720px;margin:2rem auto;line-height:1.7;">
-      <h2>CSS Gradient Syntax</h2>
-      <p>CSS gradients are image values generated by the browser, specified using the <code>linear-gradient()</code>, <code>radial-gradient()</code>, or <code>conic-gradient()</code> functions. They can be used anywhere a CSS image is accepted, most commonly as <code>background-image</code> or <code>background</code> values. Unlike solid colors, gradients create smooth transitions between two or more colors.</p>
-      <p>A basic linear gradient requires only two colors. The browser interpolates between them across the element:</p>
-      <pre><code>/* Simple two-color gradient (top to bottom) */
-background: linear-gradient(#3B82F6, #8B5CF6);
+    <label>Color stops</label>
+    <div id="stops" class="stops"></div>
 
-/* With direction */
-background: linear-gradient(to right, #3B82F6, #8B5CF6);
-
-/* With angle */
-background: linear-gradient(135deg, #3B82F6, #8B5CF6);</code></pre>
-
-      <h2>Linear Gradients: Direction and Angles</h2>
-      <p>Linear gradients flow along a straight line called the gradient line. The direction can be specified as an angle or a keyword. Angles start from the top (0deg = upward) and rotate clockwise: 90deg goes left-to-right, 180deg goes top-to-bottom, 270deg goes right-to-left. Keyword directions use the <code>to</code> syntax:</p>
-      <ul>
-        <li><code>to top</code> = 0deg</li>
-        <li><code>to right</code> = 90deg</li>
-        <li><code>to bottom</code> = 180deg (default)</li>
-        <li><code>to left</code> = 270deg</li>
-        <li><code>to bottom right</code> = 135deg (approximately)</li>
-      </ul>
-      <p>Color stops can include position values to control where each color appears along the gradient line. Positions can be percentages or absolute lengths:</p>
-      <pre><code>/* Color stops with positions */
-background: linear-gradient(
-  90deg,
-  #3B82F6 0%,
-  #8B5CF6 40%,
-  #EC4899 100%
-);
-
-/* Hard color stop (no transition) */
-background: linear-gradient(
-  to right,
-  #3B82F6 0%,
-  #3B82F6 50%,
-  #EC4899 50%,
-  #EC4899 100%
-);</code></pre>
-
-      <h2>Radial Gradients</h2>
-      <p>Radial gradients radiate outward from a center point. By default, the gradient is elliptical and centered in the element, with the farthest corner determining the extent:</p>
-      <pre><code>/* Basic radial gradient */
-background: radial-gradient(#3B82F6, #1E3A8A);
-
-/* Circle shape */
-background: radial-gradient(circle, #3B82F6, #1E3A8A);
-
-/* Custom position */
-background: radial-gradient(circle at 25% 25%,
-  #3B82F6, #1E3A8A);
-
-/* Size keywords */
-background: radial-gradient(
-  circle closest-side at 50% 50%,
-  #3B82F6, #1E3A8A
-);</code></pre>
-      <p>The size keywords are <code>closest-side</code>, <code>farthest-side</code>, <code>closest-corner</code>, and <code>farthest-corner</code> (default). These determine where the final color stop reaches relative to the element's edges.</p>
-
-      <h2>Multi-Stop Gradients and Advanced Techniques</h2>
-      <p>Complex gradients can layer multiple color stops to create rich visual effects. You can also layer multiple gradients on a single element using comma separation:</p>
-      <pre><code>/* Multi-stop gradient */
-background: linear-gradient(
-  135deg,
-  #667eea 0%,
-  #764ba2 25%,
-  #f093fb 50%,
-  #f5576c 75%,
-  #fda085 100%
-);
-
-/* Layered gradients */
-background:
-  linear-gradient(135deg, #667eea33 0%, transparent 50%),
-  linear-gradient(225deg, #f093fb33 0%, transparent 50%),
-  linear-gradient(315deg, #fda08533 0%, transparent 50%),
-  #1a1a2e;</code></pre>
-      <p>For the smoothest color transitions, consider using the <code>oklch()</code> color space available in modern CSS. Interpolation in oklch produces more perceptually uniform gradients, avoiding the muddy mid-tones that can appear when transitioning between saturated colors in sRGB. Use <a href="/tools/hex-to-rgb.html">hex to RGB conversion</a> to get exact values for your gradient stops, and check text legibility over gradients with the <a href="/tools/color-contrast-checker.html">contrast checker</a>.</p>
-    </section>
-
-    <section class="faq-section" style="max-width:720px;margin:2rem auto;">
-      <h2>Frequently Asked Questions</h2>
-      <details>
-        <summary>What is the syntax for CSS linear-gradient?</summary>
-        <p>The syntax is <code>background: linear-gradient(direction, color-stop1, color-stop2, ...)</code>. The direction can be an angle (e.g., 45deg, 180deg) or a keyword (to right, to bottom left). Color stops can include optional position values as percentages or lengths. For example: <code>linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EC4899 100%)</code>.</p>
-      </details>
-      <details>
-        <summary>What is the difference between linear-gradient and radial-gradient?</summary>
-        <p>Linear gradients transition colors along a straight line at a specified angle. Radial gradients transition colors outward from a center point in an elliptical or circular shape. Linear gradients are more common for backgrounds and buttons. Radial gradients are useful for spotlight effects, circular UI elements, and ambient lighting effects.</p>
-      </details>
-      <details>
-        <summary>How do I create a smooth gradient without banding?</summary>
-        <p>Gradient banding occurs when there are not enough intermediate colors to create a smooth transition, especially in subtle gradients. To reduce banding: use more color stops at intermediate positions, add a slight noise texture overlay, avoid very long gradients between similar colors, and use colors with enough contrast between stops. The oklch() color space in modern CSS also produces perceptually smoother gradients than sRGB.</p>
-      </details>
-      <details>
-        <summary>Can I use gradients with transparency in CSS?</summary>
-        <p>Yes. Use rgba() or hsla() color values, or the modern rgb() / hsl() syntax with an alpha parameter. For example: <code>linear-gradient(to right, rgba(59, 130, 246, 1), rgba(59, 130, 246, 0))</code> fades blue to transparent. You can also use the 'transparent' keyword: <code>linear-gradient(to right, #3B82F6, transparent)</code>.</p>
-      </details>
-      <details>
-        <summary>Do CSS gradients work in all browsers?</summary>
-        <p>Yes. CSS linear-gradient and radial-gradient are supported in all modern browsers including Chrome, Firefox, Safari, and Edge. The unprefixed syntax has been supported since approximately 2013. Vendor prefixes (-webkit-, -moz-) are no longer necessary unless you need to support very old browsers. Conic-gradient has slightly less support but works in all browsers released after 2020.</p>
-      </details>
-    </section>
-
-    <section style="max-width:720px;margin:2rem auto;">
-      <h2>Related Tools</h2>
-      <ul>
-        <li><a href="/tools/hex-to-rgb.html">Hex to RGB Converter</a> — Get exact values for gradient color stops</li>
-        <li><a href="/tools/rgb-to-hsl.html">RGB to HSL Converter</a> — Adjust hue and lightness for gradient colors</li>
-        <li><a href="/tools/tailwind-colors.html">Tailwind CSS Color Reference</a> — Find colors for your gradients</li>
-      </ul>
-    </section>
-
-    <p style="max-width:720px;margin:2rem auto;font-size:0.85rem;color:var(--text-muted);">Built by <a href="/about.html">Michael Lip</a>. 100% client-side.</p>
-  </main>
-
-<footer class="site-footer">
-    <div class="footer-inner">
-        <div class="footer-brand">Zovo Tools</div>
-        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
-        <a href="https://zovo.one/pricing?utm_source=gen8x.com&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
-        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one">Zovo</a> &middot; 47/500 founding spots</div>
+    <div class="rowbtns">
+      <button id="addStop" type="button">+ Add color stop</button>
+      <button id="randomize" type="button">Randomize</button>
+      <button id="reverse" type="button">Reverse stops</button>
     </div>
+
+    <div class="codewrap">
+      <label for="code">Generated CSS <span style="font-weight:400;color:var(--muted)">(includes <code class="inline">background</code> shorthand)</span></label>
+      <pre id="code">background: linear-gradient(...);</pre>
+      <div class="rowbtns">
+        <button id="copy" class="primary" type="button">Copy CSS</button>
+        <span id="copied" class="hide" style="color:var(--accent2);font-size:13px;align-self:center">Copied!</span>
+      </div>
+    </div>
+  </section>
+
+  <h2>How this gradient generator works</h2>
+  <p>A CSS gradient is an image generated by the browser from a list of <strong>color stops</strong>. Each stop pairs a color with a position between 0% and 100%. Between two adjacent stops the browser linearly interpolates the red, green and blue channels, so a stop at <code class="inline">#ff0000 0%</code> blending into <code class="inline">#0000ff 100%</code> produces every shade along the line. This tool builds the exact CSS function string for you: it sorts your stops by position, joins them as <code class="inline">color position%</code> pairs, and wraps them in the correct function.</p>
+  <p>For a <strong>linear gradient</strong> the syntax is <code class="inline">linear-gradient(angle, stop1, stop2, ...)</code>. The angle sets the direction of the gradient line: <code class="inline">0deg</code> points up, <code class="inline">90deg</code> points right, and <code class="inline">180deg</code> points down, increasing clockwise. The gradient line passes through the center of the box, and stop positions are measured as a fraction of that line's length. For a <strong>radial gradient</strong> the colors radiate outward from a center point, so the syntax becomes <code class="inline">radial-gradient(shape, stop1, stop2, ...)</code> where shape is <code class="inline">circle</code> or <code class="inline">ellipse</code>. A <strong>conic gradient</strong> sweeps the colors around a center like a color wheel using <code class="inline">conic-gradient(from angle, ...)</code>.</p>
+  <p>The math behind a single channel at any point is straightforward: if a position <em>p</em> falls between stops at positions <em>p1</em> and <em>p2</em> with channel values <em>c1</em> and <em>c2</em>, the interpolated value is <code class="inline">c1 + (c2 - c1) * (p - p1) / (p2 - p1)</code>. Browsers do this in sRGB space by default for the legacy syntax used here, which keeps results consistent across devices. Add as many stops as you like, drag the position sliders, and the generated code stays valid and copy-ready. Paste it straight into a <code class="inline">background</code> declaration in your stylesheet.</p>
+
+  <h2>Related Tools</h2>
+  <p class="related">
+    <a href="/tools/hex-to-rgb-converter">Hex to RGB Converter</a>
+    <a href="/tools/color-contrast-checker">Color Contrast Checker</a>
+    <a href="/tools/box-shadow-generator">Box Shadow Generator</a>
+  </p>
+</main>
+
+<footer>
+  <div>
+    <a href="/">Home</a>
+    <a href="/tools/">All Tools</a>
+    <a href="/tools/hex-to-rgb-converter">Hex to RGB</a>
+  </div>
+  <p>&copy; 2026 gen8x.com &middot; Built by <a href="https://zovo.one">Michael Lip</a></p>
 </footer>
 
-<nav class="zovo-network" aria-label="Zovo Tools Network">
-    <div class="zovo-network-inner">
-        <h3 class="zovo-network-title">Explore More Tools</h3>
-        <div class="zovo-network-links">
-            <a href="https://abwex.com">ABWex — A/B Testing</a>
-            <a href="https://b2berp.com">B2BERP — Business Tools</a>
-            <a href="https://bugbountyreality.com">BugBountyReality — Security</a>
-            <a href="https://claudflow.com">ClaudFlow — Workflows</a>
-            <a href="https://claudkit.com">ClaudKit — API Tools</a>
-            <a href="https://dismissticket.com">DismissTicket — Support</a>
-            <a href="https://enhio.com">Enhio — Text Tools</a>
-            <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
-            <a href="https://gpt0x.com">GPT0X — AI Models</a>
-            <a href="https://heytensor.com">HeyTensor — ML Tools</a>
-            <a href="https://ingredientcalculator.com">IngredientCalc — Recipes</a>
-            <a href="https://invokebot.com">InvokeBot — Webhooks</a>
-            <a href="https://kappafy.com">Kappafy — JSON</a>
-            <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
-            <a href="https://kickllm.com">KickLLM — LLM Costs</a>
-            <a href="https://krzen.com">Krzen — Image Tools</a>
-            <a href="https://lochbot.com">LochBot — Security</a>
-            <a href="https://lockml.com">LockML — ML Security</a>
-            <a href="https://ml0x.com">ML0X — ML Basics</a>
-            <a href="https://ml3x.com">ML3X — Matrix Math</a>
-            <a href="https://pictureeditor.net">PictureEditor — Image Editing</a>
-            <a href="https://recipetool.net">RecipeTool — Cooking</a>
-            <a href="https://viryd.com">Viryd — Dev Tools</a>
-        </div>
-    </div>
-</nav>
+<script>
+(function(){
+  "use strict";
+  var stopsEl = document.getElementById('stops');
+  var typeEl = document.getElementById('type');
+  var angleEl = document.getElementById('angle');
+  var angleVal = document.getElementById('angleVal');
+  var angleField = document.getElementById('angle-field');
+  var radialField = document.getElementById('radial-field');
+  var shapeEl = document.getElementById('shape');
+  var preview = document.getElementById('preview');
+  var codeEl = document.getElementById('code');
 
-<div class="pow-strip">
-  <div class="pow-strip-inner">
-    <span class="pow-label">By the same builder:</span>
-    <a href="https://github.com/theluckystrike" rel="nofollow">GitHub — theluckystrike</a>
-    <a href="https://www.belikenative.com" rel="nofollow">BeLikeNative — Grammar AI</a>
-    <a href="https://earlythunder.com" rel="nofollow">EarlyThunder — Dev Blog</a>
-    <a href="https://bugbountyreality.com" rel="nofollow">Bug Bounty Reality</a>
-    <a href="https://zovo.one" rel="nofollow">Zovo — AI Dev Tools</a>
-  </div>
-</div>
+  var stops = [
+    { color: '#ff6b6b', pos: 0 },
+    { color: '#4d8bff', pos: 100 }
+  ];
 
-  <script src="/assets/js/share.js"></script>
-<script src="/assets/js/pro-nudge.js"></script>
+  function clampPos(n){
+    n = parseInt(n, 10);
+    if (isNaN(n)) n = 0;
+    if (n < 0) n = 0;
+    if (n > 100) n = 100;
+    return n;
+  }
+
+  function renderStops(){
+    stopsEl.innerHTML = '';
+    for (var i = 0; i < stops.length; i++){
+      (function(idx){
+        var s = stops[idx];
+        var row = document.createElement('div');
+        row.className = 'stop';
+
+        var color = document.createElement('input');
+        color.type = 'color';
+        color.value = s.color;
+        color.setAttribute('aria-label', 'Stop ' + (idx+1) + ' color');
+        color.addEventListener('input', function(){
+          stops[idx].color = color.value;
+          update();
+        });
+
+        var posWrap = document.createElement('div');
+        posWrap.className = 'pos';
+        var range = document.createElement('input');
+        range.type = 'range';
+        range.min = '0'; range.max = '100'; range.step = '1';
+        range.value = String(s.pos);
+        range.setAttribute('aria-label', 'Stop ' + (idx+1) + ' position');
+        var posLabel = document.createElement('span');
+        posLabel.textContent = s.pos + '%';
+        range.addEventListener('input', function(){
+          stops[idx].pos = clampPos(range.value);
+          posLabel.textContent = stops[idx].pos + '%';
+          update();
+        });
+        posWrap.appendChild(range);
+        posWrap.appendChild(posLabel);
+
+        var del = document.createElement('button');
+        del.type = 'button';
+        del.className = 'del';
+        del.textContent = 'Remove';
+        del.addEventListener('click', function(){
+          if (stops.length <= 2) return;
+          stops.splice(idx, 1);
+          renderStops();
+          update();
+        });
+
+        row.appendChild(color);
+        row.appendChild(posWrap);
+        row.appendChild(del);
+        stopsEl.appendChild(row);
+      })(i);
+    }
+  }
+
+  function buildGradient(){
+    var sorted = stops.slice().sort(function(a,b){ return a.pos - b.pos; });
+    var parts = [];
+    for (var i = 0; i < sorted.length; i++){
+      parts.push(sorted[i].color + ' ' + sorted[i].pos + '%');
+    }
+    var joined = parts.join(', ');
+    var type = typeEl.value;
+    var ang = parseInt(angleEl.value, 10);
+    if (type === 'linear'){
+      return 'linear-gradient(' + ang + 'deg, ' + joined + ')';
+    } else if (type === 'radial'){
+      return 'radial-gradient(' + shapeEl.value + ' at center, ' + joined + ')';
+    } else {
+      return 'conic-gradient(from ' + ang + 'deg at center, ' + joined + ')';
+    }
+  }
+
+  function update(){
+    angleVal.textContent = angleEl.value + '°';
+    var type = typeEl.value;
+    radialField.style.display = (type === 'radial') ? 'block' : 'none';
+    angleField.style.display = (type === 'radial') ? 'none' : 'block';
+    var g = buildGradient();
+    preview.style.background = g;
+    codeEl.textContent = 'background: ' + g + ';';
+  }
+
+  function randHex(){
+    var h = Math.floor(Math.random()*16777215).toString(16);
+    while (h.length < 6) h = '0' + h;
+    return '#' + h;
+  }
+
+  document.getElementById('addStop').addEventListener('click', function(){
+    var pos = stops.length ? clampPos(stops[stops.length-1].pos) : 50;
+    pos = Math.min(100, pos + 10);
+    stops.push({ color: randHex(), pos: pos });
+    renderStops();
+    update();
+  });
+
+  document.getElementById('randomize').addEventListener('click', function(){
+    var n = stops.length;
+    for (var i = 0; i < n; i++){
+      stops[i].color = randHex();
+    }
+    renderStops();
+    update();
+  });
+
+  document.getElementById('reverse').addEventListener('click', function(){
+    for (var i = 0; i < stops.length; i++){
+      stops[i].pos = 100 - stops[i].pos;
+    }
+    renderStops();
+    update();
+  });
+
+  typeEl.addEventListener('change', update);
+  angleEl.addEventListener('input', update);
+  shapeEl.addEventListener('change', update);
+
+  var copyBtn = document.getElementById('copy');
+  var copied = document.getElementById('copied');
+  copyBtn.addEventListener('click', function(){
+    var text = codeEl.textContent;
+    function flash(){
+      copied.classList.remove('hide');
+      setTimeout(function(){ copied.classList.add('hide'); }, 1500);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(flash, function(){ fallbackCopy(text); flash(); });
+    } else {
+      fallbackCopy(text); flash();
+    }
+  });
+
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  renderStops();
+  update();
+})();
+</script>
 </body>
 </html>
