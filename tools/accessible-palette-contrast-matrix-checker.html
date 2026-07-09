@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessible Color Palette Contrast Matrix Checker</title>
+<meta name="description" content="Paste any set of hex colors and get a full pairwise WCAG contrast matrix with AA/AAA pass-fail badges for normal and large text and UI components.">
+<link rel="canonical" href="https://gen8x.com/tools/accessible-palette-contrast-matrix-checker">
+<meta property="og:title" content="Accessible Color Palette Contrast Matrix Checker">
+<meta property="og:description" content="Paste any set of hex colors and get a full pairwise WCAG contrast matrix with AA/AAA pass-fail badges for normal and large text and UI components.">
+<meta property="og:url" content="https://gen8x.com/tools/accessible-palette-contrast-matrix-checker">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Accessible Color Palette Contrast Matrix Checker",
+      "url": "https://gen8x.com/tools/accessible-palette-contrast-matrix-checker",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "description": "Paste any set of hex colors and get a full pairwise WCAG contrast matrix with AA/AAA pass-fail badges for normal and large text and UI components.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Michael Lip", "url": "https://zovo.one" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gen8x.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://gen8x.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "Accessible Color Palette Contrast Matrix Checker", "item": "https://gen8x.com/tools/accessible-palette-contrast-matrix-checker" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --border:#2b3444;
+  --text:#e6edf3; --muted:#9aa7b4; --accent:#58a6ff; --accent2:#7ee787;
+  --pass:#1a7f37; --passbg:#122e1c; --fail:#8b2a2a; --failbg:#2d1414;
+  --warn:#9e6a03; --warnbg:#2a2109;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+nav{
+  display:flex;gap:18px;padding:14px 20px;border-bottom:1px solid var(--border);
+  background:var(--panel);font-size:14px;position:sticky;top:0;z-index:5;
+}
+nav a{color:var(--accent);text-decoration:none;font-weight:600}
+nav a:hover{text-decoration:underline}
+main{max-width:1080px;margin:0 auto;padding:24px 20px 60px}
+h1{font-size:26px;line-height:1.25;margin:14px 0 6px}
+h2{font-size:19px;margin:34px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.lead{color:var(--muted);font-size:15px;max-width:70ch}
+section#tool{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:22px}
+label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin:0 0 6px;text-transform:uppercase;letter-spacing:.04em}
+textarea,input[type=text]{
+  width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--border);
+  border-radius:8px;padding:11px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:14px;resize:vertical;
+}
+textarea:focus,input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.controls{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;align-items:flex-end}
+.ctl{flex:1;min-width:150px}
+select{
+  width:100%;background:var(--panel2);color:var(--text);border:1px solid var(--border);
+  border-radius:8px;padding:10px 12px;font-size:14px;
+}
+.pillrow{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px}
+.pillrow label{display:flex;align-items:center;gap:7px;text-transform:none;letter-spacing:0;font-weight:500;color:var(--text);font-size:14px;cursor:pointer}
+.pillrow input{width:auto;margin:0}
+button{
+  background:var(--accent);color:#04101f;border:none;border-radius:8px;padding:10px 16px;
+  font-size:14px;font-weight:700;cursor:pointer;
+}
+button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--border)}
+button:hover{filter:brightness(1.08)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--border);border-radius:20px;padding:4px 10px;font-family:ui-monospace,monospace;font-size:12.5px}
+.chip .sw{width:15px;height:15px;border-radius:50%;border:1px solid rgba(255,255,255,.25)}
+.err{color:#ff9c9c;font-size:13px;margin-top:8px;min-height:18px;font-family:ui-monospace,monospace}
+.matrixwrap{overflow-x:auto;margin-top:18px;border:1px solid var(--border);border-radius:10px}
+table.matrix{border-collapse:collapse;font-size:12.5px;min-width:100%}
+table.matrix th,table.matrix td{border:1px solid var(--border);padding:0;text-align:center;white-space:nowrap}
+table.matrix th.corner{background:var(--panel2);font-size:11px;color:var(--muted);padding:6px 8px;position:sticky;left:0;z-index:3}
+table.matrix th.col{background:var(--panel2);padding:6px 8px;font-family:ui-monospace,monospace}
+table.matrix th.row{background:var(--panel2);padding:6px 8px;font-family:ui-monospace,monospace;position:sticky;left:0;z-index:2;text-align:right}
+.swdot{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.25);vertical-align:middle;margin-right:5px}
+td.cell{padding:5px 4px;min-width:76px}
+td.cell .ratio{font-family:ui-monospace,monospace;font-weight:700;font-size:13px}
+td.cell .prev{display:block;font-size:11px;padding:3px 4px;border-radius:4px;margin-top:3px;font-weight:600}
+td.diag{background:#0a0d12;color:#4a5563}
+.badge{display:inline-block;font-size:10px;font-weight:800;padding:1px 5px;border-radius:4px;margin:1px 1px 0}
+.b-pass{background:var(--passbg);color:#69db7c;border:1px solid #245c34}
+.b-fail{background:var(--failbg);color:#ff8f8f;border:1px solid #5c2424}
+.cell-pass{background:var(--passbg)}
+.cell-warn{background:var(--warnbg)}
+.cell-fail{background:var(--failbg)}
+.badgeline{display:flex;gap:3px;justify-content:center;flex-wrap:wrap;margin-top:3px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border-radius:3px;display:inline-block}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:18px}
+.stat{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.stat b{display:block;font-size:23px;color:var(--accent2)}
+.stat small{color:var(--muted);font-size:12px}
+.best{margin-top:16px;font-size:13.5px}
+.best code{background:var(--panel2);padding:2px 6px;border-radius:5px;font-size:12.5px}
+.prose{margin-top:8px}
+.prose p{margin:12px 0;color:#cdd7e1}
+.prose code{background:var(--panel2);padding:2px 6px;border-radius:5px;font-family:ui-monospace,monospace;font-size:13px;color:var(--accent2)}
+.related{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.related a{background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:9px 14px;color:var(--accent);text-decoration:none;font-size:14px;font-weight:600}
+.related a:hover{border-color:var(--accent)}
+footer{border-top:1px solid var(--border);margin-top:44px;padding:22px 20px;text-align:center;color:var(--muted);font-size:13px}
+footer a{color:var(--accent);text-decoration:none;margin:0 8px}
+footer a:hover{text-decoration:underline}
+@media(max-width:640px){h1{font-size:22px}td.cell{min-width:64px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/">Home</a>
+  <a href="/tools/">Tools</a>
+</nav>
+<main>
+  <h1>Check Every Foreground/Background Pair in Your Palette for WCAG Contrast</h1>
+  <p class="lead">Drop in your hex colors and this tool builds a full N&times;N contrast matrix &mdash; every ordered pair scored against WCAG 2.x AA and AAA thresholds for normal text, large text, and non-text UI components. Instantly see which combinations are legally usable and which will fail an audit.</p>
+
+  <section id="tool">
+    <div>
+      <label for="colors">Palette colors (hex &mdash; comma, space, or newline separated)</label>
+      <textarea id="colors" rows="3" spellcheck="false">#0d1117, #e6edf3, #58a6ff, #7ee787, #f85149, #9aa7b4, #ffd33d</textarea>
+    </div>
+    <div class="controls">
+      <div class="ctl">
+        <label for="level">Conformance target</label>
+        <select id="level">
+          <option value="AA" selected>WCAG AA (4.5 normal / 3.0 large)</option>
+          <option value="AAA">WCAG AAA (7.0 normal / 4.5 large)</option>
+        </select>
+      </div>
+      <div class="ctl">
+        <label for="cellmode">Cell shading by</label>
+        <select id="cellmode">
+          <option value="normal" selected>Normal-text pass</option>
+          <option value="large">Large-text pass</option>
+          <option value="ui">UI / non-text (3:1)</option>
+        </select>
+      </div>
+      <div class="ctl" style="flex:0 0 auto">
+        <button id="parseBtn" class="secondary" type="button">Re-parse colors</button>
+      </div>
+    </div>
+    <div class="pillrow">
+      <label><input type="checkbox" id="showBadges" checked> Show AA/AAA badges in cells</label>
+      <label><input type="checkbox" id="dedupe" checked> Ignore self &amp; duplicate pairs in stats</label>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="err" id="err"></div>
+
+    <div class="legend">
+      <span><i class="cell-pass" style="border:1px solid #245c34"></i> Passes selected level</span>
+      <span><i class="cell-warn" style="border:1px solid #5c4a1a"></i> Passes large only</span>
+      <span><i class="cell-fail" style="border:1px solid #5c2424"></i> Fails</span>
+      <span>Rows = foreground (text) &middot; Columns = background</span>
+    </div>
+
+    <div class="matrixwrap"><table class="matrix" id="matrix"></table></div>
+
+    <div class="summary" id="summary"></div>
+    <div class="best" id="best"></div>
+  </section>
+
+  <h2>How the contrast ratio is computed</h2>
+  <div class="prose">
+    <p>This tool implements the WCAG 2.x relative-luminance and contrast-ratio definitions exactly. For each color, the three 8-bit hex channels are normalized to the <code>0&ndash;1</code> sRGB range. Each channel is then linearized (gamma-expanded): if the normalized value <code>c &le; 0.03928</code> it becomes <code>c / 12.92</code>, otherwise <code>((c + 0.055) / 1.055) ^ 2.4</code>. This undoes the sRGB transfer curve so the values represent linear light.</p>
+    <p>Relative luminance is the weighted sum <code>L = 0.2126&middot;R + 0.7152&middot;G + 0.0722&middot;B</code> of those linear channels, reflecting the eye's sensitivity to green over red and blue. For any two colors the contrast ratio is <code>(Lmax + 0.05) / (Lmin + 0.05)</code>, where the <code>0.05</code> flare term models ambient reflection and keeps the range bounded between 1:1 and 21:1.</p>
+    <p>Each cell is then classified. <strong>WCAG AA</strong> requires <code>4.5:1</code> for normal text and <code>3:1</code> for large text (&ge;18.66px bold, or &ge;24px regular). <strong>AAA</strong> raises those to <code>7:1</code> and <code>4.5:1</code>. Separately, WCAG 2.1's Success Criterion 1.4.11 requires <code>3:1</code> for user-interface components and meaningful graphical objects &mdash; the "UI / non-text" mode. Because contrast is symmetric, swapping foreground and background yields the same ratio, but the matrix keeps both orderings so you can read it as "this text color on that background." Everything runs locally in your browser; no color ever leaves the page.</p>
+  </div>
+
+  <h2>Related Tools</h2>
+  <div class="related">
+    <a href="/tools/css-gradient-generator">CSS Gradient Generator</a>
+    <a href="/tools/hex-to-rgb-converter">Hex to RGB Converter</a>
+    <a href="/tools/color-palette-generator">Color Palette Generator</a>
+  </div>
+</main>
+
+<footer>
+  <div>
+    <a href="/">Home</a>
+    <a href="/tools/">All Tools</a>
+    <a href="/tools/css-gradient-generator">Gradient Generator</a>
+    <a href="https://zovo.one">More by Michael Lip</a>
+  </div>
+  <p>&copy; 2026 gen8x.com &mdash; client-side WCAG contrast tooling.</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var elColors  = document.getElementById('colors');
+  var elLevel   = document.getElementById('level');
+  var elCellMode= document.getElementById('cellmode');
+  var elBadges  = document.getElementById('showBadges');
+  var elDedupe  = document.getElementById('dedupe');
+  var elParse   = document.getElementById('parseBtn');
+  var elChips   = document.getElementById('chips');
+  var elErr     = document.getElementById('err');
+  var elMatrix  = document.getElementById('matrix');
+  var elSummary = document.getElementById('summary');
+  var elBest    = document.getElementById('best');
+
+  var MAX_COLORS = 16;
+
+  // --- hex parsing ---
+  function normHex(raw){
+    var h = raw.trim().replace(/^#/, '');
+    if(/^[0-9a-fA-F]{3}$/.test(h)){
+      h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    } else if(/^[0-9a-fA-F]{4}$/.test(h)){ // rgba short -> drop alpha
+      h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+    } else if(/^[0-9a-fA-F]{8}$/.test(h)){ // rrggbbaa -> drop alpha
+      h = h.slice(0,6);
+    } else if(!/^[0-9a-fA-F]{6}$/.test(h)){
+      return null;
+    }
+    return '#'+h.toLowerCase();
+  }
+
+  function parseColors(text){
+    var tokens = text.split(/[\s,;]+/).filter(Boolean);
+    var out = [], seen = {}, bad = [];
+    for(var i=0;i<tokens.length;i++){
+      var n = normHex(tokens[i]);
+      if(!n){ bad.push(tokens[i]); continue; }
+      if(seen[n]) continue;
+      seen[n] = true;
+      out.push(n);
+      if(out.length >= MAX_COLORS) break;
+    }
+    return { colors: out, bad: bad };
+  }
+
+  // --- WCAG luminance + contrast ---
+  function channelLin(v){
+    var c = v / 255;
+    return c <= 0.03928 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4);
+  }
+  function luminance(hex){
+    var r = parseInt(hex.substr(1,2),16);
+    var g = parseInt(hex.substr(3,2),16);
+    var b = parseInt(hex.substr(5,2),16);
+    return 0.2126*channelLin(r) + 0.7152*channelLin(g) + 0.0722*channelLin(b);
+  }
+  function contrast(l1, l2){
+    var hi = Math.max(l1,l2), lo = Math.min(l1,l2);
+    return (hi + 0.05) / (lo + 0.05);
+  }
+
+  // thresholds
+  function thresholds(level){
+    return level === 'AAA'
+      ? { normal:7.0, large:4.5, ui:3.0 }
+      : { normal:4.5, large:3.0, ui:3.0 };
+  }
+
+  function classify(ratio, th){
+    return {
+      normal: ratio >= th.normal,
+      large:  ratio >= th.large,
+      ui:     ratio >= th.ui
+    };
+  }
+
+  function renderChips(colors){
+    elChips.innerHTML = '';
+    colors.forEach(function(c){
+      var span = document.createElement('span');
+      span.className = 'chip';
+      span.innerHTML = '<span class="sw" style="background:'+c+'"></span>'+c;
+      elChips.appendChild(span);
+    });
+  }
+
+  function cellClass(cls, mode){
+    // returns background class based on selected shading mode
+    if(mode === 'ui') return cls.ui ? 'cell-pass' : 'cell-fail';
+    if(mode === 'large') return cls.large ? 'cell-pass' : 'cell-fail';
+    // normal
+    if(cls.normal) return 'cell-pass';
+    if(cls.large)  return 'cell-warn';
+    return 'cell-fail';
+  }
+
+  function badge(label, ok){
+    return '<span class="badge '+(ok?'b-pass':'b-fail')+'">'+label+(ok?' ✓':' ✗')+'</span>';
+  }
+
+  function render(){
+    var parsed = parseColors(elColors.value);
+    var colors = parsed.colors;
+
+    if(parsed.bad.length){
+      elErr.textContent = 'Ignored invalid: ' + parsed.bad.slice(0,6).join(', ') + (parsed.bad.length>6?' …':'');
+    } else {
+      elErr.textContent = '';
+    }
+
+    renderChips(colors);
+
+    if(colors.length < 2){
+      elMatrix.innerHTML = '';
+      elSummary.innerHTML = '';
+      elBest.innerHTML = '';
+      elErr.textContent = 'Enter at least 2 valid hex colors to build the matrix.';
+      return;
+    }
+
+    var level = elLevel.value;
+    var th = thresholds(level);
+    var mode = elCellMode.value;
+    var showBadges = elBadges.checked;
+    var dedupe = elDedupe.checked;
+
+    var lums = colors.map(luminance);
+
+    // header
+    var html = '<thead><tr><th class="corner">FG ↓ &nbsp;/&nbsp; BG →</th>';
+    colors.forEach(function(c){
+      html += '<th class="col"><span class="swdot" style="background:'+c+'"></span>'+c+'</th>';
+    });
+    html += '</tr></thead><tbody>';
+
+    var passNormal=0, passLarge=0, passUI=0, total=0;
+    var best = null;
+
+    for(var i=0;i<colors.length;i++){
+      html += '<tr><th class="row"><span class="swdot" style="background:'+colors[i]+'"></span>'+colors[i]+'</th>';
+      for(var j=0;j<colors.length;j++){
+        if(i===j){
+          html += '<td class="diag">&mdash;</td>';
+          continue;
+        }
+        var ratio = contrast(lums[i], lums[j]);
+        var cls = classify(ratio, th);
+        var bgCls = cellClass(cls, mode);
+
+        // stats: count each ordered pair once; if dedupe, only i<j (symmetric)
+        var countThis = dedupe ? (i < j) : true;
+        if(countThis){
+          total++;
+          if(cls.normal) passNormal++;
+          if(cls.large)  passLarge++;
+          if(cls.ui)     passUI++;
+          if(!best || ratio > best.ratio){
+            best = { ratio:ratio, fg:colors[i], bg:colors[j] };
+          }
+        }
+
+        var preview = '<span class="prev" style="background:'+colors[j]+';color:'+colors[i]+'">Ag</span>';
+        var badges = '';
+        if(showBadges){
+          badges = '<div class="badgeline">'+
+            badge('T', cls.normal)+
+            badge('L', cls.large)+
+            badge('UI', cls.ui)+
+            '</div>';
+        }
+        html += '<td class="cell '+bgCls+'" title="'+colors[i]+' on '+colors[j]+' = '+ratio.toFixed(2)+':1">'
+              + '<span class="ratio">'+ratio.toFixed(2)+'</span>'
+              + preview + badges + '</td>';
+      }
+      html += '</tr>';
+    }
+    html += '</tbody>';
+    elMatrix.innerHTML = html;
+
+    // summary
+    function pct(n){ return total ? Math.round(n/total*100) : 0; }
+    elSummary.innerHTML =
+      stat(passNormal+'/'+total, 'Pass normal text ('+th.normal.toFixed(1)+':1) &middot; '+pct(passNormal)+'%') +
+      stat(passLarge+'/'+total, 'Pass large text ('+th.large.toFixed(1)+':1) &middot; '+pct(passLarge)+'%') +
+      stat(passUI+'/'+total, 'Pass UI / non-text (3:1) &middot; '+pct(passUI)+'%') +
+      stat(colors.length+' colors', (dedupe? 'Unordered pairs: ':'Ordered pairs: ')+total);
+
+    if(best){
+      elBest.innerHTML = 'Highest-contrast pair: <code>'+best.fg+'</code> text on <code>'+best.bg+
+        '</code> background &rarr; <strong>'+best.ratio.toFixed(2)+':1</strong> '+
+        '<span class="chip" style="vertical-align:middle"><span class="sw" style="background:'+best.bg+'"></span>'+
+        '<span style="color:'+best.fg+';background:'+best.bg+';padding:1px 8px;border-radius:12px">Sample text</span></span>';
+    } else {
+      elBest.innerHTML = '';
+    }
+  }
+
+  function stat(big, small){
+    return '<div class="stat"><b>'+big+'</b><small>'+small+'</small></div>';
+  }
+
+  // events
+  elColors.addEventListener('input', render);
+  elLevel.addEventListener('change', render);
+  elCellMode.addEventListener('change', render);
+  elBadges.addEventListener('change', render);
+  elDedupe.addEventListener('change', render);
+  elParse.addEventListener('click', render);
+
+  // initial
+  render();
+})();
+</script>
+</body>
+</html>

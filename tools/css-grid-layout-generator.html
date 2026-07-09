@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSS Grid Layout Generator &amp; Template Builder</title>
+<meta name="description" content="Visually build grid-template-columns/rows with fr, px, %, minmax and repeat(), place items by drag, and copy production-ready CSS Grid code instantly.">
+<link rel="canonical" href="https://gen8x.com/tools/css-grid-layout-generator">
+<meta property="og:title" content="CSS Grid Layout Generator & Template Builder">
+<meta property="og:description" content="Visually build grid-template-columns/rows with fr, px, %, minmax and repeat(), place items by drag, and copy production-ready CSS Grid code instantly.">
+<meta property="og:url" content="https://gen8x.com/tools/css-grid-layout-generator">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "CSS Grid Layout Generator & Template Builder",
+      "url": "https://gen8x.com/tools/css-grid-layout-generator",
+      "description": "Visually build grid-template-columns/rows with fr, px, %, minmax and repeat(), place items by drag, and copy production-ready CSS Grid code instantly.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Michael Lip", "url": "https://zovo.one" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gen8x.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://gen8x.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "CSS Grid Layout Generator & Template Builder", "item": "https://gen8x.com/tools/css-grid-layout-generator" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --border:#2b3444;
+    --text:#e6edf3; --muted:#9aa7b4; --accent:#58c4ff; --accent2:#7ee787;
+    --track:#233047; --cell:#20304a; --cellsel:#1f6feb;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; font-size:16px;
+  }
+  nav{display:flex; gap:18px; padding:14px 20px; border-bottom:1px solid var(--border); background:var(--panel)}
+  nav a{color:var(--accent); text-decoration:none; font-weight:600; font-size:14px}
+  nav a:hover{text-decoration:underline}
+  main{max-width:1080px; margin:0 auto; padding:22px 20px 60px}
+  h1{font-size:1.9rem; line-height:1.25; margin:.4em 0 .3em}
+  h2{font-size:1.3rem; margin:1.6em 0 .5em; border-bottom:1px solid var(--border); padding-bottom:.3em}
+  p.intro{color:var(--muted); font-size:1.05rem}
+  section{margin-top:20px}
+  .grid-layout{display:grid; grid-template-columns:1fr; gap:18px}
+  @media(min-width:860px){.grid-layout{grid-template-columns:340px 1fr}}
+  .panel{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px}
+  label{display:block; font-size:13px; font-weight:600; color:var(--muted); margin:12px 0 5px; text-transform:uppercase; letter-spacing:.03em}
+  label:first-child{margin-top:0}
+  input[type=text],input[type=number],select,textarea{
+    width:100%; background:var(--panel2); color:var(--text); border:1px solid var(--border);
+    border-radius:8px; padding:9px 11px; font-size:14px; font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  }
+  input:focus,select:focus,textarea:focus{outline:none; border-color:var(--accent)}
+  .row{display:flex; gap:10px}
+  .row>div{flex:1}
+  .hint{font-size:12px; color:var(--muted); margin-top:4px; font-weight:400; text-transform:none; letter-spacing:0}
+  button{
+    background:var(--panel2); color:var(--text); border:1px solid var(--border);
+    border-radius:8px; padding:8px 12px; font-size:13px; cursor:pointer; font-weight:600;
+  }
+  button:hover{border-color:var(--accent)}
+  button.primary{background:var(--cellsel); border-color:var(--cellsel); color:#fff}
+  .btnrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
+  .preview-wrap{overflow:auto}
+  #gridPreview{display:grid; gap:8px; background:var(--panel2); border:1px dashed var(--border); border-radius:10px; padding:10px; min-height:180px}
+  .cell{
+    background:var(--cell); border:1px solid var(--border); border-radius:8px;
+    min-height:44px; display:flex; align-items:center; justify-content:center;
+    font-size:12px; color:var(--muted); cursor:pointer; user-select:none; position:relative;
+    font-family:"SF Mono",ui-monospace,monospace;
+  }
+  .cell:hover{border-color:var(--accent)}
+  .cell.sel{background:var(--cellsel); color:#fff; border-color:var(--accent)}
+  .cell .tw{position:absolute; top:3px; left:5px; font-size:10px; color:var(--accent2); opacity:.85}
+  .resolved{margin-top:12px}
+  .barrow{display:flex; align-items:center; gap:8px; margin:4px 0; font-size:12px; font-family:"SF Mono",ui-monospace,monospace}
+  .barrow .lab{width:130px; color:var(--muted); flex:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .bar{height:16px; background:linear-gradient(90deg,var(--accent),#3a7bd5); border-radius:4px; min-width:2px}
+  .barrow .px{width:70px; text-align:right; color:var(--accent2); flex:none}
+  pre{
+    background:#0a0e14; border:1px solid var(--border); border-radius:10px; padding:14px;
+    overflow:auto; font-size:13px; line-height:1.5; font-family:"SF Mono",ui-monospace,Menlo,monospace;
+    color:#d6e2ee; margin:0;
+  }
+  .tok-prop{color:#7ee787}
+  .tok-val{color:#a5d6ff}
+  .tok-sel{color:#ffa657}
+  .related a{display:inline-block; margin:4px 12px 4px 0; color:var(--accent)}
+  footer{border-top:1px solid var(--border); margin-top:40px; padding:22px 20px; color:var(--muted); font-size:14px; text-align:center}
+  footer a{color:var(--accent); text-decoration:none; margin:0 8px}
+  code{background:var(--panel2); padding:1px 5px; border-radius:4px; font-size:13px; font-family:"SF Mono",ui-monospace,monospace; color:#a5d6ff}
+  .prose{color:#c3ced9}
+  .copied{color:var(--accent2); font-size:12px; margin-left:8px}
+  .toolbar{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:10px}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/">Home</a>
+  <a href="/tools/">All Tools</a>
+</nav>
+<main>
+  <h1>Build CSS Grid Templates Visually and Export Clean Code</h1>
+  <p class="intro">Define <code>grid-template-columns</code> and <code>grid-template-rows</code> using <code>fr</code>, <code>px</code>, <code>%</code>, <code>minmax()</code> and <code>repeat()</code>. Click cells to group them into named grid areas, watch the exact resolved pixel width of every track against your container, then copy production-ready CSS.</p>
+
+  <section id="tool">
+    <div class="grid-layout">
+      <div class="panel">
+        <label for="cols">grid-template-columns</label>
+        <input type="text" id="cols" value="1fr 2fr minmax(120px, 1fr)">
+        <div class="hint">e.g. <code>repeat(3, 1fr)</code>, <code>200px 1fr</code>, <code>minmax(100px,2fr)</code></div>
+
+        <label for="rows">grid-template-rows</label>
+        <input type="text" id="rows" value="80px 1fr 60px">
+        <div class="hint">Supports the same units as columns.</div>
+
+        <div class="row">
+          <div>
+            <label for="cw">Container width (px)</label>
+            <input type="number" id="cw" value="960" min="100" max="4000" step="10">
+          </div>
+          <div>
+            <label for="gap">Gap (px)</label>
+            <input type="number" id="gap" value="8" min="0" max="200" step="1">
+          </div>
+        </div>
+
+        <label>Area placement</label>
+        <div class="hint" style="margin-top:0">Click two cells to define a rectangle, then name it.</div>
+        <div class="row" style="margin-top:8px">
+          <div><input type="text" id="areaName" placeholder="area name e.g. header"></div>
+          <div style="flex:none"><button id="addArea">Add area</button></div>
+        </div>
+        <div class="btnrow">
+          <button id="clearSel">Clear selection</button>
+          <button id="clearAreas">Reset areas</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <strong style="font-size:14px">Live preview</strong>
+          <span class="hint" id="dims"></span>
+        </div>
+        <div class="preview-wrap">
+          <div id="gridPreview"></div>
+        </div>
+
+        <div class="resolved">
+          <strong style="font-size:13px; color:var(--muted)">Resolved column widths</strong>
+          <div id="colBars"></div>
+          <strong style="font-size:13px; color:var(--muted); display:block; margin-top:10px">Resolved row heights</strong>
+          <div id="rowBars"></div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Generated CSS <span id="copyMsg" class="copied"></span></h2>
+    <div class="toolbar">
+      <button class="primary" id="copyBtn">Copy CSS</button>
+    </div>
+    <pre id="output"></pre>
+  </section>
+
+  <section class="prose">
+    <h2>How the fractional-space algorithm works</h2>
+    <p>CSS Grid resolves a track list in a fixed order, and this generator reproduces that math exactly. First it measures the <em>gap space</em>: for <code>n</code> tracks there are <code>n − 1</code> gaps, so <code>freeSpace = containerWidth − (n − 1) × gap</code>. Next it subtracts every <strong>definite</strong> track from that free space: a <code>px</code> value is taken literally, a <code>%</code> value resolves against the container width, and a <code>minmax(min, max)</code> reserves its minimum during this pass. Whatever remains is the <em>leftover</em> that flexible <code>fr</code> tracks compete for.</p>
+    <p>The distribution then follows the fractional rule: <code>fr_width = leftover × (thisFr ÷ sumOfAllFr)</code>. A track written as <code>2fr</code> therefore receives twice the slice of a <code>1fr</code> track, but only after fixed and percentage tracks have taken their share. For a <code>minmax(min, max)</code> track the resolved size is clamped so it never drops below <code>min</code> nor exceeds <code>max</code>, exactly like the real layout engine. The <code>repeat(count, tracklist)</code> syntax is expanded inline before any of this runs, so <code>repeat(3, 1fr)</code> becomes three independent <code>1fr</code> tracks.</p>
+    <p>The bars beneath the preview show each track's final computed pixel size so you can verify a design before shipping it. When you select cells and name an area, the tool emits a matching <code>grid-template-areas</code> string plus per-item <code>grid-column</code> / <code>grid-row</code> shorthands using line numbers, giving you copy-ready code for both modern area-based and classic line-based layouts. Everything runs locally in your browser — no data leaves the page.</p>
+    <p class="related">
+      <strong>Related Tools:</strong>
+      <a href="/tools/flexbox-playground">Flexbox Playground</a>
+      <a href="/tools/css-clamp-calculator">CSS clamp() Calculator</a>
+      <a href="/tools/box-shadow-generator">Box Shadow Generator</a>
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div>
+    <a href="/">Home</a>
+    <a href="/tools/">All Tools</a>
+    <a href="/tools/css-grid-layout-generator">CSS Grid Generator</a>
+  </div>
+  <div style="margin-top:8px">© 2026 gen8x.com · Built by <a href="https://zovo.one">Michael Lip</a></div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var colsEl=document.getElementById('cols');
+  var rowsEl=document.getElementById('rows');
+  var cwEl=document.getElementById('cw');
+  var gapEl=document.getElementById('gap');
+  var previewEl=document.getElementById('gridPreview');
+  var colBarsEl=document.getElementById('colBars');
+  var rowBarsEl=document.getElementById('rowBars');
+  var outputEl=document.getElementById('output');
+  var dimsEl=document.getElementById('dims');
+  var areaNameEl=document.getElementById('areaName');
+
+  var areas=[]; // {name, r1,c1,r2,c2}
+  var sel=[];   // selected cell indices {r,c}
+
+  // ---- token parsing ----
+  // Split a track list on top-level whitespace, keeping ()-groups intact.
+  function splitTracks(str){
+    var out=[], depth=0, cur='';
+    for(var i=0;i<str.length;i++){
+      var ch=str[i];
+      if(ch==='(') depth++;
+      if(ch===')') depth--;
+      if((ch===' '||ch==='\t'||ch==='\n') && depth===0){
+        if(cur.trim()!=='') out.push(cur.trim());
+        cur='';
+      } else { cur+=ch; }
+    }
+    if(cur.trim()!=='') out.push(cur.trim());
+    return out;
+  }
+
+  // Expand repeat(n, tracklist) inline. Returns array of raw track strings.
+  function expandTracks(str){
+    var tokens=splitTracks(str);
+    var out=[];
+    for(var i=0;i<tokens.length;i++){
+      var t=tokens[i];
+      var m=/^repeat\(\s*(\d+)\s*,(.+)\)$/i.exec(t);
+      if(m){
+        var count=parseInt(m[1],10);
+        var inner=expandTracks(m[2].trim());
+        if(count>0 && count<=200){
+          for(var k=0;k<count;k++){ out=out.concat(inner); }
+        }
+      } else {
+        out.push(t);
+      }
+    }
+    return out;
+  }
+
+  // Classify one track into a spec object.
+  function parseTrack(raw){
+    var t=raw.trim();
+    var mm=/^minmax\(\s*([^,]+?)\s*,\s*([^)]+?)\s*\)$/i.exec(t);
+    if(mm){
+      return { type:'minmax', min:parseLen(mm[1]), max:parseLen(mm[2]), raw:t };
+    }
+    var len=parseLen(t);
+    return { type:len.type, val:len.val, raw:t };
+  }
+
+  // parseLen returns {type:'px'|'fr'|'pct'|'auto', val:number}
+  function parseLen(s){
+    s=s.trim();
+    var m;
+    if(/^auto$/i.test(s)) return {type:'auto', val:0};
+    if((m=/^([\d.]+)fr$/i.exec(s))) return {type:'fr', val:parseFloat(m[1])};
+    if((m=/^([\d.]+)px$/i.exec(s))) return {type:'px', val:parseFloat(m[1])};
+    if((m=/^([\d.]+)%$/.exec(s))) return {type:'pct', val:parseFloat(m[1])};
+    if((m=/^([\d.]+)(em|rem)$/i.exec(s))) return {type:'px', val:parseFloat(m[1])*16};
+    if((m=/^([\d.]+)$/.exec(s))) return {type:'px', val:parseFloat(m[1])};
+    return {type:'px', val:0};
+  }
+
+  // Core fractional-space distribution.
+  // specs: array of parsed track objects. container: px. gap: px.
+  // returns array of resolved px widths.
+  function resolve(specs, container, gap){
+    var n=specs.length;
+    if(n===0) return [];
+    var gapSpace=(n-1)*gap;
+    var free=container-gapSpace;
+    if(free<0) free=0;
+
+    var sizes=new Array(n);
+    var frSum=0;
+    var fixedTotal=0;
+
+    // Pass 1: definite tracks + minmax minimums; accumulate fr weight.
+    for(var i=0;i<n;i++){
+      var sp=specs[i];
+      if(sp.type==='fr'){
+        frSum+=sp.val; sizes[i]=0;
+      } else if(sp.type==='px'){
+        sizes[i]=sp.val; fixedTotal+=sp.val;
+      } else if(sp.type==='pct'){
+        sizes[i]=container*sp.val/100; fixedTotal+=sizes[i];
+      } else if(sp.type==='auto'){
+        // treat auto like 1fr for preview purposes
+        frSum+=1; sizes[i]=0; sp._autoFr=true;
+      } else if(sp.type==='minmax'){
+        var minPx=lenToPx(sp.min,container);
+        sizes[i]=minPx; fixedTotal+=minPx;
+        if(sp.max.type==='fr'){ frSum+=sp.max.val; }
+      }
+    }
+
+    var leftover=free-fixedTotal;
+    if(leftover<0) leftover=0;
+
+    // Pass 2: distribute leftover across fr / minmax-fr tracks.
+    for(var j=0;j<n;j++){
+      var s=specs[j];
+      if(s.type==='fr'){
+        sizes[j]=frSum>0 ? leftover*(s.val/frSum) : 0;
+      } else if(s.type==='auto' && s._autoFr){
+        sizes[j]=frSum>0 ? leftover*(1/frSum) : 0;
+      } else if(s.type==='minmax' && s.max.type==='fr'){
+        var extra=frSum>0 ? leftover*(s.max.val/frSum) : 0;
+        var target=sizes[j]+extra; // min + fr share
+        var maxCap=Infinity;
+        sizes[j]=Math.min(Math.max(target, lenToPx(s.min,container)), maxCap);
+      } else if(s.type==='minmax'){
+        // fixed/pct max: clamp between min and max
+        var mn=lenToPx(s.min,container), mx=lenToPx(s.max,container);
+        sizes[j]=Math.min(Math.max(sizes[j],mn),mx);
+      }
+    }
+    return sizes;
+  }
+
+  function lenToPx(len, container){
+    if(!len) return 0;
+    if(len.type==='px') return len.val;
+    if(len.type==='pct') return container*len.val/100;
+    if(len.type==='fr') return 0;
+    return 0;
+  }
+
+  function round(v){ return Math.round(v*10)/10; }
+
+  // ---- rendering ----
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  function inSelectedRect(r,c){
+    if(sel.length===0) return false;
+    var r1=sel[0].r,c1=sel[0].c,r2=sel.length>1?sel[1].r:sel[0].r,c2=sel.length>1?sel[1].c:sel[0].c;
+    var rmin=Math.min(r1,r2),rmax=Math.max(r1,r2),cmin=Math.min(c1,c2),cmax=Math.max(c1,c2);
+    return r>=rmin&&r<=rmax&&c>=cmin&&c<=cmax;
+  }
+
+  function areaAt(r,c){
+    for(var i=0;i<areas.length;i++){
+      var a=areas[i];
+      if(r>=a.r1&&r<=a.r2&&c>=a.c1&&c<=a.c2) return a.name;
+    }
+    return null;
+  }
+
+  function render(){
+    var container=Math.max(100, parseFloat(cwEl.value)||960);
+    var gap=Math.max(0, parseFloat(gapEl.value)||0);
+
+    var colSpecs=expandTracks(colsEl.value||'1fr').map(parseTrack);
+    var rowSpecs=expandTracks(rowsEl.value||'1fr').map(parseTrack);
+    var nc=colSpecs.length, nr=rowSpecs.length;
+
+    var colPx=resolve(colSpecs, container, gap);
+    var rowContainer=Math.max(120, (rowSpecs.length*70));
+    var rowPx=resolve(rowSpecs, rowContainer, gap);
+
+    // preview grid
+    previewEl.style.gridTemplateColumns=colsEl.value||'1fr';
+    previewEl.style.gridTemplateRows=rowsEl.value||'1fr';
+    previewEl.style.gap=gap+'px';
+
+    var html='';
+    for(var r=0;r<nr;r++){
+      for(var c=0;c<nc;c++){
+        var an=areaAt(r,c);
+        var selc=inSelectedRect(r,c)?' sel':'';
+        html+='<div class="cell'+selc+'" data-r="'+r+'" data-c="'+c+'">';
+        if(an) html+='<span class="tw">'+esc(an)+'</span>';
+        html+=(r+1)+','+(c+1)+'</div>';
+      }
+    }
+    previewEl.innerHTML=html;
+
+    dimsEl.textContent=nc+' cols × '+nr+' rows · '+container+'px container';
+
+    // bars
+    colBarsEl.innerHTML=barSet(colSpecs,colPx,container);
+    rowBarsEl.innerHTML=barSet(rowSpecs,rowPx,rowContainer);
+
+    generateCSS(colSpecs,rowSpecs,gap);
+    bindCells();
+  }
+
+  function barSet(specs,px,container){
+    var max=Math.max.apply(null,px.concat([1]));
+    var h='';
+    for(var i=0;i<specs.length;i++){
+      var w=Math.max(2,(px[i]/max)*100);
+      h+='<div class="barrow"><span class="lab" title="'+esc(specs[i].raw)+'">'+esc(specs[i].raw)+'</span>'
+        +'<span class="bar" style="width:'+w+'%"></span>'
+        +'<span class="px">'+round(px[i])+'px</span></div>';
+    }
+    return h;
+  }
+
+  function bindCells(){
+    var cells=previewEl.querySelectorAll('.cell');
+    for(var i=0;i<cells.length;i++){
+      cells[i].addEventListener('click',onCellClick);
+    }
+  }
+
+  function onCellClick(e){
+    var r=parseInt(e.currentTarget.getAttribute('data-r'),10);
+    var c=parseInt(e.currentTarget.getAttribute('data-c'),10);
+    if(sel.length>=2) sel=[];
+    sel.push({r:r,c:c});
+    render();
+  }
+
+  // ---- CSS generation ----
+  function generateCSS(colSpecs,rowSpecs,gap){
+    var cols=colsEl.value.trim()||'1fr';
+    var rows=rowsEl.value.trim()||'1fr';
+    var nc=colSpecs.length, nr=rowSpecs.length;
+
+    var lines=[];
+    lines.push(['.grid {','']);
+    lines.push([P('display'),V('grid')]);
+    lines.push([P('grid-template-columns'),V(cols)]);
+    lines.push([P('grid-template-rows'),V(rows)]);
+    if(gap>0) lines.push([P('gap'),V(gap+'px')]);
+
+    // grid-template-areas if areas defined and cover a clean rectangle grid
+    var areasStr=buildAreasMatrix(nr,nc);
+    if(areasStr){
+      lines.push([P('grid-template-areas'),areasStr]);
+    }
+    var out='<span class="tok-sel">.grid</span> {\n';
+    out+='  <span class="tok-prop">display</span>: <span class="tok-val">grid</span>;\n';
+    out+='  <span class="tok-prop">grid-template-columns</span>: <span class="tok-val">'+esc(cols)+'</span>;\n';
+    out+='  <span class="tok-prop">grid-template-rows</span>: <span class="tok-val">'+esc(rows)+'</span>;\n';
+    if(gap>0) out+='  <span class="tok-prop">gap</span>: <span class="tok-val">'+gap+'px</span>;\n';
+    if(areasStr) out+='  <span class="tok-prop">grid-template-areas</span>:\n'+areasStr+';\n';
+    out+='}\n';
+
+    // per-area placement shorthands
+    for(var i=0;i<areas.length;i++){
+      var a=areas[i];
+      out+='\n<span class="tok-sel">.'+esc(a.name)+'</span> {\n';
+      out+='  <span class="tok-prop">grid-area</span>: <span class="tok-val">'+esc(a.name)+'</span>;\n';
+      out+='  <span class="tok-prop">grid-column</span>: <span class="tok-val">'+(a.c1+1)+' / '+(a.c2+2)+'</span>;\n';
+      out+='  <span class="tok-prop">grid-row</span>: <span class="tok-val">'+(a.r1+1)+' / '+(a.r2+2)+'</span>;\n';
+      out+='}\n';
+    }
+
+    outputEl.innerHTML=out;
+    outputEl._plain=htmlToPlain(out);
+  }
+
+  function P(x){return x;} function V(x){return x;}
+
+  // Build a grid-template-areas string. Cells not in a named area become ".".
+  function buildAreasMatrix(nr,nc){
+    if(areas.length===0) return '';
+    var rowsOut=[];
+    for(var r=0;r<nr;r++){
+      var cellsRow=[];
+      for(var c=0;c<nc;c++){
+        var name=null;
+        for(var i=0;i<areas.length;i++){
+          var a=areas[i];
+          if(r>=a.r1&&r<=a.r2&&c>=a.c1&&c<=a.c2){name=a.name;break;}
+        }
+        cellsRow.push(name||'.');
+      }
+      rowsOut.push('    "'+cellsRow.join(' ')+'"');
+    }
+    return rowsOut.map(function(l){return '<span class="tok-val">'+esc(l)+'</span>';}).join('\n');
+  }
+
+  function htmlToPlain(h){
+    var tmp=document.createElement('div');
+    tmp.innerHTML=h;
+    return tmp.textContent;
+  }
+
+  // ---- controls ----
+  document.getElementById('addArea').addEventListener('click',function(){
+    var name=(areaNameEl.value||'').trim().replace(/[^a-zA-Z0-9_-]/g,'').replace(/^[-\d]+/,'');
+    if(!name){ areaNameEl.focus(); areaNameEl.placeholder='enter a valid CSS name'; return; }
+    if(sel.length===0){ return; }
+    var r1=sel[0].r,c1=sel[0].c,r2=sel.length>1?sel[1].r:sel[0].r,c2=sel.length>1?sel[1].c:sel[0].c;
+    areas.push({
+      name:name,
+      r1:Math.min(r1,r2), r2:Math.max(r1,r2),
+      c1:Math.min(c1,c2), c2:Math.max(c1,c2)
+    });
+    sel=[]; areaNameEl.value='';
+    render();
+  });
+
+  document.getElementById('clearSel').addEventListener('click',function(){ sel=[]; render(); });
+  document.getElementById('clearAreas').addEventListener('click',function(){ areas=[]; sel=[]; render(); });
+
+  document.getElementById('copyBtn').addEventListener('click',function(){
+    var txt=outputEl._plain||outputEl.textContent;
+    var msg=document.getElementById('copyMsg');
+    function ok(){ msg.textContent='Copied!'; setTimeout(function(){msg.textContent='';},1500); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(ok,function(){ fallbackCopy(txt); ok(); });
+    } else { fallbackCopy(txt); ok(); }
+  });
+
+  function fallbackCopy(txt){
+    var ta=document.createElement('textarea');
+    ta.value=txt; document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  [colsEl,rowsEl,cwEl,gapEl].forEach(function(el){
+    el.addEventListener('input',function(){ sel=[]; render(); });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

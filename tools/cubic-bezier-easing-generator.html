@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cubic Bezier Easing Generator for CSS Animations</title>
+<meta name="description" content="Drag control points to craft custom cubic-bezier() easing curves. Live-preview motion, read the exact CSS timing-function value, and compare against">
+<link rel="canonical" href="https://gen8x.com/tools/cubic-bezier-easing-generator">
+<meta property="og:title" content="Cubic Bezier Easing Generator for CSS Animations">
+<meta property="og:description" content="Drag control points to craft custom cubic-bezier() easing curves. Live-preview motion, read the exact CSS timing-function value, and compare against">
+<meta property="og:url" content="https://gen8x.com/tools/cubic-bezier-easing-generator">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Cubic Bezier Easing Generator for CSS Animations",
+      "url": "https://gen8x.com/tools/cubic-bezier-easing-generator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "description": "Drag control points to craft custom cubic-bezier() easing curves, live-preview motion, and read the exact CSS timing-function value.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Michael Lip", "url": "https://zovo.one" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gen8x.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://gen8x.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "Cubic Bezier Easing Generator for CSS Animations", "item": "https://gen8x.com/tools/cubic-bezier-easing-generator" }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --border:#2a3140;
+    --text:#e6edf3; --muted:#9aa7b4; --accent:#58a6ff; --accent2:#f778ba;
+    --p1:#58a6ff; --p2:#f778ba; --grid:#222b38; --good:#3fb950;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{padding:14px 20px;border-bottom:1px solid var(--border);font-size:14px;display:flex;gap:18px}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
+  h1{font-size:1.9rem;line-height:1.2;margin:.4em 0 .3em}
+  h2{font-size:1.3rem;margin:1.8em 0 .5em;border-bottom:1px solid var(--border);padding-bottom:.3em}
+  .lede{color:var(--muted);font-size:1.05rem;max-width:70ch}
+  #tool{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:22px;margin:24px 0}
+  .grid{display:grid;grid-template-columns:320px 1fr;gap:24px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  canvas{background:var(--panel2);border:1px solid var(--border);border-radius:10px;touch-action:none;width:100%;height:auto;cursor:crosshair;display:block}
+  .out{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .value{background:#0b0f16;border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:1.05rem;color:var(--good);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  button.copy{background:var(--accent);color:#04101f;border:0;border-radius:7px;padding:7px 14px;font-weight:600;cursor:pointer;font-size:.85rem}
+  button.copy:hover{filter:brightness(1.1)}
+  .rows{margin-top:16px}
+  .row{display:grid;grid-template-columns:52px 1fr 60px;gap:10px;align-items:center;margin:10px 0}
+  .row label{font-size:.85rem;color:var(--muted);font-family:ui-monospace,monospace}
+  input[type=range]{width:100%;accent-color:var(--accent)}
+  .row .num{font-family:ui-monospace,monospace;font-size:.9rem;text-align:right;color:var(--text)}
+  .preset{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .preset button{background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:20px;padding:6px 13px;font-size:.8rem;cursor:pointer;font-family:ui-monospace,monospace}
+  .preset button:hover{border-color:var(--accent);color:var(--accent)}
+  .demo{margin-top:18px;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:16px}
+  .track{position:relative;height:44px;background:#0b0f16;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+  .ball{position:absolute;top:6px;left:0;width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 14px rgba(88,166,255,.5)}
+  .demo-ctrl{display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+  .demo-ctrl button{background:var(--good);color:#04120a;border:0;border-radius:7px;padding:6px 14px;font-weight:600;cursor:pointer}
+  .demo-ctrl input[type=range]{width:120px}
+  .stat{display:flex;gap:24px;flex-wrap:wrap;margin-top:14px;font-size:.85rem;color:var(--muted);font-family:ui-monospace,monospace}
+  .stat b{color:var(--text)}
+  .note{font-size:.8rem;color:var(--muted);margin-top:8px}
+  .related a{display:inline-block;margin-right:16px}
+  footer{border-top:1px solid var(--border);padding:22px 20px;color:var(--muted);font-size:.85rem;text-align:center}
+  footer a{margin:0 10px}
+  code{background:#0b0f16;border:1px solid var(--border);border-radius:5px;padding:1px 6px;font-size:.9em}
+  p{max-width:74ch}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/">Home</a>
+  <a href="/tools/">Tools</a>
+</nav>
+<div class="wrap">
+  <h1>Craft Custom cubic-bezier() Easing Curves, Visually</h1>
+  <p class="lede">Drag the two control points to shape a timing curve, watch a sample element move in real time, and copy the exact <code>cubic-bezier()</code> value straight into your CSS transitions and keyframe animations.</p>
+
+  <section id="tool">
+    <div class="grid">
+      <div>
+        <canvas id="cv" width="320" height="380" aria-label="Editable cubic bezier curve"></canvas>
+        <div class="preset" id="presets" aria-label="Preset easings">
+          <button data-b="0.25,0.1,0.25,1">ease</button>
+          <button data-b="0.42,0,1,1">ease-in</button>
+          <button data-b="0,0,0.58,1">ease-out</button>
+          <button data-b="0.42,0,0.58,1">ease-in-out</button>
+          <button data-b="0,0,1,1">linear</button>
+          <button data-b="0.68,-0.55,0.27,1.55">back</button>
+          <button data-b="0.34,1.56,0.64,1">overshoot</button>
+        </div>
+      </div>
+      <div>
+        <div class="value out">
+          <span id="css">cubic-bezier(0.25, 0.10, 0.25, 1.00)</span>
+          <button class="copy" id="copy">Copy CSS</button>
+        </div>
+        <div class="rows">
+          <div class="row"><label>P1&nbsp;x</label><input type="range" id="r0" min="0" max="1" step="0.01" value="0.25"><span class="num" id="n0">0.25</span></div>
+          <div class="row"><label>P1&nbsp;y</label><input type="range" id="r1" min="-1" max="2" step="0.01" value="0.10"><span class="num" id="n1">0.10</span></div>
+          <div class="row"><label>P2&nbsp;x</label><input type="range" id="r2" min="0" max="1" step="0.01" value="0.25"><span class="num" id="n2">0.25</span></div>
+          <div class="row"><label>P2&nbsp;y</label><input type="range" id="r3" min="-1" max="2" step="0.01" value="1.00"><span class="num" id="n3">1.00</span></div>
+        </div>
+
+        <div class="demo">
+          <div class="track"><div class="ball" id="ball"></div></div>
+          <div class="demo-ctrl">
+            <button id="play">Replay ▶</button>
+            <span>Duration <span id="durv" class="out">1.0</span>s</span>
+            <input type="range" id="dur" min="0.3" max="3" step="0.1" value="1.0">
+          </div>
+          <div class="stat">
+            <span>progress at 50% time: <b id="mid">—</b></span>
+            <span>peak velocity: <b id="pk">—</b></span>
+            <span>overshoot: <b id="ov">—</b></span>
+          </div>
+          <p class="note">The blue ball is animated by inverting x&rarr;t with Newton-Raphson each frame, exactly as a browser maps elapsed time to animation progress.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <h2>How the curve maps time to motion</h2>
+  <p>A CSS <code>cubic-bezier(x1, y1, x2, y2)</code> defines a curve with fixed endpoints P0 = (0, 0) and P3 = (1, 1) plus two draggable control points P1 and P2. The horizontal axis is the fraction of elapsed time, and the vertical axis is animation progress. The catch is that the curve is <em>parametric</em>: both coordinates are functions of a hidden parameter t, given by the cubic Bezier basis <code>B(t) = 3(1&minus;t)&sup2;t&middot;P1 + 3(1&minus;t)t&sup2;&middot;P2 + t&sup3;</code>. Because x(t) is not the same as the time fraction, the browser must first solve x(t) = elapsed for t, then evaluate y(t) to get the progress.</p>
+  <p>This tool reproduces that solver. For a target x it runs a few Newton-Raphson iterations using the analytic derivative <code>x&prime;(t) = 3(1&minus;t)&sup2;(x1) + 6(1&minus;t)t(x2&minus;x1) + 3t&sup2;(1&minus;x2)</code>, then falls back to a bisection (binary search) whenever the slope is near zero or the guess escapes [0, 1] &mdash; the same numerically-robust hybrid WebKit uses in <code>UnitBezier</code>. The resulting y is the eased progress. Sampling this across the frame produces the ball's live position, the mid-point progress readout, the peak instantaneous velocity, and how far the curve overshoots past 1 (the springy "back" effect). Only y is allowed outside [0, 1]; x stays clamped to [0, 1] because time cannot run backwards, which is why the P1x and P2x sliders are bounded there. Everything runs locally in your browser with no network calls, so you can iterate on an easing curve in a tight loop and paste the finished timing function directly into a transition or <code>@keyframes</code> rule.</p>
+
+  <h2>Related Tools</h2>
+  <p class="related">
+    <a href="/tools/css-gradient-generator">CSS Gradient Generator</a>
+    <a href="/tools/box-shadow-generator">Box Shadow Generator</a>
+    <a href="/tools/keyframe-animation-builder">Keyframe Animation Builder</a>
+  </p>
+</div>
+
+<footer>
+  <div>
+    <a href="/">Home</a>
+    <a href="/tools/">All Tools</a>
+    <a href="https://zovo.one">About</a>
+  </div>
+  <div style="margin-top:8px">&copy; 2026 gen8x.com</div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+  var R=[document.getElementById('r0'),document.getElementById('r1'),document.getElementById('r2'),document.getElementById('r3')];
+  var N=[document.getElementById('n0'),document.getElementById('n1'),document.getElementById('n2'),document.getElementById('n3')];
+  var cssEl=document.getElementById('css');
+  var ball=document.getElementById('ball'), track=document.querySelector('.track');
+  var durEl=document.getElementById('dur'), durV=document.getElementById('durv');
+  var midEl=document.getElementById('mid'), pkEl=document.getElementById('pk'), ovEl=document.getElementById('ov');
+
+  // state: [x1,y1,x2,y2]
+  var B=[0.25,0.10,0.25,1.00];
+
+  // --- Bezier math: cubic with fixed endpoints 0 and 1 on each axis ---
+  function bez(a1,a2,t){ // value of coordinate at parameter t; endpoints 0..1
+    var mt=1-t;
+    return 3*mt*mt*t*a1 + 3*mt*t*t*a2 + t*t*t;
+  }
+  function bezDeriv(a1,a2,t){
+    var mt=1-t;
+    return 3*mt*mt*a1 + 6*mt*t*(a2-a1) + 3*t*t*(1-a2);
+  }
+  // invert x -> t (Newton-Raphson + bisection fallback), then return y
+  function ease(x1,y1,x2,y2,x){
+    if(x<=0) return 0;
+    if(x>=1) return 1;
+    var t=x, i, d, xe;
+    for(i=0;i<8;i++){
+      xe=bez(x1,x2,t)-x;
+      if(Math.abs(xe)<1e-6) break;
+      d=bezDeriv(x1,x2,t);
+      if(Math.abs(d)<1e-6) break;
+      t=t-xe/d;
+    }
+    if(t<0||t>1||Math.abs(bez(x1,x2,t)-x)>1e-6){ // bisection
+      var lo=0,hi=1;
+      t=x;
+      for(i=0;i<40;i++){
+        xe=bez(x1,x2,t);
+        if(Math.abs(xe-x)<1e-7) break;
+        if(xe<x) lo=t; else hi=t;
+        t=(lo+hi)/2;
+      }
+    }
+    return bez(y1,y2,t);
+  }
+
+  var W=cv.width, H=cv.height, PAD=40, GW=W-2*PAD, GH=H-2*PAD;
+  // curve occupies the middle square; y drawn inverted (progress up)
+  function toPx(px,py){ return [PAD+px*GW, PAD+(1-py)*GH]; }
+  function toNorm(cx,cy){ return [(cx-PAD)/GW, 1-(cy-PAD)/GH]; }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // grid
+    ctx.strokeStyle=getCss('--grid'); ctx.lineWidth=1;
+    for(var g=0;g<=4;g++){
+      var gx=PAD+g/4*GW, gy=PAD+g/4*GH;
+      ctx.beginPath();ctx.moveTo(gx,PAD);ctx.lineTo(gx,PAD+GH);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(PAD,gy);ctx.lineTo(PAD+GW,gy);ctx.stroke();
+    }
+    // axes labels
+    ctx.fillStyle=getCss('--muted');ctx.font='11px monospace';
+    ctx.fillText('time →',PAD+GW-46,PAD+GH+22);
+    ctx.save();ctx.translate(PAD-24,PAD+18);ctx.rotate(-Math.PI/2);ctx.fillText('← progress',-40,0);ctx.restore();
+    // handle lines
+    var p0=toPx(0,0), p3=toPx(1,1);
+    var c1=toPx(B[0],B[1]), c2=toPx(B[2],B[3]);
+    ctx.strokeStyle=getCss('--p1');ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(p0[0],p0[1]);ctx.lineTo(c1[0],c1[1]);ctx.stroke();
+    ctx.strokeStyle=getCss('--p2');
+    ctx.beginPath();ctx.moveTo(p3[0],p3[1]);ctx.lineTo(c2[0],c2[1]);ctx.stroke();
+    // curve
+    ctx.strokeStyle=getCss('--text');ctx.lineWidth=2.5;ctx.beginPath();
+    for(var s=0;s<=100;s++){
+      var tt=s/100, xx=bez(B[0],B[2],tt), yy=bez(B[1],B[3],tt);
+      var pp=toPx(xx,yy);
+      if(s===0)ctx.moveTo(pp[0],pp[1]);else ctx.lineTo(pp[0],pp[1]);
+    }
+    ctx.stroke();
+    // endpoints
+    dot(p0[0],p0[1],getCss('--muted'),4);
+    dot(p3[0],p3[1],getCss('--muted'),4);
+    // control handles
+    dot(c1[0],c1[1],getCss('--p1'),8);
+    dot(c2[0],c2[1],getCss('--p2'),8);
+  }
+  function dot(x,y,c,r){ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();}
+  function getCss(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()||'#888';}
+
+  function fmt(n){return (Math.round(n*100)/100).toFixed(2);}
+  function sync(fromSliders){
+    if(fromSliders){for(var i=0;i<4;i++)B[i]=parseFloat(R[i].value);}
+    else{for(var j=0;j<4;j++)R[j].value=B[j];}
+    for(var k=0;k<4;k++)N[k].textContent=fmt(B[k]);
+    cssEl.textContent='cubic-bezier('+fmt(B[0])+', '+fmt(B[1])+', '+fmt(B[2])+', '+fmt(B[3])+')';
+    computeStats();
+    draw();
+  }
+
+  function computeStats(){
+    // progress at 50% time
+    midEl.textContent=fmt(ease(B[0],B[1],B[2],B[3],0.5));
+    // peak instantaneous velocity (d progress / d time), overshoot beyond 1
+    var prev=0, peak=0, over=0, N2=200;
+    for(var s=1;s<=N2;s++){
+      var x=s/N2, xp=(s-1)/N2;
+      var y=ease(B[0],B[1],B[2],B[3],x);
+      var yp=ease(B[0],B[1],B[2],B[3],xp);
+      var v=(y-yp)/(x-xp);
+      if(v>peak)peak=v;
+      if(y-1>over)over=y-1;
+    }
+    pkEl.textContent=fmt(peak)+'×';
+    ovEl.textContent=over>0.001?('+'+Math.round(over*100)+'%'):'none';
+  }
+
+  // --- drag on canvas ---
+  var dragging=-1;
+  function nearest(cx,cy){
+    var c1=toPx(B[0],B[1]), c2=toPx(B[2],B[3]);
+    var d1=Math.hypot(cx-c1[0],cy-c1[1]), d2=Math.hypot(cx-c2[0],cy-c2[1]);
+    if(Math.min(d1,d2)>22) return -1;
+    return d1<d2?0:1;
+  }
+  function evtPos(e){
+    var rect=cv.getBoundingClientRect();
+    var sx=cv.width/rect.width, sy=cv.height/rect.height;
+    var t=e.touches?e.touches[0]:e;
+    return [(t.clientX-rect.left)*sx,(t.clientY-rect.top)*sy];
+  }
+  function down(e){var p=evtPos(e);dragging=nearest(p[0],p[1]);if(dragging>=0){e.preventDefault();move(e);}}
+  function move(e){
+    if(dragging<0)return;
+    e.preventDefault();
+    var p=evtPos(e), n=toNorm(p[0],p[1]);
+    var x=Math.max(0,Math.min(1,n[0])); // time axis clamped
+    var y=Math.max(-1,Math.min(2,n[1]));
+    if(dragging===0){B[0]=x;B[1]=y;}else{B[2]=x;B[3]=y;}
+    sync(false);
+  }
+  function up(){dragging=-1;}
+  cv.addEventListener('mousedown',down);
+  window.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',up);
+  cv.addEventListener('touchstart',down,{passive:false});
+  cv.addEventListener('touchmove',move,{passive:false});
+  cv.addEventListener('touchend',up);
+
+  // --- sliders ---
+  R.forEach(function(r){r.addEventListener('input',function(){sync(true);});});
+
+  // --- presets ---
+  document.getElementById('presets').addEventListener('click',function(e){
+    var b=e.target.getAttribute('data-b');if(!b)return;
+    var v=b.split(',').map(Number);B=v.slice();sync(false);replay();
+  });
+
+  // --- copy ---
+  document.getElementById('copy').addEventListener('click',function(){
+    var txt=cssEl.textContent, btn=this;
+    var done=function(){btn.textContent='Copied ✓';setTimeout(function(){btn.textContent='Copy CSS';},1200);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,done);}
+    else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(_){}document.body.removeChild(ta);done();}
+  });
+
+  // --- animation preview: invert x->t live per frame (JS, not CSS timing-function) ---
+  var animStart=null, dur=1.0;
+  durEl.addEventListener('input',function(){dur=parseFloat(durEl.value);durV.textContent=dur.toFixed(1);});
+  document.getElementById('play').addEventListener('click',replay);
+  function replay(){animStart=null;requestAnimationFrame(frame);}
+  function frame(ts){
+    if(animStart===null)animStart=ts;
+    var elapsed=(ts-animStart)/1000;
+    var x=Math.min(1,elapsed/dur);
+    var prog=ease(B[0],B[1],B[2],B[3],x); // may exceed 1 for overshoot
+    var maxX=track.clientWidth-ball.offsetWidth;
+    ball.style.left=(prog*maxX)+'px';
+    if(x<1)requestAnimationFrame(frame);
+    else ball.style.left=(ease(B[0],B[1],B[2],B[3],1)*maxX)+'px';
+  }
+
+  // init
+  sync(false);
+  setTimeout(replay,300);
+})();
+</script>
+</body>
+</html>
