@@ -18,6 +18,22 @@
   <meta name="twitter:description" content="#3498db = rgb(52, 152, 219). Split hex into pairs, convert each from hexadecimal to decimal.">
   <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
   <link rel="stylesheet" href="/assets/style.css">
+<style>
+/* Interactive hex-to-RGB converter — scoped, uses site design tokens */
+#hexTool{margin:1.5rem 0}
+#hexTool .control-group input[type="text"]{width:190px}
+#hexTool input[type="color"]{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);width:64px;height:42px;padding:4px;cursor:pointer}
+#hexSwatch{height:42px;min-width:120px;border:1px solid var(--border);border-radius:var(--radius);background:#3498db;transition:background .12s}
+.hx-err{color:#ff7b72;font-size:.85rem;min-height:1.25rem;margin:0 0 .5rem}
+.hx-out{display:grid;gap:8px}
+.hx-row{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:9px 12px}
+.hx-k{font-size:.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600;width:56px;flex:0 0 auto}
+.hx-v{flex:1;font-family:var(--font-display);font-size:.9rem;color:var(--text);background:none;padding:0;overflow-x:auto}
+.hx-copy{background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:var(--radius);padding:4px 10px;font-size:.75rem;cursor:pointer;flex:0 0 auto}
+.hx-copy:hover{border-color:var(--accent);color:var(--accent)}
+.hx-work{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-family:var(--font-display);font-size:.82rem;color:var(--text-muted);line-height:1.9}
+.hx-work b{color:var(--text)}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,6 +67,19 @@
 }
 </script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://gen8x.com/"},{"@type":"ListItem","position":2,"name":"Answers","item":"https://gen8x.com/answers/"},{"@type":"ListItem","position":3,"name":"Hex to RGB"}]}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Hex to RGB Converter",
+  "url": "https://gen8x.com/answers/hex-to-rgb-converter.html",
+  "description": "Convert a hex colour code to RGB, RGBA and HSL in the browser. Accepts 3, 4, 6 and 8 digit hex.",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Michael Lip", "url": "https://zovo.one" }
+}
+</script>
 </head>
 <body>
   <header>
@@ -77,6 +106,33 @@
       <h1>How Do I Convert Hex to RGB?</h1>
 
       <p><strong>#3498db = rgb(52, 152, 219). To convert: split the hex code into three pairs (34, 98, db), then convert each pair from hexadecimal to decimal. 34 hex = 3&times;16 + 4 = 52. 98 hex = 9&times;16 + 8 = 152. db hex = 13&times;16 + 11 = 219.</strong></p>
+
+      <section id="hexTool" class="controls" aria-label="Hex to RGB converter">
+        <div class="control-row">
+          <div class="control-group">
+            <label for="hexIn">Hex color code</label>
+            <input type="text" id="hexIn" value="#3498db" maxlength="9" spellcheck="false" autocomplete="off" placeholder="#3498db">
+          </div>
+          <div class="control-group">
+            <label for="hexPick">Picker</label>
+            <input type="color" id="hexPick" value="#3498db">
+          </div>
+          <div class="control-group" style="flex:1;min-width:130px;">
+            <label>Preview</label>
+            <div id="hexSwatch"></div>
+          </div>
+        </div>
+        <p class="hx-err" id="hexErr" role="alert"></p>
+        <div class="hx-out">
+          <div class="hx-row"><span class="hx-k">RGB</span><code class="hx-v" id="outRgb">rgb(52, 152, 219)</code><button type="button" class="hx-copy" data-t="outRgb">Copy</button></div>
+          <div class="hx-row"><span class="hx-k">RGBA</span><code class="hx-v" id="outRgba">rgba(52, 152, 219, 1)</code><button type="button" class="hx-copy" data-t="outRgba">Copy</button></div>
+          <div class="hx-row"><span class="hx-k">Hex</span><code class="hx-v" id="outHex">#3498db</code><button type="button" class="hx-copy" data-t="outHex">Copy</button></div>
+          <div class="hx-row"><span class="hx-k">HSL</span><code class="hx-v" id="outHsl">hsl(204, 70%, 53%)</code><button type="button" class="hx-copy" data-t="outHsl">Copy</button></div>
+          <div class="hx-row"><span class="hx-k">R G B</span><code class="hx-v" id="outRaw">52 152 219</code><button type="button" class="hx-copy" data-t="outRaw">Copy</button></div>
+        </div>
+        <div class="hx-work" id="hexWork"></div>
+      </section>
+      <p style="font-size:0.9rem;color:var(--text-muted);">Accepts 3-digit (<code>#39d</code>), 4-digit (<code>#39d8</code>), 6-digit (<code>#3498db</code>) and 8-digit (<code>#3498db80</code>) hex, with or without the <code>#</code>, in any case. Everything runs in your browser.</p>
 
       <h2>Step-by-Step Conversion</h2>
       <ol>
@@ -203,5 +259,118 @@ hexToRgb('#3498db'); // { r: 52, g: 152, b: 219 }</code></pre>
     <a href="https://zovo.one/lifetime?utm_source=gen8x&amp;utm_medium=inline&amp;utm_campaign=answers-hex-to-rgb-converter" rel="nofollow">Zovo — AI Dev Tools</a>
   </div>
 </div>
+
+<script>
+(function(){
+  var hexIn  = document.getElementById('hexIn');
+  var pick   = document.getElementById('hexPick');
+  var swatch = document.getElementById('hexSwatch');
+  var errEl  = document.getElementById('hexErr');
+  var workEl = document.getElementById('hexWork');
+  if (!hexIn) return;
+
+  var HEXDIG = '0123456789abcdef';
+
+  function parseHex(raw){
+    var s = String(raw == null ? '' : raw).trim().replace(/^#/, '').toLowerCase();
+    if (!/^[0-9a-f]+$/.test(s)) return null;
+    var a = 1, hex;
+    if (s.length === 3){
+      hex = s[0]+s[0]+s[1]+s[1]+s[2]+s[2];
+    } else if (s.length === 4){
+      hex = s[0]+s[0]+s[1]+s[1]+s[2]+s[2];
+      a = parseInt(s[3]+s[3], 16) / 255;
+    } else if (s.length === 6){
+      hex = s;
+    } else if (s.length === 8){
+      hex = s.slice(0,6);
+      a = parseInt(s.slice(6,8), 16) / 255;
+    } else {
+      return null;
+    }
+    return {
+      hex: '#' + hex,
+      r: parseInt(hex.slice(0,2), 16),
+      g: parseInt(hex.slice(2,4), 16),
+      b: parseInt(hex.slice(4,6), 16),
+      a: Math.round(a * 1000) / 1000
+    };
+  }
+
+  function rgbToHsl(r, g, b){
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r,g,b), min = Math.min(r,g,b);
+    var h = 0, s = 0, l = (max + min) / 2;
+    if (max !== min){
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h /= 6;
+    }
+    return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+  }
+
+  function pairMath(hex2){
+    var hi = HEXDIG.indexOf(hex2[0]), lo = HEXDIG.indexOf(hex2[1]);
+    return hi + '×16 + ' + lo + ' = <b>' + (hi * 16 + lo) + '</b>';
+  }
+
+  function set(id, txt){ var el = document.getElementById(id); if (el) el.textContent = txt; }
+
+  function compute(){
+    var c = parseHex(hexIn.value);
+    if (!c){
+      errEl.textContent = 'Not a valid hex colour. Use 3, 4, 6 or 8 hex digits, e.g. #3498db.';
+      return;
+    }
+    errEl.textContent = '';
+    var hsl = rgbToHsl(c.r, c.g, c.b);
+    var aStr = (c.a === 1) ? '1' : String(c.a);
+    set('outRgb',  'rgb(' + c.r + ', ' + c.g + ', ' + c.b + ')');
+    set('outRgba', 'rgba(' + c.r + ', ' + c.g + ', ' + c.b + ', ' + aStr + ')');
+    set('outHex',  c.hex);
+    set('outHsl',  'hsl(' + hsl[0] + ', ' + hsl[1] + '%, ' + hsl[2] + '%)');
+    set('outRaw',  c.r + ' ' + c.g + ' ' + c.b);
+    swatch.style.background = 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + c.a + ')';
+    pick.value = c.hex;
+    var h = c.hex.slice(1);
+    workEl.innerHTML =
+      'Red &nbsp;<b>' + h.slice(0,2) + '</b> &rarr; ' + pairMath(h.slice(0,2)) + '<br>' +
+      'Green <b>' + h.slice(2,4) + '</b> &rarr; ' + pairMath(h.slice(2,4)) + '<br>' +
+      'Blue &nbsp;<b>' + h.slice(4,6) + '</b> &rarr; ' + pairMath(h.slice(4,6)) +
+      (c.a !== 1 ? '<br>Alpha &rarr; <b>' + aStr + '</b>' : '');
+  }
+
+  hexIn.addEventListener('input', compute);
+  pick.addEventListener('input', function(){ hexIn.value = pick.value; compute(); });
+
+  var btns = document.querySelectorAll('.hx-copy');
+  for (var i = 0; i < btns.length; i++){
+    btns[i].addEventListener('click', function(){
+      var btn = this;
+      var src = document.getElementById(btn.getAttribute('data-t'));
+      if (!src) return;
+      var txt = src.textContent;
+      var done = function(){
+        var old = btn.textContent;
+        btn.textContent = 'Copied';
+        setTimeout(function(){ btn.textContent = old; }, 1100);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(done, done);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = txt; document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta); done();
+      }
+    });
+  }
+
+  compute();
+})();
+</script>
 </body>
 </html>
