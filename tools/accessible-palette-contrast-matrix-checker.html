@@ -10,8 +10,7 @@
 <meta property="og:description" content="Paste any set of hex colors and get a full pairwise WCAG contrast matrix with AA/AAA pass-fail badges for normal and large text and UI components.">
 <meta property="og:url" content="https://gen8x.com/tools/accessible-palette-contrast-matrix-checker">
 <meta property="og:type" content="website">
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -20,21 +19,43 @@
       "url": "https://gen8x.com/tools/accessible-palette-contrast-matrix-checker",
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "Any",
-      "description": "Paste any set of hex colors and get a full pairwise WCAG contrast matrix with AA/AAA pass-fail badges for normal and large text and UI components.",
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-      "author": { "@type": "Person", "name": "Michael Lip", "url": "https://zovo.one" }
+      "description": "Drop in your hex colors and this tool builds a full N×N contrast matrix — every ordered pair scored against WCAG 2.x AA and AAA thresholds for normal text, large text, and non-text UI components.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Michael Lip",
+        "url": "https://zovo.one"
+      }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gen8x.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Tools", "item": "https://gen8x.com/tools/" },
-        { "@type": "ListItem", "position": 3, "name": "Accessible Color Palette Contrast Matrix Checker", "item": "https://gen8x.com/tools/accessible-palette-contrast-matrix-checker" }
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://gen8x.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://gen8x.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Accessible Color Palette Contrast Matrix Checker",
+          "item": "https://gen8x.com/tools/accessible-palette-contrast-matrix-checker"
+        }
       ]
     }
   ]
-}
-</script>
+}</script>
 <style>
 :root{
   --bg:#0d1117; --panel:#161b22; --panel2:#1c2230; --border:#2b3444;
@@ -133,6 +154,7 @@ footer a:hover{text-decoration:underline}
 <main>
   <h1>Check Every Foreground/Background Pair in Your Palette for WCAG Contrast</h1>
   <p class="lead">Drop in your hex colors and this tool builds a full N&times;N contrast matrix &mdash; every ordered pair scored against WCAG 2.x AA and AAA thresholds for normal text, large text, and non-text UI components. Instantly see which combinations are legally usable and which will fail an audit.</p>
+  <div class="page-answer" style="border-left:3px solid var(--accent,#6ea8fe);padding:12px 16px;margin:18px 0;background:rgba(110,168,254,0.08);border-radius:6px;line-height:1.6"><p style="margin:0 0 6px"><strong>This checker builds a full N×N contrast matrix for any set of hex colors. Every ordered foreground and background pair is scored against WCAG AA and AAA thresholds for normal text, large text, and non-text UI components, so you can see which combinations pass before you ship them.</strong></p><p style="margin:0;font-size:0.9rem;color:var(--muted,#8b949e)">Updated 2026-10-28</p></div>
 
   <section id="tool">
     <div>
@@ -189,7 +211,7 @@ footer a:hover{text-decoration:underline}
   <h2>Related Tools</h2>
   <div class="related">
     <a href="/tools/css-gradient-generator">CSS Gradient Generator</a>
-    <a href="/tools/hex-to-rgb-converter">Hex to RGB Converter</a>
+    <a href="/tools/hex-to-rgb.html">Hex to RGB Converter</a>
     <a href="/tools/color-palette-generator">Color Palette Generator</a>
   </div>
 </main>

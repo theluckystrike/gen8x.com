@@ -26,102 +26,117 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Color Palette Generator",
-  "url": "https://gen8x.com/",
-  "description": "Generate harmonious color palettes with hex, RGB, and HSL values. Export as CSS variables, Tailwind, SCSS, or JSON. Free client-side tool.",
-  "applicationCategory": "DesignApplication",
-  "operatingSystem": "Any",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "Michael Lip",
-    "url": "https://zovo.one"
-  },
-  "datePublished": "2026-04-05",
-  "dateModified": "2026-05-27",
-  "featureList": [
-    "Generate 5-color harmonious palettes",
-    "Complementary, analogous, triadic, and monochromatic modes",
-    "Generate from hex code or keyword",
-    "Export as CSS variables, Tailwind config, SCSS, or JSON",
-    "Live UI preview mockup",
-    "Recent palettes history in localStorage",
-    "Click-to-copy hex codes",
-    "Client-side — no data sent to servers"
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "How does the color palette generator work?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The gen8x.com color palette generator creates harmonious 5-color palettes using color theory algorithms. You can generate a random palette, start from a specific hex code, or enter a keyword like 'ocean' or 'sunset'. The tool calculates complementary, analogous, triadic, or monochromatic colors based on HSL color relationships."
+      "@type": "WebApplication",
+      "@id": "https://gen8x.com/#app",
+      "name": "Color Palette Generator",
+      "url": "https://gen8x.com/",
+      "description": "Generate harmonious 5-color palettes. Click any swatch to copy its hex code.",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@id": "https://gen8x.com/#zovo"
+      },
+      "datePublished": "2026-04-05",
+      "dateModified": "2026-10-28",
+      "featureList": [
+        "Generate harmonious 5-color palettes",
+        "Click any swatch to copy its hex code",
+        "Complementary, analogous, triadic, monochromatic",
+        "live UI mockup preview",
+        "export to CSS variables, Tailwind, SCSS, and JSON formats",
+        "recent palettes history stored in your browser's localStorage",
+        "No data is sent to any server"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://gen8x.com/#zovo",
+      "name": "Zovo",
+      "url": "https://zovo.one"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://gen8x.com/#website",
+      "name": "Gen8x",
+      "url": "https://gen8x.com/",
+      "sameAs": [
+        "https://github.com/theluckystrike/gen8x.com"
+      ],
+      "publisher": {
+        "@id": "https://gen8x.com/#zovo"
       }
     },
     {
-      "@type": "Question",
-      "name": "What export formats does the color palette tool support?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Gen8x supports four export formats: CSS custom properties (variables), Tailwind CSS config, SCSS variables, and raw JSON. Each format is ready to copy and paste directly into your project."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is the color palette generator free?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, gen8x.com is completely free with no sign-up required. The tool runs entirely in your browser — no data is sent to any server. There are no usage limits or watermarks on exported palettes."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What is the difference between complementary and analogous color schemes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Complementary colors are opposite on the color wheel (180 degrees apart), creating maximum contrast. Analogous colors are adjacent on the wheel (within 30 degrees), creating a harmonious, low-contrast look. Use complementary for high-impact CTAs and analogous for cohesive backgrounds and branding."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I generate a palette from a specific brand color?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, enter any hex code in the 'From Hex' input field and the color palette generator will create a harmonious 5-color palette based on that starting color. You can then switch between complementary, analogous, triadic, and monochromatic modes to find the best combination."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does this tool support dark mode palette generation?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The palette generator works with any color range including dark tones. To generate a dark-mode-friendly palette, start with a dark hex code or use the monochromatic mode from a dark base. The live preview shows how your palette looks in a UI context."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are my palettes saved anywhere?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Your last 10 palettes are saved in your browser's localStorage so you can revisit them. No data is sent to any server. If you clear your browser data, the history is reset."
-      }
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the color palette generator work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The gen8x.com color palette generator creates harmonious 5-color palettes using color theory algorithms. You can generate a random palette, start from a specific hex code, or enter a keyword like 'ocean' or 'sunset'. The tool calculates complementary, analogous, triadic, or monochromatic colors based on HSL color relationships."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What export formats does the color palette tool support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gen8x supports four export formats: CSS custom properties (variables), Tailwind CSS config, SCSS variables, and raw JSON. Each format is ready to copy and paste directly into your project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the color palette generator free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, gen8x.com is completely free with no sign-up required. The tool runs entirely in your browser with no data sent to any server. There are no usage limits or watermarks on exported palettes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between complementary and analogous color schemes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Complementary colors are opposite on the color wheel (180 degrees apart), creating maximum contrast. Analogous colors are adjacent on the wheel (within 30 degrees), creating a harmonious, low-contrast look. Use complementary for high-impact CTAs and analogous for cohesive backgrounds and branding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I generate a palette from a specific brand color?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, enter any hex code in the 'From Hex' input field and the color palette generator will create a harmonious 5-color palette based on that starting color. You can then switch between complementary, analogous, triadic, and monochromatic modes to find the best combination."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this tool support dark mode palette generation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The palette generator works with any color range including dark tones. To generate a dark-mode-friendly palette, start with a dark hex code or use the monochromatic mode from a dark base. The live preview shows how your palette looks in a UI context."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my palettes saved anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your last 10 palettes are saved in your browser's localStorage so you can revisit them. No data is sent to any server. If you clear your browser data, the history is reset."
+          }
+        }
+      ]
     }
   ]
 }
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Gen8x","url":"https://gen8x.com/","sameAs":"https://github.com/theluckystrike/gen8x.com","author":{"@type":"Person","name":"Michael Lip","url":"https://zovo.one"}}
 </script>
 </head>
 <body>
@@ -146,6 +161,7 @@
   <main class="container">
     <section class="hero">
       <h1>Color <span>Palette</span> Generator</h1>
+      <div class="page-answer" style="border-left:3px solid var(--accent,#6ea8fe);padding:12px 16px;margin:18px 0;background:rgba(110,168,254,0.08);border-radius:6px;line-height:1.6"><p style="margin:0 0 6px"><strong>Gen8X is a free, browser-based color palette generator. It builds five-color palettes in complementary, analogous, triadic, or monochromatic modes from a hex code, a keyword, or a random seed. Copy any swatch, preview the palette in a mock UI, check contrast, and export to CSS, Tailwind, SCSS, or JSON.</strong></p><p style="margin:0;font-size:0.9rem;color:var(--muted,#8b949e)">Updated 2026-10-28</p></div>
       <p>Generate harmonious 5-color palettes. Click any swatch to copy its hex code.</p>
     </section>
 
@@ -206,7 +222,7 @@
       <div id="history-list" class="history-list"></div>
     </div>
 
-    <div class="last-updated"><time datetime="2026-05-27">Last updated: May 27, 2026</time></div>
+    <div class="last-updated"><time datetime="2026-05-27">Last updated: 2026-10-28</time></div>
 
     <section class="explainer" style="max-width:780px;margin:40px auto;line-height:1.7;">
       <h2>How the Color Palette Generator Works</h2>
