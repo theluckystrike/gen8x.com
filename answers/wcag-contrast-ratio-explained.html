@@ -25,26 +25,18 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is the WCAG contrast ratio?",
+      "name": "What Is the WCAG Contrast Ratio?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18px+ bold or 24px+ regular). WCAG AAA requires 7:1. The contrast ratio formula is (L1 + 0.05) / (L2 + 0.05) where L1 is the lighter color's relative luminance and L2 is the darker color's relative luminance."
+        "text": "WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18px+ bold or 24px+ regular). WCAG AAA requires 7:1. The contrast ratio formula is (L1 + 0.05) / (L2 + 0.05), where L1 is the lighter color's relative luminance and L2 is the darker color's relative luminance."
       }
     },
     {
       "@type": "Question",
-      "name": "What counts as large text in WCAG?",
+      "name": "What Counts as Large Text?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Large text is defined as 18pt (24px) or larger for regular weight, or 14pt (18.66px, roughly 18px+) or larger for bold weight. Large text only needs a 3:1 contrast ratio for WCAG AA compliance."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How do you calculate relative luminance?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Relative luminance is calculated from linearized RGB values: L = 0.2126 * R + 0.7152 * G + 0.0722 * B. Each channel is first converted from sRGB to linear by dividing by 255, then applying the formula: if value <= 0.04045, divide by 12.92; otherwise, ((value + 0.055) / 1.055) ^ 2.4."
+        "text": "Large text is 18pt (24px) or larger at regular weight, or 14pt (approximately 18.66px) or larger at bold weight. Large text has a relaxed contrast requirement because its size already improves readability."
       }
     }
   ]
@@ -75,6 +67,7 @@
 
     <article>
       <h1>What Is the WCAG Contrast Ratio?</h1>
+      <div class="page-answer" style="border-left:3px solid var(--accent,#6ea8fe);padding:12px 16px;margin:18px 0;background:rgba(110,168,254,0.08);border-radius:6px;line-height:1.6"><p style="margin:0 0 6px"><strong>Contrast ratio measures how far apart two colors sit in relative luminance, from 1:1 to 21:1. WCAG AA asks for 4.5:1 on normal text and 3:1 on large text; AAA asks for 7:1 and 4.5:1. This page gives the formula and worked examples.</strong></p><p style="margin:0;font-size:0.9rem;color:var(--muted,#8b949e)">Updated 2026-10-28</p></div>
 
       <p><strong>WCAG AA requires a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text (18px+ bold or 24px+ regular). WCAG AAA requires 7:1. The contrast ratio formula is (L1 + 0.05) / (L2 + 0.05), where L1 is the lighter color's relative luminance and L2 is the darker color's relative luminance.</strong></p>
 
@@ -127,10 +120,12 @@
           <a href="/answers/hex-to-rgb-converter.html" class="related-card">How do I convert hex to RGB?</a>
           <a href="/answers/best-colors-for-dark-mode.html" class="related-card">What are the best colors for dark mode?</a>
           <a href="/tools/color-contrast-checker.html" class="related-card">Color contrast checker tool</a>
+          <a href="/answers/apca-vs-wcag-contrast.html" class="related-card">Should I use APCA instead of WCAG 2 ratios?</a>
+          <a href="/answers/wcag-contrast-exemptions.html" class="related-card">Does WCAG contrast apply to logos and decorative text?</a>
         </div>
       </section>
 
-      <div class="last-updated"><time datetime="2026-04-11">Last updated: April 11, 2026</time></div>
+      <div class="last-updated"><time datetime="2026-10-28">Last updated: 2026-10-28</time></div>
     </article>
   </main>
 

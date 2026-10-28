@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Should I Use APCA Instead of WCAG 2 Contrast Ratios? | gen8x.com</title>
+  <meta name="description" content="APCA is a perceptual contrast method built for WCAG 3. WCAG 2 AA and AAA ratios are still the compliance standard. Use both: WCAG 2 as the floor, APCA as a design check.">
+  <link rel="canonical" href="https://gen8x.com/answers/apca-vs-wcag-contrast.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Should I Use APCA Instead of WCAG 2 Contrast Ratios?">
+  <meta property="og:description" content="APCA is a perceptual contrast method built for WCAG 3. WCAG 2 AA and AAA ratios are still the compliance standard. Use both: WCAG 2 as the floor, APCA as a design check.">
+  <meta property="og:url" content="https://gen8x.com/answers/apca-vs-wcag-contrast.html">
+  <meta property="og:image" content="https://gen8x.com/assets/og-image.png">
+  <meta property="og:site_name" content="Zovo Tools">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Should I Use APCA Instead of WCAG 2 Contrast Ratios?">
+  <meta name="twitter:description" content="APCA is a perceptual contrast method built for WCAG 3. WCAG 2 AA and AAA ratios are still the compliance standard. Use both: WCAG 2 as the floor, APCA as a design check.">
+  <meta name="twitter:image" content="https://gen8x.com/assets/og-image.png">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Should I Use APCA Instead of WCAG 2 Contrast Ratios?",
+      "description": "Use APCA as a design check, not as a replacement for WCAG 2. Legal and procurement audits still test WCAG 2 ratios: 4.5:1 for normal text, 3:1 for large text, and 7:1 for AAA. APCA scores perceived lightness instead, so it catches problems the ratio misses on dark themes.",
+      "url": "https://gen8x.com/answers/apca-vs-wcag-contrast.html",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://gen8x.com/answers/apca-vs-wcag-contrast.html"
+      },
+      "datePublished": "2026-10-28",
+      "dateModified": "2026-10-28",
+      "author": {
+        "@id": "https://gen8x.com/#zovo"
+      },
+      "publisher": {
+        "@id": "https://gen8x.com/#zovo"
+      },
+      "inLanguage": "en",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Gen8x",
+        "url": "https://gen8x.com/"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://gen8x.com/#zovo",
+      "name": "Zovo",
+      "url": "https://zovo.one"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://gen8x.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Answers",
+      "item": "https://gen8x.com/answers/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "APCA vs WCAG 2",
+      "item": "https://gen8x.com/answers/apca-vs-wcag-contrast.html"
+    }
+  ]
+}
+</script>
+  <header>
+    <div class="container">
+      <a href="/" class="logo">gen8x</a>
+      <nav>
+        <a href="/">Tool</a>
+        <a href="/blog/">Blog</a>
+        <a href="/about.html">About</a>
+        <div class="nav-right">
+          <a href="https://zovo.one/pricing?utm_source=gen8x&amp;utm_medium=satellite&amp;utm_campaign=nav-link" class="nav-pro" target="_blank">Go Pro &#10022;</a>
+          <a href="https://zovo.one/tools?utm_source=gen8x&amp;utm_medium=nav&amp;utm_campaign=answers-apca-vs-wcag-contrast" class="nav-zovo">Zovo Tools</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="max-width:780px;margin:0 auto;padding:2rem 1.5rem;">
+    <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom:1.5rem;font-size:0.9rem;">
+      <a href="/">Home</a> &rsaquo; <a href="/answers/">Answers</a> &rsaquo; <span>APCA vs WCAG 2</span>
+    </nav>
+
+    <article>
+      <h1>Should I Use APCA Instead of WCAG 2 Contrast Ratios?</h1>
+
+      <p><strong>Use APCA as a design check, not as a replacement for WCAG 2. Legal and procurement audits still test WCAG 2 ratios: 4.5:1 for normal text, 3:1 for large text, and 7:1 for AAA. APCA scores perceived lightness instead, so it catches problems the ratio misses on dark themes.</strong></p>
+      <div class="last-updated"><time datetime="2026-10-28">Updated 2026-10-28</time></div>
+<p><strong>APCA and WCAG 2 answer different questions.</strong> APCA asks how easily a person perceives the text. WCAG 2 asks whether the foreground and background differ enough by a fixed formula. A palette can pass one test and fail the other.</p>
+
+      <h2>What APCA is</h2>
+      <p>APCA stands for Accessible Perceptual Contrast Algorithm. It was developed for WCAG 3 and is published in the WCAG 3 working drafts. It models contrast with perceptual lightness instead of relative luminance, and it treats polarity as a real variable: dark text on a light background and light text on a dark background do not score the same even when the two colors are swapped.</p>
+      <p>APCA returns an <code>Lc</code> value on its own scale. It does not return a ratio, and it does not define pass or fail. The APCA project publishes its own lookup table for font size and weight, and that table is not part of WCAG 2.</p>
+
+      <h2>What WCAG 2 requires</h2>
+      <p>WCAG 2.1 and 2.2 Success Criterion 1.4.3 sets the thresholds that audits and accessibility statements use:</p>
+      <ul>
+        <li>AA: 4.5:1 for normal text, 3:1 for large text</li>
+        <li>AAA: 7:1 for normal text, 4.5:1 for large text</li>
+      </ul>
+      <p>Success Criterion 1.4.11 adds 3:1 for user-interface components and meaningful graphics. Public-sector procurement rules and the European standard EN 301 549 reference WCAG 2, so a site that reports WCAG 2.2 AA conformance is measured with these ratios, not with APCA.</p>
+
+      <h2>Where APCA helps</h2>
+      <p>APCA is most useful in three cases:</p>
+      <ul>
+        <li>Dark themes, where the same pair of colors can meet a WCAG 2 ratio and still look thin or glare-heavy.</li>
+        <li>Light font weights, where a ratio that ignores stroke thickness overstates readability.</li>
+        <li>Saturated brand colors, where equal luminance produces very different perceived contrast depending on hue.</li>
+      </ul>
+      <p>Use APCA to choose between two palettes that both pass WCAG 2. Do not use it to declare that a failing palette is compliant.</p>
+
+      <h2>A practical order of checks</h2>
+      <ol>
+        <li>Build the palette and check every text and background pair against WCAG 2 AA ratios.</li>
+        <li>Fix failures by changing lightness, not hue, so the brand keeps its character.</li>
+        <li>Score the same pairs with APCA and compare the two results.</li>
+        <li>When the two disagree, keep the WCAG 2 pass as the floor and use APCA to decide which passing option reads better.</li>
+      </ol>
+
+      <h2>Check a palette now</h2>
+      <p>The <a href="/tools/accessible-palette-contrast-matrix-checker">contrast matrix checker</a> scores every ordered pair in a palette against WCAG AA and AAA for normal text, large text, and non-text UI components. The <a href="/tools/color-contrast-checker.html">color contrast checker</a> tests a single foreground and background pair. For the WCAG 2 formula itself, read <a href="/answers/wcag-contrast-ratio-explained.html">what the WCAG contrast ratio is</a>.</p>
+    </article>
+  </main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">Zovo Tools</div>
+        <div class="footer-tagline">Free developer tools by a solo dev. No tracking.</div>
+        <a href="https://zovo.one/pricing?utm_source=gen8x&amp;utm_medium=satellite&amp;utm_campaign=footer-link" class="footer-cta">Zovo Lifetime — $99 once, free forever &rarr;</a>
+        <div class="footer-copy">&copy; 2026 <a href="https://zovo.one/lifetime?utm_source=gen8x&amp;utm_medium=footer&amp;utm_campaign=answers-apca-vs-wcag-contrast">Zovo</a> &middot; 47/500 founding spots</div>
+    </div>
+</footer>
+
+<nav class="zovo-network" aria-label="Zovo Tools Network">
+    <div class="zovo-network-inner">
+        <h3 class="zovo-network-title">Explore More Tools</h3>
+        <div class="zovo-network-links">
+            <a href="https://abwex.com">ABWex — A/B Testing</a>
+            <a href="https://b2berp.com">B2BERP — Business Tools</a>
+            <a href="https://bugbountyreality.com">BugBountyReality — Security</a>
+            <a href="https://claudflow.com">ClaudFlow — Workflows</a>
+            <a href="https://claudkit.com">ClaudKit — API Tools</a>
+            <a href="https://dismissticket.com">DismissTicket — Support</a>
+            <a href="https://enhio.com">Enhio — Text Tools</a>
+            <a href="https://epochpilot.com">EpochPilot — Timestamps</a>
+            <a href="https://gpt0x.com">GPT0X — AI Models</a>
+            <a href="https://heytensor.com">HeyTensor — ML Tools</a>
+            <a href="https://ingredientcalculator.com">IngredientCalc — Recipes</a>
+            <a href="https://invokebot.com">InvokeBot — Webhooks</a>
+            <a href="https://kappafy.com">Kappafy — JSON</a>
+            <a href="https://kappakit.com">KappaKit — Dev Toolkit</a>
+            <a href="https://kickllm.com">KickLLM — LLM Costs</a>
+            <a href="https://krzen.com">Krzen — Image Tools</a>
+            <a href="https://lochbot.com">LochBot — Security</a>
+            <a href="https://lockml.com">LockML — ML Security</a>
+            <a href="https://ml0x.com?utm_source=gen8x&amp;utm_medium=nav&amp;utm_campaign=answers-apca-vs-wcag-contrast">ML0X — ML Basics</a>
+            <a href="https://ml3x.com">ML3X — Matrix Math</a>
+            <a href="https://pictureeditor.net">PictureEditor — Image Editing</a>
+            <a href="https://recipetool.net">RecipeTool — Cooking</a>
+            <a href="https://viryd.com">Viryd — Dev Tools</a>
+            <a href="https://tg.zovo.one/">Tiny Telegram Tools — Telegram Bots</a>
+        </div>
+    </div>
+</nav>
+
+<div class="pow-strip">
+  <div class="pow-strip-inner">
+    <span class="pow-label">By the same builder:</span>
+    <a href="https://github.com/theluckystrike" rel="nofollow">GitHub — theluckystrike</a>
+    <a href="https://www.belikenative.com" rel="nofollow">BeLikeNative — Grammar AI</a>
+    <a href="https://earlythunder.com" rel="nofollow">EarlyThunder — Dev Blog</a>
+    <a href="https://bugbountyreality.com" rel="nofollow">Bug Bounty Reality</a>
+    <a href="https://zovo.one/lifetime?utm_source=gen8x&amp;utm_medium=inline&amp;utm_campaign=answers-apca-vs-wcag-contrast" rel="nofollow">Zovo — AI Dev Tools</a>
+  </div>
+</div>
+</body>
+</html>
